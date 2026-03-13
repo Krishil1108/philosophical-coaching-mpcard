@@ -1,65 +1,431 @@
-import Image from "next/image";
+import SiteLayout from "./components/SiteLayout";
+import Link from "next/link";
+import { hasSanityConfig, client } from "./lib/sanity";
+import { heroQuery } from "./lib/queries";
 
-export default function Home() {
+export const revalidate = 60;
+
+async function getHero() {
+  if (!hasSanityConfig()) return null;
+  return client.fetch(heroQuery);
+}
+
+const contents = [
+  {
+    num: "01",
+    href: "/about",
+    title: "About",
+    desc: "PhD from MIT · Faculty at Douglas College · 12 years of public dialogue · Author of How to Play Philosophy",
+  },
+  {
+    num: "02",
+    href: "/services",
+    title: "Services",
+    desc: "1-on-1 Philosophical Coaching · Café Philosophy · Philosophy Sports",
+  },
+  {
+    num: "03",
+    href: "/practice",
+    title: "The Practice",
+    desc: "Socratic Inquiry · Semantic Analysis · Impartial Witness · No Preset Agenda",
+  },
+  {
+    num: "04",
+    href: "/gallery",
+    title: "Gallery",
+    desc: "Sessions · Events · Public Dialogue · The Philosophical Life in Images",
+  },
+  {
+    num: "05",
+    href: "/publications",
+    title: "Publications",
+    desc: "How to Play Philosophy · This is Not a Book · Café Conversations · Forthcoming Translations",
+  },
+  {
+    num: "06",
+    href: "/videos",
+    title: "Videos",
+    desc: "Talks · Demonstrations · Café Philosophy · Philosophy Sports in Action",
+  },
+];
+
+export default async function Home() {
+  const hero = await getHero();
+
+  const headline = hero?.headline || "Think\nDeeply.";
+  const subheadline =
+    hero?.subheadline ||
+    "One-on-one philosophical coaching that examines the language behind your deepest beliefs — and reveals what you didn't know you were free to think.";
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
+    <SiteLayout>
+
+      {/* ══════════════════════════════════════════
+          HERO — left-aligned editorial
+          ══════════════════════════════════════════ */}
+      <section
+        style={{
+          background: "#0d0f14",
+          minHeight: "100svh",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "flex-end",
+          paddingBottom: "5rem",
+          position: "relative",
+          overflow: "hidden",
+        }}
+      >
+        {/* Top gold line */}
+        <div
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            height: "1px",
+            background: "linear-gradient(90deg, rgba(201,168,76,0.5) 0%, rgba(201,168,76,0.1) 60%, transparent 100%)",
+          }}
         />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+
+        {/* Huge background phi */}
+        <div
+          className="font-cinzel"
+          style={{
+            position: "absolute",
+            right: "-2rem",
+            top: "50%",
+            transform: "translateY(-55%)",
+            fontSize: "clamp(24rem, 45vw, 55rem)",
+            lineHeight: 1,
+            color: "rgba(201,168,76,0.03)",
+            pointerEvents: "none",
+            userSelect: "none",
+            fontWeight: 900,
+          }}
+        >
+          φ
+        </div>
+
+        <div className="inner-max" style={{ maxWidth: "88rem", position: "relative", zIndex: 1 }}>
+
+          {/* Credential strip — top of content */}
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "2rem",
+              marginBottom: "3.5rem",
+              fontFamily: "Space Grotesk, sans-serif",
+              fontSize: "0.5625rem",
+              letterSpacing: "0.35em",
+              textTransform: "uppercase",
+              color: "var(--text-muted)",
+            }}
+          >
+            <span className="inline-block" style={{ width: "2rem", height: "1px", background: "var(--gold)" }} />
+            <span>PhD (MIT)</span>
+            <span style={{ color: "rgba(201,168,76,0.3)" }}>·</span>
+            <span>Philosophical Practitioner</span>
+            <span style={{ color: "rgba(201,168,76,0.3)" }}>·</span>
+            <span>Douglas College</span>
+          </div>
+
+          {/* Headline — enormous, left-aligned */}
+          <h1
+            className="font-serif"
+            style={{
+              fontSize: "clamp(5rem, 14vw, 14rem)",
+              lineHeight: 0.9,
+              color: "white",
+              marginBottom: "3.5rem",
+              whiteSpace: "pre-line",
+            }}
+          >
+            {headline.split("\n").map((line: string, i: number) => (
+              <span
+                key={i}
+                className={i === 1 ? "text-gold-gradient" : ""}
+                style={{ display: "block" }}
+              >
+                {line}
+              </span>
+            ))}
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+
+          {/* Subheadline + CTA row */}
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1fr auto",
+              gap: "4rem",
+              alignItems: "end",
+              borderTop: "1px solid rgba(201,168,76,0.12)",
+              paddingTop: "2.5rem",
+            }}
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+            <p
+              style={{
+                fontFamily: "Space Grotesk, sans-serif",
+                fontWeight: 300,
+                color: "var(--text-muted)",
+                fontSize: "clamp(0.9375rem, 1.75vw, 1.125rem)",
+                lineHeight: 1.85,
+                maxWidth: "40rem",
+              }}
+            >
+              {subheadline}
+            </p>
+
+            <div style={{ display: "flex", flexDirection: "column", gap: "1rem", flexShrink: 0 }}>
+              <a
+                href="https://chat.appa.edu/product/chat-with-michael-picard-msc-phd/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-primary"
+              >
+                <span>Book a Session</span>
+                <svg width="13" height="13" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+              </a>
+              <Link href="/about" className="btn-outline">
+                Explore the Practice
+              </Link>
+            </div>
+          </div>
         </div>
-      </main>
-    </div>
+      </section>
+
+      {/* ══════════════════════════════════════════
+          STATS LINE
+          ══════════════════════════════════════════ */}
+      <div
+        style={{
+          background: "#141720",
+          borderTop: "1px solid rgba(201,168,76,0.08)",
+          borderBottom: "1px solid rgba(201,168,76,0.08)",
+        }}
+      >
+        <div
+          className="inner-max"
+          style={{
+            maxWidth: "88rem",
+            display: "flex",
+            justifyContent: "space-between",
+            flexWrap: "wrap",
+            gap: "0",
+          }}
+        >
+          {[
+            { v: "700+", l: "Café Sessions" },
+            { v: "12", l: "Years Practice" },
+            { v: "2", l: "Books Authored" },
+            { v: "PhD", l: "Philosophy, MIT" },
+          ].map((s, i) => (
+            <div
+              key={s.l}
+              style={{
+                padding: "2.25rem 2rem",
+                flex: "1 1 0",
+                textAlign: "center",
+                borderRight: i < 3 ? "1px solid rgba(201,168,76,0.08)" : "none",
+              }}
+            >
+              <div
+                className="font-cinzel font-bold"
+                style={{ fontSize: "1.875rem", color: "var(--gold)", letterSpacing: "0.04em" }}
+              >
+                {s.v}
+              </div>
+              <div
+                style={{
+                  fontFamily: "Space Grotesk, sans-serif",
+                  fontSize: "0.5625rem",
+                  letterSpacing: "0.25em",
+                  textTransform: "uppercase",
+                  color: "var(--text-muted)",
+                  marginTop: "0.375rem",
+                }}
+              >
+                {s.l}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* ══════════════════════════════════════════
+          OPENING STATEMENT
+          ══════════════════════════════════════════ */}
+      <div
+        style={{
+          background: "#0d0f14",
+          padding: "7rem 0",
+          borderBottom: "1px solid rgba(201,168,76,0.1)",
+        }}
+      >
+        <div className="inner-max" style={{ maxWidth: "88rem" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "5.5rem 1fr", gap: "3rem" }}>
+            <div />
+            <div>
+              <p
+                className="font-serif"
+                style={{
+                  fontSize: "clamp(1.5rem, 3vw, 2.75rem)",
+                  color: "white",
+                  lineHeight: 1.3,
+                  maxWidth: "52rem",
+                  marginBottom: "2.5rem",
+                }}
+              >
+                Most of what we believe, we believe because we absorbed it. Very little of our thinking is genuinely our own. That is where philosophy begins.
+              </p>
+              <Link href="/practice" className="btn-ghost">
+                The Practice
+                <svg width="13" height="13" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* ══════════════════════════════════════════
+          CONTENTS / INDEX
+          ══════════════════════════════════════════ */}
+      <div style={{ background: "#141720" }}>
+        {contents.map((item, i) => (
+          <Link
+            key={item.num}
+            href={item.href}
+            className="index-row"
+            style={{ display: "block", textDecoration: "none" }}
+          >
+            <div
+              className="inner-max"
+              style={{
+                maxWidth: "88rem",
+                display: "grid",
+                gridTemplateColumns: "5.5rem 1fr auto",
+                gap: "3rem",
+                alignItems: "center",
+                padding: "2.5rem 0",
+              }}
+            >
+              {/* Number */}
+              <span
+                className="font-cinzel"
+                style={{
+                  fontSize: "0.75rem",
+                  color: "var(--gold)",
+                  letterSpacing: "0.2em",
+                }}
+              >
+                {item.num}
+              </span>
+
+              {/* Title + desc */}
+              <div>
+                <div
+                  className="font-serif"
+                  style={{
+                    fontSize: "clamp(1.25rem, 2.5vw, 2rem)",
+                    color: "white",
+                    marginBottom: "0.4rem",
+                    lineHeight: 1.1,
+                  }}
+                >
+                  {item.title}
+                </div>
+                <div
+                  style={{
+                    fontFamily: "Space Grotesk, sans-serif",
+                    fontSize: "0.75rem",
+                    color: "var(--text-muted)",
+                    letterSpacing: "0.05em",
+                    fontWeight: 300,
+                  }}
+                >
+                  {item.desc}
+                </div>
+              </div>
+
+              {/* Arrow */}
+              <svg
+                width="18"
+                height="18"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+                className="index-row-arrow"
+                style={{ color: "rgba(201,168,76,0.3)", flexShrink: 0, transition: "color 0.25s" }}
+              >
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </div>
+          </Link>
+        ))}
+      </div>
+
+      {/* ══════════════════════════════════════════
+          LARGE FEATURED QUOTE
+          ══════════════════════════════════════════ */}
+      <div
+        style={{
+          background: "#0a0c10",
+          padding: "8rem 0",
+          borderBottom: "1px solid rgba(201,168,76,0.08)",
+        }}
+      >
+        <div className="inner-max" style={{ maxWidth: "88rem" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "5.5rem 1fr", gap: "3rem" }}>
+            <div
+              style={{
+                fontFamily: "Space Grotesk, sans-serif",
+                fontSize: "0.5rem",
+                color: "var(--gold)",
+                letterSpacing: "0.35em",
+                textTransform: "uppercase",
+                writingMode: "vertical-rl",
+                transform: "rotate(180deg)",
+                textAlign: "right",
+                alignSelf: "center",
+              }}
+            >
+              How to Play Philosophy
+            </div>
+            <blockquote
+              className="font-italic"
+              style={{
+                fontSize: "clamp(1.75rem, 4vw, 4rem)",
+                color: "var(--text)",
+                fontStyle: "italic",
+                lineHeight: 1.2,
+                maxWidth: "64rem",
+              }}
+            >
+              &ldquo;Thinking is both our greatest limitation and our most powerful form of liberation. The question is: whose thinking is it, really?&rdquo;
+              <cite
+                style={{
+                  display: "block",
+                  marginTop: "2rem",
+                  fontFamily: "Space Grotesk, sans-serif",
+                  fontSize: "0.625rem",
+                  letterSpacing: "0.25em",
+                  textTransform: "uppercase",
+                  color: "var(--gold)",
+                  fontStyle: "normal",
+                }}
+              >
+                — Michael Picard
+              </cite>
+            </blockquote>
+          </div>
+        </div>
+      </div>
+
+    </SiteLayout>
   );
 }

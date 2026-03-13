@@ -1,0 +1,20 @@
+import { defineField, defineType } from "sanity";
+
+export const service = defineType({
+  name: "service",
+  title: "Services",
+  type: "document",
+  fields: [
+    defineField({ name: "title", title: "Service Title", type: "string" }),
+    defineField({ name: "icon", title: "Icon (emoji or SVG name)", type: "string" }),
+    defineField({ name: "description", title: "Description", type: "text", rows: 4 }),
+    defineField({ name: "price", title: "Price Range", type: "string" }),
+    defineField({ name: "duration", title: "Duration", type: "string" }),
+    defineField({ name: "features", title: "Features List", type: "array", of: [{ type: "string" }] }),
+    defineField({ name: "ctaText", title: "CTA Button Text", type: "string" }),
+    defineField({ name: "ctaLink", title: "CTA Button Link", type: "string" }),
+    defineField({ name: "featured", title: "Featured (highlighted)", type: "boolean" }),
+    defineField({ name: "order", title: "Display Order", type: "number" }),
+  ],
+  orderings: [{ title: "Display Order", name: "orderAsc", by: [{ field: "order", direction: "asc" }] }],
+});

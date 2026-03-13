@@ -1,26 +1,301 @@
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=DM+Serif+Display:ital@0;1&family=Space+Grotesk:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@1,300;1,400;1,500&display=swap");
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #0d0f14;
+  --bg-card: #141720;
+  --bg-muted: #1c2030;
+  --gold: #c9a84c;
+  --gold-light: #e6c96a;
+  --gold-dark: #a68832;
+  --text: #e8e6e1;
+  --text-muted: #9a97a0;
+  --text-heading: #ffffff;
+  --border: rgba(201, 168, 76, 0.2);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-bg: var(--bg);
+  --color-bg-card: var(--bg-card);
+  --color-bg-muted: var(--bg-muted);
+  --color-gold: var(--gold);
+  --color-gold-light: var(--gold-light);
+  --color-gold-dark: var(--gold-dark);
+  --color-text: var(--text);
+  --color-text-muted: var(--text-muted);
+  --color-text-heading: var(--text-heading);
+  --font-cinzel: "Cinzel", Georgia, serif;
+  --font-serif: "DM Serif Display", Georgia, serif;
+  --font-sans: "Space Grotesk", system-ui, sans-serif;
+  --font-display: "Cormorant Garamond", Georgia, serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: "Space Grotesk", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  letter-spacing: 0.01em;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "DM Serif Display", Georgia, serif;
+  color: var(--text-heading);
+  line-height: 1.1;
+}
+
+/* =====================
+   BUTTON SYSTEM
+   ===================== */
+
+/* Primary: gold fill, sharp corners, uppercase tracked */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.625rem;
+  padding: 0.9375rem 2.5rem;
+  background: linear-gradient(135deg, #c9a84c 0%, #a68832 100%);
+  color: #0d0f14;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  border-radius: 3px;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
+}
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #e6c96a 0%, #c9a84c 100%);
+  opacity: 0;
+  transition: opacity 0.35s;
+}
+.btn-primary:hover { box-shadow: 0 12px 48px rgba(201,168,76,0.4); transform: translateY(-3px); }
+.btn-primary:hover::before { opacity: 1; }
+.btn-primary > * { position: relative; z-index: 1; }
+
+/* Secondary: outline only, dark fill on hover */
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.625rem;
+  padding: 0.9375rem 2.5rem;
+  background: transparent;
+  color: #c8c5bf;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  border-radius: 3px;
+  border: 1px solid rgba(201,168,76,0.45);
+  cursor: pointer;
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
+}
+.btn-outline:hover {
+  color: #c9a84c;
+  border-color: #c9a84c;
+  background: rgba(201,168,76,0.07);
+  transform: translateY(-2px);
+}
+
+/* Ghost / text-arrow link */
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #c9a84c;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: none;
+  position: relative;
+  padding-bottom: 3px;
+  transition: gap 0.3s;
+}
+.btn-ghost::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 0; height: 1px;
+  background: #c9a84c;
+  transition: width 0.35s;
+}
+.btn-ghost:hover { gap: 0.875rem; }
+.btn-ghost:hover::after { width: 100%; }
+
+/* Small nav CTA */
+.btn-nav {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.625rem 1.375rem;
+  background: transparent;
+  color: #c9a84c;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  border-radius: 2px;
+  border: 1px solid rgba(201,168,76,0.55);
+  cursor: pointer;
+  transition: all 0.3s;
+  text-decoration: none;
+}
+.btn-nav:hover {
+  background: rgba(201,168,76,0.1);
+  border-color: #c9a84c;
+}
+
+/* =====================
+   TYPOGRAPHY UTILITIES
+   ===================== */
+
+.font-cinzel { font-family: "Cinzel", Georgia, serif; }
+.font-serif  { font-family: "DM Serif Display", Georgia, serif; }
+.font-sans   { font-family: "Space Grotesk", system-ui, sans-serif; }
+.font-italic { font-family: "Cormorant Garamond", Georgia, serif; }
+
+.text-gold-gradient {
+  background: linear-gradient(135deg, var(--gold-light), var(--gold), var(--gold-dark));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Label caps above section titles */
+.section-label {
+  display: block;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+/* Decorative gold divider */
+.divider-gold {
+  width: 48px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  margin: 1.75rem auto;
+}
+.divider-gold-left {
+  width: 48px;
+  height: 1px;
+  background: linear-gradient(90deg, var(--gold), transparent);
+  margin: 1.75rem 0;
+}
+
+/* =====================
+   PAGE SECTION SPACING
+   ===================== */
+.section-pad { padding-top: 7rem; padding-bottom: 7rem; }
+.section-pad-lg { padding-top: 9rem; padding-bottom: 9rem; }
+.section-pad-xl { padding-top: 11rem; padding-bottom: 11rem; }
+.inner-max { max-width: 80rem; margin-left: auto; margin-right: auto; padding-left: 2rem; padding-right: 2rem; }
+
+/* =====================
+   SWIPER CUSTOMIZATION
+   ===================== */
+.swiper-pagination-bullet { background: var(--text-muted) !important; opacity: 1 !important; }
+.swiper-pagination-bullet-active { background: var(--gold) !important; }
+.swiper-button-next,
+.swiper-button-prev { color: var(--gold) !important; }
+
+/* =====================
+   INDEX ROW HOVER
+   ===================== */
+.index-row {
+  display: block;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(201,168,76,0.08);
+  transition: background 0.25s;
+}
+.index-row:hover { background: #1c2030; }
+.index-row:hover .index-row-arrow { color: rgba(201,168,76,0.8) !important; }
+
+/* =====================
+   CARD HOVER LINE
+   ===================== */
+.card-hover {
+  position: relative;
+  transition: transform 0.4s cubic-bezier(0.4,0,0.2,1),
+              box-shadow 0.4s;
+}
+.card-hover::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 0; height: 2px;
+  background: var(--gold);
+  transition: width 0.45s cubic-bezier(0.4,0,0.2,1);
+}
+.card-hover:hover { transform: translateY(-6px); }
+.card-hover:hover::before { width: 100%; }
+
+/* =====================
+   SCROLLBAR
+   ===================== */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--gold-dark); border-radius: 3px; }
+::selection { background: rgba(201, 168, 76, 0.25); color: white; }
+
+/* =====================
+   RESPONSIVE OVERRIDES
+   ===================== */
+@media (max-width: 1024px) {
+  /* About: stack portrait + bio */
+  .about-split { grid-template-columns: 1fr !important; }
+  .about-left  { border-right: none !important; padding-right: 0 !important; border-bottom: 1px solid rgba(201,168,76,0.1); padding-bottom: 4rem !important; }
+  .about-right { padding-left: 0 !important; padding-top: 3rem !important; }
+
+  /* Publications: stack columns */
+  .pub-row { grid-template-columns: 4rem 1fr 1fr !important; }
+  .pub-cover { display: none !important; }
+
+  /* Services: stack description + features */
+  .service-body-grid { grid-template-columns: 1fr !important; gap: 2rem !important; }
+
+  /* Hero: stack sub + CTA */
+  .hero-bottom-row { grid-template-columns: 1fr !important; gap: 2.5rem !important; }
+}
+
+@media (max-width: 768px) {
+  .inner-max { padding-left: 1.25rem !important; padding-right: 1.25rem !important; }
+  .section-left-col { display: none !important; }
+  .service-row-grid { grid-template-columns: 1fr !important; }
+  .service-row-grid > :first-child { display: none !important; }
+  .pub-row { grid-template-columns: 1fr !important; }
+  .pub-cta-col { margin-top: 1rem !important; }
+  .video-row { grid-template-columns: 1fr !important; }
+  .video-row-thumb { width: 100% !important; max-width: 100% !important; }
+  .index-row-inner { grid-template-columns: 1fr auto !important; gap: 1rem !important; }
+  .index-row-num { display: none !important; }
+  .stats-grid { flex-direction: column !important; }
+  .stats-grid > div { border-right: none !important; border-bottom: 1px solid rgba(201,168,76,0.08); }
 }
