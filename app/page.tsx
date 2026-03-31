@@ -81,7 +81,7 @@ export default async function Home() {
           justifyContent: "flex-end",
           paddingBottom: "5rem",
           position: "relative",
-          overflow: "visible",
+          overflow: "hidden",
         }}
       >
         {/* Top accent line */}
@@ -233,13 +233,39 @@ export default async function Home() {
       {/* ══════════════════════════════════════════
           CONTENTS / INDEX
           ══════════════════════════════════════════ */}
-      <div style={{ background: "var(--bg-card)" }}>
+      <div style={{ background: "var(--bg-card)", position: "relative", overflow: "hidden" }}>
+        {/* Cubist Art Side Design */}
+        <div
+          style={{
+            position: "absolute",
+            right: 0,
+            top: 0,
+            bottom: 0,
+            width: "45%",
+            backgroundImage: "url('/side-art.png')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+            pointerEvents: "none",
+          }}
+        >
+          {/* Subtle overlay to blend with the page */}
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              background: "linear-gradient(90deg, rgba(250, 248, 245, 0.3) 0%, transparent 25%)",
+            }}
+          />
+        </div>
+
+        {/* Content rows */}
         {contents.map((item) => (
           <Link
             key={item.num}
             href={item.href}
             className="index-row"
-            style={{ display: "block", textDecoration: "none" }}
+            style={{ display: "block", textDecoration: "none", position: "relative", zIndex: 1 }}
           >
             <div
               className="inner-max"
