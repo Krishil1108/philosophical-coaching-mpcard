@@ -54,7 +54,7 @@ export default function ContactPage() {
       />
 
       {/* Options */}
-      <section className="section-pad-xl" style={{ background: "#0d0f14" }}>
+      <section className="section-pad-xl" style={{ background: "var(--bg)" }}>
         <div className="inner-max" style={{ maxWidth: "76rem" }}>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
             {options.map((opt) => (
@@ -62,17 +62,17 @@ export default function ContactPage() {
                 key={opt.num}
                 className="card-hover flex flex-col"
                 style={{
-                  background: opt.featured ? "rgba(201,168,76,0.05)" : "#141720",
-                  border: opt.featured ? "1px solid rgba(201,168,76,0.35)" : "1px solid rgba(201,168,76,0.1)",
-                  borderRadius: "4px",
+                  background: opt.featured ? "rgba(139, 107, 74, 0.06)" : "var(--bg-card)",
+                  border: opt.featured ? "2px solid var(--accent)" : "1px solid var(--border)",
+                  borderRadius: "12px",
                   padding: "3rem",
-                  boxShadow: opt.featured ? "0 0 60px rgba(201,168,76,0.07)" : "none",
+                  boxShadow: opt.featured ? "0 4px 30px rgba(139, 107, 74, 0.1)" : "none",
                 }}
               >
                 <div className="flex items-start justify-between mb-6">
                   <span
                     className="font-cinzel font-bold"
-                    style={{ fontSize: "0.75rem", color: "var(--gold)", letterSpacing: "0.22em" }}
+                    style={{ fontSize: "0.75rem", color: "var(--accent)", letterSpacing: "0.22em" }}
                   >
                     {opt.num}
                   </span>
@@ -91,7 +91,7 @@ export default function ContactPage() {
 
                 <h3
                   className="font-serif mb-4"
-                  style={{ fontSize: "1.5rem", color: "white", lineHeight: 1.15 }}
+                  style={{ fontSize: "1.5rem", color: "var(--text-heading)", lineHeight: 1.15 }}
                 >
                   {opt.title}
                 </h3>
@@ -114,7 +114,7 @@ export default function ContactPage() {
                   style={{
                     fontFamily: "Space Grotesk, sans-serif",
                     fontSize: "0.75rem",
-                    color: "var(--gold)",
+                    color: "var(--accent)",
                     letterSpacing: "0.08em",
                     marginBottom: "2rem",
                     fontWeight: 500,
@@ -143,9 +143,9 @@ export default function ContactPage() {
       </section>
 
       {/* Trust + additional info */}
-      <section className="py-24" style={{ background: "#141720", borderTop: "1px solid rgba(201,168,76,0.08)" }}>
+      <section className="py-24" style={{ background: "var(--bg-card)", borderTop: "1px solid var(--border)" }}>
         <div className="inner-max text-center" style={{ maxWidth: "56rem" }}>
-          <h2 className="font-serif mb-6" style={{ fontSize: "clamp(1.75rem, 3.5vw, 2.75rem)", color: "white" }}>
+          <h2 className="font-serif mb-6" style={{ fontSize: "clamp(1.75rem, 3.5vw, 2.75rem)", color: "var(--text-heading)" }}>
             Before Your First Session
           </h2>
           <div className="divider-gold" />
@@ -181,7 +181,7 @@ export default function ContactPage() {
                   color: "var(--text-muted)",
                 }}
               >
-                <span style={{ color: "var(--gold)", marginRight: "0.5rem" }}>✓</span>
+                <span style={{ color: "var(--sage)", marginRight: "0.5rem" }}>✓</span>
                 {t}
               </span>
             ))}
@@ -190,7 +190,7 @@ export default function ContactPage() {
       </section>
 
       {/* Links to other pages */}
-      <section className="py-20" style={{ background: "#0d0f14" }}>
+      <section className="py-20" style={{ background: "var(--bg-muted)" }}>
         <div className="inner-max" style={{ maxWidth: "80rem" }}>
           <p
             className="text-center mb-8"

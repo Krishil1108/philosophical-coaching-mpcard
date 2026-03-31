@@ -32,7 +32,7 @@ export default function About({ data }: { data?: AboutData }) {
     : ["PhD, Philosophy — MIT", "MSc — MIT", "Faculty, Douglas College", "Founder, Café Philosophy Victoria BC", "Creator, Philosophy Sports", "Author of 'How to Play Philosophy'"];
 
   return (
-    <section style={{ background: "#0d0f14" }}>
+    <section style={{ background: "var(--bg)" }}>
 
       {/* ─── OPENING STATEMENT ─────────────────── */}
       <motion.div
@@ -41,7 +41,7 @@ export default function About({ data }: { data?: AboutData }) {
         viewport={{ once: true }}
         transition={{ duration: 0.8 }}
         style={{
-          borderBottom: "1px solid rgba(201,168,76,0.1)",
+          borderBottom: "1px solid var(--border)",
           padding: "5rem 0 5rem",
         }}
       >
@@ -52,7 +52,7 @@ export default function About({ data }: { data?: AboutData }) {
               className="font-serif"
               style={{
                 fontSize: "clamp(1.5rem, 3vw, 2.5rem)",
-                color: "white",
+                color: "var(--text-heading)",
                 lineHeight: 1.35,
                 maxWidth: "44rem",
               }}
@@ -64,7 +64,7 @@ export default function About({ data }: { data?: AboutData }) {
       </motion.div>
 
       {/* ─── MAIN SPLIT LAYOUT ─────────────────── */}
-      <div style={{ borderBottom: "1px solid rgba(201,168,76,0.1)" }}>
+      <div style={{ borderBottom: "1px solid var(--border)" }}>
         <div
           className="inner-max"
           style={{
@@ -81,7 +81,7 @@ export default function About({ data }: { data?: AboutData }) {
             viewport={{ once: true }}
             transition={{ duration: 0.9 }}
             style={{
-              borderRight: "1px solid rgba(201,168,76,0.1)",
+              borderRight: "1px solid var(--border)",
               padding: "5rem 4rem 5rem 0",
             }}
           >
@@ -90,9 +90,10 @@ export default function About({ data }: { data?: AboutData }) {
               style={{
                 position: "relative",
                 aspectRatio: "3 / 4",
-                background: "#141720",
+                background: "var(--bg-card)",
                 marginBottom: "3rem",
                 overflow: "hidden",
+                borderRadius: "4px",
               }}
             >
               {data?.portrait ? (
@@ -111,12 +112,12 @@ export default function About({ data }: { data?: AboutData }) {
                     flexDirection: "column",
                     alignItems: "center",
                     justifyContent: "center",
-                    background: "#141720",
+                    background: "var(--bg-card)",
                   }}
                 >
                   <div
                     className="font-cinzel"
-                    style={{ fontSize: "8rem", color: "rgba(201,168,76,0.1)", lineHeight: 1 }}
+                    style={{ fontSize: "8rem", color: "rgba(139, 107, 74, 0.08)", lineHeight: 1 }}
                   >
                     φ
                   </div>
@@ -134,15 +135,16 @@ export default function About({ data }: { data?: AboutData }) {
                   </p>
                 </div>
               )}
-              {/* Gold accent line at top */}
+              {/* Accent line at top */}
               <div
                 style={{
                   position: "absolute",
                   top: 0,
                   left: 0,
                   right: 0,
-                  height: "3px",
-                  background: "linear-gradient(90deg, var(--gold), transparent)",
+                  height: "4px",
+                  background: "linear-gradient(90deg, var(--accent), transparent)",
+                  borderRadius: "4px 4px 0 0",
                 }}
               />
             </div>
@@ -164,7 +166,7 @@ export default function About({ data }: { data?: AboutData }) {
                       fontSize: "0.875rem",
                       color: "var(--text-muted)",
                       paddingBottom: "1rem",
-                      borderBottom: "1px solid rgba(255,255,255,0.04)",
+                      borderBottom: "1px solid var(--border)",
                       display: "flex",
                       gap: "1rem",
                       alignItems: "baseline",
@@ -172,7 +174,7 @@ export default function About({ data }: { data?: AboutData }) {
                   >
                     <span
                       style={{
-                        color: "var(--gold)",
+                        color: "var(--accent)",
                         fontFamily: "Space Grotesk, sans-serif",
                         fontSize: "0.5625rem",
                         letterSpacing: "0.1em",
@@ -197,46 +199,6 @@ export default function About({ data }: { data?: AboutData }) {
             transition={{ duration: 0.9 }}
             style={{ padding: "5rem 0 5rem 4rem" }}
           >
-            {/* Inline stats */}
-            <div
-              style={{
-                display: "flex",
-                gap: "3rem",
-                flexWrap: "wrap",
-                marginBottom: "3.5rem",
-                paddingBottom: "3.5rem",
-                borderBottom: "1px solid rgba(255,255,255,0.06)",
-              }}
-            >
-              {[
-                { v: "700+", l: "Café Sessions" },
-                { v: "12", l: "Years Practice" },
-                { v: "2+", l: "Books Authored" },
-                { v: "PhD", l: "Philosophy, MIT" },
-              ].map((s) => (
-                <div key={s.l}>
-                  <div
-                    className="font-cinzel font-bold"
-                    style={{ fontSize: "2rem", color: "var(--gold)", letterSpacing: "0.04em" }}
-                  >
-                    {s.v}
-                  </div>
-                  <div
-                    style={{
-                      fontFamily: "Space Grotesk, sans-serif",
-                      fontSize: "0.5625rem",
-                      letterSpacing: "0.2em",
-                      textTransform: "uppercase",
-                      color: "var(--text-muted)",
-                      marginTop: "0.25rem",
-                    }}
-                  >
-                    {s.l}
-                  </div>
-                </div>
-              ))}
-            </div>
-
             {/* Bio paragraphs */}
             <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem", marginBottom: "3.5rem" }}>
               {bio.map((para, i) => (
@@ -259,14 +221,15 @@ export default function About({ data }: { data?: AboutData }) {
             <div
               style={{
                 paddingLeft: "2rem",
-                borderLeft: "2px solid var(--gold)",
+                borderLeft: "3px solid var(--accent)",
+                borderRadius: "2px",
               }}
             >
               <blockquote
                 className="font-italic"
                 style={{
                   fontSize: "clamp(1.25rem, 2.5vw, 1.75rem)",
-                  color: "var(--text)",
+                  color: "var(--text-heading)",
                   fontStyle: "italic",
                   lineHeight: 1.55,
                   marginBottom: "1rem",
@@ -280,7 +243,7 @@ export default function About({ data }: { data?: AboutData }) {
                   fontSize: "0.625rem",
                   letterSpacing: "0.2em",
                   textTransform: "uppercase",
-                  color: "var(--gold)",
+                  color: "var(--accent)",
                   fontStyle: "normal",
                 }}
               >

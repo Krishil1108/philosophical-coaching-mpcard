@@ -20,12 +20,12 @@ export default function PracticePage() {
       <PhilosophySection />
 
       {/* Deep dive section */}
-      <section className="section-pad-lg" style={{ background: "#141720" }}>
+      <section className="section-pad-lg" style={{ background: "var(--bg-card)" }}>
         <div className="inner-max" style={{ maxWidth: "72rem" }}>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
             <div>
               <span className="section-label" style={{ marginBottom: "1.5rem", display: "block" }}>Why It Works</span>
-              <h2 className="font-serif mb-8" style={{ fontSize: "clamp(2rem, 4vw, 3.25rem)", color: "white" }}>
+              <h2 className="font-serif mb-8" style={{ fontSize: "clamp(2rem, 4vw, 3.25rem)", color: "var(--text-heading)" }}>
                 Philosophy as Liberation
               </h2>
               <div className="divider-gold-left" />
@@ -60,21 +60,21 @@ export default function PracticePage() {
                   key={item.term}
                   className="card-hover"
                   style={{
-                    background: "#1c2030",
-                    border: "1px solid rgba(201,168,76,0.1)",
-                    borderRadius: "4px",
+                    background: "var(--bg)",
+                    border: "1px solid var(--border)",
+                    borderRadius: "8px",
                     padding: "2.25rem",
                   }}
                 >
                   <div
                     className="font-serif mb-3"
-                    style={{ fontSize: "2.25rem", color: "rgba(201,168,76,0.3)", lineHeight: 1 }}
+                    style={{ fontSize: "2.25rem", color: "rgba(139, 107, 74, 0.3)", lineHeight: 1 }}
                   >
                     {item.symbol}
                   </div>
                   <h3
                     className="font-serif mb-3"
-                    style={{ fontSize: "1.25rem", color: "white" }}
+                    style={{ fontSize: "1.25rem", color: "var(--text-heading)" }}
                   >
                     {item.term}
                   </h3>
@@ -97,10 +97,10 @@ export default function PracticePage() {
       </section>
 
       {/* CTA */}
-      <section className="py-28 text-center" style={{ background: "#0d0f14" }}>
+      <section className="py-28 text-center" style={{ background: "var(--bg-muted)" }}>
         <div className="inner-max" style={{ maxWidth: "48rem" }}>
           <span className="section-label" style={{ marginBottom: "1.5rem", display: "block" }}>Ready?</span>
-          <h2 className="font-serif mb-6" style={{ fontSize: "clamp(2rem, 4vw, 3.5rem)", color: "white" }}>
+          <h2 className="font-serif mb-6" style={{ fontSize: "clamp(2rem, 4vw, 3.5rem)", color: "var(--text-heading)" }}>
             Begin the Inquiry
           </h2>
           <div className="divider-gold" />

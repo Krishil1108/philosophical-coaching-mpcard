@@ -48,7 +48,7 @@ export default function Testimonials({ data }: { data?: Testimonial[] }) {
   const testimonials = data?.length ? data : defaultTestimonials;
 
   return (
-    <section className="py-32 overflow-hidden" style={{ background: "#141720" }}>
+    <section className="py-32 overflow-hidden" style={{ background: "var(--bg-card)" }}>
       <div className="max-w-7xl mx-auto px-6">
         {/* Heading */}
         <motion.div
@@ -60,13 +60,13 @@ export default function Testimonials({ data }: { data?: Testimonial[] }) {
         >
           <span
             className="text-xs tracking-[0.3em] uppercase font-medium"
-            style={{ color: "#c9a84c" }}
+            style={{ color: "var(--accent)" }}
           >
             Voices from the Practice
           </span>
           <h2
             className="text-5xl md:text-6xl font-bold mt-3"
-            style={{ fontFamily: "DM Serif Display, serif", color: "white" }}
+            style={{ fontFamily: "DM Serif Display, serif", color: "var(--text-heading)" }}
           >
             Testimonials
           </h2>
@@ -98,8 +98,8 @@ export default function Testimonials({ data }: { data?: Testimonial[] }) {
                 <div
                   className="h-full p-8 rounded-2xl flex flex-col"
                   style={{
-                    background: "#1c2030",
-                    border: "1px solid rgba(201,168,76,0.1)",
+                    background: "var(--bg)",
+                    border: "1px solid var(--border)",
                     minHeight: "260px",
                   }}
                 >
@@ -107,7 +107,7 @@ export default function Testimonials({ data }: { data?: Testimonial[] }) {
                   <div
                     className="text-5xl leading-none mb-4 font-bold"
                     style={{
-                      color: "rgba(201,168,76,0.3)",
+                      color: "rgba(139, 107, 74, 0.2)",
                       fontFamily: "DM Serif Display, serif",
                     }}
                   >
@@ -118,7 +118,7 @@ export default function Testimonials({ data }: { data?: Testimonial[] }) {
                   <blockquote
                     className="flex-1 text-base leading-relaxed mb-6 italic"
                     style={{
-                      color: "#e8e6e1",
+                      color: "var(--text)",
                       fontFamily: "Cormorant Garamond, Georgia, serif",
                       fontSize: "1.1rem",
                     }}
@@ -130,21 +130,21 @@ export default function Testimonials({ data }: { data?: Testimonial[] }) {
                   <div className="flex items-center gap-3">
                     <div
                       className="w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold"
-                      style={{ background: "rgba(201,168,76,0.15)", color: "#c9a84c" }}
+                      style={{ background: "rgba(139, 107, 74, 0.12)", color: "var(--accent)" }}
                     >
                       {t.author?.charAt(0) || "P"}
                     </div>
                     <div>
                       <p
                         className="text-sm font-medium"
-                        style={{ color: "white", fontFamily: "Space Grotesk, sans-serif" }}
+                        style={{ color: "var(--text-heading)", fontFamily: "Space Grotesk, sans-serif" }}
                       >
                         {t.author || "Anonymous"}
                       </p>
                       {t.role && (
                         <p
                           className="text-xs"
-                          style={{ color: "#9a97a0", fontFamily: "Space Grotesk, sans-serif" }}
+                          style={{ color: "var(--text-muted)", fontFamily: "Space Grotesk, sans-serif" }}
                         >
                           {t.role}
                         </p>

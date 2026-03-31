@@ -27,7 +27,7 @@ export default async function GalleryPage() {
         subtitle="Moments from Café Philosophy sessions, public lectures, and philosophical practice."
         breadcrumb={{ label: "Home", href: "/" }}
       />
-      <section className="section-pad-xl" style={{ background: "#0d0f14" }}>
+      <section className="section-pad-xl" style={{ background: "var(--bg)" }}>
         <ImageCarousel data={data} />
       </section>
     </SiteLayout>

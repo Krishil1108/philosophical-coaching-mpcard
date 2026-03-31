@@ -26,34 +26,36 @@ export default function Hero({ data }: { data?: HeroData }) {
     <section
       id="hero"
       className="relative min-h-screen flex flex-col justify-center items-center overflow-hidden"
-      style={{ background: "#0d0f14" }}
+      style={{ background: "linear-gradient(135deg, #f7f4ef 0%, #faf8f5 50%, #f5f2eb 100%)" }}
     >
-      {/* Background */}
+      {/* Soft decorative background */}
       <div className="absolute inset-0 z-0">
         {data?.backgroundImage?.asset?.url ? (
-          <Image
-            src={data.backgroundImage.asset.url}
-            alt="Hero background"
-            fill
-            style={{ objectFit: "cover", objectPosition: "center" }}
-            priority
-          />
+          <>
+            <Image
+              src={data.backgroundImage.asset.url}
+              alt="Hero background"
+              fill
+              style={{ objectFit: "cover", objectPosition: "center" }}
+              priority
+            />
+            <div
+              className="absolute inset-0"
+              style={{
+                background:
+                  "linear-gradient(to bottom, rgba(250, 248, 245, 0.75) 0%, rgba(250, 248, 245, 0.5) 50%, rgba(250, 248, 245, 0.95) 100%)",
+              }}
+            />
+          </>
         ) : (
           <div
             className="absolute inset-0"
             style={{
               background:
-                "radial-gradient(ellipse at 25% 50%, rgba(201,168,76,0.07) 0%, transparent 55%), radial-gradient(ellipse at 75% 20%, rgba(28,32,48,0.8) 0%, transparent 50%)",
+                "radial-gradient(ellipse at 25% 50%, rgba(139, 107, 74, 0.05) 0%, transparent 55%), radial-gradient(ellipse at 75% 20%, rgba(125, 139, 111, 0.06) 0%, transparent 50%)",
             }}
           />
         )}
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              "linear-gradient(to bottom, rgba(13,15,20,0.65) 0%, rgba(13,15,20,0.4) 50%, rgba(13,15,20,0.98) 100%)",
-          }}
-        />
       </div>
 
       <div className="relative z-10" style={{ maxWidth: "76rem", margin: "0 auto", padding: "0 2rem", textAlign: "center" }}>
@@ -68,12 +70,12 @@ export default function Hero({ data }: { data?: HeroData }) {
             fontSize: "0.625rem",
             letterSpacing: "0.4em",
             textTransform: "uppercase",
-            color: "var(--gold)",
+            color: "var(--accent)",
           }}
         >
-          <span className="inline-block w-8 h-px" style={{ background: "var(--gold)" }} />
+          <span className="inline-block w-8 h-px" style={{ background: "var(--accent)" }} />
           PhD (MIT) · Philosophical Practitioner
-          <span className="inline-block w-8 h-px" style={{ background: "var(--gold)" }} />
+          <span className="inline-block w-8 h-px" style={{ background: "var(--accent)" }} />
         </motion.div>
 
         {/* Headline */}
@@ -85,7 +87,7 @@ export default function Hero({ data }: { data?: HeroData }) {
           style={{
             fontSize: "clamp(4.5rem, 12vw, 11rem)",
             lineHeight: 0.93,
-            color: "white",
+            color: "var(--text-heading)",
             marginBottom: "3rem",
             whiteSpace: "pre-line",
           }}
@@ -93,7 +95,7 @@ export default function Hero({ data }: { data?: HeroData }) {
           {headline.split("\n").map((line, i) => (
             <span
               key={i}
-              className={i === 1 ? "text-gold-gradient" : ""}
+              className={i === 1 ? "text-accent-gradient" : ""}
               style={{ display: "block" }}
             >
               {line}
@@ -178,7 +180,7 @@ export default function Hero({ data }: { data?: HeroData }) {
                   fontSize: "0.625rem",
                   letterSpacing: "0.2em",
                   textTransform: "uppercase",
-                  color: "var(--gold)",
+                  color: "var(--accent)",
                   fontStyle: "normal",
                 }}
               >
@@ -207,7 +209,7 @@ export default function Hero({ data }: { data?: HeroData }) {
         >
           Scroll
         </span>
-        <div className="w-px h-14" style={{ background: "linear-gradient(to bottom, var(--gold), transparent)" }} />
+        <div className="w-px h-14" style={{ background: "linear-gradient(to bottom, var(--accent), transparent)" }} />
       </motion.div>
     </section>
   );

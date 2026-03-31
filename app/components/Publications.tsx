@@ -52,7 +52,7 @@ export default function Publications({ data }: { data?: Publication[] }) {
   const publications = data?.length ? data : defaultPublications;
 
   return (
-    <section style={{ background: "#0d0f14" }}>
+    <section style={{ background: "var(--bg)" }}>
       {publications.map((pub, i) => (
         <motion.div
           key={pub._id}
@@ -61,7 +61,7 @@ export default function Publications({ data }: { data?: Publication[] }) {
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.7, delay: i * 0.08 }}
           style={{
-            borderBottom: "1px solid rgba(201,168,76,0.1)",
+            borderBottom: "1px solid var(--border)",
           }}
         >
           <div className="inner-max" style={{ maxWidth: "88rem" }}>
@@ -79,7 +79,7 @@ export default function Publications({ data }: { data?: Publication[] }) {
                 className="font-cinzel"
                 style={{
                   fontSize: "0.875rem",
-                  color: "var(--gold)",
+                  color: "var(--accent)",
                   letterSpacing: "0.2em",
                   paddingTop: "0.5rem",
                 }}
@@ -92,9 +92,10 @@ export default function Publications({ data }: { data?: Publication[] }) {
                 style={{
                   position: "relative",
                   aspectRatio: "3 / 4",
-                  background: "#141720",
+                  background: "var(--bg-card)",
                   overflow: "hidden",
                   flexShrink: 0,
+                  borderRadius: "4px",
                 }}
               >
                 {pub.coverImage ? (
@@ -114,8 +115,8 @@ export default function Publications({ data }: { data?: Publication[] }) {
                       alignItems: "center",
                       justifyContent: "center",
                       padding: "2rem",
-                      background: "#141720",
-                      border: "1px solid rgba(201,168,76,0.12)",
+                      background: "var(--bg-card)",
+                      border: "1px solid var(--border)",
                     }}
                   >
                     <div
@@ -134,22 +135,23 @@ export default function Publications({ data }: { data?: Publication[] }) {
                     {pub.year && (
                       <div
                         className="font-cinzel"
-                        style={{ fontSize: "0.625rem", color: "var(--gold)", letterSpacing: "0.2em" }}
+                        style={{ fontSize: "0.625rem", color: "var(--accent)", letterSpacing: "0.2em" }}
                       >
                         {pub.year}
                       </div>
                     )}
                   </div>
                 )}
-                {/* Gold top edge */}
+                {/* Accent top edge */}
                 <div
                   style={{
                     position: "absolute",
                     top: 0,
                     left: 0,
                     right: 0,
-                    height: "2px",
-                    background: "var(--gold)",
+                    height: "3px",
+                    background: "var(--accent)",
+                    borderRadius: "4px 4px 0 0",
                   }}
                 />
               </div>
@@ -161,7 +163,7 @@ export default function Publications({ data }: { data?: Publication[] }) {
                     className="font-serif"
                     style={{
                       fontSize: "clamp(1.5rem, 2.5vw, 2.5rem)",
-                      color: "white",
+                      color: "var(--text-heading)",
                       lineHeight: 1.1,
                       marginBottom: "0.5rem",
                     }}
@@ -173,7 +175,7 @@ export default function Publications({ data }: { data?: Publication[] }) {
                       className="font-italic"
                       style={{
                         fontSize: "1rem",
-                        color: "var(--gold)",
+                        color: "var(--sage)",
                         fontStyle: "italic",
                       }}
                     >
@@ -243,7 +245,8 @@ export default function Publications({ data }: { data?: Publication[] }) {
                     className="font-cinzel"
                     style={{
                       fontSize: "0.5625rem",
-                      color: "rgba(201,168,76,0.4)",
+                      color: "var(--accent)",
+                      opacity: 0.5,
                       letterSpacing: "0.2em",
                       textTransform: "uppercase",
                     }}
@@ -276,7 +279,7 @@ export default function Publications({ data }: { data?: Publication[] }) {
                 fontWeight: 300,
               }}
             >
-              <span style={{ color: "var(--gold)" }}>Forthcoming — </span>
+              <span style={{ color: "var(--accent)" }}>Forthcoming — </span>
               Two translations of Gerd Achenbach&apos;s works on Philosophical Praxis, published by Lexington Books.
             </p>
           </div>

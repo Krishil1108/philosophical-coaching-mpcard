@@ -61,11 +61,11 @@ export default async function Home() {
     <SiteLayout>
 
       {/* ══════════════════════════════════════════
-          HERO — left-aligned editorial
+          HERO — light, warm, elegant
           ══════════════════════════════════════════ */}
       <section
         style={{
-          background: "#0d0f14",
+          background: "linear-gradient(180deg, #faf8f5 0%, #f5f1eb 100%)",
           minHeight: "100svh",
           display: "flex",
           flexDirection: "column",
@@ -75,19 +75,19 @@ export default async function Home() {
           overflow: "hidden",
         }}
       >
-        {/* Top gold line */}
+        {/* Top accent line */}
         <div
           style={{
             position: "absolute",
             top: 0,
             left: 0,
             right: 0,
-            height: "1px",
-            background: "linear-gradient(90deg, rgba(201,168,76,0.5) 0%, rgba(201,168,76,0.1) 60%, transparent 100%)",
+            height: "3px",
+            background: "linear-gradient(90deg, var(--accent) 0%, var(--sage) 50%, transparent 100%)",
           }}
         />
 
-        {/* Huge background phi */}
+        {/* Huge background phi symbol */}
         <div
           className="font-cinzel"
           style={{
@@ -97,7 +97,7 @@ export default async function Home() {
             transform: "translateY(-55%)",
             fontSize: "clamp(24rem, 45vw, 55rem)",
             lineHeight: 1,
-            color: "rgba(201,168,76,0.03)",
+            color: "rgba(139, 107, 74, 0.04)",
             pointerEvents: "none",
             userSelect: "none",
             fontWeight: 900,
@@ -108,7 +108,7 @@ export default async function Home() {
 
         <div className="inner-max" style={{ maxWidth: "88rem", position: "relative", zIndex: 1 }}>
 
-          {/* Credential strip — top of content */}
+          {/* Credential strip */}
           <div
             style={{
               display: "flex",
@@ -122,21 +122,21 @@ export default async function Home() {
               color: "var(--text-muted)",
             }}
           >
-            <span className="inline-block" style={{ width: "2rem", height: "1px", background: "var(--gold)" }} />
+            <span className="inline-block" style={{ width: "2rem", height: "2px", background: "var(--accent)", borderRadius: "1px" }} />
             <span>PhD (MIT)</span>
-            <span style={{ color: "rgba(201,168,76,0.3)" }}>·</span>
+            <span style={{ color: "var(--accent)", opacity: 0.4 }}>·</span>
             <span>Philosophical Practitioner</span>
-            <span style={{ color: "rgba(201,168,76,0.3)" }}>·</span>
+            <span style={{ color: "var(--accent)", opacity: 0.4 }}>·</span>
             <span>Douglas College</span>
           </div>
 
-          {/* Headline — enormous, left-aligned */}
+          {/* Headline */}
           <h1
             className="font-serif"
             style={{
               fontSize: "clamp(5rem, 14vw, 14rem)",
               lineHeight: 0.9,
-              color: "white",
+              color: "var(--text-heading)",
               marginBottom: "3.5rem",
               whiteSpace: "pre-line",
             }}
@@ -144,7 +144,7 @@ export default async function Home() {
             {headline.split("\n").map((line: string, i: number) => (
               <span
                 key={i}
-                className={i === 1 ? "text-gold-gradient" : ""}
+                className={i === 1 ? "text-accent-gradient" : ""}
                 style={{ display: "block" }}
               >
                 {line}
@@ -159,7 +159,7 @@ export default async function Home() {
               gridTemplateColumns: "1fr auto",
               gap: "4rem",
               alignItems: "end",
-              borderTop: "1px solid rgba(201,168,76,0.12)",
+              borderTop: "1px solid var(--border)",
               paddingTop: "2.5rem",
             }}
           >
@@ -201,13 +201,13 @@ export default async function Home() {
           ══════════════════════════════════════════ */}
       <div
         style={{
-          background: "#141720",
-          borderTop: "1px solid rgba(201,168,76,0.08)",
-          borderBottom: "1px solid rgba(201,168,76,0.08)",
+          background: "var(--bg-card)",
+          borderTop: "1px solid var(--border)",
+          borderBottom: "1px solid var(--border)",
         }}
       >
         <div
-          className="inner-max"
+          className="inner-max stats-grid"
           style={{
             maxWidth: "88rem",
             display: "flex",
@@ -225,15 +225,15 @@ export default async function Home() {
             <div
               key={s.l}
               style={{
-                padding: "2.25rem 2rem",
+                padding: "2.5rem 2rem",
                 flex: "1 1 0",
                 textAlign: "center",
-                borderRight: i < 3 ? "1px solid rgba(201,168,76,0.08)" : "none",
+                borderRight: i < 3 ? "1px solid var(--border)" : "none",
               }}
             >
               <div
                 className="font-cinzel font-bold"
-                style={{ fontSize: "1.875rem", color: "var(--gold)", letterSpacing: "0.04em" }}
+                style={{ fontSize: "2rem", color: "var(--accent)", letterSpacing: "0.04em" }}
               >
                 {s.v}
               </div>
@@ -244,7 +244,7 @@ export default async function Home() {
                   letterSpacing: "0.25em",
                   textTransform: "uppercase",
                   color: "var(--text-muted)",
-                  marginTop: "0.375rem",
+                  marginTop: "0.5rem",
                 }}
               >
                 {s.l}
@@ -259,9 +259,9 @@ export default async function Home() {
           ══════════════════════════════════════════ */}
       <div
         style={{
-          background: "#0d0f14",
+          background: "var(--bg)",
           padding: "7rem 0",
-          borderBottom: "1px solid rgba(201,168,76,0.1)",
+          borderBottom: "1px solid var(--border)",
         }}
       >
         <div className="inner-max" style={{ maxWidth: "88rem" }}>
@@ -272,7 +272,7 @@ export default async function Home() {
                 className="font-serif"
                 style={{
                   fontSize: "clamp(1.5rem, 3vw, 2.75rem)",
-                  color: "white",
+                  color: "var(--text-heading)",
                   lineHeight: 1.3,
                   maxWidth: "52rem",
                   marginBottom: "2.5rem",
@@ -294,8 +294,8 @@ export default async function Home() {
       {/* ══════════════════════════════════════════
           CONTENTS / INDEX
           ══════════════════════════════════════════ */}
-      <div style={{ background: "#141720" }}>
-        {contents.map((item, i) => (
+      <div style={{ background: "var(--bg-card)" }}>
+        {contents.map((item) => (
           <Link
             key={item.num}
             href={item.href}
@@ -318,7 +318,7 @@ export default async function Home() {
                 className="font-cinzel"
                 style={{
                   fontSize: "0.75rem",
-                  color: "var(--gold)",
+                  color: "var(--accent)",
                   letterSpacing: "0.2em",
                 }}
               >
@@ -331,7 +331,7 @@ export default async function Home() {
                   className="font-serif"
                   style={{
                     fontSize: "clamp(1.25rem, 2.5vw, 2rem)",
-                    color: "white",
+                    color: "var(--text-heading)",
                     marginBottom: "0.4rem",
                     lineHeight: 1.1,
                   }}
@@ -360,7 +360,7 @@ export default async function Home() {
                 strokeWidth="2"
                 viewBox="0 0 24 24"
                 className="index-row-arrow"
-                style={{ color: "rgba(201,168,76,0.3)", flexShrink: 0, transition: "color 0.25s" }}
+                style={{ color: "var(--border-strong)", flexShrink: 0, transition: "color 0.25s" }}
               >
                 <path d="M5 12h14M12 5l7 7-7 7" />
               </svg>
@@ -374,9 +374,9 @@ export default async function Home() {
           ══════════════════════════════════════════ */}
       <div
         style={{
-          background: "#0a0c10",
+          background: "var(--bg-muted)",
           padding: "8rem 0",
-          borderBottom: "1px solid rgba(201,168,76,0.08)",
+          borderBottom: "1px solid var(--border)",
         }}
       >
         <div className="inner-max" style={{ maxWidth: "88rem" }}>
@@ -385,7 +385,7 @@ export default async function Home() {
               style={{
                 fontFamily: "Space Grotesk, sans-serif",
                 fontSize: "0.5rem",
-                color: "var(--gold)",
+                color: "var(--accent)",
                 letterSpacing: "0.35em",
                 textTransform: "uppercase",
                 writingMode: "vertical-rl",
@@ -400,7 +400,7 @@ export default async function Home() {
               className="font-italic"
               style={{
                 fontSize: "clamp(1.75rem, 4vw, 4rem)",
-                color: "var(--text)",
+                color: "var(--text-heading)",
                 fontStyle: "italic",
                 lineHeight: 1.2,
                 maxWidth: "64rem",
@@ -415,7 +415,7 @@ export default async function Home() {
                   fontSize: "0.625rem",
                   letterSpacing: "0.25em",
                   textTransform: "uppercase",
-                  color: "var(--gold)",
+                  color: "var(--accent)",
                   fontStyle: "normal",
                 }}
               >

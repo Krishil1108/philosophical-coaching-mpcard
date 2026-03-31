@@ -58,7 +58,7 @@ export default function Services({ data }: { data?: Service[] }) {
   const services = data?.length ? data : defaultServices;
 
   return (
-    <section style={{ background: "#0d0f14" }}>
+    <section style={{ background: "var(--bg)" }}>
       {services.map((service, i) => (
         <motion.div
           key={service._id}
@@ -67,7 +67,7 @@ export default function Services({ data }: { data?: Service[] }) {
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.75, delay: i * 0.1 }}
           style={{
-            borderBottom: "1px solid rgba(201,168,76,0.12)",
+            borderBottom: "1px solid var(--border)",
             padding: "5rem 0",
           }}
         >
@@ -86,7 +86,7 @@ export default function Services({ data }: { data?: Service[] }) {
                 style={{
                   fontSize: "1rem",
                   fontWeight: 600,
-                  color: "var(--gold)",
+                  color: "var(--accent)",
                   letterSpacing: "0.2em",
                   paddingTop: "0.625rem",
                 }}
@@ -106,14 +106,14 @@ export default function Services({ data }: { data?: Service[] }) {
                     gap: "1rem",
                     marginBottom: "2rem",
                     paddingBottom: "2rem",
-                    borderBottom: "1px solid rgba(255,255,255,0.06)",
+                    borderBottom: "1px solid var(--border)",
                   }}
                 >
                   <h2
                     className="font-serif"
                     style={{
                       fontSize: "clamp(2.25rem, 4.5vw, 4rem)",
-                      color: "white",
+                      color: "var(--text-heading)",
                       lineHeight: 1.0,
                     }}
                   >
@@ -125,7 +125,7 @@ export default function Services({ data }: { data?: Service[] }) {
                         className="font-cinzel"
                         style={{
                           fontSize: "0.875rem",
-                          color: "var(--gold)",
+                          color: "var(--accent)",
                           letterSpacing: "0.08em",
                           fontWeight: 600,
                         }}
@@ -182,7 +182,7 @@ export default function Services({ data }: { data?: Service[] }) {
                             color: "var(--text)",
                             paddingBottom: "0.75rem",
                             marginBottom: "0.75rem",
-                            borderBottom: "1px solid rgba(255,255,255,0.05)",
+                            borderBottom: "1px solid var(--border)",
                             display: "flex",
                             alignItems: "center",
                             gap: "0.875rem",
@@ -190,10 +190,10 @@ export default function Services({ data }: { data?: Service[] }) {
                         >
                           <span
                             style={{
-                              width: "4px",
-                              height: "4px",
+                              width: "6px",
+                              height: "6px",
                               borderRadius: "50%",
-                              background: "var(--gold)",
+                              background: "var(--sage)",
                               flexShrink: 0,
                             }}
                           />

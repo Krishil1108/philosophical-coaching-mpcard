@@ -38,7 +38,7 @@ export default function VideoSection({ data }: { data?: YoutubeVideo[] }) {
   const isReal = (id: string) => !id.startsWith("placeholder");
 
   return (
-    <section style={{ background: "#0d0f14" }}>
+    <section style={{ background: "var(--bg)" }}>
       {videos.map((video, i) => (
         <motion.div
           key={video._id}
@@ -46,7 +46,7 @@ export default function VideoSection({ data }: { data?: YoutubeVideo[] }) {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.7, delay: i * 0.08 }}
-          style={{ borderBottom: "1px solid rgba(201,168,76,0.1)" }}
+          style={{ borderBottom: "1px solid var(--border)" }}
         >
           <div className="inner-max" style={{ maxWidth: "88rem" }}>
             <div
@@ -63,7 +63,7 @@ export default function VideoSection({ data }: { data?: YoutubeVideo[] }) {
                 className="font-cinzel"
                 style={{
                   fontSize: "0.875rem",
-                  color: "var(--gold)",
+                  color: "var(--accent)",
                   letterSpacing: "0.2em",
                 }}
               >
@@ -76,7 +76,7 @@ export default function VideoSection({ data }: { data?: YoutubeVideo[] }) {
                   className="font-serif"
                   style={{
                     fontSize: "clamp(1.5rem, 2.5vw, 2.25rem)",
-                    color: "white",
+                    color: "var(--text-heading)",
                     lineHeight: 1.1,
                     marginBottom: "1rem",
                   }}
@@ -117,10 +117,11 @@ export default function VideoSection({ data }: { data?: YoutubeVideo[] }) {
                 style={{
                   position: "relative",
                   aspectRatio: "16 / 9",
-                  background: "#141720",
+                  background: "var(--bg-card)",
                   overflow: "hidden",
                   cursor: isReal(video.videoId) ? "pointer" : "default",
                   flexShrink: 0,
+                  borderRadius: "4px",
                 }}
                 onClick={() => isReal(video.videoId) && setActiveVideoId(video.videoId)}
               >
@@ -140,11 +141,11 @@ export default function VideoSection({ data }: { data?: YoutubeVideo[] }) {
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
-                        background: "rgba(13,15,20,0.4)",
+                        background: "rgba(250, 248, 245, 0.4)",
                         transition: "background 0.3s",
                       }}
-                      onMouseEnter={(e) => (e.currentTarget.style.background = "rgba(13,15,20,0.2)")}
-                      onMouseLeave={(e) => (e.currentTarget.style.background = "rgba(13,15,20,0.4)")}
+                      onMouseEnter={(e) => (e.currentTarget.style.background = "rgba(250, 248, 245, 0.2)")}
+                      onMouseLeave={(e) => (e.currentTarget.style.background = "rgba(250, 248, 245, 0.4)")}
                     >
                       <div
                         style={{
@@ -153,10 +154,11 @@ export default function VideoSection({ data }: { data?: YoutubeVideo[] }) {
                           display: "flex",
                           alignItems: "center",
                           justifyContent: "center",
-                          background: "rgba(201,168,76,0.9)",
+                          background: "var(--accent)",
+                          borderRadius: "4px",
                         }}
                       >
-                        <svg width="18" height="18" fill="#0d0f14" viewBox="0 0 24 24" style={{ marginLeft: "3px" }}>
+                        <svg width="18" height="18" fill="#fff" viewBox="0 0 24 24" style={{ marginLeft: "3px" }}>
                           <path d="M8 5v14l11-7z" />
                         </svg>
                       </div>
@@ -172,7 +174,8 @@ export default function VideoSection({ data }: { data?: YoutubeVideo[] }) {
                       alignItems: "center",
                       justifyContent: "center",
                       gap: "0.75rem",
-                      border: "1px solid rgba(201,168,76,0.1)",
+                      border: "1px solid var(--border)",
+                      borderRadius: "4px",
                     }}
                   >
                     <div
@@ -182,11 +185,12 @@ export default function VideoSection({ data }: { data?: YoutubeVideo[] }) {
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
-                        background: "rgba(201,168,76,0.07)",
-                        border: "1px solid rgba(201,168,76,0.2)",
+                        background: "rgba(139, 107, 74, 0.08)",
+                        border: "1px solid var(--border)",
+                        borderRadius: "4px",
                       }}
                     >
-                      <svg width="18" height="18" fill="var(--gold)" viewBox="0 0 24 24" style={{ marginLeft: "3px" }}>
+                      <svg width="18" height="18" fill="var(--accent)" viewBox="0 0 24 24" style={{ marginLeft: "3px" }}>
                         <path d="M8 5v14l11-7z" />
                       </svg>
                     </div>
@@ -225,7 +229,7 @@ export default function VideoSection({ data }: { data?: YoutubeVideo[] }) {
               alignItems: "center",
               justifyContent: "center",
               padding: "2rem",
-              background: "rgba(0,0,0,0.92)",
+              background: "rgba(45, 40, 32, 0.95)",
             }}
           >
             <motion.div
@@ -240,7 +244,7 @@ export default function VideoSection({ data }: { data?: YoutubeVideo[] }) {
                 title="YouTube video"
                 allow="autoplay; encrypted-media"
                 allowFullScreen
-                style={{ position: "absolute", inset: 0, width: "100%", height: "100%", border: "none" }}
+                style={{ position: "absolute", inset: 0, width: "100%", height: "100%", border: "none", borderRadius: "4px" }}
               />
               <button
                 onClick={() => setActiveVideoId(null)}
@@ -255,7 +259,7 @@ export default function VideoSection({ data }: { data?: YoutubeVideo[] }) {
                   fontSize: "0.625rem",
                   letterSpacing: "0.2em",
                   textTransform: "uppercase",
-                  color: "var(--text-muted)",
+                  color: "rgba(250, 248, 245, 0.7)",
                   display: "flex",
                   alignItems: "center",
                   gap: "0.5rem",

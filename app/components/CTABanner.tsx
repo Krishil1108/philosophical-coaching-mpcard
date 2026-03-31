@@ -5,12 +5,12 @@ import Link from "next/link";
 
 export default function CTABanner() {
   return (
-    <section className="py-36 relative overflow-hidden" style={{ background: "#0d0f14" }}>
+    <section className="py-36 relative overflow-hidden" style={{ background: "var(--bg-muted)" }}>
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse 60% 80% at 50% 100%, rgba(201,168,76,0.08) 0%, transparent 60%)",
+            "radial-gradient(ellipse 60% 80% at 50% 100%, rgba(139, 107, 74, 0.06) 0%, transparent 60%)",
         }}
       />
 
@@ -23,7 +23,7 @@ export default function CTABanner() {
         >
           <div
             className="font-serif mb-4"
-            style={{ fontSize: "6rem", color: "rgba(201,168,76,0.1)", lineHeight: 1 }}
+            style={{ fontSize: "6rem", color: "rgba(139, 107, 74, 0.12)", lineHeight: 1 }}
           >
             φ
           </div>
@@ -39,7 +39,7 @@ export default function CTABanner() {
             className="font-serif"
             style={{
               fontSize: "clamp(2.5rem, 6vw, 5.5rem)",
-              color: "white",
+              color: "var(--text-heading)",
               lineHeight: 1.0,
               marginBottom: "0.5rem",
             }}
@@ -47,7 +47,7 @@ export default function CTABanner() {
             Ready to Think{" "}
           </h2>
           <h2
-            className="font-serif text-gold-gradient"
+            className="font-serif text-accent-gradient"
             style={{
               fontSize: "clamp(2.5rem, 6vw, 5.5rem)",
               lineHeight: 1.0,
@@ -105,7 +105,7 @@ export default function CTABanner() {
           >
             {["PhD, MIT", "700+ sessions", "12 years practice", "No worldview imposed"].map((t) => (
               <span key={t}>
-                <span style={{ color: "var(--gold)", marginRight: "0.4rem" }}>✓</span>
+                <span style={{ color: "var(--sage)", marginRight: "0.4rem" }}>✓</span>
                 {t}
               </span>
             ))}

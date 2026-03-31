@@ -30,11 +30,11 @@ export default async function ServicesPage() {
       <Services data={data} />
 
       {/* What to expect section */}
-      <section className="section-pad" style={{ background: "#0d0f14" }}>
+      <section className="section-pad" style={{ background: "var(--bg-muted)" }}>
         <div className="inner-max" style={{ maxWidth: "64rem" }}>
           <div className="text-center mb-20">
             <span className="section-label" style={{ marginBottom: "1.25rem", display: "block" }}>Process</span>
-            <h2 className="font-serif" style={{ fontSize: "clamp(2rem, 4vw, 3.5rem)", color: "white" }}>
+            <h2 className="font-serif" style={{ fontSize: "clamp(2rem, 4vw, 3.5rem)", color: "var(--text-heading)" }}>
               What to Expect
             </h2>
             <div className="divider-gold" />
@@ -51,21 +51,21 @@ export default async function ServicesPage() {
                 key={item.n}
                 className="card-hover"
                 style={{
-                  background: "#141720",
-                  border: "1px solid rgba(201,168,76,0.1)",
-                  borderRadius: "4px",
+                  background: "var(--bg-card)",
+                  border: "1px solid var(--border)",
+                  borderRadius: "8px",
                   padding: "2.5rem",
                 }}
               >
                 <div
                   className="font-cinzel font-bold mb-4"
-                  style={{ fontSize: "0.8125rem", color: "var(--gold)", letterSpacing: "0.2em" }}
+                  style={{ fontSize: "0.8125rem", color: "var(--accent)", letterSpacing: "0.2em" }}
                 >
                   {item.n}
                 </div>
                 <h3
                   className="font-serif mb-4"
-                  style={{ fontSize: "1.375rem", color: "white" }}
+                  style={{ fontSize: "1.375rem", color: "var(--text-heading)" }}
                 >
                   {item.title}
                 </h3>

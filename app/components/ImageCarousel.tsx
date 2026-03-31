@@ -62,7 +62,7 @@ export default function ImageCarousel({ data }: { data?: GalleryImage[] }) {
     : placeholderSlides;
 
   return (
-    <section id="gallery" className="py-20 relative overflow-hidden" style={{ background: "#141720" }}>
+    <section id="gallery" className="py-20 relative overflow-hidden" style={{ background: "var(--bg-muted)" }}>
       {/* Section heading */}
       <motion.div
         initial={{ opacity: 0, y: 30 }}
@@ -73,13 +73,13 @@ export default function ImageCarousel({ data }: { data?: GalleryImage[] }) {
       >
         <span
           className="text-xs tracking-[0.3em] uppercase font-medium"
-          style={{ color: "#c9a84c" }}
+          style={{ color: "var(--accent)" }}
         >
           Visual Journey
         </span>
         <h2
           className="text-5xl md:text-6xl font-bold mt-3"
-          style={{ fontFamily: "DM Serif Display, serif", color: "white" }}
+          style={{ fontFamily: "DM Serif Display, serif", color: "var(--text-heading)" }}
         >
           Gallery
         </h2>
@@ -115,7 +115,7 @@ export default function ImageCarousel({ data }: { data?: GalleryImage[] }) {
             <SwiperSlide key={slide._id}>
               <div
                 className="relative aspect-[16/10] rounded-2xl overflow-hidden group"
-                style={{ border: "1px solid rgba(201,168,76,0.15)" }}
+                style={{ border: "1px solid var(--border)", background: "var(--bg-card)" }}
               >
                 {slide.image ? (
                   <Image
@@ -128,10 +128,10 @@ export default function ImageCarousel({ data }: { data?: GalleryImage[] }) {
                 ) : (
                   <div
                     className="absolute inset-0 flex flex-col items-center justify-center"
-                    style={{ background: "#1c2030" }}
+                    style={{ background: "var(--bg-card)" }}
                   >
                     <div className="text-6xl mb-4">{slide.emoji}</div>
-                    <p className="text-sm text-center px-8" style={{ color: "#9a97a0" }}>
+                    <p className="text-sm text-center px-8" style={{ color: "var(--text-muted)" }}>
                       Add images via Sanity Studio
                     </p>
                   </div>
@@ -141,21 +141,21 @@ export default function ImageCarousel({ data }: { data?: GalleryImage[] }) {
                 {slide.caption && (
                   <div
                     className="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-500"
-                    style={{ background: "linear-gradient(to top, rgba(13,15,20,0.95), transparent)" }}
+                    style={{ background: "linear-gradient(to top, rgba(45, 40, 32, 0.95), transparent)" }}
                   >
                     <p
                       className="text-sm font-medium"
-                      style={{ color: "white", fontFamily: "Space Grotesk, sans-serif" }}
+                      style={{ color: "#faf8f5", fontFamily: "Space Grotesk, sans-serif" }}
                     >
                       {slide.caption}
                     </p>
                   </div>
                 )}
 
-                {/* Gold corner accent */}
+                {/* Accent corner dot */}
                 <div
                   className="absolute top-3 right-3 w-2 h-2 rounded-full"
-                  style={{ background: "#c9a84c" }}
+                  style={{ background: "var(--accent)" }}
                 />
               </div>
             </SwiperSlide>

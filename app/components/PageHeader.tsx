@@ -14,23 +14,23 @@ export default function PageHeader({ label, title, subtitle, breadcrumb }: PageH
   return (
     <section
       style={{
-        background: "#0d0f14",
+        background: "linear-gradient(180deg, #faf8f5 0%, #f5f1eb 100%)",
         paddingTop: "9rem",
         paddingBottom: "4rem",
-        borderBottom: "1px solid rgba(201,168,76,0.1)",
+        borderBottom: "1px solid var(--border)",
         position: "relative",
         overflow: "hidden",
       }}
     >
-      {/* Very subtle background glow */}
+      {/* Top accent line */}
       <div
         style={{
           position: "absolute",
           top: 0,
           left: 0,
           right: 0,
-          height: "1px",
-          background: "linear-gradient(90deg, transparent 0%, rgba(201,168,76,0.4) 50%, transparent 100%)",
+          height: "3px",
+          background: "linear-gradient(90deg, transparent 0%, var(--accent) 50%, transparent 100%)",
         }}
       />
 
@@ -60,12 +60,12 @@ export default function PageHeader({ label, title, subtitle, breadcrumb }: PageH
                   textDecoration: "none",
                   transition: "color 0.2s",
                 }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = "var(--gold)")}
+                onMouseEnter={(e) => (e.currentTarget.style.color = "var(--accent)")}
                 onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-muted)")}
               >
                 {breadcrumb.label}
               </Link>
-              <span style={{ color: "rgba(201,168,76,0.3)", fontSize: "10px" }}>›</span>
+              <span style={{ color: "var(--accent)", opacity: 0.4, fontSize: "10px" }}>›</span>
             </>
           )}
           <span
@@ -74,14 +74,14 @@ export default function PageHeader({ label, title, subtitle, breadcrumb }: PageH
               fontSize: "0.625rem",
               letterSpacing: "0.3em",
               textTransform: "uppercase",
-              color: "var(--gold)",
+              color: "var(--accent)",
             }}
           >
             {label}
           </span>
         </motion.div>
 
-        {/* Main title — very large */}
+        {/* Main title */}
         <motion.h1
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
@@ -89,7 +89,7 @@ export default function PageHeader({ label, title, subtitle, breadcrumb }: PageH
           className="font-serif"
           style={{
             fontSize: "clamp(3.5rem, 9vw, 9rem)",
-            color: "white",
+            color: "var(--text-heading)",
             lineHeight: 0.95,
             marginBottom: subtitle ? "3rem" : 0,
           }}
@@ -97,7 +97,7 @@ export default function PageHeader({ label, title, subtitle, breadcrumb }: PageH
           {title}
         </motion.h1>
 
-        {/* Subtitle — left aligned, narrow column */}
+        {/* Subtitle */}
         {subtitle && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -111,10 +111,12 @@ export default function PageHeader({ label, title, subtitle, breadcrumb }: PageH
           >
             <div
               style={{
-                width: "1px",
+                width: "2px",
                 height: "100%",
-                background: "rgba(201,168,76,0.3)",
+                background: "var(--accent)",
                 justifySelf: "center",
+                borderRadius: "1px",
+                opacity: 0.4,
               }}
             />
             <p

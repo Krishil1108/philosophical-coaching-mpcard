@@ -31,13 +31,13 @@ const cols = [
 
 export default function Footer() {
   return (
-    <footer style={{ background: "#080b10" }}>
+    <footer style={{ background: "var(--bg-muted)" }}>
 
       {/* ── TOP: Brand identity ─────────────────── */}
       <div
         style={{
-          borderTop: "1px solid rgba(201,168,76,0.12)",
-          borderBottom: "1px solid rgba(201,168,76,0.1)",
+          borderTop: "1px solid var(--border)",
+          borderBottom: "1px solid var(--border)",
           padding: "5rem 0 4.5rem",
           textAlign: "center",
         }}
@@ -47,7 +47,7 @@ export default function Footer() {
           className="font-cinzel"
           style={{
             fontSize: "4rem",
-            color: "rgba(201,168,76,0.18)",
+            color: "rgba(139, 107, 74, 0.15)",
             lineHeight: 1,
             marginBottom: "1.75rem",
             letterSpacing: "0.1em",
@@ -62,7 +62,7 @@ export default function Footer() {
             className="font-cinzel"
             style={{
               fontSize: "clamp(1.75rem, 5.5vw, 5.5rem)",
-              color: "white",
+              color: "var(--text-heading)",
               letterSpacing: "0.28em",
               lineHeight: 1,
               marginBottom: "1.25rem",
@@ -73,13 +73,14 @@ export default function Footer() {
           </h2>
         </Link>
 
-        {/* Gold rule */}
+        {/* Accent rule */}
         <div
           style={{
             width: "40px",
-            height: "1px",
-            background: "var(--gold)",
+            height: "2px",
+            background: "var(--accent)",
             margin: "0 auto 1.5rem",
+            borderRadius: "1px",
           }}
         />
 
@@ -98,7 +99,7 @@ export default function Footer() {
       </div>
 
       {/* ── MIDDLE: 3-column nav grid ────────────── */}
-      <div style={{ borderBottom: "1px solid rgba(201,168,76,0.08)" }}>
+      <div style={{ borderBottom: "1px solid var(--border)", background: "var(--bg-card)" }}>
         <div
           className="inner-max"
           style={{
@@ -114,7 +115,7 @@ export default function Footer() {
                 padding: "3.5rem 3rem",
                 borderRight:
                   i < cols.length - 1
-                    ? "1px solid rgba(201,168,76,0.08)"
+                    ? "1px solid var(--border)"
                     : "none",
                 textAlign: "center",
               }}
@@ -126,7 +127,7 @@ export default function Footer() {
                   fontSize: "0.5rem",
                   letterSpacing: "0.4em",
                   textTransform: "uppercase",
-                  color: "var(--gold)",
+                  color: "var(--accent)",
                   fontWeight: 600,
                   marginBottom: "1.75rem",
                 }}
@@ -151,7 +152,7 @@ export default function Footer() {
                         fontWeight: 300,
                         transition: "color 0.2s",
                       }}
-                      onMouseEnter={(e) => (e.currentTarget.style.color = "white")}
+                      onMouseEnter={(e) => (e.currentTarget.style.color = "var(--accent)")}
                       onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-muted)")}
                     >
                       {link.label}
@@ -165,7 +166,7 @@ export default function Footer() {
       </div>
 
       {/* ── BOTTOM: copyright bar ───────────────── */}
-      <div>
+      <div style={{ background: "var(--bg-muted)" }}>
         <div
           className="inner-max"
           style={{
@@ -190,25 +191,19 @@ export default function Footer() {
             © {new Date().getFullYear()} Michael Picard. All rights reserved.
           </span>
 
-          {/* Center: credential chips */}
-          <div
+          {/* Minimal credential */}
+          <span
             style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "1.5rem",
               fontFamily: "Space Grotesk, sans-serif",
               fontSize: "0.5625rem",
               letterSpacing: "0.18em",
               textTransform: "uppercase",
-              color: "rgba(201,168,76,0.45)",
+              color: "var(--accent)",
+              opacity: 0.6,
             }}
           >
-            <span>PhD (MIT)</span>
-            <span style={{ color: "rgba(201,168,76,0.2)" }}>·</span>
-            <span>Douglas College</span>
-            <span style={{ color: "rgba(201,168,76,0.2)" }}>·</span>
-            <span>12 yrs practice</span>
-          </div>
+            PhD · Douglas College
+          </span>
 
           <a
             href="#"
@@ -225,7 +220,7 @@ export default function Footer() {
               gap: "0.375rem",
               transition: "color 0.2s",
             }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = "var(--gold)")}
+            onMouseEnter={(e) => (e.currentTarget.style.color = "var(--accent)")}
             onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-muted)")}
           >
             Back to top

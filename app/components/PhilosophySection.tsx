@@ -25,7 +25,7 @@ export default function PhilosophySection() {
   ];
 
   return (
-    <section style={{ background: "#0d0f14" }}>
+    <section style={{ background: "var(--bg)" }}>
 
       {/* ─── OPENING STATEMENT ──────────────────── */}
       <motion.div
@@ -34,7 +34,7 @@ export default function PhilosophySection() {
         viewport={{ once: true }}
         transition={{ duration: 0.8 }}
         style={{
-          borderBottom: "1px solid rgba(201,168,76,0.1)",
+          borderBottom: "1px solid var(--border)",
           padding: "6rem 0",
           overflow: "hidden",
         }}
@@ -47,7 +47,7 @@ export default function PhilosophySection() {
                 className="font-serif"
                 style={{
                   fontSize: "clamp(1.75rem, 3.5vw, 3rem)",
-                  color: "white",
+                  color: "var(--text-heading)",
                   lineHeight: 1.3,
                   maxWidth: "48rem",
                   marginBottom: "3rem",
@@ -69,7 +69,7 @@ export default function PhilosophySection() {
               >
                 {["Socratic method", "Semantic analysis", "Independent thinking"].map((t) => (
                   <span key={t}>
-                    <span style={{ color: "var(--gold)", marginRight: "0.5rem" }}>—</span>
+                    <span style={{ color: "var(--accent)", marginRight: "0.5rem" }}>—</span>
                     {t}
                   </span>
                 ))}
@@ -86,9 +86,9 @@ export default function PhilosophySection() {
         viewport={{ once: true }}
         transition={{ duration: 1 }}
         style={{
-          borderBottom: "1px solid rgba(201,168,76,0.1)",
+          borderBottom: "1px solid var(--border)",
           padding: "7rem 0",
-          background: "#0a0c10",
+          background: "var(--bg-muted)",
         }}
       >
         <div className="inner-max" style={{ maxWidth: "88rem" }}>
@@ -96,7 +96,7 @@ export default function PhilosophySection() {
             className="font-cinzel"
             style={{
               fontSize: "0.625rem",
-              color: "var(--gold)",
+              color: "var(--accent)",
               letterSpacing: "0.4em",
               textTransform: "uppercase",
               marginBottom: "3rem",
@@ -108,7 +108,7 @@ export default function PhilosophySection() {
             className="font-italic"
             style={{
               fontSize: "clamp(2rem, 4.5vw, 4.5rem)",
-              color: "white",
+              color: "var(--text-heading)",
               fontStyle: "italic",
               lineHeight: 1.2,
               maxWidth: "72rem",
@@ -124,7 +124,7 @@ export default function PhilosophySection() {
               fontSize: "0.625rem",
               letterSpacing: "0.25em",
               textTransform: "uppercase",
-              color: "var(--gold)",
+              color: "var(--accent)",
               fontStyle: "normal",
             }}
           >
@@ -142,7 +142,7 @@ export default function PhilosophySection() {
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.7, delay: i * 0.1 }}
           style={{
-            borderBottom: "1px solid rgba(201,168,76,0.1)",
+            borderBottom: "1px solid var(--border)",
             padding: "4.5rem 0",
           }}
         >
@@ -160,7 +160,7 @@ export default function PhilosophySection() {
                 className="font-cinzel"
                 style={{
                   fontSize: "0.875rem",
-                  color: "var(--gold)",
+                  color: "var(--accent)",
                   letterSpacing: "0.15em",
                   paddingTop: "0.5rem",
                 }}
@@ -174,7 +174,7 @@ export default function PhilosophySection() {
                   className="font-serif"
                   style={{
                     fontSize: "clamp(1.25rem, 2vw, 1.75rem)",
-                    color: "white",
+                    color: "var(--text-heading)",
                     lineHeight: 1.1,
                     marginBottom: "0.75rem",
                   }}
@@ -185,7 +185,7 @@ export default function PhilosophySection() {
                   style={{
                     fontFamily: "Space Grotesk, sans-serif",
                     fontSize: "0.75rem",
-                    color: "var(--gold)",
+                    color: "var(--sage)",
                     letterSpacing: "0.08em",
                     fontWeight: 500,
                   }}

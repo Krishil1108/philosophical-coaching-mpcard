@@ -30,8 +30,8 @@ export default function Navbar() {
       transition={{ duration: 0.7, ease: [0.4, 0, 0.2, 1] }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500`}
       style={{
-        background: scrolled ? "rgba(13,15,20,0.94)" : "transparent",
-        borderBottom: scrolled ? "1px solid rgba(201,168,76,0.1)" : "none",
+        background: scrolled ? "rgba(250, 248, 245, 0.95)" : "transparent",
+        borderBottom: scrolled ? "1px solid var(--border)" : "none",
         backdropFilter: scrolled ? "blur(20px)" : "none",
       }}
     >
@@ -43,14 +43,14 @@ export default function Navbar() {
         <Link href="/" style={{ textDecoration: "none" }}>
           <span
             className="font-cinzel font-semibold"
-            style={{ color: "white", fontSize: "1.0625rem", letterSpacing: "0.2em" }}
+            style={{ color: "var(--text-heading)", fontSize: "1.0625rem", letterSpacing: "0.2em" }}
           >
             MICHAEL PICARD
           </span>
           <span
             className="block"
             style={{
-              color: "var(--gold)",
+              color: "var(--accent)",
               fontFamily: "Space Grotesk, sans-serif",
               fontSize: "0.5625rem",
               letterSpacing: "0.45em",
@@ -78,7 +78,7 @@ export default function Navbar() {
                   textDecoration: "none",
                   transition: "color 0.2s",
                 }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = "white")}
+                onMouseEnter={(e) => (e.currentTarget.style.color = "var(--accent)")}
                 onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-muted)")}
               >
                 {link.label}
@@ -108,7 +108,7 @@ export default function Navbar() {
               key={i}
               className="block w-5 h-px transition-all duration-300"
               style={{
-                background: "var(--gold)",
+                background: "var(--accent)",
                 transform:
                   i === 0 && menuOpen ? "rotate(45deg) translate(4px, 4px)"
                   : i === 2 && menuOpen ? "rotate(-45deg) translate(4px, -4px)"
@@ -129,8 +129,8 @@ export default function Navbar() {
             exit={{ opacity: 0, height: 0 }}
             className="lg:hidden overflow-hidden"
             style={{
-              background: "#141720",
-              borderTop: "1px solid rgba(201,168,76,0.1)",
+              background: "var(--bg-card)",
+              borderTop: "1px solid var(--border)",
             }}
           >
             <div className="px-8 py-8 flex flex-col gap-6">
