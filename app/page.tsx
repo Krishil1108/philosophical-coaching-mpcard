@@ -72,7 +72,7 @@ export default async function Home() {
           justifyContent: "flex-end",
           paddingBottom: "5rem",
           position: "relative",
-          overflow: "hidden",
+          overflow: "visible",
         }}
       >
         {/* Top accent line */}
@@ -108,34 +108,12 @@ export default async function Home() {
 
         <div className="inner-max" style={{ maxWidth: "88rem", position: "relative", zIndex: 1 }}>
 
-          {/* Credential strip */}
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "2rem",
-              marginBottom: "3.5rem",
-              fontFamily: "Space Grotesk, sans-serif",
-              fontSize: "0.5625rem",
-              letterSpacing: "0.35em",
-              textTransform: "uppercase",
-              color: "var(--text-muted)",
-            }}
-          >
-            <span className="inline-block" style={{ width: "2rem", height: "2px", background: "var(--accent)", borderRadius: "1px" }} />
-            <span>PhD (MIT)</span>
-            <span style={{ color: "var(--accent)", opacity: 0.4 }}>·</span>
-            <span>Philosophical Practitioner</span>
-            <span style={{ color: "var(--accent)", opacity: 0.4 }}>·</span>
-            <span>Douglas College</span>
-          </div>
-
           {/* Headline */}
           <h1
             className="font-serif"
             style={{
               fontSize: "clamp(5rem, 14vw, 14rem)",
-              lineHeight: 0.9,
+              lineHeight: 1.05,
               color: "var(--text-heading)",
               marginBottom: "3.5rem",
               whiteSpace: "pre-line",
