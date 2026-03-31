@@ -2,6 +2,7 @@ import SiteLayout from "./components/SiteLayout";
 import Link from "next/link";
 import ImageCarousel from "./components/ImageCarousel";
 import StatsSection from "./components/StatsSection";
+import Typewriter from "./components/Typewriter";
 import { hasSanityConfig, client } from "./lib/sanity";
 import { heroQuery, galleryQuery } from "./lib/queries";
 
@@ -206,24 +207,18 @@ export default async function Home() {
           <div style={{ display: "grid", gridTemplateColumns: "5.5rem 1fr", gap: "3rem" }}>
             <div />
             <div>
-              <p
-                className="font-serif typewriter-text"
+              <Typewriter
+                text="Most of what we believe, we believe because we absorbed it. Very little of our thinking is genuinely our own. That is where philosophy begins."
+                speed={30}
+                className="font-serif"
                 style={{
                   fontSize: "clamp(1.5rem, 3vw, 2.75rem)",
                   color: "var(--text-heading)",
                   lineHeight: 1.3,
                   maxWidth: "52rem",
                   marginBottom: "2.5rem",
-                  overflow: "hidden",
-                  whiteSpace: "nowrap",
-                  borderRight: "3px solid var(--accent)",
-                  paddingRight: "0.5rem",
-                  width: "fit-content",
-                  animation: "typewriter 4s steps(120) 0.5s 1 normal both, blinkCursor 700ms steps(120) infinite normal",
                 }}
-              >
-                Most of what we believe, we believe because we absorbed it. Very little of our thinking is genuinely our own. That is where philosophy begins.
-              </p>
+              />
               <Link href="/practice" className="btn-ghost">
                 The Practice
                 <svg width="13" height="13" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
