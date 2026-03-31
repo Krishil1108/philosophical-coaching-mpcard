@@ -1,6 +1,7 @@
 import SiteLayout from "./components/SiteLayout";
 import Link from "next/link";
 import ImageCarousel from "./components/ImageCarousel";
+import StatsSection from "./components/StatsSection";
 import { hasSanityConfig, client } from "./lib/sanity";
 import { heroQuery, galleryQuery } from "./lib/queries";
 
@@ -184,60 +185,7 @@ export default async function Home() {
       {/* ══════════════════════════════════════════
           STATS LINE
           ══════════════════════════════════════════ */}
-      <div
-        style={{
-          background: "var(--bg-card)",
-          borderTop: "1px solid var(--border)",
-          borderBottom: "1px solid var(--border)",
-        }}
-      >
-        <div
-          className="inner-max stats-grid"
-          style={{
-            maxWidth: "88rem",
-            display: "flex",
-            justifyContent: "space-between",
-            flexWrap: "wrap",
-            gap: "0",
-          }}
-        >
-          {[
-            { v: "700+", l: "Café Sessions" },
-            { v: "12", l: "Years Practice" },
-            { v: "2", l: "Books Authored" },
-            { v: "PhD", l: "Philosophy, MIT" },
-          ].map((s, i) => (
-            <div
-              key={s.l}
-              style={{
-                padding: "2.5rem 2rem",
-                flex: "1 1 0",
-                textAlign: "center",
-                borderRight: i < 3 ? "1px solid var(--border)" : "none",
-              }}
-            >
-              <div
-                className="font-cinzel font-bold"
-                style={{ fontSize: "2rem", color: "var(--accent)", letterSpacing: "0.04em" }}
-              >
-                {s.v}
-              </div>
-              <div
-                style={{
-                  fontFamily: "Space Grotesk, sans-serif",
-                  fontSize: "0.5625rem",
-                  letterSpacing: "0.25em",
-                  textTransform: "uppercase",
-                  color: "var(--text-muted)",
-                  marginTop: "0.5rem",
-                }}
-              >
-                {s.l}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
+      <StatsSection />
 
       {/* ══════════════════════════════════════════
           GALLERY CAROUSEL
