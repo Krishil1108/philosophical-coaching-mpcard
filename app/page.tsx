@@ -1,13 +1,19 @@
 import SiteLayout from "./components/SiteLayout";
 import Link from "next/link";
+import ImageCarousel from "./components/ImageCarousel";
 import { hasSanityConfig, client } from "./lib/sanity";
-import { heroQuery } from "./lib/queries";
+import { heroQuery, galleryQuery } from "./lib/queries";
 
 export const revalidate = 60;
 
 async function getHero() {
   if (!hasSanityConfig()) return null;
   return client.fetch(heroQuery);
+}
+
+async function getGalleryData() {
+  if (!hasSanityConfig()) return [];
+  return client.fetch(galleryQuery);
 }
 
 const contents = [
@@ -51,6 +57,7 @@ const contents = [
 
 export default async function Home() {
   const hero = await getHero();
+  const galleryData = await getGalleryData();
 
   const headline = hero?.headline || "Think\nDeeply.";
   const subheadline =
@@ -231,6 +238,11 @@ export default async function Home() {
           ))}
         </div>
       </div>
+
+      {/* ══════════════════════════════════════════
+          GALLERY CAROUSEL
+          ══════════════════════════════════════════ */}
+      <ImageCarousel data={galleryData} />
 
       {/* ══════════════════════════════════════════
           OPENING STATEMENT

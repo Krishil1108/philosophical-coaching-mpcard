@@ -124,11 +124,11 @@ export default function Footer() {
               <h4
                 className="font-cinzel"
                 style={{
-                  fontSize: "0.5rem",
-                  letterSpacing: "0.4em",
+                  fontSize: "0.75rem",
+                  letterSpacing: "0.35em",
                   textTransform: "uppercase",
                   color: "var(--accent)",
-                  fontWeight: 600,
+                  fontWeight: 700,
                   marginBottom: "1.75rem",
                 }}
               >
@@ -146,14 +146,23 @@ export default function Footer() {
                       className="footer-link"
                       style={{
                         fontFamily: "Space Grotesk, sans-serif",
-                        fontSize: "0.875rem",
+                        fontSize: "0.9375rem",
                         color: "var(--text-muted)",
                         textDecoration: "none",
-                        fontWeight: 300,
-                        transition: "color 0.2s",
+                        fontWeight: 600,
+                        transition: "all 0.3s ease",
+                        display: "inline-block",
                       }}
-                      onMouseEnter={(e) => (e.currentTarget.style.color = "var(--accent)")}
-                      onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-muted)")}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.color = "var(--accent)";
+                        e.currentTarget.style.transform = "translateX(5px)";
+                        e.currentTarget.style.letterSpacing = "0.05em";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.color = "var(--text-muted)";
+                        e.currentTarget.style.transform = "translateX(0)";
+                        e.currentTarget.style.letterSpacing = "0";
+                      }}
                     >
                       {link.label}
                     </Link>
