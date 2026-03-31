@@ -62,51 +62,29 @@ export default function ImageCarousel({ data }: { data?: GalleryImage[] }) {
     : placeholderSlides;
 
   return (
-    <section id="gallery" className="py-20 relative overflow-hidden" style={{ background: "var(--bg-muted)" }}>
-      {/* Section heading */}
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.7 }}
-        className="text-center mb-12 px-6"
-      >
-        <span
-          className="text-xs tracking-[0.3em] uppercase font-medium"
-          style={{ color: "var(--accent)" }}
-        >
-          Visual Journey
-        </span>
-        <h2
-          className="text-5xl md:text-6xl font-bold mt-3"
-          style={{ fontFamily: "DM Serif Display, serif", color: "var(--text-heading)" }}
-        >
-          Gallery
-        </h2>
-        <div className="divider-gold" />
-      </motion.div>
-
+    <section id="gallery" className="py-16 relative overflow-hidden" style={{ background: "var(--bg-muted)" }}>
       {/* Swiper carousel */}
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.8, delay: 0.2 }}
+        transition={{ duration: 0.8 }}
       >
         <Swiper
           modules={[Navigation, Pagination, Autoplay]}
-          spaceBetween={24}
-          slidesPerView={1}
-          centeredSlides
+          spaceBetween={20}
+          slidesPerView={2}
+          centeredSlides={false}
           loop
-          autoplay={{ delay: 4000, disableOnInteraction: false }}
+          autoplay={{ delay: 3500, disableOnInteraction: false }}
           navigation
           pagination={{ clickable: true }}
           breakpoints={{
-            640: { slidesPerView: 1.2 },
-            768: { slidesPerView: 1.5 },
-            1024: { slidesPerView: 2.2 },
-            1280: { slidesPerView: 2.8 },
+            640: { slidesPerView: 3 },
+            768: { slidesPerView: 4 },
+            1024: { slidesPerView: 5 },
+            1280: { slidesPerView: 6 },
+            1536: { slidesPerView: 7 },
           }}
           className="pb-14"
           style={{ paddingLeft: "2rem", paddingRight: "2rem" }}

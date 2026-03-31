@@ -136,7 +136,7 @@ export default function Footer() {
               </h4>
 
               {/* Links */}
-              <ul style={{ listStyle: "none", padding: 0, display: "flex", flexDirection: "column", gap: "1rem" }}>
+              <ul style={{ listStyle: "none", padding: 0, display: "flex", flexDirection: "column", gap: "1.25rem" }}>
                 {col.links.map((link) => (
                   <li key={link.label}>
                     <Link
@@ -145,23 +145,28 @@ export default function Footer() {
                       rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
                       className="footer-link"
                       style={{
-                        fontFamily: "Space Grotesk, sans-serif",
-                        fontSize: "0.9375rem",
+                        fontFamily: "DM Serif Display, serif",
+                        fontSize: "1.125rem",
                         color: "var(--text-muted)",
                         textDecoration: "none",
-                        fontWeight: 600,
-                        transition: "all 0.3s ease",
+                        fontWeight: 400,
+                        fontStyle: "italic",
+                        transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
                         display: "inline-block",
+                        position: "relative",
+                        letterSpacing: "0.02em",
                       }}
                       onMouseEnter={(e) => {
                         e.currentTarget.style.color = "var(--accent)";
-                        e.currentTarget.style.transform = "translateX(5px)";
-                        e.currentTarget.style.letterSpacing = "0.05em";
+                        e.currentTarget.style.transform = "translateX(10px) scale(1.05)";
+                        e.currentTarget.style.letterSpacing = "0.08em";
+                        e.currentTarget.style.textShadow = "0 2px 8px rgba(139, 107, 74, 0.2)";
                       }}
                       onMouseLeave={(e) => {
                         e.currentTarget.style.color = "var(--text-muted)";
-                        e.currentTarget.style.transform = "translateX(0)";
-                        e.currentTarget.style.letterSpacing = "0";
+                        e.currentTarget.style.transform = "translateX(0) scale(1)";
+                        e.currentTarget.style.letterSpacing = "0.02em";
+                        e.currentTarget.style.textShadow = "none";
                       }}
                     >
                       {link.label}
