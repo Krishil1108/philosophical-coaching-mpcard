@@ -71,8 +71,8 @@ export default function Navbar() {
                 style={{
                   color: "var(--text-muted)",
                   fontFamily: "Space Grotesk, sans-serif",
-                  fontSize: "0.6875rem",
-                  letterSpacing: "0.18em",
+                  fontSize: "0.875rem",
+                  letterSpacing: "0.15em",
                   textTransform: "uppercase",
                   fontWeight: 500,
                   textDecoration: "none",

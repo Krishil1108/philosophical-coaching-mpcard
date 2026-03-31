@@ -112,8 +112,8 @@ export default async function Home() {
           <h1
             className="font-serif"
             style={{
-              fontSize: "clamp(5rem, 14vw, 14rem)",
-              lineHeight: 1.05,
+              fontSize: "clamp(4rem, 11vw, 11rem)",
+              lineHeight: 1.1,
               color: "var(--text-heading)",
               marginBottom: "3.5rem",
               whiteSpace: "pre-line",
