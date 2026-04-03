@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { urlFor } from "../lib/sanity";
+import { PhilPeopleFollowButton } from "./PhilPeopleWidgets";
 
 interface AboutData {
   name?: string;
@@ -255,36 +256,7 @@ export default function About({ data }: { data?: AboutData }) {
       </div>
 
       {/* ─── PHILPEOPLE FOLLOW BUTTON ─────────────────── */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-        style={{
-          padding: "3rem 0",
-          borderTop: "1px solid var(--border)",
-        }}
-      >
-        <div className="inner-max" style={{ maxWidth: "88rem" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "5.5rem 1fr", gap: "3rem" }}>
-            <div />
-            <div style={{ display: "flex", alignItems: "center", gap: "1.5rem" }}>
-              <span
-                className="section-label"
-                style={{ margin: 0 }}
-              >
-                Follow on PhilPeople
-              </span>
-              <div id="philpeople-component-follow_btn"></div>
-              <script
-                type="text/javascript"
-                src="https://philpeople.org/components/follow_btn?props%5B%3Aprofile_id_prop%5D=97554&amp;props%5Bcontext%5D=external"
-                async
-              ></script>
-            </div>
-          </div>
-        </div>
-      </motion.div>
+      <PhilPeopleFollowButton />
     </section>
   );
 }
