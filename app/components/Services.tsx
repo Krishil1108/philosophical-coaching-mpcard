@@ -18,7 +18,7 @@ interface Service {
 const defaultServices: Service[] = [
   {
     _id: "1",
-    title: "One-on-One Coaching",
+    title: "Philosophy as Counsel",
     description:
       "An intimate philosophical dialogue where we examine the language underlying your deepest beliefs. Through Socratic questioning and semantic analysis, we reveal the hidden structures that shape how you see everything — and open up options you didn't know existed.",
     price: "$60–$100 USD",
@@ -30,7 +30,7 @@ const defaultServices: Service[] = [
   },
   {
     _id: "2",
-    title: "Café Philosophy",
+    title: "Dialogue Facilitation",
     description:
       "Public philosophical dialogue in a relaxed, open setting. Inspired by 12+ years of weekly sessions in Victoria, BC — open to everyone regardless of background. A space where questioning together is the only requirement.",
     price: "Community-based",
@@ -42,7 +42,7 @@ const defaultServices: Service[] = [
   },
   {
     _id: "3",
-    title: "Philosophy Sports",
+    title: "Editorial / Translation",
     description:
       "Michael's original format — competitive yet collaborative philosophical debate where teams engage in structured intellectual play. A uniquely energising way to sharpen critical thinking in educational and corporate contexts.",
     price: "Custom",

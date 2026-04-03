@@ -61,10 +61,10 @@ export default async function Home() {
   const hero = await getHero();
   const galleryData = await getGalleryData();
 
-  const headline = hero?.headline || "Think\nDeeply.";
+  const headline = hero?.headline || "Thinking\nwith Care";
   const subheadline =
     hero?.subheadline ||
-    "One-on-one philosophical coaching that examines the language behind your deepest beliefs — and reveals what you didn't know you were free to think.";
+    "Philosophy in the service of a life worth living.\n\nThinking with you.";
 
   return (
     <SiteLayout>
@@ -115,7 +115,7 @@ export default async function Home() {
           φ
         </div>
 
-        <div className="inner-max" style={{ maxWidth: "88rem", position: "relative", zIndex: 1 }}>
+        <div className="inner-max" style={{ maxWidth: "88rem", position: "relative", zIndex: 1, paddingTop: "8rem" }}>
 
           {/* Headline */}
           <h1
