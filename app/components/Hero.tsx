@@ -17,7 +17,7 @@ interface HeroData {
 }
 
 export default function Hero({ data }: { data?: HeroData }) {
-  const headline = data?.headline || "Think Deeper.\nLive Wiser.";
+  const headline = data?.headline || "Thinking\nwith Care...";
   const subheadline =
     data?.subheadline ||
     "Philosophical coaching that examines the language behind your beliefs — revealing hidden options and empowering genuinely independent thought.";
@@ -136,17 +136,6 @@ export default function Hero({ data }: { data?: HeroData }) {
           transition={{ duration: 0.7, delay: 1.1 }}
           className="flex flex-col sm:flex-row gap-4 justify-center items-center"
         >
-          <a
-            href={data?.ctaPrimaryLink || "https://chat.appa.edu/product/chat-with-michael-picard-msc-phd/"}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-primary"
-          >
-            <span>{data?.ctaPrimary || "Book a Session"}</span>
-            <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-              <path d="M5 12h14M12 5l7 7-7 7" />
-            </svg>
-          </a>
           <Link
             href={data?.ctaSecondaryLink || "/about"}
             className="btn-outline"

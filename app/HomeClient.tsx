@@ -1,26 +1,17 @@
-import HomeClient from "./HomeClient";
-import { hasSanityConfig, client } from "./lib/sanity";
-import { heroQuery, galleryQuery } from "./lib/queries";
+"use client";
 
-export const revalidate = 60;
+import SiteLayout from "./components/SiteLayout";
+import Link from "next/link";
+import ImageCarousel from "./components/ImageCarousel";
+import StatsSection from "./components/StatsSection";
+import Typewriter from "./components/Typewriter";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 
-async function getHero() {
-  if (!hasSanityConfig()) return null;
-  return client.fetch(heroQuery);
-}
-
-async function getGalleryData() {
-  if (!hasSanityConfig()) return [];
-  return client.fetch(galleryQuery);
-}
-
-export default async function Home() {
-  const hero = await getHero();
-  const galleryData = await getGalleryData();
-
-  return <HomeClient hero={hero} galleryData={galleryData} />;
-}
-
+const contents = [
+  {
+    num: "01",
+    href: "/about",
     title: "About",
     desc: "PhD from MIT · Faculty at Douglas College · 12 years of public dialogue · Author of How to Play Philosophy",
   },
@@ -38,25 +29,19 @@ export default async function Home() {
   },
   {
     num: "04",
-    href: "/gallery",
-    title: "Gallery",
-    desc: "Sessions · Events · Public Dialogue · The Philosophical Life in Images",
-  },
-  {
-    num: "05",
     href: "/publications",
     title: "Publications",
     desc: "How to Play Philosophy · This is Not a Book · Café Conversations · Forthcoming Translations",
   },
   {
-    num: "06",
+    num: "05",
     href: "/videos",
     title: "Videos",
     desc: "Talks · Demonstrations · Café Philosophy · Philosophy Sports in Action",
   },
 ];
 
-export default function Home({ 
+export default function HomeClient({ 
   hero, 
   galleryData 
 }: { 

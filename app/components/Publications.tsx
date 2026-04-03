@@ -266,7 +266,7 @@ export default function Publications({ data }: { data?: Publication[] }) {
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
-        style={{ padding: "3rem 0" }}
+        style={{ padding: "3rem 0", borderBottom: "1px solid var(--border)" }}
       >
         <div className="inner-max" style={{ maxWidth: "88rem" }}>
           <div style={{ display: "grid", gridTemplateColumns: "5.5rem 1fr", gap: "3rem" }}>
@@ -282,6 +282,51 @@ export default function Publications({ data }: { data?: Publication[] }) {
               <span style={{ color: "var(--accent)" }}>Forthcoming — </span>
               Two translations of Gerd Achenbach&apos;s works on Philosophical Praxis, published by Lexington Books.
             </p>
+          </div>
+        </div>
+      </motion.div>
+
+      {/* ─── PHILPEOPLE PUBLICATIONS WIDGET ─────────────────── */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        style={{ padding: "4rem 0" }}
+      >
+        <div className="inner-max" style={{ maxWidth: "88rem" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "5.5rem 1fr", gap: "3rem" }}>
+            <div />
+            <div>
+              <div
+                className="section-label"
+                style={{ marginBottom: "2rem" }}
+              >
+                Academic Publications (PhilPeople)
+              </div>
+              <div
+                className="ppl-widget-container"
+                style={{
+                  fontFamily: "Space Grotesk, sans-serif",
+                  fontSize: "0.875rem",
+                  color: "var(--text-muted)",
+                }}
+              >
+                One moment, publications loading ... (or view them{" "}
+                <a
+                  href="https://philpapers.org/profile/97554?widget_failed=1"
+                  style={{ color: "var(--accent)", textDecoration: "underline" }}
+                >
+                  here
+                </a>
+                )
+              </div>
+              <script
+                type="text/javascript"
+                src="https://philpeople.org/widget/97554.js"
+                async
+              ></script>
+            </div>
           </div>
         </div>
       </motion.div>
