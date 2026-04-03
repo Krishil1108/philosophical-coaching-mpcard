@@ -1,26 +1,17 @@
-import HomeClient from "./HomeClient";
-import { hasSanityConfig, client } from "./lib/sanity";
-import { heroQuery, galleryQuery } from "./lib/queries";
+'use client';
 
-export const revalidate = 60;
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import Link from "next/link";
+import SiteLayout from "@/app/components/SiteLayout";
+import StatsSection from "@/app/components/StatsSection";
+import ImageCarousel from "@/app/components/ImageCarousel";
+import Typewriter from "@/app/components/Typewriter";
 
-async function getHero() {
-  if (!hasSanityConfig()) return null;
-  return client.fetch(heroQuery);
-}
-
-async function getGalleryData() {
-  if (!hasSanityConfig()) return [];
-  return client.fetch(galleryQuery);
-}
-
-export default async function Home() {
-  const hero = await getHero();
-  const galleryData = await getGalleryData();
-
-  return <HomeClient hero={hero} galleryData={galleryData} />;
-}
-
+const contents = [
+  {
+    num: "01",
+    href: "/about",
     title: "About",
     desc: "PhD from MIT · Faculty at Douglas College · 12 years of public dialogue · Author of How to Play Philosophy",
   },
@@ -38,31 +29,31 @@ export default async function Home() {
   },
   {
     num: "04",
-    href: "/gallery",
-    title: "Gallery",
-    desc: "Sessions · Events · Public Dialogue · The Philosophical Life in Images",
-  },
-  {
-    num: "05",
     href: "/publications",
     title: "Publications",
     desc: "How to Play Philosophy · This is Not a Book · Café Conversations · Forthcoming Translations",
   },
   {
-    num: "06",
+    num: "05",
     href: "/videos",
     title: "Videos",
     desc: "Talks · Demonstrations · Café Philosophy · Philosophy Sports in Action",
   },
+  {
+    num: "06",
+    href: "/contact",
+    title: "Connect",
+    desc: "Book a Philosophical Coaching Session · Reach Out · Let's Talk",
+  },
 ];
 
-export default function Home({ 
-  hero, 
-  galleryData 
-}: { 
-  hero: any; 
-  galleryData: any[];
-}) {
+export default function Home({
+  hero = null,
+  galleryData = []
+}: {
+  hero?: any;
+  galleryData?: any[];
+} = {}) {
   const containerRef = useRef<HTMLDivElement>(null);
   
   const { scrollYProgress } = useScroll({
