@@ -118,7 +118,7 @@ export default function About({ data }: { data?: AboutData }) {
                 >
                   <div
                     className="font-cinzel"
-                    style={{ fontSize: "8rem", color: "rgba(139, 107, 74, 0.08)", lineHeight: 1 }}
+                    style={{ fontSize: "0.8rem", color: "rgba(139, 107, 74, 0.08)", lineHeight: 1 }}
                   >
                     φ
                   </div>
