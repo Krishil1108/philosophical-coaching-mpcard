@@ -223,6 +223,7 @@ export default function Home({
               <Typewriter
                 text="Most of what we believe, we believe because we absorbed it. Very little of our thinking is genuinely our own. That is where philosophy begins."
                 speed={30}
+                triggerOnScroll={true}
                 className="font-serif"
                 style={{
                   fontSize: "clamp(1.5rem, 3vw, 2.75rem)",

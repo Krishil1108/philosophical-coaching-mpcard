@@ -379,6 +379,7 @@ export function PhilPeopleFollowButton() {
   const [isHovered, setIsHovered] = useState(false);
   const [buttonVisible, setButtonVisible] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const buttonContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const script = document.createElement("script");
@@ -391,8 +392,8 @@ export function PhilPeopleFollowButton() {
       }, 400);
     };
     
-    if (containerRef.current) {
-      containerRef.current.appendChild(script);
+    if (buttonContainerRef.current) {
+      buttonContainerRef.current.appendChild(script);
     }
 
     return () => {
@@ -409,7 +410,7 @@ export function PhilPeopleFollowButton() {
       viewport={{ once: true }}
       transition={{ duration: 0.7 }}
       style={{
-        padding: "6rem 0 5rem",
+        padding: "1rem 0 1rem",
         background: "linear-gradient(135deg, var(--bg-muted) 0%, var(--bg) 50%, var(--bg-card) 100%)",
         position: "relative",
         overflow: "hidden",
@@ -478,66 +479,6 @@ export function PhilPeopleFollowButton() {
             textAlign: "center",
           }}
         >
-          {/* Enhanced decorative header */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, type: "spring", bounce: 0.3 }}
-            style={{
-              marginBottom: "2rem",
-              position: "relative",
-            }}
-          >
-            <motion.div
-              animate={{
-                rotate: [0, 5, -5, 0],
-              }}
-              transition={{
-                duration: 6,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-              className="font-cinzel"
-              style={{
-                fontSize: "3.5rem",
-                color: "rgba(139, 107, 74, 0.25)",
-                lineHeight: 1,
-                marginBottom: "0.5rem",
-              }}
-            >
-              φ
-            </motion.div>
-            
-            {/* Floating dots decoration */}
-            <div style={{ position: "relative", display: "inline-block" }}>
-              {[...Array(3)].map((_, i) => (
-                <motion.div
-                  key={i}
-                  animate={{
-                    y: [-2, -8, -2],
-                    opacity: [0.3, 0.7, 0.3],
-                  }}
-                  transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                    delay: i * 0.3,
-                    ease: "easeInOut",
-                  }}
-                  style={{
-                    position: "absolute",
-                    top: "-1rem",
-                    left: `${-1 + i * 1}rem`,
-                    width: "3px",
-                    height: "3px",
-                    borderRadius: "50%",
-                    background: "var(--accent)",
-                  }}
-                />
-              ))}
-            </div>
-          </motion.div>
-
           {/* Enhanced title section */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -569,7 +510,7 @@ export function PhilPeopleFollowButton() {
               <span
                 style={{
                   fontFamily: "Space Grotesk, sans-serif",
-                  fontSize: "0.6875rem",
+                  fontSize: "0.875rem",
                   letterSpacing: "0.25em",
                   textTransform: "uppercase",
                   color: "var(--accent)",
@@ -730,6 +671,7 @@ export function PhilPeopleFollowButton() {
 
             {/* PhilPeople button container with fade-in */}
             <motion.div
+              ref={buttonContainerRef}
               id="philpeople-component-follow_btn"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: buttonVisible ? 1 : 0, y: buttonVisible ? 0 : 10 }}

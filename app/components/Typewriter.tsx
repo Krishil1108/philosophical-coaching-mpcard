@@ -1,27 +1,60 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 interface TypewriterProps {
   text: string;
   speed?: number;
   className?: string;
   style?: React.CSSProperties;
+  triggerOnScroll?: boolean;
 }
 
 export default function Typewriter({ 
   text, 
   speed = 30, 
   className = "",
-  style = {}
+  style = {},
+  triggerOnScroll = false
 }: TypewriterProps) {
   const [displayedText, setDisplayedText] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showCursor, setShowCursor] = useState(true);
+  const [hasStarted, setHasStarted] = useState(!triggerOnScroll);
+  const elementRef = useRef<HTMLParagraphElement>(null);
+
+  // IntersectionObserver for scroll-triggered typing
+  useEffect(() => {
+    if (!triggerOnScroll || hasStarted) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !hasStarted) {
+            setHasStarted(true);
+          }
+        });
+      },
+      {
+        threshold: 0.3, // Trigger when 30% of element is visible
+        rootMargin: "0px"
+      }
+    );
+
+    if (elementRef.current) {
+      observer.observe(elementRef.current);
+    }
+
+    return () => {
+      if (elementRef.current) {
+        observer.unobserve(elementRef.current);
+      }
+    };
+  }, [triggerOnScroll, hasStarted]);
 
   // Typewriter effect
   useEffect(() => {
-    if (currentIndex < text.length) {
+    if (hasStarted && currentIndex < text.length) {
       const timeout = setTimeout(() => {
         setDisplayedText(prev => prev + text[currentIndex]);
         setCurrentIndex(prev => prev + 1);
@@ -29,7 +62,7 @@ export default function Typewriter({
 
       return () => clearTimeout(timeout);
     }
-  }, [currentIndex, text, speed]);
+  }, [currentIndex, text, speed, hasStarted]);
 
   // Blinking cursor
   useEffect(() => {
@@ -41,7 +74,7 @@ export default function Typewriter({
   }, []);
 
   return (
-    <p className={className} style={style}>
+    <p ref={elementRef} className={className} style={style}>
       {displayedText}
       <span 
         style={{ 
