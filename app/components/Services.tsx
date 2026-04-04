@@ -54,6 +54,11 @@ const defaultServices: Service[] = [
   },
 ];
 
+function numberToRoman(num: number): string {
+  const romanNumerals = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"];
+  return romanNumerals[num - 1] || num.toString();
+}
+
 export default function Services({ data }: { data?: Service[] }) {
   const services = data?.length ? data : defaultServices;
 
@@ -91,7 +96,7 @@ export default function Services({ data }: { data?: Service[] }) {
                   paddingTop: "0.625rem",
                 }}
               >
-                0{i + 1}
+                {numberToRoman(i + 1)}
               </div>
 
               {/* Content */}
