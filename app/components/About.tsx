@@ -88,13 +88,16 @@ export default function About({ data }: { data?: AboutData }) {
           >
             {/* Portrait */}
             <div
+              suppressHydrationWarning
               style={{
                 position: "relative",
-                aspectRatio: "3 / 4",
                 background: "var(--bg-card)",
                 marginBottom: "3rem",
                 overflow: "hidden",
                 borderRadius: "4px",
+                width: "100%",
+                maxWidth: "900px",
+                height: "600px",
               }}
             >
               {data?.portrait ? (
