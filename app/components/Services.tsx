@@ -55,7 +55,7 @@ const defaultServices: Service[] = [
 ];
 
 function numberToRoman(num: number): string {
-  const romanNumerals = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"];
+  const romanNumerals = ["i", "ii", "iii", "iv", "v", "vi", "vii", "viii", "ix", "x"];
   return romanNumerals[num - 1] || num.toString();
 }
 
