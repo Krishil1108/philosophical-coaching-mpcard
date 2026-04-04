@@ -207,7 +207,7 @@ export default function About({ data }: { data?: AboutData }) {
                   key={i}
                   style={{
                     fontFamily: "Space Grotesk, sans-serif",
-                    fontWeight: i === 0 ? 400 : 300,
+                    fontWeight: i === 0 ? 700 : 300,
                     color: i === 0 ? "var(--text)" : "var(--text-muted)",
                     lineHeight: 1.9,
                     fontSize: "1rem",
