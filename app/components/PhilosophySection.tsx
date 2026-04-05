@@ -6,21 +6,21 @@ export default function PhilosophySection() {
   const methods = [
     {
       num: "I",
-      name: "Socratic Inquiry",
-      short: "The art of the question.",
-      body: "We trace beliefs back to their foundations through systematic question and answer — not to demolish them, but to understand them clearly. Every conviction has a reason. Philosophy finds it.",
+      name: "Questionless Inquiry",
+      short: "Philosophy also listens.",
+      body: "Tell Michael your story. He will respect you by not promising solutions. You can talk with him about the answerless, the unquestioned, and the unquestionable. Michael will not question your questions or dismiss your answers. But expect to be respectfully challenged in thought.",
     },
     {
-      num: "II",
-      name: "Semantic Analysis",
-      short: "Language shapes thought.",
-      body: "Many of our deepest convictions rest on unexamined metaphors — what Michael calls 'zombie metaphors'. By examining the specific words we use to describe our beliefs, we reveal the invisible architecture underneath.",
+      num: "II", 
+      name: "Approximately-Socratic Inquiry",
+      short: "Socrates is dead and he's not coming back.",
+      body: "Arguably he proffers no definite replicable method. Michael does not pretend to offer an imitation. Socrates could listen and think ahead. Michael will hear you out, and think alongside. Irony is not a method. Michael says: \"I don't pretend to know the answers to your problems, or that the answers I know pertain to your problems. I promise open ears for the time it takes for you to say what you need. And I will engage you. But I don't know what I will say. Yet, I won't say what I can't know, except to mention it. Still, if I never say what I don't know, I would forever remain silent. Come, let's talk. Risk your time.\"",
     },
     {
       num: "III",
-      name: "Impartial Witness",
-      short: "No agenda. No answers.",
-      body: "Michael acts as a mirror, not an authority. He brings no worldview to promote and no conclusion to reach. The insight must — and always will — be entirely yours.",
+      name: "Thoughtless Belief",
+      short: "Our deepest convictions are often laziest.",
+      body: "Resting on unexamined metaphors— what Michael calls 'zombie metaphors'. By examining the specific usages of words that describe our intentions, beliefs and actions, the invisible architecture beneath thought is laid bare. This foundation may be built upon or rebuilt through thoughtful belief. Every belief lives in language, and many die there. The examined life is in large measure an examination of what we say or would say about what we do or would do; and what is related to that. But life rarely offers opportunities for examination. Michael can help with that.",
     },
   ];
 
@@ -53,7 +53,7 @@ export default function PhilosophySection() {
                   marginBottom: "3rem",
                 }}
               >
-                Philosophy is not a set of answers to memorise. It is a practice of <em className="font-italic">thinking more freely</em> — examining the forces that quietly shape what we believe, and choosing more honestly.
+                There is no agenda but truth that is the property of no one. "Philosophy goes second." — Marc Sautet (1947-1998)
               </p>
               <div
                 style={{
@@ -102,7 +102,7 @@ export default function PhilosophySection() {
               marginBottom: "3rem",
             }}
           >
-            Core Conviction
+            Approach
           </div>
           <blockquote
             className="font-italic"
@@ -115,8 +115,7 @@ export default function PhilosophySection() {
               marginBottom: "2.5rem",
             }}
           >
-            Thinking is both our greatest limitation and our most powerful form of liberation.
-            The question is: whose thinking is it, really?
+            Philosophy is cohabitation — actively generating and inhabiting questions with greater clarity, purpose, and freedom.
           </blockquote>
           <cite
             style={{
@@ -128,7 +127,7 @@ export default function PhilosophySection() {
               fontStyle: "normal",
             }}
           >
-            — Michael Picard, <em>How to Play Philosophy</em>
+            — The Practice
           </cite>
         </div>
       </motion.div>

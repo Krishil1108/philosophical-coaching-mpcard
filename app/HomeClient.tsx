@@ -45,8 +45,8 @@ export default function HomeClient({
   hero, 
   galleryData 
 }: { 
-  hero: any; 
-  galleryData: any[];
+  hero?: any; 
+  galleryData?: any[];
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
   
@@ -61,7 +61,10 @@ export default function HomeClient({
   const headline = hero?.headline || "Thinking\nwith Care...";
   const subheadline =
     hero?.subheadline ||
-    "Philosophy in the service of a life worth living.\n\nThinking with you.";
+    "Philosophical practice is not philosophy on sale. It is a situational deployment of philosophy for purposes of life. It is not a monopoly. Try it.";
+
+  // Ensure we have proper line breaks for styling
+  const headlineWithBreaks = headline.replace(/\n/g, '\n');
 
   return (
     <SiteLayout>
@@ -134,7 +137,7 @@ export default function HomeClient({
               paddingLeft: "0",
             }}
           >
-            {headline.split("\n").map((line: string, i: number) => (
+            {headlineWithBreaks.split("\n").map((line: string, i: number) => (
               <motion.span
                 key={i}
                 initial={{ opacity: 0, y: 30 }}
@@ -380,7 +383,7 @@ export default function HomeClient({
                 maxWidth: "64rem",
               }}
             >
-              &ldquo;Thinking is both our greatest limitation and our most powerful form of liberation. The question is: whose thinking is it, really?&rdquo;
+              &ldquo;Philosophy is not a method, theory, or set of answers. It's a way of actively generating and inhabiting questions with greater clarity, purpose, and freedom. To examine an answer is to inhabit a question. Philosophy is cohabitation.&rdquo;
               <cite
                 style={{
                   display: "block",

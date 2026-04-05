@@ -287,6 +287,63 @@ export default function Publications({ data }: { data?: Publication[] }) {
         </div>
       </motion.div>
 
+      {/* ─── PHILOSOPHICAL FOUNDATIONS ─────────────────── */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 1 }}
+        style={{
+          borderBottom: "1px solid var(--border)",
+          padding: "7rem 0",
+          background: "var(--bg-muted)",
+        }}
+      >
+        <div className="inner-max" style={{ maxWidth: "88rem" }}>
+          <div
+            className="font-cinzel"
+            style={{
+              fontSize: "0.625rem",
+              color: "var(--accent)",
+              letterSpacing: "0.4em",
+              textTransform: "uppercase",
+              marginBottom: "3rem",
+              textAlign: "center",
+            }}
+          >
+            Philosophical Practice — Foundational Principles
+          </div>
+          <blockquote
+            className="font-italic"
+            style={{
+              fontSize: "clamp(1.75rem, 4vw, 3.5rem)",
+              color: "var(--text-heading)",
+              fontStyle: "italic",
+              lineHeight: 1.2,
+              maxWidth: "72rem",
+              marginBottom: "2.5rem",
+              textAlign: "center",
+              margin: "0 auto 2.5rem",
+            }}
+          >
+            "Philosophical practice must calibrate itself to the themes, problems and question-formulations that burden others, those who in their need have turned to philosophy for help."
+          </blockquote>
+          <cite
+            style={{
+              fontFamily: "Space Grotesk, sans-serif",
+              fontSize: "0.625rem",
+              letterSpacing: "0.25em",
+              textTransform: "uppercase",
+              color: "var(--accent)",
+              fontStyle: "normal",
+              textAlign: "right",
+            }}
+          >
+            — Gerd B. Achenbach, <em>Philosophical Praxis</em> (Bloomsbury, 2024)
+          </cite>
+        </div>
+      </motion.div>
+
       {/* ─── PHILPEOPLE PUBLICATIONS WIDGET ─────────────────── */}
       <PhilPeoplePublications />
     </section>

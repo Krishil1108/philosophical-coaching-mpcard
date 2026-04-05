@@ -213,6 +213,63 @@ export default function VideoSection({ data }: { data?: YoutubeVideo[] }) {
         </motion.div>
       ))}
 
+      {/* ─── QUOTE SECTION ─────────────────── */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 1 }}
+        style={{
+          borderBottom: "1px solid var(--border)",
+          padding: "7rem 0",
+          background: "var(--bg-muted)",
+        }}
+      >
+        <div className="inner-max" style={{ maxWidth: "88rem" }}>
+          <div
+            className="font-cinzel"
+            style={{
+              fontSize: "0.625rem",
+              color: "var(--accent)",
+              letterSpacing: "0.4em",
+              textTransform: "uppercase",
+              marginBottom: "3rem",
+              textAlign: "center",
+            }}
+          >
+            Philosophical Dialogue
+          </div>
+          <blockquote
+            className="font-italic"
+            style={{
+              fontSize: "clamp(2rem, 4vw, 4rem)",
+              color: "var(--text-heading)",
+              fontStyle: "italic",
+              lineHeight: 1.2,
+              maxWidth: "72rem",
+              marginBottom: "2.5rem",
+              textAlign: "center",
+              margin: "0 auto 2.5rem",
+            }}
+          >
+            "It is not the philosopher who presses their questions upon others; rather, the questions of others press upon the philosopher."
+          </blockquote>
+          <cite
+            style={{
+              fontFamily: "Space Grotesk, sans-serif",
+              fontSize: "0.625rem",
+              letterSpacing: "0.25em",
+              textTransform: "uppercase",
+              color: "var(--accent)",
+              fontStyle: "normal",
+              textAlign: "right",
+            }}
+          >
+            — Gerd B. Achenbach, <em>Philosophical Praxis</em> (Bloomsbury, 2024)
+          </cite>
+        </div>
+      </motion.div>
+
       {/* Video modal */}
       <AnimatePresence>
         {activeVideoId && (

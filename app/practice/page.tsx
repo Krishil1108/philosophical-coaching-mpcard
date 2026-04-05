@@ -24,37 +24,30 @@ export default function PracticePage() {
         <div className="inner-max" style={{ maxWidth: "72rem" }}>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
             <div>
-              <span className="section-label" style={{ marginBottom: "1.5rem", display: "block" }}>Why It Works</span>
+              <span className="section-label" style={{ marginBottom: "1.5rem", display: "block" }}>The Methods</span>
               <h2 className="font-serif mb-8" style={{ fontSize: "clamp(2rem, 4vw, 3.25rem)", color: "var(--text-heading)" }}>
-                Philosophy as Liberation
+                Three Approaches
               </h2>
               <div className="divider-gold-left" />
-              {[
-                "Most of what we believe, we believe because we absorbed it — from culture, family, media, and social contagion. Very little of our thinking is genuinely our own.",
-                "Michael calls these inherited structures 'zombie metaphors' — figurative language that moves us without our awareness. He helps you see them, name them, and choose what to do with them.",
-                "The result is not a new worldview imposed from outside, but a more honest, more flexible relationship with your own mind.",
-              ].map((p, i) => (
-                <p
-                  key={i}
-                  style={{
-                    fontFamily: "Space Grotesk, sans-serif",
-                    fontWeight: 300,
-                    color: i === 0 ? "var(--text)" : "var(--text-muted)",
-                    lineHeight: 1.9,
-                    fontSize: "1rem",
-                    marginBottom: "1.5rem",
-                  }}
-                >
-                  {p}
-                </p>
-              ))}
+              <p
+                style={{
+                  fontFamily: "Space Grotesk, sans-serif",
+                  fontWeight: 300,
+                  color: "var(--text)",
+                  lineHeight: 1.9,
+                  fontSize: "1rem",
+                  marginBottom: "1.5rem",
+                }}
+              >
+                Each session draws from these complementary approaches, depending on what emerges in our conversation.
+              </p>
             </div>
 
             <div className="space-y-6">
               {[
-                { symbol: "∮", term: "Socratic Inquiry", definition: "Tracing beliefs back to their foundations through systematic question and answer — not to demolish, but to understand." },
-                { symbol: "§", term: "Semantic Analysis", definition: "Every belief lives in language. Examining the specific words and metaphors we use reveals the hidden architecture of thought." },
-                { symbol: "◎", term: "Impartial Witnessing", definition: "Michael brings no conclusion to promote. His role is to hold a clear mirror — the insight must, and always will, be yours." },
+                { symbol: "∮", term: "Questionless Inquiry", definition: "Philosophy also listens. A space for what is answerless, unquestioned, and unquestionable." },
+                { symbol: "§", term: "Approximately-Socratic", definition: "Not an imitation but thinking alongside. Open ears, genuine engagement, shared risk." },
+                { symbol: "◎", term: "Examining Language", definition: "Every belief lives in words. Revealing the 'zombie metaphors' that move us without awareness." },
               ].map((item) => (
                 <div
                   key={item.term}
@@ -113,7 +106,7 @@ export default function PracticePage() {
               marginBottom: "2.5rem",
             }}
           >
-            You don&apos;t need a background in philosophy. You just need a genuine question.
+            You don&apos;t need a background in philosophy. You just need a life, and issues. This is not philosophy for philosophers. It is philosophy by philosophers in free conversation with human beings (philosophers or not) in the service of life.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a

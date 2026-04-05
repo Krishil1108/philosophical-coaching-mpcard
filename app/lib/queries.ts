@@ -68,3 +68,13 @@ export const testimonialsQuery = groq`*[_type == "testimonial"] | order(order as
   author,
   role
 }`;
+
+export const philosophicalQuotesQuery = groq`*[_type == "philosophicalQuote" && active == true] | order(order asc){
+  _id,
+  quote,
+  author,
+  source,
+  publisher,
+  context,
+  usedOnPages
+}`;

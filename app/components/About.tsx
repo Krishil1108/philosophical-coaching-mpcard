@@ -620,6 +620,83 @@ export default function About({ data }: { data?: AboutData }) {
         </div>
       </div>
 
+      {/* ─── PHILOSOPHY AS LIBERATION ─────────────────── */}
+      <section className="section-pad-lg" style={{ background: "var(--bg)" }}>
+        <div className="inner-max" style={{ maxWidth: "72rem" }}>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
+            <div>
+              <span className="section-label" style={{ marginBottom: "1.5rem", display: "block" }}>Why It Works</span>
+              <h2 className="font-serif mb-8" style={{ fontSize: "clamp(2rem, 4vw, 3.25rem)", color: "var(--text-heading)" }}>
+                Philosophy as Liberation
+              </h2>
+              <div className="divider-gold-left" />
+              {[
+                "Most of what we believe, we believe because we absorbed it — from culture, family, media, and social contagion. Very little of our thinking is genuinely our own.",
+                "Michael calls these inherited structures 'zombie metaphors' — figurative language that moves us without our awareness. He helps you see them, name them, and choose what to do with them.",
+                "The result is not a new worldview imposed from outside, but a more honest, more flexible relationship with your own mind.",
+              ].map((p, i) => (
+                <p
+                  key={i}
+                  style={{
+                    fontFamily: "Space Grotesk, sans-serif",
+                    fontWeight: 300,
+                    color: i === 0 ? "var(--text)" : "var(--text-muted)",
+                    lineHeight: 1.9,
+                    fontSize: "1rem",
+                    marginBottom: "1.5rem",
+                  }}
+                >
+                  {p}
+                </p>
+              ))}
+            </div>
+
+            <div className="space-y-6">
+              {[
+                { symbol: "∮", term: "Examine Inherited Thinking", definition: "Question what you've absorbed from culture, family, and media without conscious choice." },
+                { symbol: "§", term: "Identify Zombie Metaphors", definition: "See the figurative language that moves you without your awareness and decide what to do with it." },
+                { symbol: "◎", term: "Develop Mental Freedom", definition: "Build a more honest, flexible relationship with your own mind and thinking patterns." },
+              ].map((item) => (
+                <div
+                  key={item.term}
+                  className="card-hover"
+                  style={{
+                    background: "var(--bg-card)",
+                    border: "1px solid var(--border)",
+                    borderRadius: "8px",
+                    padding: "2.25rem",
+                  }}
+                >
+                  <div
+                    className="font-serif mb-3"
+                    style={{ fontSize: "2.25rem", color: "rgba(139, 107, 74, 0.3)", lineHeight: 1 }}
+                  >
+                    {item.symbol}
+                  </div>
+                  <h3
+                    className="font-serif mb-3"
+                    style={{ fontSize: "1.25rem", color: "var(--text-heading)" }}
+                  >
+                    {item.term}
+                  </h3>
+                  <p
+                    style={{
+                      fontFamily: "Space Grotesk, sans-serif",
+                      fontWeight: 300,
+                      color: "var(--text-muted)",
+                      lineHeight: 1.8,
+                      fontSize: "0.9rem",
+                    }}
+                  >
+                    {item.definition}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ─── PHILPEOPLE FOLLOW BUTTON ─────────────────── */}
       <PhilPeopleFollowButton />
     </section>
