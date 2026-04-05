@@ -4,7 +4,7 @@ import Publications from "../components/Publications";
 import { hasSanityConfig, client } from "../lib/sanity";
 import { publicationsQuery } from "../lib/queries";
 
-export const revalidate = 60;
+export const revalidate = 0;
 
 export const metadata = {
   title: "Publications — Michael Picard",

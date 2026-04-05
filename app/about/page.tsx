@@ -4,7 +4,7 @@ import About from "../components/About";
 import { hasSanityConfig, client } from "../lib/sanity";
 import { aboutQuery } from "../lib/queries";
 
-export const revalidate = 60;
+export const revalidate = 0;
 
 export const metadata = {
   title: "About Michael Picard — Philosophical Practice",

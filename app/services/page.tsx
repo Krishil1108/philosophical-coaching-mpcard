@@ -4,7 +4,7 @@ import Services from "../components/Services";
 import { hasSanityConfig, client } from "../lib/sanity";
 import { servicesQuery } from "../lib/queries";
 
-export const revalidate = 60;
+export const revalidate = 0;
 
 export const metadata = {
   title: "Services — Michael Picard Philosophical Practice",

@@ -2,7 +2,7 @@ import HomeClient from "./HomeClient";
 import { hasSanityConfig, client } from "./lib/sanity";
 import { heroQuery, galleryQuery } from "./lib/queries";
 
-export const revalidate = 60;
+export const revalidate = 0;
 
 async function getHero() {
   if (!hasSanityConfig()) return null;

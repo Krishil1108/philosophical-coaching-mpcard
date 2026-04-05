@@ -4,7 +4,7 @@ import VideoSection from "../components/VideoSection";
 import { hasSanityConfig, client } from "../lib/sanity";
 import { videosQuery } from "../lib/queries";
 
-export const revalidate = 60;
+export const revalidate = 0;
 
 export const metadata = {
   title: "Videos — Michael Picard Philosophical Practice",

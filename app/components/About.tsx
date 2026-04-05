@@ -152,47 +152,6 @@ export default function About({ data }: { data?: AboutData }) {
                 }}
               />
             </div>
-
-            {/* Credentials as stacked list */}
-            <div>
-              <div
-                className="section-label"
-                style={{ marginBottom: "1.5rem" }}
-              >
-                Background
-              </div>
-              <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-                {credentials.map((cred, i) => (
-                  <div
-                    key={i}
-                    style={{
-                      fontFamily: "Space Grotesk, sans-serif",
-                      fontSize: "0.875rem",
-                      color: "var(--text-muted)",
-                      paddingBottom: "1rem",
-                      borderBottom: "1px solid var(--border)",
-                      display: "flex",
-                      gap: "1rem",
-                      alignItems: "baseline",
-                    }}
-                  >
-                    <span
-                      style={{
-                        color: "var(--accent)",
-                        fontFamily: "Space Grotesk, sans-serif",
-                        fontSize: "0.5625rem",
-                        letterSpacing: "0.1em",
-                        flexShrink: 0,
-                        paddingTop: "0.2rem",
-                      }}
-                    >
-                      ✦
-                    </span>
-                    {cred}
-                  </div>
-                ))}
-              </div>
-            </div>
           </motion.div>
 
           {/* Right: Bio + quote column */}
@@ -253,6 +212,409 @@ export default function About({ data }: { data?: AboutData }) {
               >
                 — {data?.quoteAttribution || "Michael Picard"}
               </cite>
+            </div>
+          </motion.div>
+        </div>
+      </div>
+
+      {/* ─── FULL-WIDTH CREDENTIALS SECTION ─────────────────── */}
+      <div style={{ 
+        background: "linear-gradient(135deg, var(--bg-muted) 0%, var(--bg) 50%, var(--bg-card) 100%)", 
+        padding: "5rem 0",
+        borderBottom: "1px solid var(--border)",
+        position: "relative",
+        overflow: "hidden"
+      }}>
+        {/* Background decoration */}
+        <motion.div
+          animate={{
+            rotate: [0, 360],
+            scale: [1, 1.1, 1],
+          }}
+          transition={{
+            duration: 25,
+            repeat: Infinity,
+            ease: "linear",
+          }}
+          className="font-cinzel"
+          style={{
+            position: "absolute",
+            left: "-10rem",
+            top: "50%",
+            transform: "translateY(-50%)",
+            fontSize: "25rem",
+            color: "rgba(139, 107, 74, 0.03)",
+            pointerEvents: "none",
+            userSelect: "none",
+            fontWeight: 300,
+            lineHeight: 1,
+          }}
+        >
+          φ
+        </motion.div>
+
+        <div className="inner-max" style={{ maxWidth: "88rem", position: "relative", zIndex: 1 }}>
+          {/* Section Header */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            style={{ textAlign: "center", marginBottom: "4rem" }}
+          >
+            <div
+              style={{
+                fontFamily: "Space Grotesk, sans-serif",
+                fontSize: "0.6875rem",
+                letterSpacing: "0.4em",
+                textTransform: "uppercase",
+                color: "var(--accent)",
+                marginBottom: "1.5rem",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: "1rem"
+              }}
+            >
+              <span style={{ width: "3rem", height: "1px", background: "var(--accent)" }} />
+              Academic Journey
+              <span style={{ width: "3rem", height: "1px", background: "var(--accent)" }} />
+            </div>
+            <h2
+              className="font-serif"
+              style={{
+                fontSize: "clamp(2rem, 4vw, 3rem)",
+                color: "var(--text-heading)",
+                lineHeight: 1.2,
+                maxWidth: "48rem",
+                margin: "0 auto"
+              }}
+            >
+              Two Decades of Philosophical Practice
+            </h2>
+          </motion.div>
+
+          {/* Dynamic Grid Layout */}
+          <div style={{ 
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
+            gap: "2rem",
+            marginBottom: "3rem"
+          }}>
+            {/* Education Card */}
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              whileHover={{ y: -8, scale: 1.02 }}
+              style={{
+                background: "var(--bg)",
+                padding: "2.5rem",
+                borderRadius: "16px",
+                border: "1px solid var(--border)",
+                position: "relative",
+                overflow: "hidden",
+                boxShadow: "0 4px 20px rgba(0, 0, 0, 0.08)"
+              }}
+            >
+              <div style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                right: 0,
+                height: "4px",
+                background: "linear-gradient(90deg, var(--accent) 0%, var(--sage) 100%)"
+              }} />
+              
+              <div style={{ 
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                width: "4rem",
+                height: "4rem",
+                background: "var(--accent)",
+                borderRadius: "50%",
+                margin: "0 auto 1.5rem",
+                color: "white"
+              }}>
+                <svg width="32" height="32" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6L23 9l-11-6zm0 2.18L18.18 9 12 12.82 5.82 9 12 5.18zM17 15.09l-5 2.73-5-2.73v-3.27l5 2.73 5-2.73v3.27z"/>
+                </svg>
+              </div>
+              
+              <h3 style={{
+                fontFamily: "DM Serif Display, serif",
+                fontSize: "1.5rem",
+                color: "var(--text-heading)",
+                textAlign: "center",
+                marginBottom: "2rem"
+              }}>Education</h3>
+              
+              <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
+                <div style={{ textAlign: "center" }}>
+                  <div style={{ 
+                    fontFamily: "Space Grotesk, sans-serif", 
+                    fontWeight: 700,
+                    fontSize: "1.125rem",
+                    color: "var(--text-heading)",
+                    marginBottom: "0.5rem"
+                  }}>PhD, Philosophy</div>
+                  <div style={{ 
+                    fontFamily: "Space Grotesk, sans-serif", 
+                    fontSize: "1rem",
+                    color: "var(--accent)",
+                    fontWeight: 500
+                  }}>Massachusetts Institute of Technology</div>
+                </div>
+                <div style={{ textAlign: "center" }}>
+                  <div style={{ 
+                    fontFamily: "Space Grotesk, sans-serif", 
+                    fontWeight: 700,
+                    fontSize: "1.125rem",
+                    color: "var(--text-heading)",
+                    marginBottom: "0.5rem"
+                  }}>MSc</div>
+                  <div style={{ 
+                    fontFamily: "Space Grotesk, sans-serif", 
+                    fontSize: "1rem",
+                    color: "var(--accent)",
+                    fontWeight: 500
+                  }}>Massachusetts Institute of Technology</div>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Teaching Card */}
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              whileHover={{ y: -8, scale: 1.02 }}
+              style={{
+                background: "var(--bg)",
+                padding: "2.5rem",
+                borderRadius: "16px",
+                border: "1px solid var(--border)",
+                position: "relative",
+                overflow: "hidden",
+                boxShadow: "0 4px 20px rgba(0, 0, 0, 0.08)"
+              }}
+            >
+              <div style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                right: 0,
+                height: "4px",
+                background: "linear-gradient(90deg, var(--sage) 0%, var(--accent) 100%)"
+              }} />
+              
+              <div style={{ 
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                width: "4rem",
+                height: "4rem",
+                background: "var(--sage)",
+                borderRadius: "50%",
+                margin: "0 auto 1.5rem",
+                color: "white"
+              }}>
+                <svg width="32" height="32" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/>
+                  <path d="M10 17l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/>
+                </svg>
+              </div>
+              
+              <h3 style={{
+                fontFamily: "DM Serif Display, serif",
+                fontSize: "1.5rem",
+                color: "var(--text-heading)",
+                textAlign: "center",
+                marginBottom: "2rem"
+              }}>Teaching</h3>
+              
+              <div style={{ textAlign: "center" }}>
+                <div style={{ 
+                  fontFamily: "Space Grotesk, sans-serif", 
+                  fontWeight: 700,
+                  fontSize: "1.125rem",
+                  color: "var(--text-heading)",
+                  marginBottom: "0.5rem"
+                }}>Faculty</div>
+                <div style={{ 
+                  fontFamily: "Space Grotesk, sans-serif", 
+                  fontSize: "1rem",
+                  color: "var(--text-muted)",
+                  marginBottom: "1.5rem"
+                }}>Douglas College</div>
+                <div style={{ 
+                  fontFamily: "Space Grotesk, sans-serif", 
+                  fontSize: "0.875rem",
+                  color: "var(--accent)",
+                  fontStyle: "italic"
+                }}>Bringing philosophy to life in the classroom</div>
+              </div>
+            </motion.div>
+
+            {/* Innovation Card */}
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              whileHover={{ y: -8, scale: 1.02 }}
+              style={{
+                background: "var(--bg)",
+                padding: "2.5rem",
+                borderRadius: "16px",
+                border: "1px solid var(--border)",
+                position: "relative",
+                overflow: "hidden",
+                boxShadow: "0 4px 20px rgba(0, 0, 0, 0.08)"
+              }}
+            >
+              <div style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                right: 0,
+                height: "4px",
+                background: "linear-gradient(90deg, var(--accent) 0%, var(--sage) 50%, var(--accent) 100%)"
+              }} />
+              
+              <div style={{ 
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                width: "4rem",
+                height: "4rem",
+                background: "linear-gradient(135deg, var(--accent), var(--sage))",
+                borderRadius: "50%",
+                margin: "0 auto 1.5rem",
+                color: "white"
+              }}>
+                <svg width="32" height="32" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/>
+                  <path d="M12 10.5V12h4.5c-.77 2.65-3.16 4.5-6 4.5A6.5 6.5 0 0 1 4 10.5H12z"/>
+                </svg>
+              </div>
+              
+              <h3 style={{
+                fontFamily: "DM Serif Display, serif",
+                fontSize: "1.5rem",
+                color: "var(--text-heading)",
+                textAlign: "center",
+                marginBottom: "2rem"
+              }}>Innovation</h3>
+              
+              <div style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
+                <div style={{ textAlign: "center" }}>
+                  <div style={{ 
+                    fontFamily: "Space Grotesk, sans-serif", 
+                    fontWeight: 700,
+                    fontSize: "1rem",
+                    color: "var(--text-heading)",
+                    marginBottom: "0.25rem"
+                  }}>Founder</div>
+                  <div style={{ 
+                    fontFamily: "Space Grotesk, sans-serif", 
+                    fontSize: "0.875rem",
+                    color: "var(--text-muted)"
+                  }}>Café Philosophy Victoria BC</div>
+                </div>
+                <div style={{ textAlign: "center" }}>
+                  <div style={{ 
+                    fontFamily: "Space Grotesk, sans-serif", 
+                    fontWeight: 700,
+                    fontSize: "1rem",
+                    color: "var(--text-heading)",
+                    marginBottom: "0.25rem"
+                  }}>Creator</div>
+                  <div style={{ 
+                    fontFamily: "Space Grotesk, sans-serif", 
+                    fontSize: "0.875rem",
+                    color: "var(--text-muted)"
+                  }}>Philosophy Sports</div>
+                </div>
+                <div style={{ textAlign: "center" }}>
+                  <div style={{ 
+                    fontFamily: "Space Grotesk, sans-serif", 
+                    fontWeight: 700,
+                    fontSize: "1rem",
+                    color: "var(--text-heading)",
+                    marginBottom: "0.25rem"
+                  }}>Author</div>
+                  <div style={{ 
+                    fontFamily: "Space Grotesk, sans-serif", 
+                    fontSize: "0.875rem",
+                    color: "var(--text-muted)",
+                    fontStyle: "italic"
+                  }}>'How to Play Philosophy'</div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Stats Row */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
+              gap: "2rem",
+              padding: "2rem",
+              background: "var(--bg-card)",
+              borderRadius: "12px",
+              border: "1px solid var(--border)"
+            }}
+          >
+            <div style={{ textAlign: "center" }}>
+              <div style={{ 
+                fontSize: "2.5rem", 
+                fontWeight: 700, 
+                color: "var(--accent)",
+                fontFamily: "Space Grotesk, sans-serif"
+              }}>12+</div>
+              <div style={{ 
+                fontSize: "0.875rem", 
+                color: "var(--text-muted)",
+                fontFamily: "Space Grotesk, sans-serif",
+                letterSpacing: "0.05em"
+              }}>Years of Public Philosophy</div>
+            </div>
+            <div style={{ textAlign: "center" }}>
+              <div style={{ 
+                fontSize: "2.5rem", 
+                fontWeight: 700, 
+                color: "var(--accent)",
+                fontFamily: "Space Grotesk, sans-serif"
+              }}>2</div>
+              <div style={{ 
+                fontSize: "0.875rem", 
+                color: "var(--text-muted)",
+                fontFamily: "Space Grotesk, sans-serif",
+                letterSpacing: "0.05em"
+              }}>Degrees from MIT</div>
+            </div>
+            <div style={{ textAlign: "center" }}>
+              <div style={{ 
+                fontSize: "2.5rem", 
+                fontWeight: 700, 
+                color: "var(--accent)",
+                fontFamily: "Space Grotesk, sans-serif"
+              }}>∞</div>
+              <div style={{ 
+                fontSize: "0.875rem", 
+                color: "var(--text-muted)",
+                fontFamily: "Space Grotesk, sans-serif",
+                letterSpacing: "0.05em"
+              }}>Questions Asked</div>
             </div>
           </motion.div>
         </div>
