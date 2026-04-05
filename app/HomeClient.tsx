@@ -63,8 +63,20 @@ export default function HomeClient({
     hero?.subheadline ||
     "Philosophical practice is not philosophy on sale. It is a situational deployment of philosophy for purposes of life. It is not a monopoly. Try it.";
 
+  // Debug: log what we're getting from Sanity
+  console.log('Raw headline from Sanity:', JSON.stringify(headline));
+  
   // Ensure we have proper line breaks for styling
-  const headlineWithBreaks = headline.replace(/\n/g, '\n');
+  // If the headline doesn't have line breaks, split it intelligently
+  let processedHeadline = headline;
+  if (headline && !headline.includes('\n')) {
+    // If it's the expected text, add the line break
+    if (headline.toLowerCase().includes('thinking with')) {
+      processedHeadline = headline.replace(/thinking\s+with/i, 'Thinking\nwith');
+    }
+  }
+  
+  console.log('Processed headline:', JSON.stringify(processedHeadline));
 
   return (
     <SiteLayout>
@@ -137,7 +149,7 @@ export default function HomeClient({
               paddingLeft: "0",
             }}
           >
-            {headlineWithBreaks.split("\n").map((line: string, i: number) => (
+            {processedHeadline.split("\n").map((line: string, i: number) => (
               <motion.span
                 key={i}
                 initial={{ opacity: 0, y: 30 }}
