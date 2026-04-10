@@ -1,6 +1,6 @@
 import HomeClient from "./HomeClient";
 import { hasSanityConfig, client } from "./lib/sanity";
-import { heroQuery, galleryQuery } from "./lib/queries";
+import { heroQuery } from "./lib/queries";
 
 export const revalidate = 0;
 
@@ -9,14 +9,8 @@ async function getHero() {
   return client.fetch(heroQuery);
 }
 
-async function getGalleryData() {
-  if (!hasSanityConfig()) return [];
-  return client.fetch(galleryQuery);
-}
-
 export default async function Home() {
   const hero = await getHero();
-  const galleryData = await getGalleryData();
 
-  return <HomeClient hero={hero} galleryData={galleryData} />;
+  return <HomeClient hero={hero} />;
 }

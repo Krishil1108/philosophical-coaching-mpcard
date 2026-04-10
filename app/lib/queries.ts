@@ -37,13 +37,6 @@ export const servicesQuery = groq`*[_type == "service"] | order(order asc){
   featured
 }`;
 
-export const galleryQuery = groq`*[_type == "galleryImage"] | order(order asc){
-  _id,
-  image,
-  caption,
-  alt
-}`;
-
 export const videosQuery = groq`*[_type == "youtubeVideo"] | order(order asc){
   _id,
   title,

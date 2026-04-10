@@ -60,7 +60,6 @@ The site is engineered with a strict **near-black + antique gold + white** desig
 | 🎭 | **Framer Motion Animations** | Glassmorphism navbar, animated mobile menu, card lift effects |
 | 📱 | **Fully Responsive** | Fluid `clamp()` typography, mobile-first at 768px & 1024px breakpoints |
 | 🔮 | **Embedded CMS Studio** | Sanity Studio lives at `/studio` — edit everything from a browser, no separate deployment |
-| 🖼️ | **Image Carousel** | Swiper.js powered gallery with gold-themed pagination & navigation |
 | 🎥 | **YouTube Integration** | `react-youtube` embeds with live thumbnail previews |
 | 🛡️ | **Graceful Degradation** | Falls back to rich hardcoded content if CMS is unconfigured |
 | 📜 | **Signature Details** | Ghost φ watermark · gold text gradient · vertical section labels · custom gold scrollbar |
@@ -75,7 +74,6 @@ app/
 ├── /about               →  About         Bio · Credentials · Philosophy Quote · Stats
 ├── /services            →  Services      1-on-1 Coaching · Café Philosophy · Philosophy Sports
 ├── /practice            →  The Practice  Socratic Inquiry · Semantic Analysis · Impartial Witness
-├── /gallery             →  Gallery       Swiper carousel of sessions & public dialogues
 ├── /publications        →  Publications  Books, covers, buy links & forthcoming translations
 ├── /videos              →  Videos        Talks · Demos · Café Philosophy · Philosophy Sports
 ├── /contact             →  Contact       Booking details & direct links
@@ -95,7 +93,6 @@ app/
 | **Styling** | Tailwind CSS v4 | Utility-first with custom CSS design tokens |
 | **CMS** | Sanity v5 | Embedded Studio, GROQ queries, CDN-served images |
 | **Animation** | Framer Motion 12 | Navbar entry, mobile menu, scroll-aware effects |
-| **Carousel** | Swiper 12 | Gallery with custom gold-themed pagination |
 | **Video** | react-youtube | YouTube embeds with thumbnail preview |
 | **Images** | @sanity/image-url | CDN-optimised, hotspot-aware image transforms |
 
@@ -134,7 +131,7 @@ Cormorant Garamond  →  Pull quotes · Blockquotes · Italic display text
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │                  SANITY STUDIO  (/studio)                    │
-│   Hero · About · Services · Gallery · Videos                │
+│   Hero · About · Services · Videos                           │
 │   Publications · Testimonials · Site Settings               │
 └──────────────────────────┬──────────────────────────────────┘
                            │  content saved to cloud
@@ -148,13 +145,13 @@ Cormorant Garamond  →  Pull quotes · Blockquotes · Italic display text
                            ▼
 ┌─────────────────────────────────────────────────────────────┐
 │          NEXT.JS SERVER COMPONENTS                          │
-│   app/page.tsx · /about · /services · /gallery · …         │
+│   app/page.tsx · /about · /services · /videos · …          │
 └──────────────────────────┬──────────────────────────────────┘
                            │  typed props
                            ▼
 ┌─────────────────────────────────────────────────────────────┐
 │                  REACT COMPONENTS                           │
-│  Hero · About · Services · ImageCarousel · VideoSection     │
+│  Hero · About · Services · VideoSection                     │
 │  Publications · Testimonials · CTABanner · Navbar · Footer  │
 └─────────────────────────────────────────────────────────────┘
 ```
@@ -233,7 +230,6 @@ philosophy-coaching/
 │   │   ├── Hero.tsx             # Hero section component
 │   │   ├── About.tsx            # Bio, portrait, credentials, stats
 │   │   ├── Services.tsx         # Service cards with featured highlight
-│   │   ├── ImageCarousel.tsx    # Swiper.js gallery with gold pagination
 │   │   ├── VideoSection.tsx     # YouTube video embeds
 │   │   ├── Publications.tsx     # Book grid with buy links
 │   │   ├── Testimonials.tsx     # Client quote cards
@@ -250,7 +246,6 @@ philosophy-coaching/
 │   ├── about/                   # /about page
 │   ├── services/                # /services page
 │   ├── practice/                # /practice page
-│   ├── gallery/                 # /gallery page
 │   ├── publications/            # /publications page
 │   ├── videos/                  # /videos page
 │   ├── contact/                 # /contact page
@@ -262,7 +257,6 @@ philosophy-coaching/
 │   ├── hero.ts
 │   ├── about.ts
 │   ├── service.ts
-│   ├── galleryImage.ts
 │   ├── youtubeVideo.ts
 │   ├── publication.ts
 │   ├── testimonial.ts
@@ -285,7 +279,6 @@ philosophy-coaching/
 | `about` | Singleton | Portrait, bio (rich text), credentials array, stats, philosophy quote |
 | `siteSettings` | Singleton | Title, tagline, email, phone, social links |
 | `service` | Repeating | Title, icon, description, price, duration, features list, CTA, `order` |
-| `galleryImage` | Repeating | Image (hotspot), caption, alt text, `order` |
 | `youtubeVideo` | Repeating | Title, video ID, description, `order` |
 | `publication` | Repeating | Title, year, publisher, cover image, description, buy link, `order` |
 | `testimonial` | Repeating | Quote, author, role, `order` |

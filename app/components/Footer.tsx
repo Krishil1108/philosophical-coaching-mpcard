@@ -1,402 +1,606 @@
 "use client";
 
+import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useEffect, useMemo, useState } from "react";
 
-const quickLinks = [
-  { label: "About", href: "/about" },
-  { label: "Services", href: "/services" },
-  { label: "Practice", href: "/practice" },
-  { label: "Publications", href: "/publications" },
-  { label: "Gallery", href: "/gallery" },
-  { label: "Videos", href: "/videos" },
-  { label: "Contact", href: "/contact" },
+const navigationLinks = [
+  { label: "About", href: "/about", glyph: "○", note: "Background, philosophy, and credentials." },
+  { label: "Services", href: "/services", glyph: "◆", note: "Session formats and offerings." },
+  { label: "Practice", href: "/practice", glyph: "∮", note: "Method and mode of inquiry." },
+  { label: "Publications", href: "/publications", glyph: "✶", note: "Books, writing, and translations." },
+  { label: "Videos", href: "/videos", glyph: "▶", note: "Talks, clips, and guided reflections." },
+  { label: "Contact", href: "/contact", glyph: "↗", note: "Ways to connect directly." },
 ];
 
 const externalLinks = [
-  { 
-    label: "Book Session", 
-    href: "/book-session",
-    icon: "calendar"
+  { label: "Book Session", href: "/book-session" },
+  { label: "PhilPeople", href: "https://philpeople.org/profiles/michael-picard" },
+];
+
+const prompts = [
+  "What belief are you currently living inside?",
+  "What question refuses to leave you alone?",
+  "What if clarity begins with language, not certainty?",
+  "What assumption is quietly steering your day?",
+  "Where in your life are you waiting for permission to think?",
+  "What metaphor are you using to define yourself?",
+  "What happens if your problem is actually a question?",
+];
+
+const pulseWords = [
+  "Inquiry",
+  "Language",
+  "Clarity",
+  "Presence",
+  "Dialogue",
+  "Attention",
+  "Courage",
+  "Reframing",
+];
+
+const sessionModes = [
+  {
+    id: "clarity",
+    label: "Need Clarity",
+    summary: "Surface hidden assumptions and get unstuck in your thinking.",
   },
-  { 
-    label: "PhilPeople", 
-    href: "https://philpeople.org/profiles/michael-picard",
-    icon: "academic"
+  {
+    id: "transition",
+    label: "In Transition",
+    summary: "Explore major life decisions without imposed worldview.",
+  },
+  {
+    id: "practice",
+    label: "Build Practice",
+    summary: "Develop a more rigorous personal philosophy over time.",
   },
 ];
 
+const fadeUp = {
+  hidden: { opacity: 0, y: 22 },
+  show: { opacity: 1, y: 0 },
+};
+
+const stagger = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: { staggerChildren: 0.13, delayChildren: 0.08 },
+  },
+};
+
+function formatVancouverTime(date: Date) {
+  return new Intl.DateTimeFormat("en-CA", {
+    timeZone: "America/Vancouver",
+    hour: "numeric",
+    minute: "2-digit",
+    weekday: "short",
+  }).format(date);
+}
+
 export default function Footer() {
+  const pathname = usePathname();
+  const [timeLabel, setTimeLabel] = useState(() => formatVancouverTime(new Date()));
+  const [activePrompt, setActivePrompt] = useState(() => new Date().getDay() % prompts.length);
+  const [activeMode, setActiveMode] = useState(0);
+  const [activePulse, setActivePulse] = useState(0);
+  const [hoveredExplore, setHoveredExplore] = useState<string | null>(null);
+
+  useEffect(() => {
+    const interval = window.setInterval(() => {
+      setTimeLabel(formatVancouverTime(new Date()));
+    }, 60000);
+
+    return () => window.clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    const rotatePrompt = window.setInterval(() => {
+      setActivePrompt((prev) => (prev + 1) % prompts.length);
+    }, 9000);
+
+    return () => window.clearInterval(rotatePrompt);
+  }, []);
+
+  useEffect(() => {
+    const pulseInterval = window.setInterval(() => {
+      setActivePulse((prev) => (prev + 1) % pulseWords.length);
+    }, 2400);
+
+    return () => window.clearInterval(pulseInterval);
+  }, []);
+
+  const bookingHref = useMemo(() => {
+    const intent = sessionModes[activeMode]?.id || "clarity";
+    return `/book-session?intent=${encodeURIComponent(intent)}`;
+  }, [activeMode]);
+
+  const currentPrompt = prompts[activePrompt];
+  const currentMode = sessionModes[activeMode];
+  const focusLink =
+    navigationLinks.find((link) => link.href === hoveredExplore) ||
+    navigationLinks.find((link) => link.href === pathname) ||
+    navigationLinks[0];
+
   return (
-    <footer 
-      style={{ 
-        background: "var(--bg-card)",
-        borderTop: "2px solid var(--accent)",
+    <footer
+      style={{
         position: "relative",
         overflow: "hidden",
+        background:
+          "radial-gradient(140% 90% at 10% 0%, rgba(139, 107, 74, 0.13) 0%, transparent 52%), radial-gradient(90% 120% at 100% 100%, rgba(163, 176, 148, 0.14) 0%, transparent 58%), linear-gradient(180deg, #f0ebe3 0%, #ebe4d7 100%)",
+        borderTop: "1px solid rgba(139, 107, 74, 0.28)",
       }}
     >
-      {/* Decorative Background Element */}
       <div
+        aria-hidden="true"
         style={{
           position: "absolute",
-          top: 0,
-          right: "-10%",
-          width: "40%",
-          height: "100%",
-          background: "linear-gradient(135deg, transparent 0%, rgba(139, 107, 74, 0.03) 50%, transparent 100%)",
-          transform: "skewX(-12deg)",
+          inset: 0,
           pointerEvents: "none",
+          backgroundImage:
+            "linear-gradient(to right, rgba(139, 107, 74, 0.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(139, 107, 74, 0.08) 1px, transparent 1px)",
+          backgroundSize: "50px 50px",
+          opacity: 0.24,
         }}
       />
 
-      {/* Main Content */}
-      <div className="inner-max" style={{ maxWidth: "88rem", padding: "4rem 2rem 2rem", position: "relative" }}>
-        
-        {/* Top Section: Philosophy Quote */}
-        <div
+      <motion.div
+        aria-hidden="true"
+        initial={{ opacity: 0, y: -12 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.5 }}
+        transition={{ duration: 0.8, ease: [0.3, 0.1, 0.2, 1] }}
+        style={{
+          position: "absolute",
+          top: "-4rem",
+          right: "4rem",
+          fontFamily: "Cormorant Garamond, Georgia, serif",
+          fontSize: "11rem",
+          color: "rgba(139, 107, 74, 0.12)",
+          lineHeight: 1,
+          pointerEvents: "none",
+        }}
+      >
+        φ
+      </motion.div>
+
+      <div className="inner-max" style={{ maxWidth: "90rem", paddingTop: "4.5rem", paddingBottom: "1.8rem", position: "relative" }}>
+        <motion.section
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.45 }}
+          variants={fadeUp}
+          transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
           style={{
-            textAlign: "center",
-            marginBottom: "4rem",
-            paddingBottom: "3rem",
-            borderBottom: "1px solid var(--border)",
+            marginBottom: "2.2rem",
+            padding: "1.1rem 1.25rem",
+            border: "1px solid var(--border)",
+            borderRadius: "12px",
+            background: "rgba(255, 255, 255, 0.45)",
+            backdropFilter: "blur(4px)",
           }}
         >
-          <div
-            style={{
-              fontSize: "2.5rem",
-              color: "var(--accent)",
-              opacity: 0.6,
-              marginBottom: "1.5rem",
-              fontFamily: "Georgia, serif",
-            }}
-          >
-            φ
-          </div>
-          
-          <blockquote
-            className="font-italic"
-            style={{
-              fontFamily: "DM Serif Display, serif",
-              fontSize: "clamp(1.25rem, 2.5vw, 1.75rem)",
-              color: "var(--text-heading)",
-              fontStyle: "italic",
-              lineHeight: 1.4,
-              maxWidth: "42rem",
-              margin: "0 auto 1.5rem",
-              textAlign: "center",
-            }}
-          >
-            "Philosophy is not a method, theory, or set of answers. It's a way of actively generating and inhabiting questions with greater clarity, purpose, and freedom."
-          </blockquote>
-
-          <div
-            style={{
-              width: "3rem",
-              height: "1px",
-              background: "var(--accent)",
-              margin: "0 auto",
-            }}
-          />
-        </div>
-
-        {/* Middle Section: Navigation & Info */}
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "1fr auto 1fr",
-            gap: "4rem",
-            alignItems: "start",
-            marginBottom: "3rem",
-          }}
-        >
-          {/* Left: Quick Navigation */}
-          <div>
-            <h3
-              style={{
-                fontFamily: "Space Grotesk, sans-serif",
-                fontSize: "0.875rem",
-                fontWeight: 600,
-                letterSpacing: "0.1em",
-                textTransform: "uppercase",
-                color: "var(--accent)",
-                marginBottom: "1.5rem",
-              }}
-            >
-              Navigate
-            </h3>
-            
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "1fr 1fr",
-                gap: "0.75rem",
-              }}
-            >
-              {quickLinks.map((link) => (
-                <Link
-                  key={link.label}
-                  href={link.href}
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
+            <div className="md:col-span-7">
+              <div className="flex items-center justify-between gap-3 mb-2">
+                <span
                   style={{
                     fontFamily: "Space Grotesk, sans-serif",
-                    fontSize: "0.9375rem",
-                    color: "var(--text-muted)",
-                    textDecoration: "none",
-                    padding: "0.5rem 0.75rem",
-                    borderRadius: "6px",
-                    transition: "all 0.3s ease",
+                    fontSize: "0.56rem",
+                    letterSpacing: "0.28em",
+                    textTransform: "uppercase",
+                    color: "var(--accent)",
                     display: "block",
                   }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.background = "var(--bg-muted)";
-                    e.currentTarget.style.color = "var(--accent)";
-                    e.currentTarget.style.paddingLeft = "1rem";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.background = "transparent";
-                    e.currentTarget.style.color = "var(--text-muted)";
-                    e.currentTarget.style.paddingLeft = "0.75rem";
-                  }}
                 >
-                  {link.label}
-                </Link>
-              ))}
-            </div>
-          </div>
-
-          {/* Center: Brand */}
-          <div style={{ textAlign: "center", minWidth: "200px" }}>
-            <Link href="/" style={{ textDecoration: "none" }}>
-              <div
-                style={{
-                  marginBottom: "1rem",
-                }}
-              >
-                <h2
-                  className="font-cinzel"
-                  style={{
-                    fontSize: "1.75rem",
-                    color: "var(--text-heading)",
-                    letterSpacing: "0.2em",
-                    lineHeight: 1.2,
-                    fontWeight: 600,
-                    marginBottom: "0.5rem",
-                    transition: "color 0.3s ease",
-                  }}
-                  onMouseEnter={(e) => (e.currentTarget.style.color = "var(--accent)")}
-                  onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-heading)")}
+                  Live Inquiry Deck
+                </span>
+                <button
+                  type="button"
+                  className="btn-outline"
+                  onClick={() => setActivePrompt((prev) => (prev + 1) % prompts.length)}
+                  style={{ padding: "0.35rem 0.65rem", fontSize: "0.56rem", letterSpacing: "0.17em" }}
                 >
-                  MICHAEL
-                  <br />
-                  PICARD
-                </h2>
+                  New Prompt
+                </button>
               </div>
-            </Link>
 
-            <div
-              style={{
-                fontFamily: "Space Grotesk, sans-serif",
-                fontSize: "0.8125rem",
-                color: "var(--text-muted)",
-                letterSpacing: "0.05em",
-                lineHeight: 1.6,
-              }}
-            >
-              <div style={{ marginBottom: "0.25rem" }}>Philosophical Practice</div>
-              <div style={{ color: "var(--accent)", fontWeight: 500 }}>British Columbia, Canada</div>
+              <AnimatePresence mode="wait">
+                <motion.p
+                  key={activePrompt}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.35 }}
+                  style={{
+                    fontFamily: "DM Serif Display, Georgia, serif",
+                    fontSize: "clamp(1.05rem, 2.2vw, 1.55rem)",
+                    lineHeight: 1.35,
+                    color: "var(--text-heading)",
+                  }}
+                >
+                  {currentPrompt}
+                </motion.p>
+              </AnimatePresence>
             </div>
 
-            {/* Credentials */}
-            <div
-              style={{
-                marginTop: "1.5rem",
-                padding: "0.75rem 1.25rem",
-                background: "var(--bg-muted)",
-                borderRadius: "50px",
-                display: "inline-block",
-              }}
-            >
+            <div className="md:col-span-5">
               <span
                 style={{
                   fontFamily: "Space Grotesk, sans-serif",
-                  fontSize: "0.75rem",
-                  color: "var(--accent)",
-                  letterSpacing: "0.1em",
+                  fontSize: "0.56rem",
+                  letterSpacing: "0.28em",
                   textTransform: "uppercase",
-                  fontWeight: 600,
+                  color: "var(--accent)",
+                  display: "block",
+                  marginBottom: "0.5rem",
                 }}
               >
-                PhD · Douglas College
+                Session Compass
               </span>
+
+              <div className="flex flex-wrap gap-2 mb-2">
+                {sessionModes.map((mode, index) => {
+                  const isActive = activeMode === index;
+                  return (
+                    <button
+                      type="button"
+                      key={mode.id}
+                      onClick={() => setActiveMode(index)}
+                      style={{
+                        border: isActive ? "1px solid var(--accent)" : "1px solid var(--border)",
+                        background: isActive ? "rgba(139, 107, 74, 0.14)" : "rgba(255, 255, 255, 0.58)",
+                        color: isActive ? "var(--accent-dark)" : "var(--text-muted)",
+                        borderRadius: "999px",
+                        fontFamily: "Space Grotesk, sans-serif",
+                        fontSize: "0.7rem",
+                        letterSpacing: "0.11em",
+                        textTransform: "uppercase",
+                        padding: "0.36rem 0.66rem",
+                        cursor: "pointer",
+                        transition: "all 0.2s ease",
+                      }}
+                    >
+                      {mode.label}
+                    </button>
+                  );
+                })}
+              </div>
+
+              <AnimatePresence mode="wait">
+                <motion.p
+                  key={currentMode.id}
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -8 }}
+                  transition={{ duration: 0.28 }}
+                  style={{
+                    fontFamily: "Space Grotesk, sans-serif",
+                    fontSize: "0.84rem",
+                    lineHeight: 1.55,
+                    color: "var(--text-muted)",
+                  }}
+                >
+                  {currentMode.summary}
+                </motion.p>
+              </AnimatePresence>
             </div>
           </div>
+        </motion.section>
 
-          {/* Right: Connect */}
-          <div style={{ textAlign: "right" }}>
+        <motion.div
+          className="grid grid-cols-1 lg:grid-cols-12 gap-6"
+          style={{ marginBottom: "2.3rem" }}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.3 }}
+          variants={stagger}
+        >
+          <motion.section
+            className="lg:col-span-5"
+            variants={fadeUp}
+            transition={{ duration: 0.55, ease: [0.4, 0, 0.2, 1] }}
+            style={{
+              border: "1px solid var(--border)",
+              borderRadius: "12px",
+              padding: "1.6rem",
+              background: "rgba(255, 255, 255, 0.55)",
+            }}
+          >
+            <Link href="/" style={{ textDecoration: "none", display: "inline-block", marginBottom: "0.8rem" }}>
+              <h2
+                className="font-cinzel"
+                style={{
+                  fontSize: "clamp(1.3rem, 3vw, 1.9rem)",
+                  letterSpacing: "0.15em",
+                  lineHeight: 1.15,
+                  color: "var(--text-heading)",
+                }}
+              >
+                MICHAEL PICARD
+              </h2>
+            </Link>
+
+            <p
+              style={{
+                fontFamily: "Space Grotesk, sans-serif",
+                fontSize: "0.95rem",
+                color: "var(--text-muted)",
+                lineHeight: 1.8,
+                marginBottom: "1.15rem",
+                maxWidth: "36rem",
+              }}
+            >
+              Philosophical practice for real lives: private sessions, public dialogue, and rigorous inquiry grounded in clear language.
+            </p>
+
+            <div className="flex flex-wrap gap-2" style={{ marginBottom: "1rem" }}>
+              {pulseWords.map((word, index) => {
+                const isActive = index === activePulse;
+                return (
+                  <motion.span
+                    key={word}
+                    animate={{
+                      y: isActive ? -2 : 0,
+                      scale: isActive ? 1.04 : 1,
+                    }}
+                    transition={{ duration: 0.22 }}
+                    style={{
+                      fontFamily: "Space Grotesk, sans-serif",
+                      fontSize: "0.65rem",
+                      letterSpacing: "0.14em",
+                      textTransform: "uppercase",
+                      padding: "0.38rem 0.62rem",
+                      borderRadius: "999px",
+                      color: isActive ? "var(--accent-dark)" : "var(--text-muted)",
+                      border: isActive
+                        ? "1px solid rgba(139, 107, 74, 0.35)"
+                        : "1px solid rgba(139, 107, 74, 0.2)",
+                      background: isActive ? "rgba(139, 107, 74, 0.12)" : "rgba(255, 255, 255, 0.45)",
+                    }}
+                  >
+                    {word}
+                  </motion.span>
+                );
+              })}
+            </div>
+
+            <div className="flex flex-wrap gap-2">
+              {["PhD, MIT", "Douglas College", "700+ sessions", "British Columbia"].map((item) => (
+                <span
+                  key={item}
+                  style={{
+                    fontFamily: "Space Grotesk, sans-serif",
+                    fontSize: "0.63rem",
+                    letterSpacing: "0.12em",
+                    textTransform: "uppercase",
+                    padding: "0.45rem 0.68rem",
+                    borderRadius: "999px",
+                    color: "var(--accent)",
+                    border: "1px solid rgba(139, 107, 74, 0.28)",
+                    background: "rgba(255, 255, 255, 0.6)",
+                  }}
+                >
+                  {item}
+                </span>
+              ))}
+            </div>
+          </motion.section>
+
+          <motion.section
+            className="lg:col-span-4"
+            variants={fadeUp}
+            transition={{ duration: 0.55, ease: [0.4, 0, 0.2, 1] }}
+            style={{
+              border: "1px solid var(--border)",
+              borderRadius: "12px",
+              padding: "1.6rem",
+              background: "rgba(255, 255, 255, 0.55)",
+            }}
+          >
             <h3
               style={{
                 fontFamily: "Space Grotesk, sans-serif",
-                fontSize: "0.875rem",
-                fontWeight: 600,
-                letterSpacing: "0.1em",
+                fontSize: "0.66rem",
+                letterSpacing: "0.22em",
                 textTransform: "uppercase",
                 color: "var(--accent)",
-                marginBottom: "1.5rem",
+                marginBottom: "1rem",
               }}
             >
-              Connect
+              Explore
             </h3>
 
-            <div style={{ display: "flex", flexDirection: "column", gap: "1rem", alignItems: "flex-end" }}>
-              {externalLinks.map((link) => (
-                // Internal booking links should stay in-tab; external resources open new tab.
-                <Link
-                  key={link.label}
-                  href={link.href}
-                  target={link.href.startsWith("http") ? "_blank" : undefined}
-                  rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                  style={{
-                    fontFamily: "Space Grotesk, sans-serif",
-                    fontSize: "0.9375rem",
-                    color: "var(--text-muted)",
-                    textDecoration: "none",
-                    padding: "0.75rem 1.25rem",
-                    border: "1px solid var(--border)",
-                    borderRadius: "50px",
-                    transition: "all 0.3s ease",
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "0.5rem",
-                    background: "transparent",
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.background = "var(--accent)";
-                    e.currentTarget.style.color = "white";
-                    e.currentTarget.style.borderColor = "var(--accent)";
-                    e.currentTarget.style.transform = "translateY(-2px)";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.background = "transparent";
-                    e.currentTarget.style.color = "var(--text-muted)";
-                    e.currentTarget.style.borderColor = "var(--border)";
-                    e.currentTarget.style.transform = "translateY(0)";
-                  }}
-                >
-                  {link.label}
-                  <svg
-                    width="12"
-                    height="12"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M7 17L17 7M17 7H7M17 7V17" />
-                  </svg>
-                </Link>
-              ))}
-
-              {/* Email Contact */}
               <div
                 style={{
-                  marginTop: "1rem",
-                  padding: "1rem",
-                  background: "var(--bg-muted)",
-                  borderRadius: "12px",
-                  textAlign: "center",
+                  border: "1px solid rgba(139, 107, 74, 0.2)",
+                  borderRadius: "10px",
+                  background: "rgba(255, 255, 255, 0.6)",
+                  padding: "0.75rem 0.8rem",
+                  marginBottom: "0.85rem",
                 }}
               >
                 <div
                   style={{
                     fontFamily: "Space Grotesk, sans-serif",
-                    fontSize: "0.8125rem",
-                    color: "var(--text-muted)",
-                    marginBottom: "0.5rem",
-                  }}
-                >
-                  Questions?
-                </div>
-                <div
-                  style={{
-                    fontFamily: "Space Grotesk, sans-serif",
-                    fontSize: "0.875rem",
+                    fontSize: "0.65rem",
+                    letterSpacing: "0.16em",
+                    textTransform: "uppercase",
                     color: "var(--accent)",
-                    fontWeight: 500,
+                    marginBottom: "0.35rem",
                   }}
                 >
-                  Get in touch
+                  Focus
                 </div>
+                <AnimatePresence mode="wait">
+                  <motion.p
+                    key={focusLink.href}
+                    initial={{ opacity: 0, y: 6 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -6 }}
+                    transition={{ duration: 0.22 }}
+                    style={{
+                      fontFamily: "Space Grotesk, sans-serif",
+                      fontSize: "0.82rem",
+                      lineHeight: 1.5,
+                      color: "var(--text-muted)",
+                    }}
+                  >
+                    <span style={{ color: "var(--accent-dark)", marginRight: "0.4rem" }}>{focusLink.glyph}</span>
+                    {focusLink.note}
+                  </motion.p>
+                </AnimatePresence>
               </div>
-            </div>
-          </div>
-        </div>
 
-        {/* Bottom Bar */}
-        <div
+              <div className="grid grid-cols-2 gap-2">
+              {navigationLinks.map((link) => {
+                const isActive = pathname === link.href;
+                  const isHovered = hoveredExplore === link.href;
+
+                return (
+                    <motion.div
+                    key={link.href}
+                      whileHover={{ y: -2 }}
+                      transition={{ duration: 0.18 }}
+                    >
+                      <Link
+                      href={link.href}
+                      onMouseEnter={() => setHoveredExplore(link.href)}
+                      onMouseLeave={() => setHoveredExplore(null)}
+                    style={{
+                      textDecoration: "none",
+                      borderRadius: "8px",
+                        padding: "0.55rem 0.62rem",
+                      fontFamily: "Space Grotesk, sans-serif",
+                      fontSize: "0.86rem",
+                        color: isActive || isHovered ? "var(--accent-dark)" : "var(--text-muted)",
+                        background:
+                          isActive || isHovered
+                            ? "linear-gradient(135deg, rgba(139, 107, 74, 0.16) 0%, rgba(139, 107, 74, 0.08) 100%)"
+                            : "transparent",
+                        border:
+                          isActive || isHovered
+                            ? "1px solid rgba(139, 107, 74, 0.3)"
+                            : "1px solid transparent",
+                        transition: "all 0.22s ease",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                        gap: "0.45rem",
+                    }}
+                  >
+                      <span>
+                        <span style={{ marginRight: "0.35rem", opacity: 0.8 }}>{link.glyph}</span>
+                        {link.label}
+                      </span>
+                      <span style={{ opacity: isActive || isHovered ? 0.9 : 0.35 }}>→</span>
+                      </Link>
+                    </motion.div>
+                );
+              })}
+            </div>
+          </motion.section>
+
+          <motion.section
+            className="lg:col-span-3"
+            variants={fadeUp}
+            transition={{ duration: 0.55, ease: [0.4, 0, 0.2, 1] }}
+            style={{
+              border: "1px solid var(--border)",
+              borderRadius: "12px",
+              padding: "1.6rem",
+              background: "rgba(255, 255, 255, 0.55)",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
+              gap: "1rem",
+            }}
+          >
+            <div>
+              <h3
+                style={{
+                  fontFamily: "Space Grotesk, sans-serif",
+                  fontSize: "0.66rem",
+                  letterSpacing: "0.22em",
+                  textTransform: "uppercase",
+                  color: "var(--accent)",
+                  marginBottom: "0.75rem",
+                }}
+              >
+                Connect
+              </h3>
+              <p
+                style={{
+                  fontFamily: "Space Grotesk, sans-serif",
+                  fontSize: "0.86rem",
+                  color: "var(--text-muted)",
+                  lineHeight: 1.7,
+                }}
+              >
+                Live in Vancouver
+                <br />
+                <span style={{ color: "var(--text-heading)" }}>{timeLabel}</span>
+              </p>
+            </div>
+
+            <div className="flex flex-col gap-2">
+              {externalLinks.map((link) => {
+                const isExternal = link.href.startsWith("http");
+                const finalHref = link.label === "Book Session" ? bookingHref : link.href;
+                return (
+                  <Link
+                    key={link.href}
+                    href={finalHref}
+                    target={isExternal ? "_blank" : undefined}
+                    rel={isExternal ? "noopener noreferrer" : undefined}
+                    className={link.label === "Book Session" ? "btn-primary" : "btn-outline"}
+                    style={{ width: "100%", justifyContent: "center", padding: "0.75rem 1rem" }}
+                  >
+                    {link.label === "Book Session" ? `Book: ${currentMode.label}` : link.label}
+                  </Link>
+                );
+              })}
+            </div>
+          </motion.section>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.9 }}
+          transition={{ duration: 0.45, ease: [0.4, 0, 0.2, 1], delay: 0.15 }}
           style={{
-            paddingTop: "2rem",
-            borderTop: "1px solid var(--border)",
+            borderTop: "1px solid rgba(139, 107, 74, 0.2)",
+            paddingTop: "1rem",
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
+            gap: "0.75rem",
             flexWrap: "wrap",
-            gap: "1.5rem",
           }}
         >
-          {/* Copyright */}
-          <div
+          <p
             style={{
               fontFamily: "Space Grotesk, sans-serif",
-              fontSize: "0.8125rem",
+              fontSize: "0.78rem",
               color: "var(--text-muted)",
-              display: "flex",
-              alignItems: "center",
-              gap: "1.5rem",
             }}
           >
-            <span>© {new Date().getFullYear()} Michael Picard</span>
-            <span style={{ color: "var(--accent)" }}>·</span>
-            <span>All rights reserved</span>
-          </div>
+            Copyright {new Date().getFullYear()} Michael Picard. Built for inquiry.
+          </p>
 
-          {/* Back to Top */}
           <button
+            type="button"
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            style={{
-              background: "none",
-              border: "1px solid var(--accent)",
-              borderRadius: "50%",
-              width: "48px",
-              height: "48px",
-              color: "var(--accent)",
-              cursor: "pointer",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              transition: "all 0.3s ease",
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background = "var(--accent)";
-              e.currentTarget.style.color = "white";
-              e.currentTarget.style.transform = "translateY(-3px)";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = "none";
-              e.currentTarget.style.color = "var(--accent)";
-              e.currentTarget.style.transform = "translateY(0)";
-            }}
+            className="btn-outline"
+            style={{ padding: "0.55rem 0.9rem", letterSpacing: "0.12em" }}
           >
-            <svg
-              width="16"
-              height="16"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2.5"
-              viewBox="0 0 24 24"
-            >
-              <path d="M12 19V5M5 12l7-7 7 7" />
-            </svg>
+            Back to Top
           </button>
-        </div>
+        </motion.div>
       </div>
     </footer>
   );

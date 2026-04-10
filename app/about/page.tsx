@@ -1,8 +1,9 @@
 import SiteLayout from "../components/SiteLayout";
 import PageHeader from "../components/PageHeader";
 import About from "../components/About";
+import AboutShowcaseCarousel from "../components/AboutShowcaseCarousel";
 import { hasSanityConfig, client } from "../lib/sanity";
-import { aboutQuery } from "../lib/queries";
+import { aboutQuery, publicationsQuery } from "../lib/queries";
 
 export const revalidate = 0;
 
@@ -12,12 +13,18 @@ export const metadata = {
 };
 
 async function getData() {
-  if (!hasSanityConfig()) return null;
-  return client.fetch(aboutQuery);
+  if (!hasSanityConfig()) return { about: null, publications: [] };
+
+  const [about, publications] = await Promise.all([
+    client.fetch(aboutQuery),
+    client.fetch(publicationsQuery),
+  ]);
+
+  return { about, publications };
 }
 
 export default async function AboutPage() {
-  const data = await getData();
+  const { about, publications } = await getData();
 
   return (
     <SiteLayout>
@@ -27,7 +34,8 @@ export default async function AboutPage() {
         subtitle="A life in philosophy — from MIT lecture halls to café tables to one-on-one inquiry."
         breadcrumb={{ label: "Home", href: "/" }}
       />
-      <About data={data} />
+      <About data={about} />
+      <AboutShowcaseCarousel about={about} publications={publications} />
     </SiteLayout>
   );
 }

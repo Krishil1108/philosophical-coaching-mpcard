@@ -68,7 +68,6 @@ Visit `http://localhost:3000/studio` while the dev server is running. You'll see
 | Document | What to fill in |
 |---|---|
 | **Service** | Title, icon (emoji), description, price, duration, features, CTA, `order` for sorting |
-| **Gallery Image** | Upload image, caption, alt text, `order` for sorting |
 | **YouTube Video** | Title, video ID (just the `v=...` part of the URL), description, `order` |
 | **Publication** | Title, subtitle, year, publisher, cover image, description, buy link, `order` |
 | **Testimonial** | Quote, author name, role (e.g., "Philosophy Coaching Client"), `order` |
@@ -116,7 +115,6 @@ app/page.tsx + section components
 | `hero` | `schemaTypes/hero.ts` | Singleton |
 | `about` | `schemaTypes/about.ts` | Singleton |
 | `service` | `schemaTypes/service.ts` | Repeating |
-| `galleryImage` | `schemaTypes/galleryImage.ts` | Repeating |
 | `youtubeVideo` | `schemaTypes/youtubeVideo.ts` | Repeating |
 | `publication` | `schemaTypes/publication.ts` | Repeating |
 | `testimonial` | `schemaTypes/testimonial.ts` | Repeating |
@@ -133,7 +131,6 @@ app/page.tsx + section components
 - [ ] Filled in About content
 - [ ] Filled in Site Settings
 - [ ] Added at least one Service
-- [ ] Added Gallery images
 - [ ] Added YouTube videos
 - [ ] Added Publications
 - [ ] Added Testimonials

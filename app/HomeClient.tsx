@@ -2,7 +2,6 @@
 
 import SiteLayout from "./components/SiteLayout";
 import Link from "next/link";
-import ImageCarousel from "./components/ImageCarousel";
 import StatsSection from "./components/StatsSection";
 import Typewriter from "./components/Typewriter";
 import { motion, useScroll, useTransform } from "framer-motion";
@@ -42,11 +41,9 @@ const contents = [
 ];
 
 export default function HomeClient({ 
-  hero, 
-  galleryData 
+  hero 
 }: { 
   hero?: any; 
-  galleryData?: any[];
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
   
@@ -209,11 +206,6 @@ export default function HomeClient({
           STATS LINE
           ══════════════════════════════════════════ */}
       <StatsSection />
-
-      {/* ══════════════════════════════════════════
-          GALLERY CAROUSEL
-          ══════════════════════════════════════════ */}
-      <ImageCarousel data={galleryData} />
 
       {/* ══════════════════════════════════════════
           OPENING STATEMENT

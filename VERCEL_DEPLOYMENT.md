@@ -184,8 +184,7 @@ After deployment, verify:
 1. **Site loads:** Visit your Vercel URL
 2. **Sanity content appears:** Check that Hero, About, Services, etc. display
 3. **Studio works:** Visit `https://your-site.vercel.app/studio`
-4. **Images load:** Verify gallery images from `cdn.sanity.io`
-5. **YouTube videos work:** Test video embeds in `/videos`
+4. **YouTube videos work:** Test video embeds in `/videos`
 
 ---
 
