@@ -87,14 +87,12 @@ export default function Navbar() {
         </ul>
 
         {/* Book Session */}
-        <a
-          href="https://chat.appa.edu/product/chat-with-michael-picard-msc-phd/"
-          target="_blank"
-          rel="noopener noreferrer"
+        <Link
+          href="/book-session"
           className="btn-nav hidden lg:inline-flex"
         >
           Book Session
-        </a>
+        </Link>
 
         {/* Mobile Burger */}
         <button
@@ -151,14 +149,12 @@ export default function Navbar() {
                   {link.label}
                 </Link>
               ))}
-              <a
-                href="https://chat.appa.edu/product/chat-with-michael-picard-msc-phd/"
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                href="/book-session"
                 className="btn-primary mt-2"
               >
                 Book a Session
-              </a>
+              </Link>
             </div>
           </motion.div>
         )}

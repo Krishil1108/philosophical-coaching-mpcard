@@ -184,9 +184,23 @@ Create `.env.local` in the project root:
 NEXT_PUBLIC_SANITY_PROJECT_ID=your-project-id
 NEXT_PUBLIC_SANITY_DATASET=production
 NEXT_PUBLIC_SANITY_API_VERSION=2024-01-01
+
+# Google Calendar booking integration
+GOOGLE_CLIENT_ID=your-google-oauth-client-id
+GOOGLE_CLIENT_SECRET=your-google-oauth-client-secret
+GOOGLE_REFRESH_TOKEN=your-google-oauth-refresh-token
+GOOGLE_CALENDAR_ID=your-calendar-id@group.calendar.google.com
+
+# Optional booking config
+BOOKING_OWNER_EMAIL=michael@philosophicalcoaching.com
+BOOKING_TIMEZONE=America/Vancouver
+BOOKING_SLOT_MARKER=[AVAILABLE]
+BOOKING_WINDOW_DAYS=45
 ```
 
 > Get your Project ID from [sanity.io/manage](https://sanity.io/manage) → your project → Settings → API
+
+For booking slots, create events in the configured Google Calendar with `[AVAILABLE]` in the event title (or update `BOOKING_SLOT_MARKER`). Those events are shown to users as available times.
 
 ### 3 · Add CORS Origin
 

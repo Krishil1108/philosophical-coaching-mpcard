@@ -10,13 +10,13 @@ export const metadata = {
 const options = [
   {
     num: "01",
-    platform: "APPA Chat",
+    platform: "Google Calendar",
     title: "Book a Live Session",
-    desc: "Schedule a 30- or 60-minute live philosophical coaching session through the American Philosophical Practitioners Association platform.",
+    desc: "Choose from Michael's available Google Calendar slots and book a live philosophical coaching session with an automatic Meet link.",
     price: "$60 – $100 USD",
-    cta: "Book on APPA Chat",
-    href: "https://chat.appa.edu/product/chat-with-michael-picard-msc-phd/",
-    external: true,
+    cta: "Book a Session",
+    href: "/book-session",
+    external: false,
     featured: true,
   },
   {

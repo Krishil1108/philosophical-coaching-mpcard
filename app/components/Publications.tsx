@@ -337,6 +337,8 @@ export default function Publications({ data }: { data?: Publication[] }) {
               color: "var(--accent)",
               fontStyle: "normal",
               textAlign: "right",
+              display: "block",
+              width: "100%",
             }}
           >
             — Gerd B. Achenbach, <em>Philosophical Praxis</em> (Bloomsbury, 2024)

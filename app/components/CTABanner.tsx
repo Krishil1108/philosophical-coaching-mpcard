@@ -76,17 +76,15 @@ export default function CTABanner() {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
-              href="https://chat.appa.edu/product/chat-with-michael-picard-msc-phd/"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/book-session"
               className="btn-primary"
             >
-              <span>Book a Session on APPA Chat</span>
+              <span>Book a Session</span>
               <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
                 <path d="M5 12h14M12 5l7 7-7 7" />
               </svg>
-            </a>
+            </Link>
             <Link href="/contact" className="btn-outline">
               All Contact Options
             </Link>

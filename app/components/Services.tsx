@@ -24,8 +24,8 @@ const defaultServices: Service[] = [
     price: "$60–$100 USD",
     duration: "30 or 60 minutes",
     features: ["Socratic method", "Semantic belief analysis", "No preset worldview", "Live format", "Fully confidential"],
-    ctaText: "Book via APPA Chat",
-    ctaLink: "https://chat.appa.edu/product/chat-with-michael-picard-msc-phd/",
+    ctaText: "Book a Session",
+    ctaLink: "/book-session",
     featured: true,
   },
   {
