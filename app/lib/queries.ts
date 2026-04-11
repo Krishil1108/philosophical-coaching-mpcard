@@ -58,7 +58,16 @@ export const publicationsQuery = groq`*[_type == "publication"] | order(order as
   publisher,
   coverImage,
   description,
-  buyLink
+  viewLink,
+  buyLink,
+  editions[]{
+    _key,
+    language,
+    label,
+    coverImage,
+    viewLink,
+    buyLink
+  }
 }`;
 
 export const testimonialsQuery = groq`*[_type == "testimonial"] | order(order asc){
