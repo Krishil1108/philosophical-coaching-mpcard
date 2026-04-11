@@ -4,8 +4,15 @@ import SiteLayout from "./components/SiteLayout";
 import Link from "next/link";
 import StatsSection from "./components/StatsSection";
 import Typewriter from "./components/Typewriter";
+import AboutShowcaseCarousel from "./components/AboutShowcaseCarousel";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+
+interface HomeClientProps {
+  hero?: any;
+  about?: any;
+  publications?: any[];
+}
 
 const contents = [
   {
@@ -41,10 +48,10 @@ const contents = [
 ];
 
 export default function HomeClient({ 
-  hero 
-}: { 
-  hero?: any; 
-}) {
+  hero,
+  about,
+  publications = [],
+}: HomeClientProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   
   const { scrollYProgress } = useScroll({
@@ -206,6 +213,8 @@ export default function HomeClient({
           STATS LINE
           ══════════════════════════════════════════ */}
       <StatsSection />
+
+      <AboutShowcaseCarousel about={about ?? null} publications={publications} />
 
       {/* ══════════════════════════════════════════
           OPENING STATEMENT

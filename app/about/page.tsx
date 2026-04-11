@@ -1,9 +1,8 @@
 import SiteLayout from "../components/SiteLayout";
 import PageHeader from "../components/PageHeader";
 import About from "../components/About";
-import AboutShowcaseCarousel from "../components/AboutShowcaseCarousel";
 import { hasSanityConfig, client } from "../lib/sanity";
-import { aboutQuery, publicationsQuery } from "../lib/queries";
+import { aboutQuery } from "../lib/queries";
 
 export const revalidate = 0;
 
@@ -13,18 +12,15 @@ export const metadata = {
 };
 
 async function getData() {
-  if (!hasSanityConfig()) return { about: null, publications: [] };
+  if (!hasSanityConfig()) return { about: null };
 
-  const [about, publications] = await Promise.all([
-    client.fetch(aboutQuery),
-    client.fetch(publicationsQuery),
-  ]);
+  const about = await client.fetch(aboutQuery);
 
-  return { about, publications };
+  return { about };
 }
 
 export default async function AboutPage() {
-  const { about, publications } = await getData();
+  const { about } = await getData();
 
   return (
     <SiteLayout>
@@ -35,7 +31,6 @@ export default async function AboutPage() {
         breadcrumb={{ label: "Home", href: "/" }}
       />
       <About data={about} />
-      <AboutShowcaseCarousel about={about} publications={publications} />
     </SiteLayout>
   );
 }
