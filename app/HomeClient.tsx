@@ -10,7 +10,6 @@ import { useRef } from "react";
 
 interface HomeClientProps {
   hero?: any;
-  about?: any;
   publications?: any[];
 }
 
@@ -49,7 +48,6 @@ const contents = [
 
 export default function HomeClient({ 
   hero,
-  about,
   publications = [],
 }: HomeClientProps) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -214,7 +212,7 @@ export default function HomeClient({
           ══════════════════════════════════════════ */}
       <StatsSection />
 
-      <AboutShowcaseCarousel about={about ?? null} publications={publications} />
+      <AboutShowcaseCarousel showcasePhotos={hero?.showcasePhotos || []} publications={publications} />
 
       {/* ══════════════════════════════════════════
           OPENING STATEMENT

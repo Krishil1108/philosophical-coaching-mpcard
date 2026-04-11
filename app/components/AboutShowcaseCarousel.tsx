@@ -20,9 +20,11 @@ interface ShowcaseItem {
   image?: Record<string, unknown> | null;
 }
 
-interface AboutData {
-  name?: string;
-  portrait?: Record<string, unknown>;
+interface ShowcasePhoto {
+  _key?: string;
+  title?: string;
+  subtitle?: string;
+  image?: Record<string, unknown>;
 }
 
 interface Publication {
@@ -56,16 +58,16 @@ const filters = [
 ] as const;
 
 function cardLabel(kind: ShowcaseKind) {
-  if (kind === "photo") return "Portrait";
+  if (kind === "photo") return "Photo";
   if (kind === "book") return "Publication";
   return "Practice";
 }
 
 export default function AboutShowcaseCarousel({
-  about,
+  showcasePhotos,
   publications,
 }: {
-  about: AboutData | null;
+  showcasePhotos: ShowcasePhoto[];
   publications: Publication[];
 }) {
   const [activeFilter, setActiveFilter] = useState<(typeof filters)[number]["key"]>("all");
@@ -73,15 +75,17 @@ export default function AboutShowcaseCarousel({
   const items = useMemo(() => {
     const list: ShowcaseItem[] = [];
 
-    if (about?.portrait) {
+    showcasePhotos?.forEach((photo, index) => {
+      if (!photo?.image) return;
+
       list.push({
-        id: "portrait",
+        id: photo._key || `photo-${index}`,
         kind: "photo",
-        title: about.name ? `${about.name} — Portrait` : "Portrait",
-        subtitle: "A life dedicated to living philosophy in public and private dialogue.",
-        image: about.portrait,
+        title: photo.title || `Photo ${index + 1}`,
+        subtitle: photo.subtitle,
+        image: photo.image,
       });
-    }
+    });
 
     publications.forEach((book) => {
       list.push({
@@ -94,7 +98,7 @@ export default function AboutShowcaseCarousel({
     });
 
     return [...list, ...baseMoments];
-  }, [about, publications]);
+  }, [publications, showcasePhotos]);
 
   const filteredItems = useMemo(() => {
     if (activeFilter === "all") return items;

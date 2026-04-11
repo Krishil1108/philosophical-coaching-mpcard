@@ -8,6 +8,12 @@ export const heroQuery = groq`*[_type == "hero"][0]{
   ctaSecondary,
   ctaSecondaryLink,
   backgroundImage,
+  showcasePhotos[]{
+    _key,
+    title,
+    subtitle,
+    image
+  },
   quote,
   quoteAuthor
 }`;
