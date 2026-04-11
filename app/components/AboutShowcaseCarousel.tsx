@@ -4,10 +4,12 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { useMemo, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination } from "swiper/modules";
+import { Autoplay, Navigation, Pagination } from "swiper/modules";
+import type { Swiper as SwiperType } from "swiper";
 import { urlFor } from "../lib/sanity";
 
 import "swiper/css";
+import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 type ShowcaseKind = "photo" | "book" | "moment";
@@ -71,6 +73,7 @@ export default function AboutShowcaseCarousel({
   publications: Publication[];
 }) {
   const [activeFilter, setActiveFilter] = useState<(typeof filters)[number]["key"]>("all");
+  const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
 
   const items = useMemo(() => {
     const list: ShowcaseItem[] = [];
@@ -161,97 +164,146 @@ export default function AboutShowcaseCarousel({
             No showcase items for this filter yet.
           </p>
         ) : (
-          <Swiper
-            modules={[Autoplay, Pagination]}
-            autoplay={{ delay: 4500, disableOnInteraction: false, pauseOnMouseEnter: true }}
-            loop={filteredItems.length > 2}
-            spaceBetween={20}
-            pagination={{ clickable: true }}
-            breakpoints={{
-              320: { slidesPerView: 1.1 },
-              768: { slidesPerView: 2 },
-              1200: { slidesPerView: 3 },
-            }}
-            style={{ paddingBottom: "3rem" }}
-          >
-            {filteredItems.map((item) => (
-              <SwiperSlide key={item.id}>
-                <motion.article
-                  whileHover={{ y: -6 }}
-                  transition={{ duration: 0.2 }}
-                  style={{
-                    borderRadius: "14px",
-                    overflow: "hidden",
-                    border: "1px solid var(--border)",
-                    background: "var(--bg)",
-                    boxShadow: "0 10px 25px rgba(0, 0, 0, 0.06)",
-                  }}
-                >
-                  <div
+          <>
+            <Swiper
+              modules={[Autoplay, Navigation, Pagination]}
+              onSwiper={setSwiperInstance}
+              autoplay={{ delay: 3200, disableOnInteraction: false, pauseOnMouseEnter: false }}
+              loop={filteredItems.length > 1}
+              speed={700}
+              spaceBetween={20}
+              pagination={{ clickable: true }}
+              breakpoints={{
+                320: { slidesPerView: 1.1 },
+                768: { slidesPerView: 2 },
+                1200: { slidesPerView: 3 },
+              }}
+              style={{ paddingBottom: "3rem" }}
+            >
+              {filteredItems.map((item) => (
+                <SwiperSlide key={item.id}>
+                  <motion.article
+                    whileHover={{ y: -6 }}
+                    transition={{ duration: 0.2 }}
                     style={{
-                      position: "relative",
-                      aspectRatio: item.kind === "book" ? "3 / 4" : "16 / 10",
-                      background: "linear-gradient(135deg, rgba(139, 107, 74, 0.1), rgba(163, 176, 148, 0.09))",
+                      borderRadius: "14px",
+                      overflow: "hidden",
+                      border: "1px solid var(--border)",
+                      background: "var(--bg)",
+                      boxShadow: "0 10px 25px rgba(0, 0, 0, 0.06)",
                     }}
                   >
-                    {item.image ? (
-                      <Image
-                        src={urlFor(item.image).width(900).height(900).url()}
-                        alt={item.title}
-                        fill
-                        style={{ objectFit: item.kind === "book" ? "cover" : "cover" }}
-                      />
-                    ) : (
-                      <div
-                        className="font-cinzel"
-                        style={{
-                          position: "absolute",
-                          inset: 0,
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                          fontSize: "4rem",
-                          color: "rgba(139, 107, 74, 0.2)",
-                        }}
-                      >
-                        φ
-                      </div>
-                    )}
-                  </div>
-
-                  <div style={{ padding: "1rem 1rem 1.15rem" }}>
                     <div
                       style={{
-                        fontFamily: "Space Grotesk, sans-serif",
-                        fontSize: "0.6rem",
-                        textTransform: "uppercase",
-                        letterSpacing: "0.18em",
-                        color: "var(--accent)",
-                        marginBottom: "0.5rem",
+                        position: "relative",
+                        aspectRatio: item.kind === "book" ? "3 / 4" : "16 / 10",
+                        background: "linear-gradient(135deg, rgba(139, 107, 74, 0.1), rgba(163, 176, 148, 0.09))",
                       }}
                     >
-                      {cardLabel(item.kind)}
+                      {item.image ? (
+                        <Image
+                          src={urlFor(item.image).width(900).height(900).url()}
+                          alt={item.title}
+                          fill
+                          style={{ objectFit: item.kind === "book" ? "cover" : "cover" }}
+                        />
+                      ) : (
+                        <div
+                          className="font-cinzel"
+                          style={{
+                            position: "absolute",
+                            inset: 0,
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            fontSize: "4rem",
+                            color: "rgba(139, 107, 74, 0.2)",
+                          }}
+                        >
+                          φ
+                        </div>
+                      )}
                     </div>
-                    <h3 className="font-serif" style={{ fontSize: "1.2rem", color: "var(--text-heading)", marginBottom: "0.4rem" }}>
-                      {item.title}
-                    </h3>
-                    {item.subtitle && (
-                      <p
+
+                    <div style={{ padding: "1rem 1rem 1.15rem" }}>
+                      <div
                         style={{
                           fontFamily: "Space Grotesk, sans-serif",
-                          fontSize: "0.85rem",
-                          color: "var(--text-muted)",
-                          lineHeight: 1.6,
+                          fontSize: "0.6rem",
+                          textTransform: "uppercase",
+                          letterSpacing: "0.18em",
+                          color: "var(--accent)",
+                          marginBottom: "0.5rem",
                         }}
                       >
-                        {item.subtitle}
-                      </p>
-                    )}
-                  </div>
-                </motion.article>
-              </SwiperSlide>
-            ))}
-          </Swiper>
+                        {cardLabel(item.kind)}
+                      </div>
+                      <h3 className="font-serif" style={{ fontSize: "1.2rem", color: "var(--text-heading)", marginBottom: "0.4rem" }}>
+                        {item.title}
+                      </h3>
+                      {item.subtitle && (
+                        <p
+                          style={{
+                            fontFamily: "Space Grotesk, sans-serif",
+                            fontSize: "0.85rem",
+                            color: "var(--text-muted)",
+                            lineHeight: 1.6,
+                          }}
+                        >
+                          {item.subtitle}
+                        </p>
+                      )}
+                    </div>
+                  </motion.article>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+
+            {filteredItems.length > 1 && (
+              <div style={{ display: "flex", justifyContent: "flex-end", gap: "0.6rem", marginTop: "0.6rem" }}>
+                <button
+                  type="button"
+                  onClick={() => swiperInstance?.slidePrev()}
+                  aria-label="Previous slide"
+                  style={{
+                    width: "2.4rem",
+                    height: "2.4rem",
+                    borderRadius: "999px",
+                    border: "1px solid var(--border)",
+                    background: "var(--bg)",
+                    color: "var(--text-heading)",
+                    display: "grid",
+                    placeItems: "center",
+                    cursor: "pointer",
+                  }}
+                >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" aria-hidden="true">
+                    <path d="M15 6l-6 6 6 6" />
+                  </svg>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => swiperInstance?.slideNext()}
+                  aria-label="Next slide"
+                  style={{
+                    width: "2.4rem",
+                    height: "2.4rem",
+                    borderRadius: "999px",
+                    border: "1px solid var(--border)",
+                    background: "var(--bg)",
+                    color: "var(--text-heading)",
+                    display: "grid",
+                    placeItems: "center",
+                    cursor: "pointer",
+                  }}
+                >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" aria-hidden="true">
+                    <path d="M9 6l6 6-6 6" />
+                  </svg>
+                </button>
+              </div>
+            )}
+          </>
         )}
       </div>
     </section>
