@@ -82,13 +82,19 @@ function formatVancouverTime(date: Date) {
 
 export default function Footer() {
   const pathname = usePathname();
-  const [timeLabel, setTimeLabel] = useState(() => formatVancouverTime(new Date()));
-  const [activePrompt, setActivePrompt] = useState(() => new Date().getDay() % prompts.length);
+  const [timeLabel, setTimeLabel] = useState("");
+  const [activePrompt, setActivePrompt] = useState(0);
   const [activeMode, setActiveMode] = useState(0);
   const [activePulse, setActivePulse] = useState(0);
+  const [currentYear, setCurrentYear] = useState<number | null>(null);
   const [hoveredExplore, setHoveredExplore] = useState<string | null>(null);
 
   useEffect(() => {
+    const now = new Date();
+    setTimeLabel(formatVancouverTime(now));
+    setActivePrompt(now.getDay() % prompts.length);
+    setCurrentYear(now.getFullYear());
+
     const interval = window.setInterval(() => {
       setTimeLabel(formatVancouverTime(new Date()));
     }, 60000);
@@ -542,7 +548,7 @@ export default function Footer() {
               >
                 Live in Vancouver
                 <br />
-                <span style={{ color: "var(--text-heading)" }}>{timeLabel}</span>
+                <span style={{ color: "var(--text-heading)" }}>{timeLabel || "Loading local time..."}</span>
               </p>
             </div>
 
@@ -589,7 +595,7 @@ export default function Footer() {
               color: "var(--text-muted)",
             }}
           >
-            Copyright {new Date().getFullYear()} Michael Picard. Built for inquiry.
+            Copyright {currentYear ?? "----"} Michael Picard. Built for inquiry.
           </p>
 
           <button

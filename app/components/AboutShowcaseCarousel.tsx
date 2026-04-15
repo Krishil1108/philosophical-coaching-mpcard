@@ -180,7 +180,10 @@ export default function AboutShowcaseCarousel({
               }}
               style={{ paddingBottom: "3rem" }}
             >
-              {filteredItems.map((item) => (
+              {filteredItems.map((item) => {
+                const isBook = item.kind === "book";
+
+                return (
                 <SwiperSlide key={item.id}>
                   <motion.article
                     whileHover={{ y: -6 }}
@@ -196,16 +199,20 @@ export default function AboutShowcaseCarousel({
                     <div
                       style={{
                         position: "relative",
-                        aspectRatio: item.kind === "book" ? "3 / 4" : "16 / 10",
+                        aspectRatio: isBook ? "2 / 3" : "16 / 10",
                         background: "linear-gradient(135deg, rgba(139, 107, 74, 0.1), rgba(163, 176, 148, 0.09))",
                       }}
                     >
                       {item.image ? (
                         <Image
-                          src={urlFor(item.image).width(900).height(900).url()}
+                          src={
+                            isBook
+                              ? urlFor(item.image).width(800).height(1200).url()
+                              : urlFor(item.image).width(1200).height(750).url()
+                          }
                           alt={item.title}
                           fill
-                          style={{ objectFit: item.kind === "book" ? "cover" : "cover" }}
+                          style={{ objectFit: isBook ? "contain" : "cover", objectPosition: "center" }}
                         />
                       ) : (
                         <div
@@ -256,7 +263,8 @@ export default function AboutShowcaseCarousel({
                     </div>
                   </motion.article>
                 </SwiperSlide>
-              ))}
+                );
+              })}
             </Swiper>
 
             {filteredItems.length > 1 && (
