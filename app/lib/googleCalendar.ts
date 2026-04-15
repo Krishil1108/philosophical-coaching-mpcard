@@ -40,6 +40,7 @@ function getConfig() {
     timezone: process.env.BOOKING_TIMEZONE || "America/Vancouver",
     marker: process.env.BOOKING_SLOT_MARKER || "[AVAILABLE]",
     windowDays: Number(process.env.BOOKING_WINDOW_DAYS || 45),
+    hostName: process.env.BOOKING_HOST_NAME || "Michael Picard",
   };
 }
 
@@ -88,7 +89,7 @@ export async function listAvailableSlots(): Promise<BookingSlot[]> {
 
 export async function bookSlot(input: BookingInput) {
   const calendar = getCalendarClient();
-  const { calendarId, marker, timezone } = getConfig();
+  const { calendarId, marker, timezone, hostName } = getConfig();
 
   const existing = await calendar.events.get({
     calendarId,
@@ -116,7 +117,7 @@ export async function bookSlot(input: BookingInput) {
     conferenceDataVersion: 1,
     sendUpdates: "all",
     requestBody: {
-      summary: `Session with ${input.name}${cleanTitle ? ` - ${cleanTitle}` : ""}`,
+      summary: `Session with ${hostName}${cleanTitle ? ` - ${cleanTitle}` : ""}`,
       description: [
         event.description || "",
         "",

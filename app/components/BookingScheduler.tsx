@@ -298,7 +298,7 @@ export default function BookingScheduler() {
                 type="submit"
                 disabled={submitting || !selectedSlotId}
                 className="btn-primary"
-                style={{ width: "100%", opacity: submitting || !selectedSlotId ? 0.7 : 1 }}
+                style={{ width: "100%" }}
               >
                 {submitting ? "Booking..." : "Confirm Booking"}
               </button>

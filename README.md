@@ -189,9 +189,10 @@ GOOGLE_REFRESH_TOKEN=your-google-oauth-refresh-token
 GOOGLE_CALENDAR_ID=your-calendar-id@group.calendar.google.com
 
 # Optional booking config
+BOOKING_HOST_NAME=Michael Picard
 BOOKING_OWNER_EMAIL=michael@philosophicalcoaching.com
 BOOKING_TIMEZONE=America/Vancouver
-BOOKING_SLOT_MARKER=[AVAILABLE]
+BOOKING_SLOT_MARKER=[Available]
 BOOKING_WINDOW_DAYS=45
 ```
 
