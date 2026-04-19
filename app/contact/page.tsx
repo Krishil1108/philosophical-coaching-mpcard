@@ -10,10 +10,9 @@ export const metadata = {
 const options = [
   {
     num: "01",
-    platform: "Google Calendar",
+    platform: "Google Meet",
     title: "Book a Live Session",
-    desc: "Choose from Michael's available Google Calendar slots and book a live philosophical coaching session with an automatic Meet link.",
-    price: "$60 – $100 USD",
+    desc: "Choose from Michael's available session times and book a live philosophical coaching session on Google Meet.",
     cta: "Book a Session",
     href: "/book-session",
     external: false,
@@ -24,7 +23,6 @@ const options = [
     platform: "Email",
     title: "Café Philosophy & Events",
     desc: "Interested in bringing Café Philosophy or Philosophy Sports to your community, institution, or organization? Get in touch directly.",
-    price: "Custom pricing",
     cta: "Send an Email",
     href: "mailto:michael@philosophicalcoaching.com",
     external: false,
@@ -35,7 +33,6 @@ const options = [
     platform: "Douglas College",
     title: "Academic & Faculty Inquiries",
     desc: "For questions about Michael's academic work, courses at Douglas College, or translating Gerd Achenbach's texts.",
-    price: "Academic context",
     cta: "View Faculty Profile",
     href: "https://www.douglascollege.ca",
     external: true,
@@ -110,19 +107,6 @@ export default function ContactPage() {
                   {opt.desc}
                 </p>
 
-                <div
-                  style={{
-                    fontFamily: "Space Grotesk, sans-serif",
-                    fontSize: "0.75rem",
-                    color: "var(--accent)",
-                    letterSpacing: "0.08em",
-                    marginBottom: "2rem",
-                    fontWeight: 500,
-                  }}
-                >
-                  {opt.price}
-                </div>
-
                 <a
                   href={opt.href}
                   target={opt.external ? "_blank" : "_self"}
@@ -142,77 +126,167 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* Trust + additional info */}
-      <section className="py-24" style={{ background: "var(--bg-card)", borderTop: "1px solid var(--border)" }}>
-        <div className="inner-max text-center" style={{ maxWidth: "56rem" }}>
-          <h2 className="font-serif mb-6" style={{ fontSize: "clamp(1.75rem, 3.5vw, 2.75rem)", color: "var(--text-heading)" }}>
-            Before Your First Session
-          </h2>
-          <div className="divider-gold" />
-          <p
+      {/* Trust + prep */}
+      <section className="section-pad" style={{ background: "var(--bg-card)", borderTop: "1px solid var(--border)" }}>
+        <div className="inner-max" style={{ maxWidth: "74rem" }}>
+          <div
             style={{
-              fontFamily: "Space Grotesk, sans-serif",
-              fontWeight: 300,
-              color: "var(--text-muted)",
-              lineHeight: 1.9,
-              fontSize: "1rem",
+              textAlign: "center",
+              maxWidth: "56rem",
+              margin: "0 auto",
               marginBottom: "3rem",
             }}
           >
-            No preparation required. No background in philosophy expected. All you need is a
-            genuine question, a problem you&apos;re sitting with, or a curiosity you haven&apos;t been
-            able to shake. The session will meet you exactly where you are.
-          </p>
+            <span className="section-label" style={{ marginBottom: "0.9rem", display: "inline-block" }}>
+              First Session
+            </span>
+            <h2 className="font-serif" style={{ fontSize: "clamp(1.95rem, 4vw, 3rem)", color: "var(--text-heading)" }}>
+              Before You Begin
+            </h2>
+            <div className="divider-gold" style={{ marginTop: "1.1rem", marginBottom: "1.25rem" }} />
+            <p
+              style={{
+                fontFamily: "Space Grotesk, sans-serif",
+                fontWeight: 400,
+                color: "var(--text-muted)",
+                lineHeight: 1.85,
+                fontSize: "1.02rem",
+              }}
+            >
+              No preparation required. No background in philosophy expected. Bring a genuine
+              question, a problem you&apos;re living with, or a curiosity you can&apos;t shake.
+              The session starts from where you are.
+            </p>
+          </div>
 
-          <div className="flex flex-wrap justify-center gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4" style={{ marginBottom: "2.25rem" }}>
             {[
               "No worldview imposed",
               "Confidential dialogue",
               "All levels welcome",
               "30 or 60 minutes",
             ].map((t) => (
-              <span
+              <div
                 key={t}
                 style={{
-                  fontFamily: "Space Grotesk, sans-serif",
-                  fontSize: "0.6875rem",
-                  letterSpacing: "0.18em",
-                  textTransform: "uppercase",
-                  color: "var(--text-muted)",
+                  background: "var(--bg)",
+                  border: "1px solid var(--border)",
+                  borderRadius: "10px",
+                  padding: "1rem 1.1rem",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "0.7rem",
+                  minHeight: "3.4rem",
                 }}
               >
-                <span style={{ color: "var(--sage)", marginRight: "0.5rem" }}>✓</span>
-                {t}
-              </span>
+                <span
+                  style={{
+                    width: "1.5rem",
+                    height: "1.5rem",
+                    borderRadius: "999px",
+                    border: "1px solid rgba(125, 139, 111, 0.35)",
+                    color: "var(--sage)",
+                    display: "grid",
+                    placeItems: "center",
+                    fontSize: "0.75rem",
+                    flexShrink: 0,
+                  }}
+                >
+                  ✓
+                </span>
+                <span
+                  style={{
+                    fontFamily: "Space Grotesk, sans-serif",
+                    fontSize: "0.76rem",
+                    letterSpacing: "0.16em",
+                    textTransform: "uppercase",
+                    color: "var(--text-muted)",
+                  }}
+                >
+                  {t}
+                </span>
+              </div>
             ))}
+          </div>
+
+          <div
+            style={{
+              background: "linear-gradient(120deg, rgba(139, 107, 74, 0.09), rgba(163, 176, 148, 0.08))",
+              border: "1px solid var(--border)",
+              borderRadius: "12px",
+              padding: "1.25rem 1.35rem",
+              textAlign: "center",
+            }}
+          >
+            <p
+              style={{
+                fontFamily: "Space Grotesk, sans-serif",
+                fontSize: "0.85rem",
+                color: "var(--text)",
+                lineHeight: 1.7,
+              }}
+            >
+              If you are unsure whether this is the right fit, start with a 30-minute session.
+            </p>
           </div>
         </div>
       </section>
 
       {/* Links to other pages */}
-      <section className="py-20" style={{ background: "var(--bg-muted)" }}>
-        <div className="inner-max" style={{ maxWidth: "80rem" }}>
-          <p
-            className="text-center mb-8"
+      <section className="section-pad" style={{ background: "var(--bg-muted)", borderTop: "1px solid var(--border)" }}>
+        <div className="inner-max" style={{ maxWidth: "74rem" }}>
+          <div
             style={{
-              fontFamily: "Space Grotesk, sans-serif",
-              fontSize: "0.5625rem",
-              letterSpacing: "0.35em",
-              textTransform: "uppercase",
-              color: "var(--text-muted)",
+              textAlign: "center",
+              maxWidth: "44rem",
+              margin: "0 auto",
+              marginBottom: "2.3rem",
             }}
           >
-            Continue Exploring
-          </p>
-          <div className="flex flex-wrap justify-center gap-4">
+            <span className="section-label" style={{ marginBottom: "0.9rem", display: "inline-block" }}>
+              Continue Exploring
+            </span>
+            <h3 className="font-serif" style={{ fontSize: "clamp(1.45rem, 2.8vw, 2.2rem)", color: "var(--text-heading)" }}>
+              Explore More of the Practice
+            </h3>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {[
               { label: "About Michael", href: "/about" },
-              { label: "Services",      href: "/services" },
-              { label: "The Practice",  href: "/practice" },
-              { label: "Publications",  href: "/publications" },
+              { label: "Services", href: "/services" },
+              { label: "The Practice", href: "/practice" },
+              { label: "Publications", href: "/publications" },
             ].map((link) => (
-              <Link key={link.href} href={link.href} className="btn-outline" style={{ padding: "0.75rem 2rem" }}>
-                {link.label}
+              <Link
+                key={link.href}
+                href={link.href}
+                className="card-hover"
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  background: "var(--bg)",
+                  border: "1px solid var(--border)",
+                  borderRadius: "10px",
+                  padding: "1rem 1.05rem",
+                  textDecoration: "none",
+                  color: "var(--text-heading)",
+                }}
+              >
+                <span
+                  style={{
+                    fontFamily: "Space Grotesk, sans-serif",
+                    fontSize: "0.7rem",
+                    letterSpacing: "0.16em",
+                    textTransform: "uppercase",
+                  }}
+                >
+                  {link.label}
+                </span>
+                <span style={{ color: "var(--accent)", fontSize: "0.95rem", lineHeight: 1 }} aria-hidden="true">
+                  →
+                </span>
               </Link>
             ))}
           </div>
