@@ -71,18 +71,8 @@ const stagger = {
   },
 };
 
-function formatVancouverTime(date: Date) {
-  return new Intl.DateTimeFormat("en-CA", {
-    timeZone: "America/Vancouver",
-    hour: "numeric",
-    minute: "2-digit",
-    weekday: "short",
-  }).format(date);
-}
-
 export default function Footer() {
   const pathname = usePathname();
-  const [timeLabel, setTimeLabel] = useState("");
   const [activePrompt, setActivePrompt] = useState(0);
   const [activeMode, setActiveMode] = useState(0);
   const [activePulse, setActivePulse] = useState(0);
@@ -91,15 +81,8 @@ export default function Footer() {
 
   useEffect(() => {
     const now = new Date();
-    setTimeLabel(formatVancouverTime(now));
     setActivePrompt(now.getDay() % prompts.length);
     setCurrentYear(now.getFullYear());
-
-    const interval = window.setInterval(() => {
-      setTimeLabel(formatVancouverTime(new Date()));
-    }, 60000);
-
-    return () => window.clearInterval(interval);
   }, []);
 
   useEffect(() => {
@@ -538,18 +521,6 @@ export default function Footer() {
               >
                 Connect
               </h3>
-              <p
-                style={{
-                  fontFamily: "Space Grotesk, sans-serif",
-                  fontSize: "0.86rem",
-                  color: "var(--text-muted)",
-                  lineHeight: 1.7,
-                }}
-              >
-                Live in Vancouver
-                <br />
-                <span style={{ color: "var(--text-heading)" }}>{timeLabel || "Loading local time..."}</span>
-              </p>
             </div>
 
             <div className="flex flex-col gap-2">

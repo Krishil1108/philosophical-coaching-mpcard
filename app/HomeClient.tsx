@@ -45,6 +45,13 @@ const contents = [
   },
 ];
 
+const openingReflections = [
+  "There is philosophy for the philosophers, and there is philosophy for life. They are not the same in that they ask different questions; but insofar as both take thinking seriously, they are one.",
+  "Sometimes an idea helps, and so benefits may come from a philosophy. More often the benefit arises, not from an idea, but from thinking, from the practice of philosophy in relation to life.",
+  "The practice of philosophy is not the application of a theory, still less the development of theory. It is not a philosophy that can help you, but a philosopher who will think with you.",
+  "The purpose of philosophy of life is a life, not a philosophy.",
+];
+
 export default function HomeClient({ 
   hero,
 }: HomeClientProps) {
@@ -227,14 +234,19 @@ export default function HomeClient({
             <div />
             <div>
               <Typewriter
-                text="Most of what we believe, we believe because we absorbed it. Very little of our thinking is genuinely our own. That is where philosophy begins."
-                speed={30}
+                texts={openingReflections}
+                speed={15}
+                deleteSpeed={11}
+                pauseMs={3200}
+                loop
+                triggerOnScroll
                 className="font-serif"
                 style={{
                   fontSize: "clamp(1.5rem, 3vw, 2.75rem)",
                   color: "var(--text-heading)",
                   lineHeight: 1.3,
                   maxWidth: "52rem",
+                  minHeight: "10rem",
                   marginBottom: "2.5rem",
                 }}
               />
@@ -392,7 +404,7 @@ export default function HomeClient({
                 maxWidth: "64rem",
               }}
             >
-              &ldquo;Philosophy is not a method, theory, or set of answers. It's a way of actively generating and inhabiting questions with greater clarity, purpose, and freedom. To examine an answer is to inhabit a question. Philosophy is cohabitation.&rdquo;
+              &ldquo;The purpose of philosophy of life is a life, not a philosophy.&rdquo;
               <cite
                 style={{
                   display: "block",
@@ -405,7 +417,7 @@ export default function HomeClient({
                   fontStyle: "normal",
                 }}
               >
-                — Michael Picard
+                — Michael Picard, How to Play Philosophy
               </cite>
             </blockquote>
           </div>
