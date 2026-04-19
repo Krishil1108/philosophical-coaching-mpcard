@@ -64,204 +64,215 @@ export default function About({ data }: { data?: AboutData }) {
         </div>
       </motion.div>
 
-      {/* ─── MAIN SPLIT LAYOUT ─────────────────── */}
+      {/* ─── MAIN COMPOSITION ─────────────────── */}
       <div style={{ borderBottom: "1px solid var(--border)" }}>
-        <div
-          className="inner-max"
-          style={{
-            maxWidth: "88rem",
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gap: 0,
-          }}
-        >
-          {/* Left: Portrait column */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.9 }}
-            style={{
-              borderRight: "1px solid var(--border)",
-              padding: "5rem 4rem 5rem 0",
-            }}
-          >
-            {/* Portrait */}
-            <div
-              suppressHydrationWarning
-              style={{
-                position: "relative",
-                background: "var(--bg-card)",
-                marginBottom: "3rem",
-                overflow: "hidden",
-                borderRadius: "4px",
-                width: "100%",
-                maxWidth: "900px",
-                height: "600px",
-              }}
+        <div className="inner-max" style={{ maxWidth: "88rem", paddingTop: "5rem", paddingBottom: "5rem" }}>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
+            <motion.figure
+              className="lg:col-span-4"
+              initial={{ opacity: 0, x: -24 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              style={{ margin: 0 }}
             >
-              {data?.portrait ? (
-                <Image
-                  src={urlFor(data.portrait).width(600).height(800).url()}
-                  alt={data.name || "Michael Picard"}
-                  fill
-                  style={{ objectFit: "cover" }}
-                />
-              ) : (
-                <div
-                  style={{
-                    position: "absolute",
-                    inset: 0,
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    background: "var(--bg-card)",
-                  }}
-                >
+              <div
+                suppressHydrationWarning
+                style={{
+                  position: "relative",
+                  width: "100%",
+                  maxWidth: "23rem",
+                  height: "34rem",
+                  overflow: "hidden",
+                  borderRadius: "14px",
+                  border: "1px solid rgba(139, 107, 74, 0.25)",
+                  background: "var(--bg-card)",
+                  boxShadow: "0 20px 46px rgba(72, 58, 41, 0.16)",
+                }}
+              >
+                {data?.portrait ? (
+                  <Image
+                    src={urlFor(data.portrait).width(920).height(1360).url()}
+                    alt={data.name || "Michael Picard"}
+                    fill
+                    style={{ objectFit: "cover" }}
+                  />
+                ) : (
                   <div
-                    className="font-cinzel"
-                    style={{ fontSize: "0.8rem", color: "rgba(139, 107, 74, 0.08)", lineHeight: 1 }}
-                  >
-                    φ
-                  </div>
-                  <p
                     style={{
-                      fontFamily: "Space Grotesk, sans-serif",
-                      fontSize: "0.6875rem",
-                      color: "var(--text-muted)",
-                      letterSpacing: "0.15em",
-                      textTransform: "uppercase",
-                      marginTop: "1rem",
+                      position: "absolute",
+                      inset: 0,
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      background: "linear-gradient(140deg, rgba(139, 107, 74, 0.12), rgba(163, 176, 148, 0.1))",
                     }}
                   >
-                    Add portrait in Sanity Studio
-                  </p>
-                </div>
-              )}
-              {/* Accent line at top */}
-              <div
-                style={{
-                  position: "absolute",
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  height: "4px",
-                  background: "linear-gradient(90deg, var(--accent), transparent)",
-                  borderRadius: "4px 4px 0 0",
-                }}
-              />
-            </div>
-          </motion.div>
-
-          {/* Right: Bio + quote column */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.9 }}
-            style={{ padding: "5rem 0 5rem 4rem" }}
-          >
-            {/* Bio paragraphs */}
-            <div style={{ marginBottom: "3.5rem" }}>
-              <div
-                style={{
-                  fontFamily: "Space Grotesk, sans-serif",
-                  fontSize: "0.6rem",
-                  letterSpacing: "0.32em",
-                  textTransform: "uppercase",
-                  color: "var(--accent)",
-                  marginBottom: "1rem",
-                }}
-              >
-                Philosophical Profile
-              </div>
-
-              <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-                {bio.map((para, i) => {
-                  const panelLabel = i === 0 ? "Identity" : i === 1 ? "Public Work" : "Method";
-
-                  return (
-                    <motion.article
-                      key={i}
-                      initial={{ opacity: 0, y: 18 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.5, delay: i * 0.08 }}
+                    <div className="font-cinzel" style={{ fontSize: "5rem", color: "rgba(139, 107, 74, 0.2)", lineHeight: 1 }}>
+                      φ
+                    </div>
+                    <p
                       style={{
-                        border: i === 0 ? "1px solid rgba(139, 107, 74, 0.32)" : "1px solid var(--border)",
-                        background:
-                          i === 0
-                            ? "linear-gradient(135deg, rgba(139, 107, 74, 0.08), rgba(255, 255, 255, 0.72))"
-                            : "rgba(255, 255, 255, 0.58)",
-                        borderRadius: "12px",
-                        padding: i === 0 ? "1.5rem 1.4rem" : "1.2rem 1.2rem",
-                        boxShadow: i === 0 ? "0 8px 24px rgba(139, 107, 74, 0.08)" : "none",
+                        fontFamily: "Space Grotesk, sans-serif",
+                        fontSize: "0.62rem",
+                        color: "var(--text-muted)",
+                        letterSpacing: "0.18em",
+                        textTransform: "uppercase",
+                        marginTop: "0.9rem",
                       }}
                     >
-                      <div
-                        style={{
-                          fontFamily: "Space Grotesk, sans-serif",
-                          fontSize: "0.58rem",
-                          letterSpacing: "0.24em",
-                          textTransform: "uppercase",
-                          color: "var(--accent)",
-                          marginBottom: "0.6rem",
-                        }}
-                      >
-                        {panelLabel}
-                      </div>
-                      <p
-                        style={{
-                          fontFamily: i === 0 ? "Cormorant Garamond, Georgia, serif" : "Space Grotesk, sans-serif",
-                          fontWeight: i === 0 ? 500 : 400,
-                          color: i === 0 ? "var(--text-heading)" : "var(--text-muted)",
-                          lineHeight: i === 0 ? 1.45 : 1.85,
-                          fontSize: i === 0 ? "clamp(1.55rem, 2.7vw, 2rem)" : "1.02rem",
-                        }}
-                      >
-                        {para}
-                      </p>
-                    </motion.article>
-                  );
-                })}
+                      Add portrait in Sanity Studio
+                    </p>
+                  </div>
+                )}
               </div>
-            </div>
-
-            {/* Philosophy quote */}
-            <div
-              style={{
-                paddingLeft: "2rem",
-                borderLeft: "3px solid var(--accent)",
-                borderRadius: "2px",
-              }}
-            >
-              <blockquote
-                className="font-italic"
+              <figcaption
                 style={{
-                  fontSize: "clamp(1.25rem, 2.5vw, 1.75rem)",
-                  color: "var(--text-heading)",
-                  fontStyle: "italic",
-                  lineHeight: 1.55,
+                  marginTop: "0.75rem",
+                  fontFamily: "Space Grotesk, sans-serif",
+                  fontSize: "0.56rem",
+                  letterSpacing: "0.24em",
+                  textTransform: "uppercase",
+                  color: "var(--text-muted)",
+                }}
+              >
+                {data?.name || "Michael Picard"} • BC, Canada
+              </figcaption>
+            </motion.figure>
+
+            <motion.div
+              className="lg:col-span-8"
+              initial={{ opacity: 0, x: 24 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.85 }}
+            >
+              <span
+                style={{
+                  display: "inline-block",
+                  fontFamily: "Space Grotesk, sans-serif",
+                  fontSize: "0.58rem",
+                  letterSpacing: "0.34em",
+                  textTransform: "uppercase",
+                  color: "var(--accent)",
                   marginBottom: "1rem",
                 }}
               >
-                &ldquo;{data?.philosophyQuote || "Philosophy is not about having the right answers — it's about learning to ask better questions."}&rdquo;
-              </blockquote>
-              <cite
+                Living Philosophy
+              </span>
+
+              <h2
+                className="font-serif"
                 style={{
-                  fontFamily: "Space Grotesk, sans-serif",
-                  fontSize: "0.625rem",
-                  letterSpacing: "0.2em",
-                  textTransform: "uppercase",
-                  color: "var(--accent)",
-                  fontStyle: "normal",
+                  fontSize: "clamp(2rem, 4vw, 3.2rem)",
+                  lineHeight: 1.08,
+                  color: "var(--text-heading)",
+                  marginBottom: "1.15rem",
+                  maxWidth: "52rem",
                 }}
               >
-                — {data?.quoteAttribution || "Michael Picard"}
-              </cite>
-            </div>
-          </motion.div>
+                A Working Biography
+              </h2>
+
+              <p
+                style={{
+                  fontFamily: "Cormorant Garamond, Georgia, serif",
+                  fontSize: "clamp(1.2rem, 2.25vw, 1.65rem)",
+                  lineHeight: 1.45,
+                  color: "var(--text-heading)",
+                  marginBottom: "1.35rem",
+                  maxWidth: "50rem",
+                }}
+              >
+                {bio[0]}
+              </p>
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3" style={{ marginBottom: "1.4rem", maxWidth: "43rem" }}>
+                {[
+                  { label: "Experience", value: `${data?.yearsExperience || 20}+ years` },
+                  { label: "Sessions", value: data?.sessionsHosted || "700+ dialogues" },
+                  { label: "Affiliation", value: data?.affiliation || "Douglas College" },
+                ].map((item) => (
+                  <div
+                    key={item.label}
+                    style={{
+                      border: "1px solid var(--border)",
+                      borderRadius: "10px",
+                      padding: "0.72rem 0.78rem",
+                      background: "rgba(255, 255, 255, 0.6)",
+                    }}
+                  >
+                    <div
+                      style={{
+                        fontFamily: "Space Grotesk, sans-serif",
+                        fontSize: "0.53rem",
+                        letterSpacing: "0.2em",
+                        textTransform: "uppercase",
+                        color: "var(--accent)",
+                        marginBottom: "0.28rem",
+                      }}
+                    >
+                      {item.label}
+                    </div>
+                    <div className="font-cinzel" style={{ fontSize: "0.74rem", letterSpacing: "0.08em", color: "var(--text-heading)" }}>
+                      {item.value}
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div style={{ display: "flex", flexDirection: "column", gap: "1.1rem", marginBottom: "1.5rem" }}>
+                {bio.slice(1).map((para, i) => (
+                  <p
+                    key={i}
+                    style={{
+                      fontFamily: "Space Grotesk, sans-serif",
+                      fontWeight: 400,
+                      color: "var(--text-muted)",
+                      fontSize: "1.01rem",
+                      lineHeight: 1.88,
+                    }}
+                  >
+                    {para}
+                  </p>
+                ))}
+              </div>
+
+              <div
+                style={{
+                  borderTop: "1px solid rgba(139, 107, 74, 0.24)",
+                  paddingTop: "1rem",
+                  maxWidth: "46rem",
+                }}
+              >
+                <blockquote
+                  className="font-italic"
+                  style={{
+                    fontSize: "clamp(1.12rem, 1.9vw, 1.45rem)",
+                    color: "var(--text-heading)",
+                    fontStyle: "italic",
+                    lineHeight: 1.52,
+                    marginBottom: "0.68rem",
+                  }}
+                >
+                  &ldquo;{data?.philosophyQuote || "Philosophy is not about having the right answers — it's about learning to ask better questions."}&rdquo;
+                </blockquote>
+                <cite
+                  style={{
+                    fontFamily: "Space Grotesk, sans-serif",
+                    fontSize: "0.56rem",
+                    letterSpacing: "0.2em",
+                    textTransform: "uppercase",
+                    color: "var(--accent)",
+                    fontStyle: "normal",
+                  }}
+                >
+                  — {data?.quoteAttribution || "Michael Picard"}
+                </cite>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </div>
 
@@ -606,65 +617,6 @@ export default function About({ data }: { data?: AboutData }) {
             </motion.div>
           </div>
 
-          {/* Stats Row */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
-              gap: "2rem",
-              padding: "2rem",
-              background: "var(--bg-card)",
-              borderRadius: "12px",
-              border: "1px solid var(--border)"
-            }}
-          >
-            <div style={{ textAlign: "center" }}>
-              <div style={{ 
-                fontSize: "2.5rem", 
-                fontWeight: 700, 
-                color: "var(--accent)",
-                fontFamily: "Space Grotesk, sans-serif"
-              }}>12+</div>
-              <div style={{ 
-                fontSize: "0.875rem", 
-                color: "var(--text-muted)",
-                fontFamily: "Space Grotesk, sans-serif",
-                letterSpacing: "0.05em"
-              }}>Years of Public Philosophy</div>
-            </div>
-            <div style={{ textAlign: "center" }}>
-              <div style={{ 
-                fontSize: "2.5rem", 
-                fontWeight: 700, 
-                color: "var(--accent)",
-                fontFamily: "Space Grotesk, sans-serif"
-              }}>2</div>
-              <div style={{ 
-                fontSize: "0.875rem", 
-                color: "var(--text-muted)",
-                fontFamily: "Space Grotesk, sans-serif",
-                letterSpacing: "0.05em"
-              }}>Degrees from MIT</div>
-            </div>
-            <div style={{ textAlign: "center" }}>
-              <div style={{ 
-                fontSize: "2.5rem", 
-                fontWeight: 700, 
-                color: "var(--accent)",
-                fontFamily: "Space Grotesk, sans-serif"
-              }}>∞</div>
-              <div style={{ 
-                fontSize: "0.875rem", 
-                color: "var(--text-muted)",
-                fontFamily: "Space Grotesk, sans-serif",
-                letterSpacing: "0.05em"
-              }}>Questions Asked</div>
-            </div>
-          </motion.div>
         </div>
       </div>
 
