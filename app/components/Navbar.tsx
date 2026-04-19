@@ -35,19 +35,19 @@ export default function Navbar() {
       }}
     >
       <div
-        className="flex items-center justify-between py-5 px-8"
+        className="site-nav-inner flex items-center justify-between py-5 px-8"
         style={{ maxWidth: "90rem", margin: "0 auto" }}
       >
         {/* Logo */}
-        <Link href="/" style={{ textDecoration: "none" }}>
+        <Link href="/" className="site-nav-brand" style={{ textDecoration: "none" }}>
           <span
-            className="font-cinzel font-semibold"
+            className="font-cinzel font-semibold site-nav-brand-title"
             style={{ color: "var(--text-heading)", fontSize: "1.0625rem", letterSpacing: "0.2em" }}
           >
             MICHAEL PICARD
           </span>
           <span
-            className="block"
+            className="block site-nav-brand-subtitle"
             style={{
               color: "var(--accent)",
               fontFamily: "Space Grotesk, sans-serif",
@@ -96,7 +96,7 @@ export default function Navbar() {
 
         {/* Mobile Burger */}
         <button
-          className="lg:hidden flex flex-col gap-1.5 p-2"
+          className="site-nav-burger lg:hidden flex flex-col gap-1.5 p-2"
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Menu"
         >
@@ -130,7 +130,7 @@ export default function Navbar() {
               borderTop: "1px solid var(--border)",
             }}
           >
-            <div className="px-8 py-8 flex flex-col gap-6">
+            <div className="site-nav-mobile-panel px-8 py-8 flex flex-col gap-6">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
