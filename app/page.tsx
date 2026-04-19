@@ -1,26 +1,23 @@
 import HomeClient from "./HomeClient";
 import { hasSanityConfig, client } from "./lib/sanity";
-import { heroQuery, publicationsQuery } from "./lib/queries";
+import { heroQuery } from "./lib/queries";
 
 export const revalidate = 0; // Disable caching to get fresh data
 
 async function getData() {
-  if (!hasSanityConfig()) return { hero: null, publications: [] };
+  if (!hasSanityConfig()) return { hero: null };
   
   try {
-    const [hero, publications] = await Promise.all([
-      client.fetch(heroQuery),
-      client.fetch(publicationsQuery),
-    ]);
-    return { hero, publications };
+    const hero = await client.fetch(heroQuery);
+    return { hero };
   } catch (error) {
     console.error("Error fetching Sanity data:", error);
-    return { hero: null, publications: [] };
+    return { hero: null };
   }
 }
 
 export default async function Home() {
-  const { hero, publications } = await getData();
+  const { hero } = await getData();
   
-  return <HomeClient hero={hero} publications={publications} />;
+  return <HomeClient hero={hero} />;
 }

@@ -12,7 +12,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
-type ShowcaseKind = "photo" | "book" | "moment";
+type ShowcaseKind = "photo" | "moment";
 
 interface ShowcaseItem {
   id: string;
@@ -27,14 +27,6 @@ interface ShowcasePhoto {
   title?: string;
   subtitle?: string;
   image?: Record<string, unknown>;
-}
-
-interface Publication {
-  _id: string;
-  title: string;
-  subtitle?: string;
-  year?: number;
-  coverImage?: Record<string, unknown>;
 }
 
 const baseMoments: ShowcaseItem[] = [
@@ -55,22 +47,18 @@ const baseMoments: ShowcaseItem[] = [
 const filters = [
   { key: "all", label: "All" },
   { key: "photo", label: "Photos" },
-  { key: "book", label: "Book Covers" },
   { key: "moment", label: "Moments" },
 ] as const;
 
 function cardLabel(kind: ShowcaseKind) {
   if (kind === "photo") return "Photo";
-  if (kind === "book") return "Publication";
   return "Practice";
 }
 
 export default function AboutShowcaseCarousel({
   showcasePhotos,
-  publications,
 }: {
   showcasePhotos: ShowcasePhoto[];
-  publications: Publication[];
 }) {
   const [activeFilter, setActiveFilter] = useState<(typeof filters)[number]["key"]>("all");
   const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
@@ -90,18 +78,8 @@ export default function AboutShowcaseCarousel({
       });
     });
 
-    publications.forEach((book) => {
-      list.push({
-        id: book._id,
-        kind: "book",
-        title: book.title,
-        subtitle: book.year ? `${book.year}${book.subtitle ? ` · ${book.subtitle}` : ""}` : book.subtitle,
-        image: book.coverImage || null,
-      });
-    });
-
     return [...list, ...baseMoments];
-  }, [publications, showcasePhotos]);
+  }, [showcasePhotos]);
 
   const filteredItems = useMemo(() => {
     if (activeFilter === "all") return items;
@@ -181,8 +159,6 @@ export default function AboutShowcaseCarousel({
               style={{ paddingBottom: "3rem" }}
             >
               {filteredItems.map((item) => {
-                const isBook = item.kind === "book";
-
                 return (
                 <SwiperSlide key={item.id}>
                   <motion.article
@@ -199,20 +175,16 @@ export default function AboutShowcaseCarousel({
                     <div
                       style={{
                         position: "relative",
-                        aspectRatio: isBook ? "2 / 3" : "16 / 10",
+                        aspectRatio: "16 / 10",
                         background: "linear-gradient(135deg, rgba(139, 107, 74, 0.1), rgba(163, 176, 148, 0.09))",
                       }}
                     >
                       {item.image ? (
                         <Image
-                          src={
-                            isBook
-                              ? urlFor(item.image).width(800).height(1200).url()
-                              : urlFor(item.image).width(1200).height(750).url()
-                          }
+                          src={urlFor(item.image).width(1200).height(750).url()}
                           alt={item.title}
                           fill
-                          style={{ objectFit: isBook ? "contain" : "cover", objectPosition: "center" }}
+                          style={{ objectFit: "cover", objectPosition: "center" }}
                         />
                       ) : (
                         <div
