@@ -76,7 +76,7 @@ export function PhilPeoplePublications() {
       </motion.div>
 
       <div className="inner-max" style={{ maxWidth: "88rem", position: "relative", zIndex: 1 }}>
-        <div style={{ display: "grid", gridTemplateColumns: "5.5rem 1fr", gap: "3rem" }}>
+        <div className="philpeople-grid" style={{ display: "grid", gridTemplateColumns: "5.5rem 1fr", gap: "3rem" }}>
           {/* Side label with animation */}
           <motion.div
             initial={{ opacity: 0, x: -10 }}

@@ -47,7 +47,7 @@ export default function About({ data }: { data?: AboutData }) {
         }}
       >
         <div className="inner-max" style={{ maxWidth: "88rem" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "5.5rem 1fr", gap: "3rem" }}>
+          <div className="about-opening-grid" style={{ display: "grid", gridTemplateColumns: "5.5rem 1fr", gap: "3rem" }}>
             <div />
             <p
               className="font-serif"
@@ -356,7 +356,7 @@ export default function About({ data }: { data?: AboutData }) {
           {/* Dynamic Grid Layout */}
           <div style={{ 
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
+            gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
             gap: "2rem",
             marginBottom: "3rem"
           }}>

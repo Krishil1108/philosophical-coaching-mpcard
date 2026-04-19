@@ -361,6 +361,52 @@ h1, h2, h3, h4, h5, h6 {
 
   /* Hero: stack sub + CTA */
   .hero-bottom-row { grid-template-columns: 1fr !important; gap: 2.5rem !important; }
+
+  /* Home page fixed grids */
+  .home-opening-grid { grid-template-columns: 1fr !important; gap: 1.5rem !important; }
+  .home-opening-grid > :first-child { display: none !important; }
+  .home-featured-quote-grid { grid-template-columns: 1fr !important; gap: 1.5rem !important; }
+  .home-featured-quote-label {
+    writing-mode: horizontal-tb !important;
+    transform: none !important;
+    font-size: 0.625rem !important;
+    letter-spacing: 0.22em !important;
+  }
+  .home-index-row-inner { grid-template-columns: 4rem 1fr auto !important; gap: 1.5rem !important; }
+  .home-index-art { display: none !important; }
+
+  /* About and practice intro rails */
+  .about-opening-grid { grid-template-columns: 1fr !important; gap: 1.25rem !important; }
+  .about-opening-grid > :first-child { display: none !important; }
+  .practice-opening-grid { grid-template-columns: 1fr !important; gap: 1.25rem !important; }
+  .practice-opening-grid > :first-child { display: none !important; }
+
+  /* Services rows */
+  .service-row-grid { grid-template-columns: 1fr !important; gap: 1.5rem !important; }
+  .service-row-grid > :first-child { display: none !important; }
+  .service-body-grid { grid-template-columns: 1fr !important; gap: 1.5rem !important; }
+  .service-title-row { align-items: flex-start !important; }
+  .service-meta { text-align: left !important; }
+
+  /* Publications and videos rows */
+  .pub-row { grid-template-columns: 4rem 200px 1fr !important; gap: 1.5rem !important; }
+  .pub-row { padding: 3.25rem 0 !important; }
+  .pub-cta-col { margin-top: 0.75rem !important; }
+  .pub-row-num { padding-top: 0 !important; }
+  .pub-language-select { min-width: 8.5rem !important; }
+  .pub-forthcoming-grid { grid-template-columns: 1fr !important; gap: 1rem !important; }
+  .pub-forthcoming-grid > :first-child { display: none !important; }
+  .video-row { grid-template-columns: 4rem 1fr 300px !important; gap: 1.5rem !important; }
+  .video-row { padding: 3rem 0 !important; }
+  .video-row-num { padding-top: 0 !important; }
+
+  /* Page header and philpeople intro */
+  .page-header-subtitle-grid { grid-template-columns: 1.5rem 1fr !important; gap: 1.25rem !important; }
+  .philpeople-grid { grid-template-columns: 1fr !important; gap: 1.25rem !important; }
+  .philpeople-grid > :first-child { display: none !important; }
+
+  /* Practice methods */
+  .practice-method-row { grid-template-columns: 4rem 12rem 1fr !important; gap: 1.5rem !important; }
 }
 
 @media (max-width: 768px) {
@@ -376,4 +422,106 @@ h1, h2, h3, h4, h5, h6 {
   .index-row-num { display: none !important; }
   .stats-grid { flex-direction: column !important; }
   .stats-grid > div { border-right: none !important; border-bottom: 1px solid var(--border); }
+
+  /* Home */
+  .home-hero-section { min-height: auto !important; padding-top: 6rem !important; padding-bottom: 3.5rem !important; }
+  .home-hero-phi { display: none !important; }
+  .home-hero-inner { padding-top: 4rem !important; padding-left: 1.25rem !important; padding-right: 1.25rem !important; }
+  .home-hero-title {
+    font-size: clamp(2.35rem, 11vw, 3.85rem) !important;
+    line-height: 1.03 !important;
+    margin-bottom: 2rem !important;
+  }
+  .home-hero-subrow { width: 100% !important; padding-top: 1.5rem !important; }
+  .home-hero-subtext {
+    font-size: clamp(0.95rem, 4.2vw, 1.06rem) !important;
+    line-height: 1.65 !important;
+    max-width: 32rem !important;
+  }
+  .home-hero-cta-wrap { margin-top: 1.25rem !important; width: 100% !important; display: flex !important; justify-content: center !important; }
+  .home-hero-cta-wrap .btn-outline { width: 100% !important; max-width: 18rem !important; }
+
+  .home-opening-section { padding: 4.5rem 0 !important; }
+  .home-opening-typewriter {
+    min-height: 11.25rem !important;
+    margin-bottom: 1.6rem !important;
+    font-size: clamp(1.35rem, 7.2vw, 1.95rem) !important;
+    line-height: 1.34 !important;
+  }
+
+  .home-index-row-inner { grid-template-columns: 1fr auto !important; gap: 1rem !important; padding: 1.5rem 0 !important; }
+  .home-index-row-num { display: none !important; }
+  .home-index-title { line-height: 1.13 !important; }
+  .home-index-desc {
+    line-height: 1.55 !important;
+    letter-spacing: 0.02em !important;
+    font-size: 0.78rem !important;
+    max-width: 95% !important;
+  }
+
+  .home-featured-quote-section { padding: 5rem 0 !important; }
+  .home-featured-quote-text {
+    font-size: clamp(1.45rem, 8vw, 2.4rem) !important;
+    line-height: 1.28 !important;
+  }
+
+  /* Services */
+  .service-title-row { padding-bottom: 1.2rem !important; margin-bottom: 1.2rem !important; }
+
+  /* Practice */
+  .practice-method-row { grid-template-columns: 1fr !important; gap: 0.9rem !important; }
+  .practice-method-row > :first-child { display: none !important; }
+
+  /* Publications */
+  .pub-row { grid-template-columns: 1fr !important; gap: 1rem !important; padding: 2.1rem 0 !important; }
+  .pub-row-num { display: none !important; }
+  .pub-cover { width: min(100%, 14rem) !important; }
+  .pub-cta-col { justify-content: flex-start !important; flex-wrap: wrap !important; }
+  .pub-cta-col .btn-outline,
+  .pub-cta-col .btn-ghost { width: auto !important; }
+  .pub-language-row {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 0.5rem !important;
+  }
+  .pub-language-select { width: 100% !important; min-width: 0 !important; }
+
+  /* Videos */
+  .video-row { grid-template-columns: 1fr !important; gap: 1rem !important; padding: 2.2rem 0 !important; }
+  .video-row-num { display: none !important; }
+  .video-row-thumb { order: -1; }
+  .video-row .btn-ghost { margin-top: 0.25rem; }
+  .video-quote-section { padding: 4.5rem 0 !important; }
+  .video-quote-section blockquote {
+    font-size: clamp(1.3rem, 7.2vw, 2rem) !important;
+    line-height: 1.32 !important;
+    margin-bottom: 1.2rem !important;
+  }
+
+  /* Page header */
+  .page-header-subtitle-grid { grid-template-columns: 1fr !important; gap: 0.75rem !important; }
+  .page-header-subtitle-grid > :first-child { display: none !important; }
+}
+
+@media (max-width: 480px) {
+  .inner-max { padding-left: 1rem !important; padding-right: 1rem !important; }
+
+  .home-hero-section { padding-top: 5.4rem !important; padding-bottom: 3rem !important; }
+  .home-hero-inner { padding-top: 3.4rem !important; padding-left: 1rem !important; padding-right: 1rem !important; }
+  .home-hero-title { font-size: clamp(2rem, 12.5vw, 2.8rem) !important; margin-bottom: 1.5rem !important; }
+  .home-hero-subtext { font-size: 0.94rem !important; line-height: 1.62 !important; }
+  .home-hero-cta-wrap .btn-outline { max-width: none !important; }
+
+  .home-opening-section { padding: 3.8rem 0 !important; }
+  .home-opening-typewriter { min-height: 12.5rem !important; margin-bottom: 1.25rem !important; }
+
+  .home-index-row-inner { grid-template-columns: 1fr !important; gap: 0.55rem !important; padding: 1.2rem 0 !important; }
+  .home-index-row-inner .index-row-arrow { display: none !important; }
+  .home-index-title { font-size: clamp(1.35rem, 9vw, 1.7rem) !important; margin-bottom: 0.3rem !important; }
+  .home-index-desc { font-size: 0.76rem !important; line-height: 1.5 !important; }
+
+  .home-featured-quote-section { padding: 3.8rem 0 !important; }
+  .home-featured-quote-text { font-size: clamp(1.25rem, 9vw, 1.85rem) !important; line-height: 1.28 !important; }
+
+  .pub-cover { width: min(100%, 12rem) !important; }
 }

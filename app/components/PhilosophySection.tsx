@@ -40,7 +40,7 @@ export default function PhilosophySection() {
         }}
       >
         <div className="inner-max" style={{ maxWidth: "88rem" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "5.5rem 1fr", gap: "3rem" }}>
+          <div className="practice-opening-grid" style={{ display: "grid", gridTemplateColumns: "5.5rem 1fr", gap: "3rem" }}>
             <div />
             <div>
               <p
@@ -147,6 +147,7 @@ export default function PhilosophySection() {
         >
           <div className="inner-max" style={{ maxWidth: "88rem" }}>
             <div
+              className="practice-method-row"
               style={{
                 display: "grid",
                 gridTemplateColumns: "5.5rem 14rem 1fr",

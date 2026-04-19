@@ -92,6 +92,7 @@ export default function HomeClient({
           HERO — light, warm, elegant
           ══════════════════════════════════════════ */}
       <motion.section
+        className="home-hero-section"
         ref={containerRef}
         style={{
           opacity,
@@ -120,7 +121,7 @@ export default function HomeClient({
 
         {/* Huge background phi symbol */}
         <div
-          className="font-cinzel"
+          className="font-cinzel home-hero-phi"
           style={{
             position: "absolute",
             right: "-2rem",
@@ -137,14 +138,14 @@ export default function HomeClient({
           φ
         </div>
 
-        <div style={{ position: "relative", zIndex: 1, paddingTop: "6rem", paddingLeft: "2rem", paddingRight: "2rem", maxWidth: "100%", display: "flex", flexDirection: "column", alignItems: "center" }}>
+        <div className="home-hero-inner" style={{ position: "relative", zIndex: 1, paddingTop: "6rem", paddingLeft: "2rem", paddingRight: "2rem", maxWidth: "100%", display: "flex", flexDirection: "column", alignItems: "center" }}>
 
           {/* Headline */}
           <motion.h1
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-            className="font-serif"
+            className="font-serif home-hero-title"
             style={{
               fontSize: "clamp(4rem, 11vw, 11rem)",
               lineHeight: 1.1,
@@ -172,6 +173,7 @@ export default function HomeClient({
 
           {/* Subheadline row */}
           <motion.div
+            className="home-hero-subrow"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
@@ -185,7 +187,7 @@ export default function HomeClient({
             }}
           >
             <p
-              className="font-serif"
+              className="font-serif home-hero-subtext"
               style={{
                 fontFamily: "DM Serif Display, Georgia, serif",
                 fontWeight: 400,
@@ -199,6 +201,7 @@ export default function HomeClient({
             </p>
 
             <motion.div 
+              className="home-hero-cta-wrap"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.9, ease: [0.22, 1, 0.36, 1] }}
@@ -223,6 +226,7 @@ export default function HomeClient({
           OPENING STATEMENT
           ══════════════════════════════════════════ */}
       <div
+        className="home-opening-section"
         style={{
           background: "var(--bg)",
           padding: "7rem 0",
@@ -230,7 +234,7 @@ export default function HomeClient({
         }}
       >
         <div className="inner-max" style={{ maxWidth: "88rem" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "5.5rem 1fr", gap: "3rem" }}>
+          <div className="home-opening-grid" style={{ display: "grid", gridTemplateColumns: "5.5rem 1fr", gap: "3rem" }}>
             <div />
             <div>
               <Typewriter
@@ -240,7 +244,7 @@ export default function HomeClient({
                 pauseMs={3200}
                 loop
                 triggerOnScroll
-                className="font-serif"
+                className="font-serif home-opening-typewriter"
                 style={{
                   fontSize: "clamp(1.5rem, 3vw, 2.75rem)",
                   color: "var(--text-heading)",
@@ -264,9 +268,10 @@ export default function HomeClient({
       {/* ══════════════════════════════════════════
           CONTENTS / INDEX
           ══════════════════════════════════════════ */}
-      <div style={{ background: "var(--bg-card)", position: "relative", overflow: "hidden", isolation: "isolate" }}>
+      <div className="home-index-section" style={{ background: "var(--bg-card)", position: "relative", overflow: "hidden", isolation: "isolate" }}>
         {/* Cubist Art Side Design */}
         <div
+          className="home-index-art"
           style={{
             position: "absolute",
             right: 0,
@@ -301,7 +306,7 @@ export default function HomeClient({
             style={{ display: "block", textDecoration: "none", position: "relative", zIndex: 1 }}
           >
             <div
-              className="inner-max"
+              className="inner-max home-index-row-inner"
               style={{
                 maxWidth: "88rem",
                 display: "grid",
@@ -313,7 +318,7 @@ export default function HomeClient({
             >
               {/* Number */}
               <span
-                className="font-cinzel"
+                className="font-cinzel home-index-row-num"
                 style={{
                   fontSize: "0.75rem",
                   color: "var(--accent)",
@@ -324,9 +329,9 @@ export default function HomeClient({
               </span>
 
               {/* Title + desc */}
-              <div>
+              <div className="home-index-copy">
                 <div
-                  className="font-serif"
+                  className="font-serif home-index-title"
                   style={{
                     fontSize: "clamp(1.25rem, 2.5vw, 2rem)",
                     color: "var(--text-heading)",
@@ -337,6 +342,7 @@ export default function HomeClient({
                   {item.title}
                 </div>
                 <div
+                  className="home-index-desc"
                   style={{
                     fontFamily: "Space Grotesk, sans-serif",
                     fontSize: "0.75rem",
@@ -371,6 +377,7 @@ export default function HomeClient({
           LARGE FEATURED QUOTE
           ══════════════════════════════════════════ */}
       <div
+        className="home-featured-quote-section"
         style={{
           background: "var(--bg-muted)",
           padding: "8rem 0",
@@ -378,8 +385,9 @@ export default function HomeClient({
         }}
       >
         <div className="inner-max" style={{ maxWidth: "88rem" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "5.5rem 1fr", gap: "3rem" }}>
+          <div className="home-featured-quote-grid" style={{ display: "grid", gridTemplateColumns: "5.5rem 1fr", gap: "3rem" }}>
             <div
+              className="home-featured-quote-label"
               style={{
                 fontFamily: "Space Grotesk, sans-serif",
                 fontSize: "0.5rem",
@@ -395,7 +403,7 @@ export default function HomeClient({
               How to Play Philosophy
             </div>
             <blockquote
-              className="font-italic"
+              className="font-italic home-featured-quote-text"
               style={{
                 fontSize: "clamp(1.75rem, 4vw, 4rem)",
                 color: "var(--text-heading)",

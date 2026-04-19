@@ -78,6 +78,7 @@ export default function Services({ data }: { data?: Service[] }) {
         >
           <div className="inner-max" style={{ maxWidth: "88rem" }}>
             <div
+              className="service-row-grid"
               style={{
                 display: "grid",
                 gridTemplateColumns: "5.5rem 1fr",
@@ -103,6 +104,7 @@ export default function Services({ data }: { data?: Service[] }) {
               <div>
                 {/* Title row */}
                 <div
+                  className="service-title-row"
                   style={{
                     display: "flex",
                     alignItems: "baseline",
@@ -124,7 +126,7 @@ export default function Services({ data }: { data?: Service[] }) {
                   >
                     {service.title}
                   </h2>
-                  <div style={{ textAlign: "right", flexShrink: 0 }}>
+                  <div className="service-meta" style={{ textAlign: "right", flexShrink: 0 }}>
                     {service.price && (
                       <div
                         className="font-cinzel"
@@ -156,13 +158,13 @@ export default function Services({ data }: { data?: Service[] }) {
 
                 {/* Description + features side by side on larger screens */}
                 <div
+                  className="service-body-grid"
                   style={{
                     display: "grid",
                     gridTemplateColumns: "1fr 1fr",
                     gap: "4rem",
                     marginBottom: "2.5rem",
                   }}
-                  className="grid-cols-1 md:grid-cols-2"
                 >
                   <p
                     style={{

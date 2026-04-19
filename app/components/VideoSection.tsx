@@ -50,6 +50,7 @@ export default function VideoSection({ data }: { data?: YoutubeVideo[] }) {
         >
           <div className="inner-max" style={{ maxWidth: "88rem" }}>
             <div
+              className="video-row"
               style={{
                 display: "grid",
                 gridTemplateColumns: "5.5rem 1fr 380px",
@@ -60,7 +61,7 @@ export default function VideoSection({ data }: { data?: YoutubeVideo[] }) {
             >
               {/* Number */}
               <div
-                className="font-cinzel"
+                className="font-cinzel video-row-num"
                 style={{
                   fontSize: "0.875rem",
                   color: "var(--accent)",
@@ -114,6 +115,7 @@ export default function VideoSection({ data }: { data?: YoutubeVideo[] }) {
 
               {/* Thumbnail */}
               <div
+                className="video-row-thumb"
                 style={{
                   position: "relative",
                   aspectRatio: "16 / 9",
@@ -215,6 +217,7 @@ export default function VideoSection({ data }: { data?: YoutubeVideo[] }) {
 
       {/* ─── QUOTE SECTION ─────────────────── */}
       <motion.div
+        className="video-quote-section"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}

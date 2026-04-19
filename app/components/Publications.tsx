@@ -108,6 +108,7 @@ function PublicationRow({ pub, index }: { pub: Publication; index: number }) {
     >
       <div className="inner-max" style={{ maxWidth: "88rem" }}>
         <div
+          className="pub-row"
           style={{
             display: "grid",
             gridTemplateColumns: "5.5rem 240px 1fr auto",
@@ -117,7 +118,7 @@ function PublicationRow({ pub, index }: { pub: Publication; index: number }) {
           }}
         >
           <div
-            className="font-cinzel"
+            className="font-cinzel pub-row-num"
             style={{
               fontSize: "0.875rem",
               color: "var(--accent)",
@@ -129,6 +130,7 @@ function PublicationRow({ pub, index }: { pub: Publication; index: number }) {
           </div>
 
           <div
+            className="pub-cover"
             style={{
               position: "relative",
               aspectRatio: "3 / 4",
@@ -251,7 +253,7 @@ function PublicationRow({ pub, index }: { pub: Publication; index: number }) {
             </div>
 
             {editions.length > 0 && (
-              <div style={{ marginBottom: "1.25rem", display: "flex", alignItems: "center", gap: "0.75rem" }}>
+              <div className="pub-language-row" style={{ marginBottom: "1.25rem", display: "flex", alignItems: "center", gap: "0.75rem" }}>
                 <label
                   htmlFor={`edition-${pub._id}`}
                   className="font-cinzel"
@@ -265,6 +267,7 @@ function PublicationRow({ pub, index }: { pub: Publication; index: number }) {
                   Language
                 </label>
                 <select
+                  className="pub-language-select"
                   id={`edition-${pub._id}`}
                   value={selectedEditionKey}
                   onChange={(event) => setSelectedEditionKey(event.target.value)}
@@ -305,7 +308,7 @@ function PublicationRow({ pub, index }: { pub: Publication; index: number }) {
             </p>
           </div>
 
-          <div style={{ paddingTop: "0.5rem", flexShrink: 0, display: "flex", gap: "0.75rem", alignItems: "center" }}>
+          <div className="pub-cta-col" style={{ paddingTop: "0.5rem", flexShrink: 0, display: "flex", gap: "0.75rem", alignItems: "center" }}>
             {activeViewLink && activeViewLink !== "#" ? (
               <a href={activeViewLink} target="_blank" rel="noopener noreferrer" className="btn-ghost">
                 View
@@ -360,7 +363,7 @@ export default function Publications({ data }: { data?: Publication[] }) {
         style={{ padding: "3rem 0", borderBottom: "1px solid var(--border)" }}
       >
         <div className="inner-max" style={{ maxWidth: "88rem" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "5.5rem 1fr", gap: "3rem" }}>
+          <div className="pub-forthcoming-grid" style={{ display: "grid", gridTemplateColumns: "5.5rem 1fr", gap: "3rem" }}>
             <div />
             <p
               style={{
