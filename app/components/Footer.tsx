@@ -271,6 +271,7 @@ export default function Footer() {
                     fontSize: "0.84rem",
                     lineHeight: 1.55,
                     color: "var(--text-muted)",
+                    marginTop: "0.45rem",
                   }}
                 >
                   {currentMode.summary}

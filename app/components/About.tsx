@@ -163,21 +163,69 @@ export default function About({ data }: { data?: AboutData }) {
             style={{ padding: "5rem 0 5rem 4rem" }}
           >
             {/* Bio paragraphs */}
-            <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem", marginBottom: "3.5rem" }}>
-              {bio.map((para, i) => (
-                <p
-                  key={i}
-                  style={{
-                    fontFamily: "Space Grotesk, sans-serif",
-                    fontWeight: i === 0 ? 700 : 300,
-                    color: i === 0 ? "var(--text)" : "var(--text-muted)",
-                    lineHeight: 1.9,
-                    fontSize: "1rem",
-                  }}
-                >
-                  {para}
-                </p>
-              ))}
+            <div style={{ marginBottom: "3.5rem" }}>
+              <div
+                style={{
+                  fontFamily: "Space Grotesk, sans-serif",
+                  fontSize: "0.6rem",
+                  letterSpacing: "0.32em",
+                  textTransform: "uppercase",
+                  color: "var(--accent)",
+                  marginBottom: "1rem",
+                }}
+              >
+                Philosophical Profile
+              </div>
+
+              <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+                {bio.map((para, i) => {
+                  const panelLabel = i === 0 ? "Identity" : i === 1 ? "Public Work" : "Method";
+
+                  return (
+                    <motion.article
+                      key={i}
+                      initial={{ opacity: 0, y: 18 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: i * 0.08 }}
+                      style={{
+                        border: i === 0 ? "1px solid rgba(139, 107, 74, 0.32)" : "1px solid var(--border)",
+                        background:
+                          i === 0
+                            ? "linear-gradient(135deg, rgba(139, 107, 74, 0.08), rgba(255, 255, 255, 0.72))"
+                            : "rgba(255, 255, 255, 0.58)",
+                        borderRadius: "12px",
+                        padding: i === 0 ? "1.5rem 1.4rem" : "1.2rem 1.2rem",
+                        boxShadow: i === 0 ? "0 8px 24px rgba(139, 107, 74, 0.08)" : "none",
+                      }}
+                    >
+                      <div
+                        style={{
+                          fontFamily: "Space Grotesk, sans-serif",
+                          fontSize: "0.58rem",
+                          letterSpacing: "0.24em",
+                          textTransform: "uppercase",
+                          color: "var(--accent)",
+                          marginBottom: "0.6rem",
+                        }}
+                      >
+                        {panelLabel}
+                      </div>
+                      <p
+                        style={{
+                          fontFamily: i === 0 ? "Cormorant Garamond, Georgia, serif" : "Space Grotesk, sans-serif",
+                          fontWeight: i === 0 ? 500 : 400,
+                          color: i === 0 ? "var(--text-heading)" : "var(--text-muted)",
+                          lineHeight: i === 0 ? 1.45 : 1.85,
+                          fontSize: i === 0 ? "clamp(1.55rem, 2.7vw, 2rem)" : "1.02rem",
+                        }}
+                      >
+                        {para}
+                      </p>
+                    </motion.article>
+                  );
+                })}
+              </div>
             </div>
 
             {/* Philosophy quote */}
