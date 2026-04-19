@@ -1,6 +1,5 @@
 import SiteLayout from "../components/SiteLayout";
 import PageHeader from "../components/PageHeader";
-import Link from "next/link";
 
 export const metadata = {
   title: "Contact & Book — Michael Picard Philosophical Practice",
@@ -16,7 +15,7 @@ const options = [
     cta: "Book a Session",
     href: "/book-session",
     external: false,
-    featured: true,
+    featured: false,
   },
   {
     num: "02",
@@ -233,65 +232,7 @@ export default function ContactPage() {
       </section>
 
       {/* Links to other pages */}
-      <section className="section-pad" style={{ background: "var(--bg-muted)", borderTop: "1px solid var(--border)" }}>
-        <div className="inner-max" style={{ maxWidth: "74rem" }}>
-          <div
-            style={{
-              textAlign: "center",
-              maxWidth: "44rem",
-              margin: "0 auto",
-              marginBottom: "2.3rem",
-            }}
-          >
-            <span className="section-label" style={{ marginBottom: "0.9rem", display: "inline-block" }}>
-              Continue Exploring
-            </span>
-            <h3 className="font-serif" style={{ fontSize: "clamp(1.45rem, 2.8vw, 2.2rem)", color: "var(--text-heading)" }}>
-              Explore More of the Practice
-            </h3>
-          </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {[
-              { label: "About Michael", href: "/about" },
-              { label: "Services", href: "/services" },
-              { label: "The Practice", href: "/practice" },
-              { label: "Publications", href: "/publications" },
-            ].map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="card-hover"
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                  background: "var(--bg)",
-                  border: "1px solid var(--border)",
-                  borderRadius: "10px",
-                  padding: "1rem 1.05rem",
-                  textDecoration: "none",
-                  color: "var(--text-heading)",
-                }}
-              >
-                <span
-                  style={{
-                    fontFamily: "Space Grotesk, sans-serif",
-                    fontSize: "0.7rem",
-                    letterSpacing: "0.16em",
-                    textTransform: "uppercase",
-                  }}
-                >
-                  {link.label}
-                </span>
-                <span style={{ color: "var(--accent)", fontSize: "0.95rem", lineHeight: 1 }} aria-hidden="true">
-                  →
-                </span>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
     </SiteLayout>
   );
 }
