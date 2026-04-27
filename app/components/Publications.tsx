@@ -128,15 +128,27 @@ function normalizeLinks(links?: PlatformLink[], singleLink?: string) {
   return deduped;
 }
 
-function resolveActionLinks(
+function mergeActionLinks(
   editionLinks?: PlatformLink[],
   editionSingleLink?: string,
   defaultLinks?: PlatformLink[],
   defaultSingleLink?: string
 ) {
-  const editionResolved = normalizeLinks(editionLinks, editionSingleLink);
-  if (editionResolved.length > 0) return editionResolved;
-  return normalizeLinks(defaultLinks, defaultSingleLink);
+  const merged = [
+    ...normalizeLinks(editionLinks, editionSingleLink),
+    ...normalizeLinks(defaultLinks, defaultSingleLink),
+  ];
+
+  const deduped: { label: string; url: string }[] = [];
+  const seen = new Set<string>();
+  for (const link of merged) {
+    const key = link.url.toLowerCase();
+    if (seen.has(key)) continue;
+    seen.add(key);
+    deduped.push(link);
+  }
+
+  return deduped;
 }
 
 function PublicationAction({
@@ -216,17 +228,17 @@ function PublicationAction({
 
 function PublicationRow({ pub, index }: { pub: Publication; index: number }) {
   const editions = pub.editions || [];
-  const defaultEditionKey = editions[0]?._key || "default";
+  const defaultEditionKey = "default";
   const [selectedEditionKey, setSelectedEditionKey] = useState(defaultEditionKey);
 
   const selectedEdition = useMemo(() => {
-    if (!editions.length) return null;
+    if (!editions.length || selectedEditionKey === defaultEditionKey) return null;
     return editions.find((edition) => (edition._key || "") === selectedEditionKey) || editions[0];
   }, [editions, selectedEditionKey]);
 
   const activeCoverImage = selectedEdition?.coverImage || pub.coverImage;
-  const activeViewLinks = resolveActionLinks(selectedEdition?.viewLinks, selectedEdition?.viewLink, pub.viewLinks, pub.viewLink);
-  const activeBuyLinks = resolveActionLinks(selectedEdition?.buyLinks, selectedEdition?.buyLink, pub.buyLinks, pub.buyLink);
+  const activeViewLinks = mergeActionLinks(selectedEdition?.viewLinks, selectedEdition?.viewLink, pub.viewLinks, pub.viewLink);
+  const activeBuyLinks = mergeActionLinks(selectedEdition?.buyLinks, selectedEdition?.buyLink, pub.buyLinks, pub.buyLink);
 
   return (
     <motion.div
@@ -415,6 +427,7 @@ function PublicationRow({ pub, index }: { pub: Publication; index: number }) {
                     minWidth: "11rem",
                   }}
                 >
+                  <option value={defaultEditionKey}>Default</option>
                   {editions.map((edition, idx) => {
                     const key = edition._key || `edition-${idx}`;
                     return (
