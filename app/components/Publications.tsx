@@ -179,9 +179,23 @@ function PublicationAction({
 
   return (
     <details style={{ position: "relative" }}>
-      <summary className={className} style={{ listStyle: "none" }}>
+      <summary
+        className={className}
+        style={{ listStyle: "none", display: "inline-flex", alignItems: "center" }}
+        aria-label={`${label} options`}
+      >
         {label}
-        <svg width="12" height="12" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+        <span
+          style={{
+            fontSize: "0.55rem",
+            letterSpacing: "0.14em",
+            textTransform: "uppercase",
+            opacity: 0.72,
+          }}
+        >
+          Options
+        </span>
+        <svg width="12" height="12" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24" aria-hidden="true">
           <path d="M6 9l6 6 6-6" />
         </svg>
       </summary>
@@ -195,7 +209,7 @@ function PublicationAction({
           border: "1px solid var(--border)",
           borderRadius: "6px",
           boxShadow: "0 10px 24px rgba(0, 0, 0, 0.08)",
-          padding: "0.45rem",
+          padding: "0.35rem",
           zIndex: 15,
         }}
       >
@@ -206,19 +220,40 @@ function PublicationAction({
             target="_blank"
             rel="noopener noreferrer"
             style={{
-              display: "block",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
               textDecoration: "none",
               fontFamily: "Space Grotesk, sans-serif",
               fontSize: "0.72rem",
-              letterSpacing: "0.05em",
+              letterSpacing: "0.08em",
               textTransform: "uppercase",
               color: "var(--text-heading)",
               borderRadius: "4px",
               padding: "0.55rem 0.6rem",
-              border: "1px solid transparent",
+              border: "1px solid var(--border)",
+              background: "transparent",
+              marginBottom: "0.25rem",
+              transition: "border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease",
             }}
           >
-            {link.label}
+            <span>{link.label}</span>
+            <span
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "0.35rem",
+                fontSize: "0.6rem",
+                letterSpacing: "0.12em",
+                color: "var(--accent)",
+                whiteSpace: "nowrap",
+              }}
+            >
+              Open now
+              <svg width="11" height="11" fill="none" stroke="currentColor" strokeWidth="2.3" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M7 17 17 7M9 7h8v8" />
+              </svg>
+            </span>
           </a>
         ))}
       </div>
