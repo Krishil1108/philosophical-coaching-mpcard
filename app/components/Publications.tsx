@@ -13,6 +13,13 @@ interface PublicationEdition {
   coverImage?: object;
   viewLink?: string;
   buyLink?: string;
+  viewLinks?: PlatformLink[];
+  buyLinks?: PlatformLink[];
+}
+
+interface PlatformLink {
+  label?: string;
+  url?: string;
 }
 
 interface Publication {
@@ -25,6 +32,8 @@ interface Publication {
   description?: string;
   viewLink?: string;
   buyLink?: string;
+  viewLinks?: PlatformLink[];
+  buyLinks?: PlatformLink[];
   editions?: PublicationEdition[];
 }
 
@@ -81,6 +90,130 @@ function editionLabel(edition: PublicationEdition) {
   return "Edition";
 }
 
+function getPlatformLabel(url: string, index: number) {
+  try {
+    const parsed = new URL(url);
+    return parsed.hostname.replace(/^www\./, "");
+  } catch {
+    return `Option ${index + 1}`;
+  }
+}
+
+function normalizeLinks(links?: PlatformLink[], singleLink?: string) {
+  const normalized: { label: string; url: string }[] = [];
+
+  for (const link of links || []) {
+    const url = link?.url?.trim();
+    if (!url || url === "#") continue;
+    normalized.push({ label: link?.label?.trim() || "", url });
+  }
+
+  const legacy = singleLink?.trim();
+  if (legacy && legacy !== "#") {
+    normalized.push({ label: "", url: legacy });
+  }
+
+  const deduped: { label: string; url: string }[] = [];
+  const seen = new Set<string>();
+  normalized.forEach((item, index) => {
+    const key = item.url.toLowerCase();
+    if (seen.has(key)) return;
+    seen.add(key);
+    deduped.push({
+      label: item.label || getPlatformLabel(item.url, index),
+      url: item.url,
+    });
+  });
+
+  return deduped;
+}
+
+function resolveActionLinks(
+  editionLinks?: PlatformLink[],
+  editionSingleLink?: string,
+  defaultLinks?: PlatformLink[],
+  defaultSingleLink?: string
+) {
+  const editionResolved = normalizeLinks(editionLinks, editionSingleLink);
+  if (editionResolved.length > 0) return editionResolved;
+  return normalizeLinks(defaultLinks, defaultSingleLink);
+}
+
+function PublicationAction({
+  label,
+  links,
+  className,
+  arrow,
+}: {
+  label: string;
+  links: { label: string; url: string }[];
+  className: string;
+  arrow?: boolean;
+}) {
+  if (!links.length) return null;
+
+  if (links.length === 1) {
+    return (
+      <a href={links[0].url} target="_blank" rel="noopener noreferrer" className={className}>
+        {label}
+        {arrow ? (
+          <svg width="12" height="12" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
+        ) : null}
+      </a>
+    );
+  }
+
+  return (
+    <details style={{ position: "relative" }}>
+      <summary className={className} style={{ listStyle: "none" }}>
+        {label}
+        <svg width="12" height="12" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+          <path d="M6 9l6 6 6-6" />
+        </svg>
+      </summary>
+      <div
+        style={{
+          position: "absolute",
+          top: "calc(100% + 0.5rem)",
+          right: 0,
+          minWidth: "13rem",
+          background: "var(--bg)",
+          border: "1px solid var(--border)",
+          borderRadius: "6px",
+          boxShadow: "0 10px 24px rgba(0, 0, 0, 0.08)",
+          padding: "0.45rem",
+          zIndex: 15,
+        }}
+      >
+        {links.map((link) => (
+          <a
+            key={link.url}
+            href={link.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              display: "block",
+              textDecoration: "none",
+              fontFamily: "Space Grotesk, sans-serif",
+              fontSize: "0.72rem",
+              letterSpacing: "0.05em",
+              textTransform: "uppercase",
+              color: "var(--text-heading)",
+              borderRadius: "4px",
+              padding: "0.55rem 0.6rem",
+              border: "1px solid transparent",
+            }}
+          >
+            {link.label}
+          </a>
+        ))}
+      </div>
+    </details>
+  );
+}
+
 function PublicationRow({ pub, index }: { pub: Publication; index: number }) {
   const editions = pub.editions || [];
   const defaultEditionKey = editions[0]?._key || "default";
@@ -92,8 +225,8 @@ function PublicationRow({ pub, index }: { pub: Publication; index: number }) {
   }, [editions, selectedEditionKey]);
 
   const activeCoverImage = selectedEdition?.coverImage || pub.coverImage;
-  const activeViewLink = selectedEdition?.viewLink || pub.viewLink;
-  const activeBuyLink = selectedEdition?.buyLink || pub.buyLink;
+  const activeViewLinks = resolveActionLinks(selectedEdition?.viewLinks, selectedEdition?.viewLink, pub.viewLinks, pub.viewLink);
+  const activeBuyLinks = resolveActionLinks(selectedEdition?.buyLinks, selectedEdition?.buyLink, pub.buyLinks, pub.buyLink);
 
   return (
     <motion.div
@@ -309,22 +442,11 @@ function PublicationRow({ pub, index }: { pub: Publication; index: number }) {
           </div>
 
           <div className="pub-cta-col" style={{ paddingTop: "0.5rem", flexShrink: 0, display: "flex", gap: "0.75rem", alignItems: "center" }}>
-            {activeViewLink && activeViewLink !== "#" ? (
-              <a href={activeViewLink} target="_blank" rel="noopener noreferrer" className="btn-ghost">
-                View
-                <svg width="12" height="12" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-                  <path d="M5 12h14M12 5l7 7-7 7" />
-                </svg>
-              </a>
-            ) : null}
+            <PublicationAction label="View" links={activeViewLinks} className="btn-ghost" arrow />
 
-            {activeBuyLink && activeBuyLink !== "#" ? (
-              <a href={activeBuyLink} target="_blank" rel="noopener noreferrer" className="btn-outline">
-                Buy
-              </a>
-            ) : null}
+            <PublicationAction label="Buy" links={activeBuyLinks} className="btn-outline" />
 
-            {!activeViewLink && !activeBuyLink && (
+            {!activeViewLinks.length && !activeBuyLinks.length && (
               <span
                 className="font-cinzel"
                 style={{

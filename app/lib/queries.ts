@@ -60,13 +60,29 @@ export const publicationsQuery = groq`*[_type == "publication"] | order(order as
   description,
   viewLink,
   buyLink,
+  viewLinks[]{
+    label,
+    url
+  },
+  buyLinks[]{
+    label,
+    url
+  },
   editions[]{
     _key,
     language,
     label,
     coverImage,
     viewLink,
-    buyLink
+    buyLink,
+    viewLinks[]{
+      label,
+      url
+    },
+    buyLinks[]{
+      label,
+      url
+    }
   }
 }`;
 

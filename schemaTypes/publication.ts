@@ -1,5 +1,19 @@
 import { defineField, defineType } from "sanity";
 
+const platformLinkField = {
+  type: "object",
+  fields: [
+    defineField({ name: "label", title: "Platform Label", type: "string", validation: (Rule) => Rule.required() }),
+    defineField({ name: "url", title: "URL", type: "url", validation: (Rule) => Rule.required() }),
+  ],
+  preview: {
+    select: {
+      title: "label",
+      subtitle: "url",
+    },
+  },
+};
+
 export const publication = defineType({
   name: "publication",
   title: "Publications",
@@ -18,6 +32,22 @@ export const publication = defineType({
     defineField({ name: "description", title: "Description", type: "text", rows: 4 }),
     defineField({ name: "viewLink", title: "Default View Link", type: "url" }),
     defineField({ name: "buyLink", title: "Default Buy Link", type: "url" }),
+    defineField({
+      name: "viewLinks",
+      title: "Default View Links",
+      description: "Optional list of all platforms where this publication can be viewed.",
+      type: "array",
+      of: [platformLinkField],
+      validation: (Rule) => Rule.max(20),
+    }),
+    defineField({
+      name: "buyLinks",
+      title: "Default Buy Links",
+      description: "Optional list of all platforms where this publication can be purchased.",
+      type: "array",
+      of: [platformLinkField],
+      validation: (Rule) => Rule.max(20),
+    }),
     defineField({
       name: "editions",
       title: "Language Editions",
@@ -59,6 +89,22 @@ export const publication = defineType({
             }),
             defineField({ name: "viewLink", title: "View Link", type: "url" }),
             defineField({ name: "buyLink", title: "Buy Link", type: "url" }),
+            defineField({
+              name: "viewLinks",
+              title: "View Links",
+              description: "Optional list of all platforms for this language edition.",
+              type: "array",
+              of: [platformLinkField],
+              validation: (Rule) => Rule.max(20),
+            }),
+            defineField({
+              name: "buyLinks",
+              title: "Buy Links",
+              description: "Optional list of all purchase platforms for this language edition.",
+              type: "array",
+              of: [platformLinkField],
+              validation: (Rule) => Rule.max(20),
+            }),
           ],
           preview: {
             select: {
