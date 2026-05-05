@@ -558,43 +558,54 @@ function PublicationsWrapper({ data }: { data?: Publication[] }) {
         }}
       >
         <div className="inner-max" style={{ maxWidth: "88rem" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: "1rem", flexWrap: "wrap" }}>
-            <label
-              style={{
-                fontFamily: "Space Grotesk, sans-serif",
-                fontSize: "0.875rem",
-                color: "var(--text-muted)",
-                fontWeight: 500,
-              }}
-            >
-              Search Publications:
-            </label>
-            <input
-              type="text"
-              placeholder="Search by title, author, publisher..."
-              value={searchQuery}
-              onChange={(e) => {
-                setSearchQuery(e.target.value);
-                setCurrentPage(1);
-              }}
-              style={{
-                flex: 1,
-                minWidth: "200px",
-                padding: "0.75rem 1rem",
-                background: "var(--bg)",
-                border: "1px solid var(--border)",
-                borderRadius: "4px",
-                fontFamily: "Space Grotesk, sans-serif",
-                color: "var(--text)",
-                fontSize: "0.9375rem",
-              }}
-            />
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1fr auto",
+              gap: "1rem",
+              alignItems: "center",
+              background: "var(--bg)",
+              border: "1px solid var(--border)",
+              borderRadius: "12px",
+              padding: "0.75rem",
+            }}
+          >
+            <div style={{ display: "flex", alignItems: "center", gap: "0.65rem", minWidth: 0 }}>
+              <svg width="16" height="16" fill="none" stroke="var(--text-muted)" strokeWidth="2" viewBox="0 0 24 24" style={{ flexShrink: 0 }}>
+                <path d="M11 19a8 8 0 1 1 5.292-14.01A8 8 0 0 1 11 19Zm10 2-4.35-4.35" />
+              </svg>
+              <input
+                type="text"
+                aria-label="Search publications"
+                placeholder="Search publications by title, subtitle, publisher, or description..."
+                value={searchQuery}
+                onChange={(e) => {
+                  setSearchQuery(e.target.value);
+                  setCurrentPage(1);
+                }}
+                style={{
+                  width: "100%",
+                  minWidth: "180px",
+                  border: "none",
+                  outline: "none",
+                  background: "transparent",
+                  fontFamily: "Space Grotesk, sans-serif",
+                  color: "var(--text)",
+                  fontSize: "0.9375rem",
+                }}
+              />
+            </div>
             <span
               style={{
                 fontFamily: "Space Grotesk, sans-serif",
-                fontSize: "0.8125rem",
-                color: "var(--text-muted)",
-                letterSpacing: "0.08em",
+                fontSize: "0.6875rem",
+                color: "var(--accent)",
+                letterSpacing: "0.14em",
+                textTransform: "uppercase",
+                border: "1px solid var(--border)",
+                borderRadius: "999px",
+                padding: "0.45rem 0.75rem",
+                whiteSpace: "nowrap",
               }}
             >
               {filteredPublications.length} result{filteredPublications.length !== 1 ? "s" : ""}
