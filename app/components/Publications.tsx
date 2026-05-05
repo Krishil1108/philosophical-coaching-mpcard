@@ -515,14 +515,205 @@ function PublicationRow({ pub, index }: { pub: Publication; index: number }) {
   );
 }
 
-export default function Publications({ data }: { data?: Publication[] }) {
+const ITEMS_PER_PAGE = 5;
+
+function PublicationsWrapper({ data }: { data?: Publication[] }) {
   const publications = data?.length ? data : defaultPublications;
+  const [searchQuery, setSearchQuery] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const filteredPublications = useMemo(() => {
+    if (!searchQuery.trim()) return publications;
+    const query = searchQuery.toLowerCase();
+    return publications.filter(
+      (pub) =>
+        pub.title?.toLowerCase().includes(query) ||
+        pub.subtitle?.toLowerCase().includes(query) ||
+        pub.publisher?.toLowerCase().includes(query) ||
+        pub.description?.toLowerCase().includes(query)
+    );
+  }, [publications, searchQuery]);
+
+  const totalPages = Math.ceil(filteredPublications.length / ITEMS_PER_PAGE);
+  const startIdx = (currentPage - 1) * ITEMS_PER_PAGE;
+  const endIdx = startIdx + ITEMS_PER_PAGE;
+  const paginatedPublications = filteredPublications.slice(startIdx, endIdx);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(Math.max(1, Math.min(page, totalPages)));
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   return (
     <section style={{ background: "var(--bg)" }}>
-      {publications.map((pub, i) => (
-        <PublicationRow key={pub._id} pub={pub} index={i} />
-      ))}
+      {/* Search Box */}
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        style={{
+          borderBottom: "1px solid var(--border)",
+          padding: "3rem 0",
+          background: "var(--bg-muted)",
+        }}
+      >
+        <div className="inner-max" style={{ maxWidth: "88rem" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "1rem", flexWrap: "wrap" }}>
+            <label
+              style={{
+                fontFamily: "Space Grotesk, sans-serif",
+                fontSize: "0.875rem",
+                color: "var(--text-muted)",
+                fontWeight: 500,
+              }}
+            >
+              Search Publications:
+            </label>
+            <input
+              type="text"
+              placeholder="Search by title, author, publisher..."
+              value={searchQuery}
+              onChange={(e) => {
+                setSearchQuery(e.target.value);
+                setCurrentPage(1);
+              }}
+              style={{
+                flex: 1,
+                minWidth: "200px",
+                padding: "0.75rem 1rem",
+                background: "var(--bg)",
+                border: "1px solid var(--border)",
+                borderRadius: "4px",
+                fontFamily: "Space Grotesk, sans-serif",
+                color: "var(--text)",
+                fontSize: "0.9375rem",
+              }}
+            />
+            <span
+              style={{
+                fontFamily: "Space Grotesk, sans-serif",
+                fontSize: "0.8125rem",
+                color: "var(--text-muted)",
+                letterSpacing: "0.08em",
+              }}
+            >
+              {filteredPublications.length} result{filteredPublications.length !== 1 ? "s" : ""}
+            </span>
+          </div>
+        </div>
+      </motion.div>
+
+      {/* Publications Grid */}
+      <div style={{ background: "var(--bg)" }}>
+        {paginatedPublications.length > 0 ? (
+          paginatedPublications.map((pub, i) => (
+            <PublicationRow key={pub._id} pub={pub} index={startIdx + i} />
+          ))
+        ) : (
+          <div
+            style={{
+              textAlign: "center",
+              padding: "4rem 2rem",
+              color: "var(--text-muted)",
+              fontFamily: "Space Grotesk, sans-serif",
+              fontSize: "1rem",
+            }}
+          >
+            No publications found matching your search.
+          </div>
+        )}
+      </div>
+
+      {/* Pagination Controls */}
+      {totalPages > 1 && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6 }}
+          style={{
+            borderBottom: "1px solid var(--border)",
+            padding: "2rem 0",
+            background: "var(--bg-muted)",
+          }}
+        >
+          <div className="inner-max" style={{ maxWidth: "88rem" }}>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: "1rem",
+                flexWrap: "wrap",
+              }}
+            >
+              <button
+                onClick={() => handlePageChange(currentPage - 1)}
+                disabled={currentPage === 1}
+                className={currentPage === 1 ? "btn-ghost" : "btn-primary"}
+                style={{
+                  opacity: currentPage === 1 ? 0.5 : 1,
+                  cursor: currentPage === 1 ? "not-allowed" : "pointer",
+                }}
+              >
+                <span>← Previous</span>
+              </button>
+
+              <div
+                style={{
+                  display: "flex",
+                  gap: "0.5rem",
+                  alignItems: "center",
+                }}
+              >
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                  <button
+                    key={page}
+                    onClick={() => handlePageChange(page)}
+                    style={{
+                      padding: "0.5rem 0.75rem",
+                      background: currentPage === page ? "var(--accent)" : "var(--bg-card)",
+                      color: currentPage === page ? "var(--bg)" : "var(--text)",
+                      border: "1px solid var(--border)",
+                      borderRadius: "4px",
+                      fontFamily: "Space Grotesk, sans-serif",
+                      fontSize: "0.8125rem",
+                      fontWeight: currentPage === page ? 600 : 500,
+                      cursor: "pointer",
+                      transition: "all 0.2s ease",
+                    }}
+                  >
+                    {page}
+                  </button>
+                ))}
+              </div>
+
+              <button
+                onClick={() => handlePageChange(currentPage + 1)}
+                disabled={currentPage === totalPages}
+                className={currentPage === totalPages ? "btn-ghost" : "btn-primary"}
+                style={{
+                  opacity: currentPage === totalPages ? 0.5 : 1,
+                  cursor: currentPage === totalPages ? "not-allowed" : "pointer",
+                }}
+              >
+                <span>Next →</span>
+              </button>
+            </div>
+            <div
+              style={{
+                textAlign: "center",
+                marginTop: "1rem",
+                fontFamily: "Space Grotesk, sans-serif",
+                fontSize: "0.8125rem",
+                color: "var(--text-muted)",
+                letterSpacing: "0.08em",
+              }}
+            >
+              Page {currentPage} of {totalPages}
+            </div>
+          </div>
+        </motion.div>
+      )}
 
       {/* Forthcoming note */}
       <motion.div
@@ -614,3 +805,5 @@ export default function Publications({ data }: { data?: Publication[] }) {
     </section>
   );
 }
+
+export default PublicationsWrapper;
