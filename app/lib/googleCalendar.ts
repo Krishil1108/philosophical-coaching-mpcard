@@ -105,7 +105,7 @@ export async function bookSlot(input: BookingInput) {
     throw new Error("Selected slot has already been booked.");
   }
 
-  const clean Title = (event.summary || "Available session").replace(marker, "").trim();
+  const cleanTitle = (event.summary || "Available session").replace(marker, "").trim();
   const ownerEmail = process.env.BOOKING_OWNER_EMAIL;
   const attendees = ownerEmail
     ? [{ email: input.email }, { email: ownerEmail }]
