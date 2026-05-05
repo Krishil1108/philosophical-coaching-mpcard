@@ -6,6 +6,7 @@ import { youtubeVideo } from "./youtubeVideo";
 import { publication } from "./publication";
 import { testimonial } from "./testimonial";
 import { philosophicalQuote } from "./philosophicalQuote";
+import { practiceMethod, practicePage } from "./practicePage";
 
 export const schemaTypes = [
   siteSettings,
@@ -16,4 +17,6 @@ export const schemaTypes = [
   publication,
   testimonial,
   philosophicalQuote,
+  practiceMethod,
+  practicePage,
 ];

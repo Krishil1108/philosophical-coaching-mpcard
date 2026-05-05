@@ -102,3 +102,28 @@ export const philosophicalQuotesQuery = groq`*[_type == "philosophicalQuote" && 
   context,
   usedOnPages
 }`;
+
+export const practicePageQuery = groq`*[_type == "practicePage"][0]{
+  headerLabel,
+  headerTitle,
+  headerSubtitle,
+  openingStatement,
+  openingTags,
+  approachLabel,
+  approachQuote,
+  approachCite,
+  methods[]{
+    _key,
+    num,
+    name,
+    short,
+    body
+  },
+  ctaLabel,
+  ctaTitle,
+  ctaBody,
+  ctaPrimaryText,
+  ctaPrimaryLink,
+  ctaSecondaryText,
+  ctaSecondaryLink
+}`;

@@ -62,6 +62,7 @@ Visit `http://localhost:3000/studio` while the dev server is running. You'll see
 | **Hero** | Headline, subheadline, CTA buttons, background image, quote |
 | **About** | Name, portrait photo, bio (rich text), credentials, quote, stats |
 | **Site Settings** | Site title, tagline, email, phone, social links |
+| **Practice Page** | Page header, opening statement/tags, approach quote, methods, CTA section |
 
 ### Repeating Content (add as many as needed)
 
@@ -114,6 +115,7 @@ app/page.tsx + section components
 | `siteSettings` | `schemaTypes/siteSettings.ts` | Singleton |
 | `hero` | `schemaTypes/hero.ts` | Singleton |
 | `about` | `schemaTypes/about.ts` | Singleton |
+| `practicePage` | `schemaTypes/practicePage.ts` | Singleton |
 | `service` | `schemaTypes/service.ts` | Repeating |
 | `youtubeVideo` | `schemaTypes/youtubeVideo.ts` | Repeating |
 | `publication` | `schemaTypes/publication.ts` | Repeating |
