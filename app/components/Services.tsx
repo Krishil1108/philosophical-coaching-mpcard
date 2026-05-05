@@ -20,10 +20,10 @@ const defaultServices: Service[] = [
     _id: "1",
     title: "Philosophy as Counsel",
     description:
-      "An intimate philosophical dialogue where we examine the language underlying your deepest beliefs. Through Socratic questioning and semantic analysis, we reveal the hidden structures that shape how you see everything — and open up options you didn't know existed.",
+      "An intimate philosophical dialogue where we examine the language underlying your deepest beliefs. Through neo-socratic questioning and semantic analysis, we reveal the hidden structures that shape how you see everything — and open up options you didn't know existed.",
     price: "$60–$100 USD",
     duration: "30 or 60 minutes",
-    features: ["Socratic method", "Semantic belief analysis", "No preset worldview", "Live format", "Fully confidential"],
+    features: ["Neo-socratic method", "Semantic belief analysis", "No preset worldview", "Live format", "Fully confidential"],
     ctaText: "Book a Session",
     ctaLink: "/book-session",
     featured: true,

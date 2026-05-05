@@ -32,7 +32,7 @@ export const defaultPracticePageData: PracticePageData = {
     "Philosophy not as a set of answers, but as a way of inhabiting questions with greater clarity and freedom.",
   openingStatement:
     'There is no agenda but truth that is the property of no one. "Philosophy goes second." — Marc Sautet (1947-1998)',
-  openingTags: ["Socratic method", "Semantic analysis", "Independent thinking"],
+  openingTags: ["Neo-socratic method", "Semantic analysis", "Independent thinking"],
   approachLabel: "Approach",
   approachQuote:
     "Philosophy is cohabitation — actively generating and inhabiting questions with greater clarity, purpose, and freedom.",
@@ -46,9 +46,9 @@ export const defaultPracticePageData: PracticePageData = {
     },
     {
       num: "II",
-      name: "Approximately-Socratic Inquiry",
-      short: "Socrates is dead and he's not coming back.",
-      body: `Arguably he proffers no definite replicable method. Michael does not pretend to offer an imitation. Socrates could listen and think ahead. Michael will hear you out, and think alongside. Irony is not a method. Michael says: "I don't pretend to know the answers to your problems, or that the answers I know pertain to your problems. I promise open ears for the time it takes for you to say what you need. And I will engage you. But I don't know what I will say. Yet, I won't say what I can't know, except to mention it. Still, if I never say what I don't know, I would forever remain silent. Come, let's talk. Risk your time."`,
+      name: "Neo-socratic Inquiry",
+      short: "Classical roots, contemporary philosophical practice.",
+      body: `This is not a historical reenactment and not a rigid script. Michael does not imitate antiquity; he works in a neo-socratic mode grounded in live dialogue, attentive listening, and shared thought. Rather than pretending certainty, he meets you where you are and thinks alongside you in real time. The point is not performance but clarity: to examine assumptions, test language, and make room for better judgment in the situations you actually face. Michael says: "I don't pretend to know the answers to your problems, or that the answers I know pertain to your problems. I promise open ears for the time it takes for you to say what you need. And I will engage you. But I don't know what I will say. Yet, I won't say what I can't know, except to mention it. Still, if I never say what I don't know, I would forever remain silent. Come, let's talk. Risk your time."`,
     },
     {
       num: "III",

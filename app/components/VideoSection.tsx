@@ -16,7 +16,7 @@ const placeholderVideos: YoutubeVideo[] = [
     _id: "v1",
     title: "What Is Philosophical Coaching?",
     videoId: "placeholder1",
-    description: "Michael explains the difference between philosophical coaching and therapy or counselling — and what makes the Socratic approach unique.",
+    description: "Michael explains the difference between philosophical coaching and therapy or counselling — and what makes the neo-socratic approach unique.",
   },
   {
     _id: "v2",

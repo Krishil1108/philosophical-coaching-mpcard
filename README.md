@@ -73,7 +73,7 @@ app/
 ├── /                    →  Home          Hero · Stats · Contents Index · Featured Quote
 ├── /about               →  About         Bio · Credentials · Philosophy Quote · Stats
 ├── /services            →  Services      1-on-1 Coaching · Café Philosophy · Philosophy Sports
-├── /practice            →  The Practice  Socratic Inquiry · Semantic Analysis · Impartial Witness
+├── /practice            →  The Practice  Neo-socratic Inquiry · Semantic Analysis · Impartial Witness
 ├── /publications        →  Publications  Books, covers, buy links & forthcoming translations
 ├── /videos              →  Videos        Talks · Demos · Café Philosophy · Philosophy Sports
 ├── /contact             →  Contact       Booking details & direct links
@@ -293,7 +293,7 @@ philosophy-coaching/
 ## ✦ &nbsp; φ &nbsp; ✦
 
 *"The unexamined life is not worth living."*
-— Socrates
+— Neo-socratic maxim
 
 <br/>
 

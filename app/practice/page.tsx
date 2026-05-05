@@ -8,7 +8,7 @@ import { defaultPracticePageData } from "../lib/practiceContent";
 
 export const metadata = {
   title: "The Practice — Michael Picard Philosophical Coaching",
-  description: "Socratic inquiry, semantic analysis, and independent thinking. Explore Michael Picard's philosophical methodology.",
+  description: "Neo-socratic inquiry, semantic analysis, and independent thinking. Explore Michael Picard's philosophical methodology.",
 };
 
 async function getData() {

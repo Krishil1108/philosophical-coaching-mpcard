@@ -344,7 +344,7 @@ Use this before going live:
 
 ## ✦ &nbsp; φ &nbsp; ✦
 
-*"The only true wisdom is in knowing you know nothing."* — Socrates
+*"The only true wisdom is in knowing you know nothing."* — Neo-socratic maxim
 
 Your philosophy coaching platform is now live on Vercel — where ancient wisdom meets modern infrastructure. 🏛️✨
 

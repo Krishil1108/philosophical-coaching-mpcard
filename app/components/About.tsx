@@ -18,9 +18,9 @@ interface AboutData {
 }
 
 const defaultBio = [
-  "Michael Picard is a philosopher, author, and Socratic practitioner based in British Columbia, Canada. Educated at MIT, he has spent over two decades exploring philosophy as a living discipline — not merely an academic exercise.",
+  "Michael Picard is a philosopher, author, and neo-socratic practitioner based in British Columbia, Canada. Educated at MIT, he has spent over two decades exploring philosophy as a living discipline — not merely an academic exercise.",
   "As the founder of Café Philosophy in Victoria, BC (weekly sessions running for 12 years), and Faculty at Douglas College, Michael brings rigorous philosophical inquiry into accessible conversation. His work focuses on examining the language behind our beliefs, probing the reasoning we rarely question, and helping individuals think more independently.",
-  "His approach is neither therapeutic nor didactic. He acts as an impartial witness — using semantic analysis and Socratic questioning to reveal the hidden assumptions that shape how we see the world.",
+  "His approach is neither therapeutic nor didactic. He acts as an impartial witness — using semantic analysis and neo-socratic questioning to reveal the hidden assumptions that shape how we see the world.",
 ];
 
 export default function About({ data }: { data?: AboutData }) {
@@ -58,7 +58,7 @@ export default function About({ data }: { data?: AboutData }) {
                 maxWidth: "44rem",
               }}
             >
-              A philosopher who teaches at Douglas College, facilitates public dialogue, and practices Socratic inquiry one-on-one — bridging academic rigour and lived philosophy.
+              A philosopher who teaches at Douglas College, facilitates public dialogue, and practices neo-socratic inquiry one-on-one — bridging academic rigour and lived philosophy.
             </p>
           </div>
         </div>

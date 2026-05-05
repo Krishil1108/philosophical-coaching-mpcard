@@ -29,7 +29,7 @@ const contents = [
     num: "03",
     href: "/practice",
     title: "The Practice",
-    desc: "Socratic Inquiry · Semantic Analysis · Impartial Witness · No Preset Agenda",
+    desc: "Neo-socratic Inquiry · Semantic Analysis · Impartial Witness · No Preset Agenda",
   },
   {
     num: "04",

@@ -5,7 +5,7 @@ import { RootLayoutClient } from "./RootLayoutClient";
 export const metadata: Metadata = {
   title: "Michael Picard — Philosophical Coaching",
   description: "Think deeper. Live wiser. One-on-one philosophical coaching, Café Philosophy, and Philosophy Sports with Michael Picard, PhD (MIT).",
-  keywords: ["philosophical coaching", "philosophy", "Michael Picard", "Socratic inquiry", "critical thinking", "café philosophy"],
+  keywords: ["philosophical coaching", "philosophy", "Michael Picard", "neo-socratic inquiry", "critical thinking", "café philosophy"],
 };
 
 export default function RootLayout({
