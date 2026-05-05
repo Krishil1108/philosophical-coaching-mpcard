@@ -1,0 +1,239 @@
+WEBSITE CONTENT AND BOOKING OWNER GUIDE
+Project: Michael Picard Philosophical Practice
+Last updated: 2026-04-19
+
+1) WHAT THIS DOCUMENT COVERS
+This guide explains:
+1. Which website text/content can be changed from Sanity Studio.
+2. Exactly where each field is in Sanity.
+3. Which website content is hardcoded in code and cannot be changed from Sanity right now.
+4. How the Book a Session mechanism works end to end.
+5. How the owner should create availability slots with examples.
+
+
+2) WHERE TO EDIT SANITY CONTENT
+Studio URL inside this project:
+/studio
+
+Sanity schema types available in Studio:
+1. Hero Section
+2. About Section
+3. Services
+4. YouTube Videos
+5. Publications
+6. Testimonials
+7. Philosophical Quotes
+8. Site Settings
+
+Important: Not every schema is currently wired to visible frontend sections. See section 7 for what is connected vs not connected.
+
+
+3) HOMEPAGE CONTENT: WHAT CAN BE CHANGED FROM SANITY
+Data source:
+Sanity document: Hero Section
+
+3.1 Homepage H1 example: "Thinking with Care..."
+Field to edit in Sanity:
+Hero Section -> Headline (field name: headline)
+
+Where it appears:
+Homepage large H1 in the hero section.
+
+Behavior note:
+If no headline is set, fallback text is used:
+"Thinking\nwith Care..."
+
+3.2 Homepage subheadline under H1
+Field to edit in Sanity:
+Hero Section -> Sub-Headline (field name: subheadline)
+
+Where it appears:
+Homepage hero paragraph under H1.
+
+3.3 Homepage visual carousel photos
+Field to edit in Sanity:
+Hero Section -> Home Showcase Photos (field name: showcasePhotos)
+
+Per photo item fields:
+1. image
+2. title
+3. subtitle
+
+Where it appears:
+Homepage carousel section (Visual Showcase).
+
+
+4) ABOUT PAGE CONTENT: WHAT CAN BE CHANGED FROM SANITY
+Data source:
+Sanity document: About Section
+
+Fields currently used by frontend:
+1. name
+2. portrait
+3. bio
+4. philosophyQuote
+5. quoteAttribution
+6. yearsExperience
+7. sessionsHosted
+8. affiliation
+
+About portrait dimensions note:
+Current layout uses a fixed portrait frame.
+Changing the image file in Sanity updates the image, but frame shape/size is controlled in code.
+
+About credentials note:
+Field exists in Sanity as credentials, but current About component has heavy custom hardcoded cards in lower section.
+The credentials array is currently not the main source for those cards.
+
+
+5) SERVICES, PUBLICATIONS, VIDEOS: SANITY-DRIVEN AREAS
+
+5.1 Services page
+Sanity document: Services
+Fields used:
+1. title
+2. icon
+3. description
+4. price
+5. duration
+6. features
+7. ctaText
+8. ctaLink
+9. featured
+10. order
+
+Note:
+The "What to Expect" section on Services page is hardcoded.
+
+5.2 Publications page
+Sanity document: Publications
+Fields used:
+1. title
+2. subtitle
+3. year
+4. publisher
+5. coverImage
+6. description
+7. viewLink
+8. buyLink
+9. editions[] (language-specific links/covers)
+10. order
+
+5.3 Videos page
+Sanity document: YouTube Videos
+Fields used:
+1. title
+2. videoId
+3. description
+4. order
+
+Note:
+The large quote block at bottom of videos section is hardcoded.
+
+
+6) BOOK A SESSION: FULL MECHANISM FOR OWNER
+This section is the simple owner workflow for booking.
+
+How it works:
+1. Michael adds availability slots in his Google Calendar.
+2. Those available slots automatically show on the website booking page.
+3. A visitor chooses one slot and books it.
+4. The booked session is added to the calendar.
+5. The meeting link is created automatically.
+6. Michael and the client receive the meeting details by calendar/email.
+
+How Michael should add availability slots:
+1. Create a calendar event for the time he is available.
+2. Mark it clearly as available using the agreed slot label.
+3. Save it in the calendar.
+4. The slot will appear on the website for users to book.
+
+Example slot titles:
+Example 1:
+Availability Session - 60 minutes
+
+Example 2:
+Intro Session
+
+Example 3:
+Clarity Session - Language and Belief
+
+What Michael does not need to manage manually:
+1. No separate booking spreadsheet.
+2. No manual meeting link creation.
+3. No manual email sending for the meeting link.
+4. No manual transfer of the booked slot into another system.
+
+What happens after booking:
+1. The session is reserved.
+2. The meeting link is created automatically.
+3. The calendar entry and email contain the meeting details.
+4. The slot is no longer shown as available.
+
+
+7) WHAT IS CONNECTED TO SANITY VS NOT CONNECTED
+
+7.1 Connected and actively used
+1. Hero Section: headline, subheadline, showcasePhotos
+2. About Section: portrait, bio, quote, attribution, experience/session/affiliation fields
+3. Services
+4. YouTube Videos
+5. Publications
+
+7.2 Exists in schema/query but not actively used on visible UI right now
+1. Hero fields ctaPrimary, ctaPrimaryLink, ctaSecondary, ctaSecondaryLink, backgroundImage, quote, quoteAuthor exist but most are not rendered in the current homepage implementation.
+2. Testimonials schema/query exists but no active testimonials section is mounted on pages.
+3. Philosophical Quotes schema/query exists but not mounted in current visible page flow.
+4. Site Settings schema exists but no active frontend binding currently reads site title/tagline/contact from this document.
+
+
+8) HARD CODED CONTENT (CODE CHANGES REQUIRED)
+These cannot be changed in Sanity currently:
+
+1. Main navigation labels and brand text
+2. Footer prompt deck, session compass labels, and footer microcopy
+3. Homepage rotating typewriter reflections and large featured quote text
+4. Homepage index row labels and descriptions (About/Services/The Practice/Publications/Videos strip)
+5. Practice page core text and method cards
+6. Contact page option cards and pre-session prep text
+7. Most page headers (label, title, subtitle)
+8. About lower credential cards content in current design
+
+
+9) QUICK CHANGE EXAMPLES
+
+Example A: Change homepage H1 "Thinking with Care..."
+1. Open /studio
+2. Open Hero Section
+3. Edit Headline
+4. Publish
+5. Reload homepage
+
+Example B: Change homepage carousel image titles
+1. Open /studio
+2. Open Hero Section
+3. Edit Home Showcase Photos item title/subtitle/image
+4. Publish
+
+Example C: Change About quote
+1. Open /studio
+2. Open About Section
+3. Edit Philosophy Quote and Quote Attribution
+4. Publish
+
+Example D: Add a new service
+1. Open /studio
+2. Open Services
+3. Create new item with title/description/price/features/cta/order
+4. Publish
+
+Example E: Make a slot available for booking
+1. Open configured Google Calendar
+2. Create event inside next 45 days
+3. Include [AVAILABLE] in event title
+4. Keep attendees empty
+5. Save
+6. Visit /book-session and verify slot appears
+
+
+END OF GUIDE
