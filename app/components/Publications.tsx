@@ -322,10 +322,10 @@ function PublicationRow({ pub, index }: { pub: Publication; index: number }) {
           >
             {activeCoverImage ? (
               <Image
-                src={urlFor(activeCoverImage).width(360).height(480).url()}
+                src={urlFor(activeCoverImage).width(360).height(480).fit("max").auto("format").url()}
                 alt={pub.title}
                 fill
-                style={{ objectFit: "cover" }}
+                style={{ objectFit: "contain", objectPosition: "center" }}
               />
             ) : (
               <div
