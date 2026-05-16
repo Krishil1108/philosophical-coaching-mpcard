@@ -6,6 +6,8 @@ import { client, hasSanityConfig } from "../lib/sanity";
 import { practicePageQuery } from "../lib/queries";
 import { defaultPracticePageData } from "../lib/practiceContent";
 
+export const revalidate = 0;
+
 export const metadata = {
   title: "The Practice — Michael Picard Philosophical Coaching",
   description: "Neo-socratic inquiry, semantic analysis, and independent thinking. Explore Michael Picard's philosophical methodology.",
