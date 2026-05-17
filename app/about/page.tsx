@@ -25,9 +25,9 @@ export default async function AboutPage() {
   return (
     <SiteLayout>
       <PageHeader
-        label="The Philosopher"
-        title="About Michael"
-        subtitle="A life in philosophy — from MIT lecture halls to café tables to one-on-one inquiry."
+        label={about?.pageHeaderLabel || "The Philosopher"}
+        title={about?.pageHeaderTitle || "About Michael"}
+        subtitle={about?.pageHeaderSubtitle || "A life in philosophy — from MIT lecture halls to café tables to one-on-one inquiry."}
         breadcrumb={{ label: "Home", href: "/" }}
       />
       <About data={about} />

@@ -6,10 +6,28 @@ import { urlFor } from "../lib/sanity";
 import { PhilPeopleFollowButton } from "./PhilPeopleWidgets";
 
 interface AboutData {
+  openingStatement?: string;
   name?: string;
+  location?: string;
   portrait?: object;
   bio?: Array<{ children: Array<{ text: string }> }>;
   credentials?: string[];
+  bioSectionLabel?: string;
+  bioSectionTitle?: string;
+  credentialsSectionLabel?: string;
+  credentialsSectionTitle?: string;
+  educationTitle?: string;
+  educationItems?: Array<{ label?: string; value?: string }>;
+  teachingTitle?: string;
+  teachingRoleLabel?: string;
+  teachingRoleValue?: string;
+  teachingTagline?: string;
+  innovationTitle?: string;
+  innovationItems?: Array<{ label?: string; value?: string }>;
+  liberationLabel?: string;
+  liberationTitle?: string;
+  liberationParagraphs?: string[];
+  liberationCards?: Array<{ symbol?: string; term?: string; definition?: string }>;
   philosophyQuote?: string;
   quoteAttribution?: string;
   yearsExperience?: number;
@@ -28,9 +46,36 @@ export default function About({ data }: { data?: AboutData }) {
     ? data.bio.map((b) => b.children?.map((c) => c.text).join("")).filter(Boolean)
     : defaultBio;
 
-  const credentials = data?.credentials?.length
-    ? data.credentials
-    : ["PhD, Philosophy — MIT", "MSc — MIT", "Faculty, Douglas College", "Founder, Café Philosophy Victoria BC", "Creator, Philosophy Sports", "Author of 'How to Play Philosophy'"];
+  const educationItems = data?.educationItems?.length
+    ? data.educationItems
+    : [
+        { label: "PhD, Philosophy", value: "Massachusetts Institute of Technology" },
+        { label: "MSc", value: "Massachusetts Institute of Technology" },
+      ];
+
+  const innovationItems = data?.innovationItems?.length
+    ? data.innovationItems
+    : [
+        { label: "Founder", value: "Café Philosophy Victoria BC" },
+        { label: "Creator", value: "Philosophy Sports" },
+        { label: "Author", value: "How to Play Philosophy" },
+      ];
+
+  const liberationParagraphs = data?.liberationParagraphs?.length
+    ? data.liberationParagraphs
+    : [
+        "Most of what we believe, we believe because we absorbed it — from culture, family, media, and social contagion. Very little of our thinking is genuinely our own.",
+        "Michael calls these inherited structures 'zombie metaphors' — figurative language that moves us without our awareness. He helps you see them, name them, and choose what to do with them.",
+        "The result is not a new worldview imposed from outside, but a more honest, more flexible relationship with your own mind.",
+      ];
+
+  const liberationCards = data?.liberationCards?.length
+    ? data.liberationCards
+    : [
+        { symbol: "∮", term: "Examine Inherited Thinking", definition: "Question what you've absorbed from culture, family, and media without conscious choice." },
+        { symbol: "§", term: "Identify Zombie Metaphors", definition: "See the figurative language that moves you without your awareness and decide what to do with it." },
+        { symbol: "◎", term: "Develop Mental Freedom", definition: "Build a more honest, flexible relationship with your own mind and thinking patterns." },
+      ];
 
   return (
     <section style={{ background: "var(--bg)" }}>
@@ -58,7 +103,7 @@ export default function About({ data }: { data?: AboutData }) {
                 maxWidth: "44rem",
               }}
             >
-              A philosopher who teaches at Douglas College, facilitates public dialogue, and practices neo-socratic inquiry one-on-one — bridging academic rigour and lived philosophy.
+              {data?.openingStatement || "A philosopher who teaches at Douglas College, facilitates public dialogue, and practices neo-socratic inquiry one-on-one — bridging academic rigour and lived philosophy."}
             </p>
           </div>
         </div>
@@ -137,7 +182,7 @@ export default function About({ data }: { data?: AboutData }) {
                   color: "var(--text-muted)",
                 }}
               >
-                {data?.name || "Michael Picard"} • BC, Canada
+                {data?.name || "Michael Picard"} • {data?.location || "BC, Canada"}
               </figcaption>
             </motion.figure>
 
@@ -159,7 +204,7 @@ export default function About({ data }: { data?: AboutData }) {
                   marginBottom: "1rem",
                 }}
               >
-                Living Philosophy
+                {data?.bioSectionLabel || "Living Philosophy"}
               </span>
 
               <h2
@@ -172,7 +217,7 @@ export default function About({ data }: { data?: AboutData }) {
                   maxWidth: "52rem",
                 }}
               >
-                A Working Biography
+                {data?.bioSectionTitle || "A Working Biography"}
               </h2>
 
               <p
@@ -336,7 +381,7 @@ export default function About({ data }: { data?: AboutData }) {
               }}
             >
               <span style={{ width: "3rem", height: "1px", background: "var(--accent)" }} />
-              Academic Journey
+              {data?.credentialsSectionLabel || "Academic Journey"}
               <span style={{ width: "3rem", height: "1px", background: "var(--accent)" }} />
             </div>
             <h2
@@ -349,7 +394,7 @@ export default function About({ data }: { data?: AboutData }) {
                 margin: "0 auto"
               }}
             >
-              Two Decades of Philosophical Practice
+              {data?.credentialsSectionTitle || "Two Decades of Philosophical Practice"}
             </h2>
           </motion.div>
 
@@ -408,7 +453,7 @@ export default function About({ data }: { data?: AboutData }) {
                 color: "var(--text-heading)",
                 textAlign: "center",
                 marginBottom: "2rem"
-              }}>Education</h3>
+              }}>{data?.educationTitle || "Education"}</h3>
               
               <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
                 <div style={{ textAlign: "center" }}>
@@ -418,13 +463,13 @@ export default function About({ data }: { data?: AboutData }) {
                     fontSize: "1.125rem",
                     color: "var(--text-heading)",
                     marginBottom: "0.5rem"
-                  }}>PhD, Philosophy</div>
+                  }}>{educationItems[0]?.label || "PhD, Philosophy"}</div>
                   <div style={{ 
                     fontFamily: "Space Grotesk, sans-serif", 
                     fontSize: "1rem",
                     color: "var(--accent)",
                     fontWeight: 500
-                  }}>Massachusetts Institute of Technology</div>
+                  }}>{educationItems[0]?.value || "Massachusetts Institute of Technology"}</div>
                 </div>
                 <div style={{ textAlign: "center" }}>
                   <div style={{ 
@@ -433,13 +478,13 @@ export default function About({ data }: { data?: AboutData }) {
                     fontSize: "1.125rem",
                     color: "var(--text-heading)",
                     marginBottom: "0.5rem"
-                  }}>MSc</div>
+                  }}>{educationItems[1]?.label || "MSc"}</div>
                   <div style={{ 
                     fontFamily: "Space Grotesk, sans-serif", 
                     fontSize: "1rem",
                     color: "var(--accent)",
                     fontWeight: 500
-                  }}>Massachusetts Institute of Technology</div>
+                  }}>{educationItems[1]?.value || "Massachusetts Institute of Technology"}</div>
                 </div>
               </div>
             </motion.div>
@@ -493,7 +538,7 @@ export default function About({ data }: { data?: AboutData }) {
                 color: "var(--text-heading)",
                 textAlign: "center",
                 marginBottom: "2rem"
-              }}>Teaching</h3>
+              }}>{data?.teachingTitle || "Teaching"}</h3>
               
               <div style={{ textAlign: "center" }}>
                 <div style={{ 
@@ -502,19 +547,19 @@ export default function About({ data }: { data?: AboutData }) {
                   fontSize: "1.125rem",
                   color: "var(--text-heading)",
                   marginBottom: "0.5rem"
-                }}>Faculty</div>
+                }}>{data?.teachingRoleLabel || "Faculty"}</div>
                 <div style={{ 
                   fontFamily: "Space Grotesk, sans-serif", 
                   fontSize: "1rem",
                   color: "var(--text-muted)",
                   marginBottom: "1.5rem"
-                }}>Douglas College</div>
+                }}>{data?.teachingRoleValue || "Douglas College"}</div>
                 <div style={{ 
                   fontFamily: "Space Grotesk, sans-serif", 
                   fontSize: "0.875rem",
                   color: "var(--accent)",
                   fontStyle: "italic"
-                }}>Bringing philosophy to life in the classroom</div>
+                }}>{data?.teachingTagline || "Bringing philosophy to life in the classroom"}</div>
               </div>
             </motion.div>
 
@@ -567,7 +612,7 @@ export default function About({ data }: { data?: AboutData }) {
                 color: "var(--text-heading)",
                 textAlign: "center",
                 marginBottom: "2rem"
-              }}>Innovation</h3>
+              }}>{data?.innovationTitle || "Innovation"}</h3>
               
               <div style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
                 <div style={{ textAlign: "center" }}>
@@ -577,12 +622,12 @@ export default function About({ data }: { data?: AboutData }) {
                     fontSize: "1rem",
                     color: "var(--text-heading)",
                     marginBottom: "0.25rem"
-                  }}>Founder</div>
+                  }}>{innovationItems[0]?.label || "Founder"}</div>
                   <div style={{ 
                     fontFamily: "Space Grotesk, sans-serif", 
                     fontSize: "0.875rem",
                     color: "var(--text-muted)"
-                  }}>Café Philosophy Victoria BC</div>
+                  }}>{innovationItems[0]?.value || "Café Philosophy Victoria BC"}</div>
                 </div>
                 <div style={{ textAlign: "center" }}>
                   <div style={{ 
@@ -591,12 +636,12 @@ export default function About({ data }: { data?: AboutData }) {
                     fontSize: "1rem",
                     color: "var(--text-heading)",
                     marginBottom: "0.25rem"
-                  }}>Creator</div>
+                  }}>{innovationItems[1]?.label || "Creator"}</div>
                   <div style={{ 
                     fontFamily: "Space Grotesk, sans-serif", 
                     fontSize: "0.875rem",
                     color: "var(--text-muted)"
-                  }}>Philosophy Sports</div>
+                  }}>{innovationItems[1]?.value || "Philosophy Sports"}</div>
                 </div>
                 <div style={{ textAlign: "center" }}>
                   <div style={{ 
@@ -605,13 +650,13 @@ export default function About({ data }: { data?: AboutData }) {
                     fontSize: "1rem",
                     color: "var(--text-heading)",
                     marginBottom: "0.25rem"
-                  }}>Author</div>
+                  }}>{innovationItems[2]?.label || "Author"}</div>
                   <div style={{ 
                     fontFamily: "Space Grotesk, sans-serif", 
                     fontSize: "0.875rem",
                     color: "var(--text-muted)",
                     fontStyle: "italic"
-                  }}>'How to Play Philosophy'</div>
+                  }}>{innovationItems[2]?.value || "How to Play Philosophy"}</div>
                 </div>
               </div>
             </motion.div>
@@ -625,16 +670,14 @@ export default function About({ data }: { data?: AboutData }) {
         <div className="inner-max" style={{ maxWidth: "72rem" }}>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
             <div>
-              <span className="section-label" style={{ marginBottom: "1.5rem", display: "block" }}>Why It Works</span>
+              <span className="section-label" style={{ marginBottom: "1.5rem", display: "block" }}>
+                {data?.liberationLabel || "Why It Works"}
+              </span>
               <h2 className="font-serif mb-8" style={{ fontSize: "clamp(2rem, 4vw, 3.25rem)", color: "var(--text-heading)" }}>
-                Philosophy as Liberation
+                {data?.liberationTitle || "Philosophy as Liberation"}
               </h2>
               <div className="divider-gold-left" />
-              {[
-                "Most of what we believe, we believe because we absorbed it — from culture, family, media, and social contagion. Very little of our thinking is genuinely our own.",
-                "Michael calls these inherited structures 'zombie metaphors' — figurative language that moves us without our awareness. He helps you see them, name them, and choose what to do with them.",
-                "The result is not a new worldview imposed from outside, but a more honest, more flexible relationship with your own mind.",
-              ].map((p, i) => (
+              {liberationParagraphs.map((p, i) => (
                 <p
                   key={i}
                   style={{
@@ -652,13 +695,9 @@ export default function About({ data }: { data?: AboutData }) {
             </div>
 
             <div className="space-y-6">
-              {[
-                { symbol: "∮", term: "Examine Inherited Thinking", definition: "Question what you've absorbed from culture, family, and media without conscious choice." },
-                { symbol: "§", term: "Identify Zombie Metaphors", definition: "See the figurative language that moves you without your awareness and decide what to do with it." },
-                { symbol: "◎", term: "Develop Mental Freedom", definition: "Build a more honest, flexible relationship with your own mind and thinking patterns." },
-              ].map((item) => (
+              {liberationCards.map((item, idx) => (
                 <div
-                  key={item.term}
+                  key={item.term || idx}
                   className="card-hover"
                   style={{
                     background: "var(--bg-card)",
