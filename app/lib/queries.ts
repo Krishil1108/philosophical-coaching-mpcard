@@ -18,7 +18,7 @@ export const heroQuery = groq`*[_type == "hero"][0]{
   quoteAuthor
 }`;
 
-export const aboutQuery = groq`*[_type == "about"][0]{
+export const aboutQuery = groq`*[_type == "about" && _id == "michael-picard"][0]{
   pageHeaderLabel,
   pageHeaderTitle,
   pageHeaderSubtitle,

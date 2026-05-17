@@ -34,6 +34,50 @@ async function seedAboutContent() {
     openingStatement: "A philosopher who teaches at Douglas College, facilitates public dialogue, and practices neo-socratic inquiry one-on-one — bridging academic rigour and lived philosophy.",
     name: "Michael Picard",
     location: "BC, Canada",
+    bio: [
+      {
+        _key: "bio-1",
+        _type: "block",
+        children: [
+          {
+            _key: "bio-1-span-1",
+            _type: "span",
+            marks: [],
+            text: "Michael Picard is a philosopher, author, and neo-socratic practitioner based in British Columbia, Canada. Educated at MIT, he has spent over two decades exploring philosophy as a living discipline — not merely an academic exercise.",
+          },
+        ],
+        markDefs: [],
+        style: "normal",
+      },
+      {
+        _key: "bio-2",
+        _type: "block",
+        children: [
+          {
+            _key: "bio-2-span-1",
+            _type: "span",
+            marks: [],
+            text: "As the founder of Café Philosophy in Victoria, BC (weekly sessions running for 12 years), and Faculty at Douglas College, Michael brings rigorous philosophical inquiry into accessible conversation. His work focuses on examining the language behind our beliefs, probing the reasoning we rarely question, and helping individuals think more independently.",
+          },
+        ],
+        markDefs: [],
+        style: "normal",
+      },
+      {
+        _key: "bio-3",
+        _type: "block",
+        children: [
+          {
+            _key: "bio-3-span-1",
+            _type: "span",
+            marks: [],
+            text: "His approach is neither therapeutic nor didactic. He acts as an impartial witness — using semantic analysis and neo-socratic questioning to reveal the hidden assumptions that shape how we see the world.",
+          },
+        ],
+        markDefs: [],
+        style: "normal",
+      },
+    ],
     bioSectionLabel: "Living Philosophy",
     bioSectionTitle: "A Working Biography",
     credentialsSectionLabel: "Academic Journey",

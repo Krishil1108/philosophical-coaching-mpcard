@@ -235,9 +235,9 @@ export default function About({ data }: { data?: AboutData }) {
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3" style={{ marginBottom: "1.4rem", maxWidth: "43rem" }}>
                 {[
-                  { label: "Experience", value: `${data?.yearsExperience || 20}+ years` },
-                  { label: "Sessions", value: data?.sessionsHosted || "700+ dialogues" },
-                  { label: "Affiliation", value: data?.affiliation || "Douglas College" },
+                  { label: "Experience", value: `${data?.yearsExperience ?? 20}+ years` },
+                  { label: "Sessions", value: data?.sessionsHosted ?? "700+ dialogues" },
+                  { label: "Affiliation", value: data?.affiliation ?? "Douglas College" },
                 ].map((item) => (
                   <div
                     key={item.label}
