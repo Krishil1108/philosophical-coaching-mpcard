@@ -59,5 +59,29 @@ export const hero = defineType({
     }),
     defineField({ name: "quote", title: "Featured Quote", type: "text", rows: 2 }),
     defineField({ name: "quoteAuthor", title: "Quote Author", type: "string" }),
+    defineField({ name: "quoteLabel", title: "Quote Label", type: "string", description: "Label text appearing vertically next to the quote" }),
+    defineField({
+      name: "openingReflections",
+      title: "Opening Reflections (Typewriter)",
+      description: "List of texts that appear in the typewriter effect section",
+      type: "array",
+      of: [{ type: "string" }],
+    }),
+    defineField({
+      name: "contents",
+      title: "Page Contents / Index",
+      type: "array",
+      of: [
+        {
+          type: "object",
+          fields: [
+            defineField({ name: "num", title: "Number", type: "string" }),
+            defineField({ name: "title", title: "Title", type: "string" }),
+            defineField({ name: "desc", title: "Description", type: "string" }),
+            defineField({ name: "href", title: "Link Path", type: "string" }),
+          ],
+        },
+      ],
+    }),
   ],
 });

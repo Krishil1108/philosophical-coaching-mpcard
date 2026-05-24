@@ -15,7 +15,15 @@ export const heroQuery = groq`*[_type == "hero"][0]{
     image
   },
   quote,
-  quoteAuthor
+  quoteAuthor,
+  quoteLabel,
+  openingReflections,
+  contents[]{
+    num,
+    title,
+    desc,
+    href
+  }
 }`;
 
 export const aboutQuery = groq`*[_type == "about" && _id == "michael-picard"][0]{

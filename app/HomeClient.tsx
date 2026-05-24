@@ -12,7 +12,7 @@ interface HomeClientProps {
   hero?: any;
 }
 
-const contents = [
+const defaultContents = [
   {
     num: "01",
     href: "/about",
@@ -45,7 +45,7 @@ const contents = [
   },
 ];
 
-const openingReflections = [
+const defaultOpeningReflections = [
   "There is philosophy for the philosophers, and there is philosophy for life. They are not the same in that they ask different questions; but insofar as both take thinking seriously, they are one.",
   "Sometimes an idea helps, and so benefits may come from a philosophy. More often the benefit arises, not from an idea, but from thinking, from the practice of philosophy in relation to life.",
   "The practice of philosophy is not the application of a theory, still less the development of theory. It is not a philosophy that can help you, but a philosopher who will think with you.",
@@ -69,6 +69,18 @@ export default function HomeClient({
   const subheadline =
     hero?.subheadline ||
     "Philosophical practice is not philosophy on sale. It is a situational deployment of philosophy for purposes of life. It is not a monopoly. Try it.";
+
+  const ctaPrimary = hero?.ctaPrimary || "Explore the Practice";
+  const ctaPrimaryLink = hero?.ctaPrimaryLink || "/about";
+  const ctaSecondary = hero?.ctaSecondary || "The Practice";
+  const ctaSecondaryLink = hero?.ctaSecondaryLink || "/practice";
+  
+  const displayContents = hero?.contents?.length ? hero.contents : defaultContents;
+  const displayOpeningReflections = hero?.openingReflections?.length ? hero.openingReflections : defaultOpeningReflections;
+
+  const featuredQuote = hero?.quote || "“The purpose of philosophy of life is a life, not a philosophy.”";
+  const featuredQuoteAuthor = hero?.quoteAuthor || "— Michael Picard, How to Play Philosophy";
+  const featuredQuoteLabel = hero?.quoteLabel || "How to Play Philosophy";
 
   // Debug: log what we're getting from Sanity
   console.log('Raw headline from Sanity:', JSON.stringify(headline));
@@ -207,8 +219,8 @@ export default function HomeClient({
               transition={{ duration: 0.6, delay: 0.9, ease: [0.22, 1, 0.36, 1] }}
               style={{ marginTop: "2rem" }}
             >
-              <Link href="/about" className="btn-outline">
-                Explore the Practice
+              <Link href={ctaPrimaryLink} className="btn-outline">
+                {ctaPrimary}
               </Link>
             </motion.div>
           </motion.div>
@@ -238,7 +250,7 @@ export default function HomeClient({
             <div />
             <div>
               <Typewriter
-                texts={openingReflections}
+                texts={displayOpeningReflections}
                 speed={15}
                 deleteSpeed={11}
                 pauseMs={3200}
@@ -254,8 +266,8 @@ export default function HomeClient({
                   marginBottom: "2.5rem",
                 }}
               />
-              <Link href="/practice" className="btn-ghost">
-                The Practice
+              <Link href={ctaSecondaryLink} className="btn-ghost">
+                {ctaSecondary}
                 <svg width="13" height="13" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
                   <path d="M5 12h14M12 5l7 7-7 7" />
                 </svg>
@@ -298,10 +310,10 @@ export default function HomeClient({
         </div>
 
         {/* Content rows */}
-        {contents.map((item) => (
+        {displayContents.map((item: any, idx: number) => (
           <Link
-            key={item.num}
-            href={item.href}
+            key={item.num || idx}
+            href={item.href || "#"}
             className="index-row"
             style={{ display: "block", textDecoration: "none", position: "relative", zIndex: 1 }}
           >
@@ -400,7 +412,7 @@ export default function HomeClient({
                 alignSelf: "center",
               }}
             >
-              How to Play Philosophy
+              {featuredQuoteLabel}
             </div>
             <blockquote
               className="font-italic home-featured-quote-text"
@@ -412,7 +424,7 @@ export default function HomeClient({
                 maxWidth: "64rem",
               }}
             >
-              &ldquo;The purpose of philosophy of life is a life, not a philosophy.&rdquo;
+              {featuredQuote}
               <cite
                 style={{
                   display: "block",
@@ -425,7 +437,7 @@ export default function HomeClient({
                   fontStyle: "normal",
                 }}
               >
-                — Michael Picard, How to Play Philosophy
+                {featuredQuoteAuthor}
               </cite>
             </blockquote>
           </div>
