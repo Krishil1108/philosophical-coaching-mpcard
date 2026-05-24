@@ -8,6 +8,13 @@ export interface BookingSlot {
   end: string;
 }
 
+export interface BookingCalendar {
+  slots: BookingSlot[];
+  bookedSlotStarts: string[];
+  windowStart: string;
+  windowEnd: string;
+}
+
 interface BookingInput {
   slotId: string;
   name: string;
@@ -55,9 +62,26 @@ function eventIsAvailable(
   return hasMarker && !hasAttendees;
 }
 
-export async function listAvailableSlots(): Promise<BookingSlot[]> {
+function eventIsBookedSlot(
+  summary: string | null | undefined,
+  attendees: Array<{ email?: string | null }> | null | undefined,
+  description: string | null | undefined,
+  marker: string,
+  hostName: string,
+) {
+  const summaryText = summary || "";
+  const hasAttendees = (attendees || []).some((attendee) => Boolean(attendee.email));
+  const wasMarkedSlot = summaryText.includes(marker);
+  const wasBookedBySite =
+    summaryText.startsWith(`Session with ${hostName}`) &&
+    Boolean(description?.includes("--- Booking details ---"));
+
+  return hasAttendees && (wasMarkedSlot || wasBookedBySite);
+}
+
+export async function listBookingCalendar(): Promise<BookingCalendar> {
   const calendar = getCalendarClient();
-  const { calendarId, windowDays, marker } = getConfig();
+  const { calendarId, windowDays, marker, hostName } = getConfig();
 
   const now = new Date();
   const windowEnd = new Date(now);
@@ -73,18 +97,38 @@ export async function listAvailableSlots(): Promise<BookingSlot[]> {
   });
 
   const events = response.data.items || [];
+  const slots: BookingSlot[] = [];
+  const bookedSlotStarts: string[] = [];
 
-  return events
-    .filter((event) => {
-      if (!event.id || !event.start?.dateTime || !event.end?.dateTime) return false;
-      return eventIsAvailable(event.summary, event.attendees, marker);
-    })
-    .map((event) => ({
-      id: event.id as string,
-      title: (event.summary || "Available session").replace(marker, "").trim(),
-      start: event.start?.dateTime as string,
-      end: event.end?.dateTime as string,
-    }));
+  for (const event of events) {
+    if (!event.id || !event.start?.dateTime || !event.end?.dateTime) continue;
+
+    if (eventIsAvailable(event.summary, event.attendees, marker)) {
+      slots.push({
+        id: event.id as string,
+        title: (event.summary || "Available session").replace(marker, "").trim(),
+        start: event.start.dateTime,
+        end: event.end.dateTime,
+      });
+      continue;
+    }
+
+    if (eventIsBookedSlot(event.summary, event.attendees, event.description, marker, hostName)) {
+      bookedSlotStarts.push(event.start.dateTime);
+    }
+  }
+
+  return {
+    slots,
+    bookedSlotStarts,
+    windowStart: now.toISOString(),
+    windowEnd: windowEnd.toISOString(),
+  };
+}
+
+export async function listAvailableSlots(): Promise<BookingSlot[]> {
+  const calendar = await listBookingCalendar();
+  return calendar.slots;
 }
 
 export async function bookSlot(input: BookingInput) {

@@ -1,10 +1,10 @@
 import { NextResponse } from "next/server";
-import { listAvailableSlots } from "@/app/lib/googleCalendar";
+import { listBookingCalendar } from "@/app/lib/googleCalendar";
 
 export async function GET() {
   try {
-    const slots = await listAvailableSlots();
-    return NextResponse.json({ slots });
+    const calendar = await listBookingCalendar();
+    return NextResponse.json(calendar);
   } catch (error) {
     console.error("Failed to fetch booking slots", error);
     return NextResponse.json(
