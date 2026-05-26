@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "seed:about": "tsx scripts/seed-about-api.ts"
+    "seed:about": "tsx scripts/seed-about-api.ts",
+    "seed:contact": "tsx scripts/seed-contact-api.ts"
   },
   "dependencies": {
     "@sanity/client": "^7.17.0",

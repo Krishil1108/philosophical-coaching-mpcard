@@ -59,6 +59,28 @@ export const aboutQuery = groq`*[_type == "about" && _id == "michael-picard"][0]
   affiliation
 }`;
 
+export const contactPageQuery = groq`*[_type == "contactPage" && _id == "contact-page"][0]{
+  pageHeaderLabel,
+  pageHeaderTitle,
+  pageHeaderSubtitle,
+  options[] {
+    _key,
+    num,
+    platform,
+    title,
+    desc,
+    cta,
+    href,
+    external,
+    featured
+  },
+  firstSessionLabel,
+  firstSessionTitle,
+  firstSessionBody,
+  firstSessionPoints,
+  firstSessionNote
+}`;
+
 export const servicesQuery = groq`*[_type == "service"] | order(order asc){
   _id,
   title,

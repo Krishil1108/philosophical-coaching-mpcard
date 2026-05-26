@@ -19,6 +19,7 @@ export default defineConfig({
   ],
   schema: {
     types: schemaTypes,
-    templates: (templates) => templates.filter(({ schemaType }) => schemaType !== "about"),
+    templates: (templates) =>
+      templates.filter(({ schemaType }) => schemaType !== "about" && schemaType !== "contactPage"),
   },
 });

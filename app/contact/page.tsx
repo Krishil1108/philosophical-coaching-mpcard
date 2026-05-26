@@ -1,12 +1,40 @@
 import SiteLayout from "../components/SiteLayout";
 import PageHeader from "../components/PageHeader";
+import { hasSanityConfig, client } from "../lib/sanity";
+import { contactPageQuery } from "../lib/queries";
+
+export const revalidate = 0;
 
 export const metadata = {
   title: "Contact & Book — Michael Picard Philosophical Practice",
   description: "Book a philosophical coaching session with Michael Picard or reach out about Café Philosophy and Philosophy Sports.",
 };
 
-const options = [
+type ContactOption = {
+  _key?: string;
+  num: string;
+  platform: string;
+  title: string;
+  desc: string;
+  cta: string;
+  href: string;
+  external?: boolean;
+  featured?: boolean;
+};
+
+type ContactPageData = {
+  pageHeaderLabel?: string;
+  pageHeaderTitle?: string;
+  pageHeaderSubtitle?: string;
+  options?: ContactOption[];
+  firstSessionLabel?: string;
+  firstSessionTitle?: string;
+  firstSessionBody?: string;
+  firstSessionPoints?: string[];
+  firstSessionNote?: string;
+};
+
+const fallbackOptions: ContactOption[] = [
   {
     num: "01",
     platform: "Google Meet",
@@ -39,13 +67,45 @@ const options = [
   },
 ];
 
-export default function ContactPage() {
+const fallbackFirstSessionPoints: string[] = [
+  "No worldview imposed",
+  "Confidential dialogue",
+  "All levels welcome",
+  "30 or 60 minutes",
+];
+
+const fallbackFirstSessionBody =
+  "No preparation required. No background in philosophy expected. Bring a genuine question, a problem you're living with, or a curiosity you can't shake. The session starts from where you are.";
+
+const fallbackFirstSessionNote =
+  "If you are unsure whether this is the right fit, start with a 30-minute session.";
+
+async function getData() {
+  if (!hasSanityConfig()) return { contact: null };
+
+  const contact = await client.fetch<ContactPageData | null>(contactPageQuery);
+
+  return { contact };
+}
+
+export default async function ContactPage() {
+  const { contact } = await getData();
+  const options =
+    contact?.options && contact.options.length > 0 ? contact.options : fallbackOptions;
+  const firstSessionPoints =
+    contact?.firstSessionPoints && contact.firstSessionPoints.length > 0
+      ? contact.firstSessionPoints
+      : fallbackFirstSessionPoints;
+
   return (
     <SiteLayout>
       <PageHeader
-        label="Reach Out"
-        title="Contact"
-        subtitle="Ready to begin your philosophical inquiry? Choose the path that fits your intention."
+        label={contact?.pageHeaderLabel || "Reach Out"}
+        title={contact?.pageHeaderTitle || "Contact"}
+        subtitle={
+          contact?.pageHeaderSubtitle ||
+          "Ready to begin your philosophical inquiry? Choose the path that fits your intention."
+        }
         breadcrumb={{ label: "Home", href: "/" }}
       />
 
@@ -55,7 +115,7 @@ export default function ContactPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
             {options.map((opt) => (
               <div
-                key={opt.num}
+                key={opt._key ?? opt.num}
                 className="card-hover flex flex-col"
                 style={{
                   background: opt.featured ? "rgba(139, 107, 74, 0.06)" : "var(--bg-card)",
@@ -103,8 +163,8 @@ export default function ContactPage() {
                     marginBottom: "1.75rem",
                   }}
                 >
-                  {opt.desc}
-                </p>
+                    {opt.desc}
+                  </p>
 
                 <a
                   href={opt.href}
@@ -137,10 +197,10 @@ export default function ContactPage() {
             }}
           >
             <span className="section-label" style={{ marginBottom: "0.9rem", display: "inline-block" }}>
-              First Session
+              {contact?.firstSessionLabel || "First Session"}
             </span>
             <h2 className="font-serif" style={{ fontSize: "clamp(1.95rem, 4vw, 3rem)", color: "var(--text-heading)" }}>
-              Before You Begin
+              {contact?.firstSessionTitle || "Before You Begin"}
             </h2>
             <div className="divider-gold" style={{ marginTop: "1.1rem", marginBottom: "1.25rem" }} />
             <p
@@ -152,19 +212,12 @@ export default function ContactPage() {
                 fontSize: "1.02rem",
               }}
             >
-              No preparation required. No background in philosophy expected. Bring a genuine
-              question, a problem you&apos;re living with, or a curiosity you can&apos;t shake.
-              The session starts from where you are.
+              {contact?.firstSessionBody || fallbackFirstSessionBody}
             </p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4" style={{ marginBottom: "2.25rem" }}>
-            {[
-              "No worldview imposed",
-              "Confidential dialogue",
-              "All levels welcome",
-              "30 or 60 minutes",
-            ].map((t) => (
+            {firstSessionPoints.map((t) => (
               <div
                 key={t}
                 style={{
@@ -225,7 +278,7 @@ export default function ContactPage() {
                 lineHeight: 1.7,
               }}
             >
-              If you are unsure whether this is the right fit, start with a 30-minute session.
+              {contact?.firstSessionNote || fallbackFirstSessionNote}
             </p>
           </div>
         </div>

@@ -1,0 +1,52 @@
+{
+  "_type": "contactPage",
+  "_id": "contact-page",
+  "pageHeaderLabel": "Reach Out",
+  "pageHeaderTitle": "Contact",
+  "pageHeaderSubtitle": "Ready to begin your philosophical inquiry? Choose the path that fits your intention.",
+  "options": [
+    {
+      "_key": "opt-1",
+      "num": "01",
+      "platform": "Google Meet",
+      "title": "Book a Live Session",
+      "desc": "Choose from Michael's available session times and book a live philosophical coaching session on Google Meet.",
+      "cta": "Book a Session",
+      "href": "/book-session",
+      "external": false,
+      "featured": false
+    },
+    {
+      "_key": "opt-2",
+      "num": "02",
+      "platform": "Email",
+      "title": "Café Philosophy & Events",
+      "desc": "Interested in bringing Café Philosophy or Philosophy Sports to your community, institution, or organization? Get in touch directly.",
+      "cta": "Send an Email",
+      "href": "mailto:michael@philosophicalcoaching.com",
+      "external": false,
+      "featured": false
+    },
+    {
+      "_key": "opt-3",
+      "num": "03",
+      "platform": "Douglas College",
+      "title": "Academic & Faculty Inquiries",
+      "desc": "For questions about Michael's academic work, courses at Douglas College, or translating Gerd Achenbach's texts.",
+      "cta": "View Faculty Profile",
+      "href": "https://www.douglascollege.ca",
+      "external": true,
+      "featured": false
+    }
+  ],
+  "firstSessionLabel": "First Session",
+  "firstSessionTitle": "Before You Begin",
+  "firstSessionBody": "No preparation required. No background in philosophy expected. Bring a genuine question, a problem you're living with, or a curiosity you can't shake. The session starts from where you are.",
+  "firstSessionPoints": [
+    "No worldview imposed",
+    "Confidential dialogue",
+    "All levels welcome",
+    "30 or 60 minutes"
+  ],
+  "firstSessionNote": "If you are unsure whether this is the right fit, start with a 30-minute session."
+}
