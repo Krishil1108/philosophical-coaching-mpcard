@@ -67,6 +67,7 @@ export default function Navbar() {
             <li key={link.href}>
               <Link
                 href={link.href}
+                className="nav-link"
                 style={{
                   color: "var(--text-muted)",
                   fontFamily: "Space Grotesk, sans-serif",
@@ -75,9 +76,9 @@ export default function Navbar() {
                   textTransform: "uppercase",
                   fontWeight: 500,
                   textDecoration: "none",
-                  transition: "color 0.2s",
+                  transition: "color 0.4s",
                 }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = "var(--accent)")}
+                onMouseEnter={(e) => (e.currentTarget.style.color = "var(--text-heading)")}
                 onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-muted)")}
               >
                 {link.label}
@@ -86,13 +87,15 @@ export default function Navbar() {
           ))}
         </ul>
 
-        {/* Book Session */}
-        <Link
-          href="/book-session"
-          className="btn-nav hidden lg:inline-flex"
-        >
-          Book Session
-        </Link>
+        {/* Book Session - Magnetic Effect */}
+        <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} transition={{ type: "spring", stiffness: 400, damping: 17 }}>
+          <Link
+            href="/book-session"
+            className="btn-nav hidden lg:inline-flex"
+          >
+            Book Session
+          </Link>
+        </motion.div>
 
         {/* Mobile Burger */}
         <button
