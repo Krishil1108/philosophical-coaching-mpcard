@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 
 interface Service {
   _id: string;
@@ -72,12 +72,12 @@ export default function Services({ data }: { data?: Service[] }) {
     },
   };
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: { opacity: 0, y: 40 },
     show: { 
       opacity: 1, 
       y: 0,
-      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } 
+      transition: { duration: 0.8, ease: "easeOut" } 
     },
   };
 
@@ -250,6 +250,6 @@ export default function Services({ data }: { data?: Service[] }) {
           </div>
         </motion.div>
       ))}
-    </section>
+    </motion.section>
   );
 }
