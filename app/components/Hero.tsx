@@ -1,8 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
 import Link from "next/link";
+import ParallaxImage from "./ParallaxImage";
 
 interface HeroData {
   headline?: string;
@@ -29,15 +29,15 @@ export default function Hero({ data }: { data?: HeroData }) {
       style={{ background: "linear-gradient(135deg, #f7f4ef 0%, #faf8f5 50%, #f5f2eb 100%)" }}
     >
       {/* Soft decorative background */}
-      <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0 z-0 overflow-hidden">
         {data?.backgroundImage?.asset?.url ? (
           <>
-            <Image
+            <ParallaxImage
               src={data.backgroundImage.asset.url}
               alt="Hero background"
               fill
-              style={{ objectFit: "cover", objectPosition: "center" }}
               priority
+              speed={0.25}
             />
             <div
               className="absolute inset-0"

@@ -62,15 +62,37 @@ function numberToRoman(num: number): string {
 export default function Services({ data }: { data?: Service[] }) {
   const services = data?.length ? data : defaultServices;
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2, // Authentic staggered cascading 
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 40 },
+    show: { 
+      opacity: 1, 
+      y: 0,
+      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } 
+    },
+  };
+
   return (
-    <section style={{ background: "var(--bg)" }}>
+    <motion.section 
+      style={{ background: "var(--bg)" }}
+      variants={containerVariants}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true, margin: "-80px" }}
+    >
       {services.map((service, i) => (
         <motion.div
           key={service._id}
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.75, delay: i * 0.1 }}
+          variants={itemVariants}
           style={{
             borderBottom: "1px solid var(--border)",
             padding: "5rem 0",
