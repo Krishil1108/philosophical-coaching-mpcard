@@ -314,42 +314,22 @@ function PublicationRow({ pub, index }: { pub: Publication; index: number }) {
             style={{
               position: "relative",
               aspectRatio: "3 / 4",
-              background: "var(--bg-card)",
-              overflow: "hidden",
+              background: "transparent",
+              overflow: "visible",
               flexShrink: 0,
-              borderRadius: "6px",
-              boxShadow: "0 8px 30px -4px rgba(0, 0, 0, 0.1)",
             }}
           >
             {activeCoverImage ? (
-              <>
-                <div
-                  aria-hidden="true"
-                  style={{
-                    position: "absolute",
-                    inset: "-20%",
-                    zIndex: 0,
-                    opacity: 0.5,
-                    filter: "blur(24px) saturate(1.5)",
-                    transform: "scale(1.1)",
-                    backgroundImage: `url(${urlFor(activeCoverImage).ignoreImageParams().width(100).height(100).fit("max").auto("format").url()})`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                  }}
-                />
-                <Image
-                  src={urlFor(activeCoverImage).ignoreImageParams().width(360).height(480).fit("max").auto("format").url()}
-                  alt={pub.title}
-                  fill
-                  style={{ 
-                    objectFit: "contain", 
-                    objectPosition: "center",
-                    position: "relative",
-                    zIndex: 1,
-                    filter: "drop-shadow(0 6px 16px rgba(0,0,0,0.2))"
-                  }}
-                />
-              </>
+              <Image
+                src={urlFor(activeCoverImage).ignoreImageParams().width(360).height(480).fit("max").auto("format").url()}
+                alt={pub.title}
+                fill
+                style={{ 
+                  objectFit: "contain", 
+                  objectPosition: "center",
+                  filter: "drop-shadow(0 12px 24px rgba(0, 0, 0, 0.12))"
+                }}
+              />
             ) : (
               <div
                 style={{
