@@ -832,3 +832,35 @@ h1, h2, h3, h4, h5, h6 {
 
   .pub-cover { width: min(100%, 12rem) !important; }
 }
+
+/* Elegant Website Level UX Additions */
+::selection {
+  background: var(--accent);
+  color: #fff;
+  text-shadow: none;
+}
+
+::-moz-selection {
+  background: var(--accent);
+  color: #fff;
+  text-shadow: none;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-card);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-light);
+}
+
+*:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
