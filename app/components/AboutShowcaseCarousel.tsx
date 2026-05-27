@@ -29,25 +29,9 @@ interface ShowcasePhoto {
   image?: Record<string, unknown>;
 }
 
-const baseMoments: ShowcaseItem[] = [
-  {
-    id: "m-1",
-    kind: "moment",
-    title: "Café Dialogues",
-    subtitle: "Open public inquiry sessions in community spaces.",
-  },
-  {
-    id: "m-2",
-    kind: "moment",
-    title: "Philosophy in Practice",
-    subtitle: "One-on-one sessions focused on language and clarity.",
-  },
-];
-
 const filters = [
   { key: "all", label: "All" },
   { key: "photo", label: "Photos" },
-  { key: "moment", label: "Moments" },
 ] as const;
 
 function cardLabel(kind: ShowcaseKind) {
@@ -78,7 +62,7 @@ export default function AboutShowcaseCarousel({
       });
     });
 
-    return [...list, ...baseMoments];
+    return list;
   }, [showcasePhotos]);
 
   const filteredItems = useMemo(() => {

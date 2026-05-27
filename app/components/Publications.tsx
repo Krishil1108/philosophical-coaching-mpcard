@@ -317,16 +317,39 @@ function PublicationRow({ pub, index }: { pub: Publication; index: number }) {
               background: "var(--bg-card)",
               overflow: "hidden",
               flexShrink: 0,
-              borderRadius: "4px",
+              borderRadius: "6px",
+              boxShadow: "0 8px 30px -4px rgba(0, 0, 0, 0.1)",
             }}
           >
             {activeCoverImage ? (
-              <Image
-                src={urlFor(activeCoverImage).ignoreImageParams().width(360).height(480).fit("max").auto("format").url()}
-                alt={pub.title}
-                fill
-                style={{ objectFit: "contain", objectPosition: "center" }}
-              />
+              <>
+                <div
+                  aria-hidden="true"
+                  style={{
+                    position: "absolute",
+                    inset: "-20%",
+                    zIndex: 0,
+                    opacity: 0.5,
+                    filter: "blur(24px) saturate(1.5)",
+                    transform: "scale(1.1)",
+                    backgroundImage: `url(${urlFor(activeCoverImage).ignoreImageParams().width(100).height(100).fit("max").auto("format").url()})`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                  }}
+                />
+                <Image
+                  src={urlFor(activeCoverImage).ignoreImageParams().width(360).height(480).fit("max").auto("format").url()}
+                  alt={pub.title}
+                  fill
+                  style={{ 
+                    objectFit: "contain", 
+                    objectPosition: "center",
+                    position: "relative",
+                    zIndex: 1,
+                    filter: "drop-shadow(0 6px 16px rgba(0,0,0,0.2))"
+                  }}
+                />
+              </>
             ) : (
               <div
                 style={{
