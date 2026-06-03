@@ -27,6 +27,8 @@ interface BookingResult {
 
 const weekdayLabels = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
+const CALENDAR_TIMEZONE = "America/Vancouver";
+
 function dateFromKey(dateKey: string) {
   const [year, month, day] = dateKey.split("-").map(Number);
   return new Date(year, month - 1, day);
@@ -39,8 +41,22 @@ function toDateKey(date: Date) {
   return `${year}-${month}-${day}`;
 }
 
-function localDateKey(isoDate: string) {
-  return toDateKey(new Date(isoDate));
+function zonedDateKey(isoDate: string | Date | number) {
+  const date = typeof isoDate === "string" || typeof isoDate === "number" ? new Date(isoDate) : isoDate;
+  
+  const formatter = new Intl.DateTimeFormat("en-US", {
+    timeZone: CALENDAR_TIMEZONE,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit"
+  });
+  
+  const parts = formatter.formatToParts(date);
+  const y = parts.find((p) => p.type === "year")?.value;
+  const m = parts.find((p) => p.type === "month")?.value;
+  const d = parts.find((p) => p.type === "day")?.value;
+  
+  return `${y}-${m}-${d}`;
 }
 
 function addDays(date: Date, days: number) {
@@ -51,11 +67,18 @@ function addDays(date: Date, days: number) {
 
 function formatDayLabel(dateValue: string) {
   const date = dateValue.includes("T") ? new Date(dateValue) : dateFromKey(dateValue);
-  return new Intl.DateTimeFormat("en-CA", {
+  
+  const options: Intl.DateTimeFormatOptions = {
     weekday: "long",
     month: "long",
     day: "numeric",
-  }).format(date);
+  };
+  
+  if (dateValue.includes("T")) {
+    options.timeZone = CALENDAR_TIMEZONE;
+  }
+  
+  return new Intl.DateTimeFormat("en-CA", options).format(date);
 }
 
 function formatMonthLabel(date: Date) {
@@ -69,12 +92,21 @@ function formatTimeRange(startIso: string, endIso: string) {
   const start = new Date(startIso);
   const end = new Date(endIso);
 
-  const formatter = new Intl.DateTimeFormat("en-CA", {
+  const formatter = new Intl.DateTimeFormat("en-US", {
+    timeZone: CALENDAR_TIMEZONE,
     hour: "numeric",
     minute: "2-digit",
   });
+  
+  const tzFormatter = new Intl.DateTimeFormat("en-US", {
+    timeZone: CALENDAR_TIMEZONE,
+    timeZoneName: "short"
+  });
+  
+  const tzParts = tzFormatter.formatToParts(start);
+  const tzName = tzParts.find((p) => p.type === "timeZoneName")?.value || "PT";
 
-  return `${formatter.format(start)} - ${formatter.format(end)}`;
+  return `${formatter.format(start)} - ${formatter.format(end)} ${tzName}`;
 }
 
 function getMonthCells(monthDate: Date) {
@@ -103,7 +135,7 @@ function statusCopy(slotCount: number, hasBookedSlot: boolean) {
 }
 
 export default function BookingScheduler() {
-  const todayKey = useMemo(() => toDateKey(new Date()), []);
+  const todayKey = useMemo(() => zonedDateKey(new Date()), []);
   const [slots, setSlots] = useState<Slot[]>([]);
   const [bookedSlotStarts, setBookedSlotStarts] = useState<string[]>([]);
   const [windowStartKey, setWindowStartKey] = useState<string | null>(null);
@@ -139,14 +171,14 @@ export default function BookingScheduler() {
 
         const nextSlots = [...(data.slots || [])].sort((a, b) => a.start.localeCompare(b.start));
         const nextBookedStarts = data.bookedSlotStarts || [];
-        const firstAvailableDate = nextSlots[0] ? localDateKey(nextSlots[0].start) : null;
-        const firstBookedDate = nextBookedStarts[0] ? localDateKey(nextBookedStarts[0]) : null;
+        const firstAvailableDate = nextSlots[0] ? zonedDateKey(nextSlots[0].start) : null;
+        const firstBookedDate = nextBookedStarts[0] ? zonedDateKey(nextBookedStarts[0]) : null;
         const nextSelectedDate = firstAvailableDate || firstBookedDate || todayKey;
 
         setSlots(nextSlots);
         setBookedSlotStarts(nextBookedStarts);
-        setWindowStartKey(data.windowStart ? localDateKey(data.windowStart) : null);
-        setWindowEndKey(data.windowEnd ? localDateKey(data.windowEnd) : null);
+        setWindowStartKey(data.windowStart ? zonedDateKey(data.windowStart) : null);
+        setWindowEndKey(data.windowEnd ? zonedDateKey(data.windowEnd) : null);
         setSelectedDateKey(nextSelectedDate);
         setCalendarMonth(new Date(dateFromKey(nextSelectedDate).getFullYear(), dateFromKey(nextSelectedDate).getMonth(), 1));
       } catch (error) {
@@ -167,7 +199,7 @@ export default function BookingScheduler() {
 
   const groupedSlots = useMemo(() => {
     return slots.reduce<Record<string, Slot[]>>((acc, slot) => {
-      const dateKey = localDateKey(slot.start);
+      const dateKey = zonedDateKey(slot.start);
       acc[dateKey] = acc[dateKey] || [];
       acc[dateKey].push(slot);
       acc[dateKey].sort((a, b) => a.start.localeCompare(b.start));
@@ -176,7 +208,7 @@ export default function BookingScheduler() {
   }, [slots]);
 
   const bookedDateKeys = useMemo(
-    () => new Set(bookedSlotStarts.map((start) => localDateKey(start))),
+    () => new Set(bookedSlotStarts.map((start) => zonedDateKey(start))),
     [bookedSlotStarts],
   );
 
@@ -225,7 +257,7 @@ export default function BookingScheduler() {
         throw new Error(data.error || "Booking failed");
       }
 
-      const bookedDateKey = localDateKey(selectedSlot.start);
+      const bookedDateKey = zonedDateKey(selectedSlot.start);
 
       setResult(data.booking as BookingResult);
       setSlots((prev) => prev.filter((slot) => slot.id !== selectedSlotId));
