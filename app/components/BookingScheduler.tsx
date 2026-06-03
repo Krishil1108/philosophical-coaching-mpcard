@@ -109,6 +109,24 @@ function formatTimeRange(startIso: string, endIso: string) {
   return `${formatter.format(start)} - ${formatter.format(end)} ${tzName}`;
 }
 
+function getLocalTimeContext(startIso: string, endIso: string) {
+  const start = new Date(startIso);
+  const end = new Date(endIso);
+
+  const localFormatter = new Intl.DateTimeFormat(undefined, {
+    hour: "numeric",
+    minute: "2-digit",
+  });
+  
+  const localTzFormatter = new Intl.DateTimeFormat(undefined, {
+    timeZoneName: "short"
+  });
+  const tzParts = localTzFormatter.formatToParts(start);
+  const localTzName = tzParts.find((p) => p.type === "timeZoneName")?.value || "";
+
+  return `${localFormatter.format(start)} - ${localFormatter.format(end)} ${localTzName}`.trim();
+}
+
 function getMonthCells(monthDate: Date) {
   const firstOfMonth = new Date(monthDate.getFullYear(), monthDate.getMonth(), 1);
   const mondayOffset = (firstOfMonth.getDay() + 6) % 7;
@@ -452,7 +470,12 @@ export default function BookingScheduler() {
                             }}
                             className={`booking-slot-button${isActive ? " is-active" : ""}`}
                           >
-                            <span>{formatTimeRange(slot.start, slot.end)}</span>
+                            <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", gap: "0.2rem" }}>
+                              <span>{formatTimeRange(slot.start, slot.end)}</span>
+                              <span style={{ fontSize: "0.8rem", opacity: 0.8, fontWeight: 400 }}>
+                                Local: {getLocalTimeContext(slot.start, slot.end)}
+                              </span>
+                            </div>
                             <small>{isActive ? "Selected" : "Available"}</small>
                           </button>
                         );
@@ -480,6 +503,8 @@ export default function BookingScheduler() {
             {selectedSlot ? (
               <p style={{ color: "var(--text-muted)", marginBottom: "1.25rem", lineHeight: 1.65 }}>
                 {formatDayLabel(selectedSlot.start)} at {formatTimeRange(selectedSlot.start, selectedSlot.end)}
+                <br />
+                <span style={{ fontSize: "0.85em", opacity: 0.85 }}>Local: {getLocalTimeContext(selectedSlot.start, selectedSlot.end)}</span>
               </p>
             ) : (
               <p style={{ color: "var(--text-muted)", marginBottom: "1.25rem", lineHeight: 1.65 }}>
@@ -568,6 +593,8 @@ export default function BookingScheduler() {
                 {result.start && result.end && (
                   <p style={{ color: "var(--text-muted)", marginBottom: "0.6rem" }}>
                     {formatDayLabel(result.start)} at {formatTimeRange(result.start, result.end)}
+                    <br />
+                    <span style={{ fontSize: "0.85em", opacity: 0.85 }}>Local: {getLocalTimeContext(result.start, result.end)}</span>
                   </p>
                 )}
 
