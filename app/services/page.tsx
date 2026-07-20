@@ -2,7 +2,7 @@ import SiteLayout from "../components/SiteLayout";
 import PageHeader from "../components/PageHeader";
 import Services from "../components/Services";
 import { hasSanityConfig, client } from "../lib/sanity";
-import { servicesQuery } from "../lib/queries";
+import { servicesQuery, servicesPageQuery } from "../lib/queries";
 
 export const revalidate = 0;
 
@@ -12,12 +12,25 @@ export const metadata = {
 };
 
 async function getData() {
-  if (!hasSanityConfig()) return [];
-  return client.fetch(servicesQuery);
+  if (!hasSanityConfig()) return { services: [], servicesPage: null };
+  const [services, servicesPage] = await Promise.all([
+    client.fetch(servicesQuery),
+    client.fetch(servicesPageQuery)
+  ]);
+  return { services, servicesPage };
 }
 
 export default async function ServicesPage() {
-  const data = await getData();
+  const { services, servicesPage } = await getData();
+
+  const defaultWhatToExpect = [
+    { n: "01", title: "No Preset Agenda", body: "Michael brings no worldview to impose. The session belongs entirely to your thinking and your questions." },
+    { n: "02", title: "Impartial Witness", body: "Rather than arguing for a position, Michael acts as a mirror — helping you see the logic and language behind your own beliefs." },
+    { n: "03", title: "Semantic Analysis", body: "Many of our deepest convictions rest on unexamined metaphors. Michael's approach helps surface and renegotiate those invisible structures." },
+    { n: "04", title: "Lasting Shift", body: "The goal isn't a single insight — it's a new way of relating to your own thinking: more independently, more clearly, more freely." },
+  ];
+
+  const whatToExpect = servicesPage?.whatToExpect?.length > 0 ? servicesPage.whatToExpect : defaultWhatToExpect;
 
   return (
     <SiteLayout>
@@ -27,7 +40,7 @@ export default async function ServicesPage() {
         subtitle="Choose the format that fits your path — from intimate one-on-one dialogue to public philosophical conversation."
         breadcrumb={{ label: "Home", href: "/" }}
       />
-      <Services data={data} />
+      <Services data={services} />
 
       {/* What to expect section */}
       <section className="section-pad" style={{ background: "var(--bg-muted)" }}>
@@ -41,12 +54,7 @@ export default async function ServicesPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-            {[
-              { n: "01", title: "No Preset Agenda", body: "Michael brings no worldview to impose. The session belongs entirely to your thinking and your questions." },
-              { n: "02", title: "Impartial Witness", body: "Rather than arguing for a position, Michael acts as a mirror — helping you see the logic and language behind your own beliefs." },
-              { n: "03", title: "Semantic Analysis", body: "Many of our deepest convictions rest on unexamined metaphors. Michael's approach helps surface and renegotiate those invisible structures." },
-              { n: "04", title: "Lasting Shift", body: "The goal isn't a single insight — it's a new way of relating to your own thinking: more independently, more clearly, more freely." },
-            ].map((item) => (
+            {whatToExpect.map((item: any) => (
               <div
                 key={item.n}
                 className="card-hover"

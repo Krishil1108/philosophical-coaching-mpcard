@@ -12,7 +12,11 @@ export const structure: StructureResolver = (S) =>
         .title("Contact Page")
         .id("contactPageSingleton")
         .child(S.document().schemaType("contactPage").documentId("contact-page")),
+      S.listItem()
+        .title("Services Page")
+        .id("servicesPageSingleton")
+        .child(S.document().schemaType("servicesPage").documentId("services-page")),
       ...S.documentTypeListItems().filter(
-        (item) => item.getId() !== "about" && item.getId() !== "contactPage",
+        (item) => item.getId() !== "about" && item.getId() !== "contactPage" && item.getId() !== "servicesPage",
       ),
     ]);
