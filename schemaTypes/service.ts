@@ -11,6 +11,21 @@ export const service = defineType({
     defineField({ name: "price", title: "Price Range", type: "string" }),
     defineField({ name: "duration", title: "Duration", type: "string" }),
     defineField({ name: "features", title: "Features List", type: "array", of: [{ type: "string" }] }),
+    defineField({
+      name: "whatToExpect",
+      title: "What to Expect (Process)",
+      type: "array",
+      of: [
+        {
+          type: "object",
+          fields: [
+            defineField({ name: "n", title: "Number (e.g. 01)", type: "string" }),
+            defineField({ name: "title", title: "Title", type: "string" }),
+            defineField({ name: "body", title: "Description", type: "text", rows: 3 }),
+          ],
+        },
+      ],
+    }),
     defineField({ name: "ctaText", title: "CTA Button Text", type: "string" }),
     defineField({ name: "ctaLink", title: "CTA Button Link", type: "string" }),
     defineField({ name: "featured", title: "Featured (highlighted)", type: "boolean" }),

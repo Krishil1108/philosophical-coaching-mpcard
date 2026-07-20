@@ -91,16 +91,14 @@ export const servicesQuery = groq`*[_type == "service"] | order(order asc){
   features,
   ctaText,
   ctaLink,
-  featured
-}`;
-
-export const servicesPageQuery = groq`*[_type == "servicesPage" && _id == "services-page"][0]{
+  featured,
   whatToExpect[]{
     n,
     title,
     body
   }
 }`;
+
 
 export const videosQuery = groq`*[_type == "youtubeVideo"] | order(order asc){
   _id,

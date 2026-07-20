@@ -13,6 +13,11 @@ interface Service {
   ctaText?: string;
   ctaLink?: string;
   featured?: boolean;
+  whatToExpect?: {
+    n: string;
+    title: string;
+    body: string;
+  }[];
 }
 
 const defaultServices: Service[] = [
@@ -232,6 +237,57 @@ export default function Services({ data }: { data?: Service[] }) {
                     </ul>
                   )}
                 </div>
+
+                {service.whatToExpect && service.whatToExpect.length > 0 && (
+                  <div style={{ marginTop: "3rem", marginBottom: "3rem" }}>
+                    <div className="text-left mb-10">
+                      <span className="section-label" style={{ marginBottom: "1rem", display: "block" }}>Process</span>
+                      <h3 className="font-serif" style={{ fontSize: "2rem", color: "var(--text-heading)" }}>
+                        What to Expect
+                      </h3>
+                      <div className="divider-gold" style={{ marginLeft: 0 }} />
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                      {service.whatToExpect.map((item: any) => (
+                        <div
+                          key={item.n}
+                          className="card-hover"
+                          style={{
+                            background: "var(--bg-card)",
+                            border: "1px solid var(--border)",
+                            borderRadius: "8px",
+                            padding: "2rem",
+                          }}
+                        >
+                          <div
+                            className="font-cinzel font-bold mb-3"
+                            style={{ fontSize: "0.8125rem", color: "var(--accent)", letterSpacing: "0.2em" }}
+                          >
+                            {item.n}
+                          </div>
+                          <h4
+                            className="font-serif mb-3"
+                            style={{ fontSize: "1.25rem", color: "var(--text-heading)" }}
+                          >
+                            {item.title}
+                          </h4>
+                          <p
+                            style={{
+                              fontFamily: "Space Grotesk, sans-serif",
+                              fontWeight: 300,
+                              color: "var(--text-muted)",
+                              lineHeight: 1.7,
+                              fontSize: "0.9rem",
+                            }}
+                          >
+                            {item.body}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
 
                 {/* CTA */}
                 <a
