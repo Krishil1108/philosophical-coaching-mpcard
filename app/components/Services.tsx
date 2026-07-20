@@ -13,6 +13,7 @@ interface Service {
   ctaText?: string;
   ctaLink?: string;
   featured?: boolean;
+  showWhatToExpect?: boolean;
   whatToExpect?: {
     n: string;
     title: string;
@@ -238,7 +239,7 @@ export default function Services({ data }: { data?: Service[] }) {
                   )}
                 </div>
 
-                {service.whatToExpect && service.whatToExpect.length > 0 && (
+                {service.showWhatToExpect !== false && service.whatToExpect && service.whatToExpect.length > 0 && (
                   <div style={{ marginTop: "3rem", marginBottom: "3rem" }}>
                     <div className="text-left mb-10">
                       <span className="section-label" style={{ marginBottom: "1rem", display: "block" }}>Process</span>

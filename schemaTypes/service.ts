@@ -12,6 +12,13 @@ export const service = defineType({
     defineField({ name: "duration", title: "Duration", type: "string" }),
     defineField({ name: "features", title: "Features List", type: "array", of: [{ type: "string" }] }),
     defineField({
+      name: "showWhatToExpect",
+      title: "Show 'What to Expect' Section",
+      type: "boolean",
+      initialValue: true,
+      description: "Toggle this off to hide the What to Expect section for this service."
+    }),
+    defineField({
       name: "whatToExpect",
       title: "What to Expect (Process)",
       type: "array",

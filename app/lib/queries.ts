@@ -92,6 +92,7 @@ export const servicesQuery = groq`*[_type == "service"] | order(order asc){
   ctaText,
   ctaLink,
   featured,
+  showWhatToExpect,
   whatToExpect[]{
     n,
     title,
