@@ -81,6 +81,12 @@ export const contactPageQuery = groq`*[_type == "contactPage" && _id == "contact
   firstSessionNote
 }`;
 
+export const bookingPageQuery = groq`*[_type == "bookingPage" && _id == "booking-page"][0]{
+  subtitle,
+  bookingHeading,
+  bookingDescription
+}`;
+
 export const servicesQuery = groq`*[_type == "service"] | order(order asc){
   _id,
   title,

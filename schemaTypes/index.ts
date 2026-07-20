@@ -8,6 +8,7 @@ import { testimonial } from "./testimonial";
 import { philosophicalQuote } from "./philosophicalQuote";
 import { practiceMethod, practicePage } from "./practicePage";
 import { contactPage } from "./contactPage";
+import { bookingPage } from "./bookingPage";
 
 export const schemaTypes = [
   siteSettings,
@@ -21,4 +22,5 @@ export const schemaTypes = [
   practiceMethod,
   practicePage,
   contactPage,
+  bookingPage,
 ];

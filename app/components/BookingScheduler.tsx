@@ -25,6 +25,11 @@ interface BookingResult {
   htmlLink: string | null;
 }
 
+interface BookingSchedulerProps {
+  heading?: string;
+  description?: string;
+}
+
 const weekdayLabels = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
 const CALENDAR_TIMEZONE = "America/Vancouver";
@@ -152,7 +157,7 @@ function statusCopy(slotCount: number, hasBookedSlot: boolean) {
   return "No slots released";
 }
 
-export default function BookingScheduler() {
+export default function BookingScheduler({ heading, description }: BookingSchedulerProps) {
   const todayKey = useMemo(() => zonedDateKey(new Date()), []);
   const [slots, setSlots] = useState<Slot[]>([]);
   const [bookedSlotStarts, setBookedSlotStarts] = useState<string[]>([]);
@@ -311,7 +316,7 @@ export default function BookingScheduler() {
               <div>
                 <span className="section-label">Live calendar</span>
                 <h2 className="font-serif" style={{ fontSize: "clamp(2rem, 4vw, 2.8rem)", marginTop: "0.5rem" }}>
-                  Choose a Date
+                  {heading || "Choose a Date"}
                 </h2>
               </div>
               <div
@@ -335,8 +340,7 @@ export default function BookingScheduler() {
             </div>
 
             <p style={{ color: "var(--text-muted)", lineHeight: 1.7, marginBottom: "1.65rem", maxWidth: "43rem" }}>
-              Michael controls these sessions directly from Google Calendar. Pick a day first, then choose one of the
-              available times for that day.
+              {description || "Michael controls these sessions directly from Google Calendar. Pick a day first, then choose one of the available times for that day."}
             </p>
 
             {loadingSlots && <p style={{ color: "var(--text-muted)" }}>Loading available slots...</p>}
