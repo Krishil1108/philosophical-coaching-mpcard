@@ -545,6 +545,75 @@ export default function Footer() {
           </motion.section>
         </motion.div>
 
+        {/* ─── DIGITAL COORDINATES (QR CODES) ─────────────────── */}
+        <motion.div
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={stagger}
+          style={{
+            marginBottom: "2.3rem",
+            border: "1px solid var(--border)",
+            borderRadius: "12px",
+            padding: "2.5rem 1.6rem",
+            background: "rgba(255, 255, 255, 0.55)",
+          }}
+        >
+          <div style={{ textAlign: "center", marginBottom: "2rem" }}>
+            <h3
+              style={{
+                fontFamily: "Space Grotesk, sans-serif",
+                fontSize: "0.75rem",
+                letterSpacing: "0.22em",
+                textTransform: "uppercase",
+                color: "var(--accent)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: "1rem"
+              }}
+            >
+              <span style={{ width: "2rem", height: "1px", background: "var(--accent)" }} />
+              Digital Coordinates
+              <span style={{ width: "2rem", height: "1px", background: "var(--accent)" }} />
+            </h3>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* 1. Buy Me a Coffee */}
+            <motion.div variants={fadeUp} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "1rem" }}>
+              <div style={{ position: "relative", width: "120px", height: "120px", borderRadius: "12px", overflow: "hidden", border: "1px solid rgba(139, 107, 74, 0.2)", background: "white", padding: "0.5rem" }}>
+                <img src="/bmc_qr.png" alt="Buy Me a Coffee" style={{ width: "100%", height: "100%", objectFit: "contain" }} />
+              </div>
+              <div style={{ textAlign: "center" }}>
+                <div style={{ fontFamily: "DM Serif Display, serif", fontSize: "1.2rem", color: "var(--text-heading)", marginBottom: "0.3rem" }}>Support the Practice</div>
+                <div style={{ fontFamily: "Space Grotesk, sans-serif", fontSize: "0.75rem", color: "var(--text-muted)" }}>Scan to buy a coffee</div>
+              </div>
+            </motion.div>
+
+            {/* 2. Tug of Logic */}
+            <motion.div variants={fadeUp} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "1rem" }}>
+              <div style={{ position: "relative", width: "120px", height: "120px", borderRadius: "12px", overflow: "hidden", border: "1px solid rgba(139, 107, 74, 0.2)", background: "white", padding: "0.5rem" }}>
+                <img src="/qrcode_www.tug-of-logic.com.png" alt="Tug of Logic" style={{ width: "100%", height: "100%", objectFit: "contain" }} />
+              </div>
+              <div style={{ textAlign: "center" }}>
+                <div style={{ fontFamily: "DM Serif Display, serif", fontSize: "1.2rem", color: "var(--text-heading)", marginBottom: "0.3rem" }}>Tug of Logic</div>
+                <div style={{ fontFamily: "Space Grotesk, sans-serif", fontSize: "0.75rem", color: "var(--text-muted)" }}>Play Philosophy Sports</div>
+              </div>
+            </motion.div>
+
+            {/* 3. ORCID ID */}
+            <motion.div variants={fadeUp} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "1rem" }}>
+              <div style={{ position: "relative", width: "120px", height: "120px", borderRadius: "12px", overflow: "hidden", border: "1px solid rgba(139, 107, 74, 0.2)", background: "white", padding: "0.5rem" }}>
+                <img src="/MP_ORCID.png" alt="Michael Picard ORCID" style={{ width: "100%", height: "100%", objectFit: "contain" }} />
+              </div>
+              <div style={{ textAlign: "center" }}>
+                <div style={{ fontFamily: "DM Serif Display, serif", fontSize: "1.2rem", color: "var(--text-heading)", marginBottom: "0.3rem" }}>Academic Profile</div>
+                <div style={{ fontFamily: "Space Grotesk, sans-serif", fontSize: "0.75rem", color: "var(--text-muted)" }}>Scan for ORCID ID</div>
+              </div>
+            </motion.div>
+          </div>
+        </motion.div>
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
