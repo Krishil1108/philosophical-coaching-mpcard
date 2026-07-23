@@ -263,6 +263,11 @@ export default function BookingScheduler({ heading, description }: BookingSchedu
       setSubmitError("Please select a slot first.");
       return;
     }
+    
+    if (!email || !email.includes("@")) {
+      setSubmitError("Please provide a valid email address so we can contact you.");
+      return;
+    }
 
     try {
       setSubmitting(true);
@@ -535,9 +540,14 @@ export default function BookingScheduler({ heading, description }: BookingSchedu
 
               <input
                 type="email"
-                placeholder="Email address"
+                placeholder="Email address *"
                 value={email}
-                onChange={(event) => setEmail(event.target.value)}
+                onChange={(event) => {
+                  setEmail(event.target.value);
+                  if (submitError && submitError.includes("email")) {
+                    setSubmitError(null);
+                  }
+                }}
                 required
                 style={{
                   width: "100%",
