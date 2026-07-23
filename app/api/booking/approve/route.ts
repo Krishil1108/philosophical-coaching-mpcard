@@ -38,6 +38,30 @@ export async function GET(request: Request) {
     return new NextResponse(html, { headers: { "Content-Type": "text/html" } });
   } catch (error: any) {
     console.error("Failed to approve slot", error);
+    
+    if (error.message === "ALREADY_PROCESSED") {
+      const html = `
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <title>Already Processed</title>
+            <style>
+              body { font-family: sans-serif; background: #fdfdfc; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; color: #333; }
+              .card { background: white; padding: 40px; border-radius: 12px; border: 1px solid #eaeaea; box-shadow: 0 10px 40px rgba(0,0,0,0.03); text-align: center; max-width: 500px; }
+              h1 { color: #555; margin-top: 0; margin-bottom: 15px; }
+            </style>
+          </head>
+          <body>
+            <div class="card">
+              <h1>Request Already Processed</h1>
+              <p>This booking request has already been approved or rejected, so this link is no longer active.</p>
+            </div>
+          </body>
+        </html>
+      `;
+      return new NextResponse(html, { headers: { "Content-Type": "text/html" } });
+    }
+
     return new NextResponse(`Error approving slot: ${error.message}`, { status: 500 });
   }
 }

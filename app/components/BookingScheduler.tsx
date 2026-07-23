@@ -592,7 +592,7 @@ export default function BookingScheduler({ heading, description }: BookingSchedu
                 }}
               >
                 <p style={{ marginBottom: "0.4rem", color: "var(--text-heading)", fontWeight: 600 }}>
-                  Session booked successfully.
+                  Booking request sent. Awaiting approval.
                 </p>
                 {result.start && result.end && (
                   <p style={{ color: "var(--text-muted)", marginBottom: "0.6rem" }}>

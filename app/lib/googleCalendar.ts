@@ -217,6 +217,10 @@ export async function approveSlot(slotId: string) {
     throw new Error("Selected slot is no longer valid.");
   }
 
+  if (!event.summary?.includes("[PENDING]")) {
+    throw new Error("ALREADY_PROCESSED");
+  }
+
   // Find client email from the description
   const desc = event.description || "";
   const emailMatch = desc.match(/Email:\s*([^\s]+)/);
@@ -284,6 +288,10 @@ export async function rejectSlot(slotId: string, comment?: string) {
   const event = existing.data;
   if (!event.id || !event.start?.dateTime || !event.end?.dateTime) {
     throw new Error("Selected slot is no longer valid.");
+  }
+
+  if (!event.summary?.includes("[PENDING]")) {
+    throw new Error("ALREADY_PROCESSED");
   }
 
   // Extract client name and email from description
