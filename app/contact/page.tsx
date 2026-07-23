@@ -1,5 +1,6 @@
 import SiteLayout from "../components/SiteLayout";
 import PageHeader from "../components/PageHeader";
+import ContactForm from "../components/ContactForm";
 import { hasSanityConfig, client } from "../lib/sanity";
 import { contactPageQuery } from "../lib/queries";
 
@@ -50,8 +51,8 @@ const fallbackOptions: ContactOption[] = [
     platform: "Email",
     title: "Café Philosophy & Events",
     desc: "Interested in bringing Café Philosophy or Philosophy Sports to your community, institution, or organization? Get in touch directly.",
-    cta: "Send an Email",
-    href: "mailto:michael@philosophicalcoaching.com",
+    cta: "Send a Message",
+    href: "#contact-form",
     external: false,
     featured: false,
   },
@@ -284,7 +285,12 @@ export default async function ContactPage() {
         </div>
       </section>
 
-      {/* Links to other pages */}
+      {/* Contact Form Section */}
+      <section id="contact-form" className="section-pad-xl" style={{ background: "var(--bg)" }}>
+        <div className="inner-max" style={{ maxWidth: "76rem" }}>
+          <ContactForm />
+        </div>
+      </section>
 
     </SiteLayout>
   );

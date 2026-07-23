@@ -1,5 +1,6 @@
 import { randomUUID } from "node:crypto";
 import { google } from "googleapis";
+import { Resend } from "resend";
 
 export interface BookingSlot {
   id: string;
@@ -20,6 +21,7 @@ interface BookingInput {
   name: string;
   email: string;
   notes?: string;
+  baseUrl?: string;
 }
 
 function getRequiredEnv(key: string): string {
@@ -131,9 +133,9 @@ export async function listAvailableSlots(): Promise<BookingSlot[]> {
   return calendar.slots;
 }
 
-export async function bookSlot(input: BookingInput) {
+export async function requestSlotBooking(input: BookingInput) {
   const calendar = getCalendarClient();
-  const { calendarId, marker, timezone, hostName } = getConfig();
+  const { calendarId, marker, hostName } = getConfig();
 
   const existing = await calendar.events.get({
     calendarId,
@@ -150,18 +152,12 @@ export async function bookSlot(input: BookingInput) {
   }
 
   const cleanTitle = (event.summary || "Available session").replace(marker, "").trim();
-  const ownerEmail = process.env.BOOKING_OWNER_EMAIL;
-  const attendees = ownerEmail
-    ? [{ email: input.email }, { email: ownerEmail }]
-    : [{ email: input.email }];
 
   const patch = await calendar.events.patch({
     calendarId,
     eventId: event.id,
-    conferenceDataVersion: 1,
-    sendUpdates: "all",
     requestBody: {
-      summary: `Session with ${hostName}${cleanTitle ? ` - ${cleanTitle}` : ""}`,
+      summary: `[PENDING] Session with ${hostName}${cleanTitle ? ` - ${cleanTitle}` : ""}`,
       description: [
         event.description || "",
         "",
@@ -172,6 +168,73 @@ export async function bookSlot(input: BookingInput) {
       ]
         .filter(Boolean)
         .join("\n"),
+    },
+  });
+
+  // Send email via Resend to the owner
+  const resend = new Resend(process.env.RESEND_API_KEY);
+  const baseUrl = input.baseUrl || "http://localhost:3000";
+  const approveUrl = `${baseUrl}/api/booking/approve?slotId=${event.id}`;
+  const ownerEmail = process.env.BOOKING_OWNER_EMAIL || "michael@philosophicalcoaching.com";
+
+  await resend.emails.send({
+    from: "Philosophical Coaching <onboarding@resend.dev>",
+    to: ownerEmail,
+    subject: "Action Required: New Booking Request",
+    html: `
+      <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; color: #333;">
+        <h2 style="color: #8b6b4a;">New Booking Request</h2>
+        <p>A new client has requested a session. Please approve it to finalize the booking and send them the Google Meet link.</p>
+        <div style="background-color: #f9f9f9; padding: 15px; border-radius: 8px; margin: 20px 0;">
+          <p><strong>Name:</strong> ${input.name}</p>
+          <p><strong>Email:</strong> ${input.email}</p>
+          <p><strong>Notes:</strong> ${input.notes || "None"}</p>
+          <p><strong>Time:</strong> ${new Date(event.start.dateTime).toLocaleString()}</p>
+        </div>
+        <a href="${approveUrl}" style="background-color: #8b6b4a; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; display: inline-block; font-weight: bold;">Approve Booking</a>
+      </div>
+    `,
+  });
+
+  return { status: "pending" };
+}
+
+export async function approveSlot(slotId: string) {
+  const calendar = getCalendarClient();
+  const { calendarId, timezone } = getConfig();
+
+  const existing = await calendar.events.get({
+    calendarId,
+    eventId: slotId,
+  });
+
+  const event = existing.data;
+  if (!event.id || !event.start?.dateTime || !event.end?.dateTime) {
+    throw new Error("Selected slot is no longer valid.");
+  }
+
+  // Find client email from the description
+  const desc = event.description || "";
+  const emailMatch = desc.match(/Email:\s*([^\s]+)/);
+  const clientEmail = emailMatch ? emailMatch[1] : null;
+
+  if (!clientEmail) {
+    throw new Error("Could not find client email in the event description.");
+  }
+
+  const cleanTitle = (event.summary || "").replace("[PENDING] ", "");
+  const ownerEmail = process.env.BOOKING_OWNER_EMAIL;
+  const attendees = ownerEmail
+    ? [{ email: clientEmail }, { email: ownerEmail }]
+    : [{ email: clientEmail }];
+
+  const patch = await calendar.events.patch({
+    calendarId,
+    eventId: event.id,
+    conferenceDataVersion: 1,
+    sendUpdates: "all",
+    requestBody: {
+      summary: cleanTitle,
       attendees,
       start: {
         dateTime: event.start.dateTime,

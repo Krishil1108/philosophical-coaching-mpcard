@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { bookSlot } from "@/app/lib/googleCalendar";
+import { requestSlotBooking } from "@/app/lib/googleCalendar";
 
 interface BookPayload {
   slotId?: string;
@@ -38,7 +38,11 @@ export async function POST(request: Request) {
   }
 
   try {
-    const booking = await bookSlot({ slotId, name, email, notes });
+    const host = request.headers.get("host") || "localhost:3000";
+    const protocol = host.includes("localhost") ? "http" : "https";
+    const baseUrl = `${protocol}://${host}`;
+
+    const booking = await requestSlotBooking({ slotId, name, email, notes, baseUrl });
     return NextResponse.json({ booking });
   } catch (error) {
     console.error("Failed to book slot", error);
