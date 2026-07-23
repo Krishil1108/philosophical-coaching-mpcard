@@ -179,7 +179,7 @@ export async function requestSlotBooking(input: BookingInput) {
   const ownerEmail = process.env.BOOKING_OWNER_EMAIL || "michael@philosophicalcoaching.com";
 
   await resend.emails.send({
-    from: "Philosophical Coaching <onboarding@resend.dev>",
+    from: "Philosophical Coaching <bookings@updates.philosophical-practice.com>",
     to: ownerEmail,
     subject: "Action Required: New Booking Request",
     html: `
@@ -326,7 +326,7 @@ export async function rejectSlot(slotId: string, comment?: string) {
     : "";
 
   await resend.emails.send({
-    from: "Philosophical Coaching <onboarding@resend.dev>",
+    from: "Philosophical Coaching <bookings@updates.philosophical-practice.com>",
     to: clientEmail,
     subject: "Update regarding your Philosophical Coaching session",
     html: `

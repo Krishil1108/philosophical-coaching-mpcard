@@ -22,7 +22,7 @@ async function sendTestEmail() {
 
   try {
     const { data, error } = await resend.emails.send({
-      from: "Philosophical Coaching <onboarding@resend.dev>",
+      from: "Philosophical Coaching <bookings@updates.philosophical-practice.com>",
       to: ownerEmail,
       subject: "Action Required: New Booking Request (Sample Preview)",
       html: `
