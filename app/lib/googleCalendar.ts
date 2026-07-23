@@ -175,6 +175,7 @@ export async function requestSlotBooking(input: BookingInput) {
   const resend = new Resend(process.env.RESEND_API_KEY);
   const baseUrl = input.baseUrl || "http://localhost:3000";
   const approveUrl = `${baseUrl}/api/booking/approve?slotId=${event.id}`;
+  const rejectUrl = `${baseUrl}/admin/booking/reject?slotId=${event.id}`;
   const ownerEmail = process.env.BOOKING_OWNER_EMAIL || "michael@philosophicalcoaching.com";
 
   await resend.emails.send({
@@ -184,14 +185,17 @@ export async function requestSlotBooking(input: BookingInput) {
     html: `
       <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; color: #333;">
         <h2 style="color: #8b6b4a;">New Booking Request</h2>
-        <p>A new client has requested a session. Please approve it to finalize the booking and send them the Google Meet link.</p>
+        <p>A new client has requested a session. Please approve it to finalize the booking and send them the Google Meet link, or reject it.</p>
         <div style="background-color: #f9f9f9; padding: 15px; border-radius: 8px; margin: 20px 0;">
           <p><strong>Name:</strong> ${input.name}</p>
           <p><strong>Email:</strong> ${input.email}</p>
           <p><strong>Notes:</strong> ${input.notes || "None"}</p>
           <p><strong>Time:</strong> ${new Date(event.start.dateTime).toLocaleString()}</p>
         </div>
-        <a href="${approveUrl}" style="background-color: #8b6b4a; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; display: inline-block; font-weight: bold;">Approve Booking</a>
+        <div>
+          <a href="${approveUrl}" style="background-color: #8b6b4a; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; display: inline-block; font-weight: bold; margin-right: 10px;">Approve Booking</a>
+          <a href="${rejectUrl}" style="background-color: #f9f9f9; color: #555; padding: 12px 24px; text-decoration: none; border-radius: 6px; border: 1px solid #ddd; display: inline-block; font-weight: bold;">Reject Booking</a>
+        </div>
       </div>
     `,
   });
@@ -266,4 +270,69 @@ export async function approveSlot(slotId: string) {
     meetLink,
     htmlLink: updated.htmlLink,
   };
+}
+
+export async function rejectSlot(slotId: string, comment?: string) {
+  const calendar = getCalendarClient();
+  const { calendarId, marker } = getConfig();
+
+  const existing = await calendar.events.get({
+    calendarId,
+    eventId: slotId,
+  });
+
+  const event = existing.data;
+  if (!event.id || !event.start?.dateTime || !event.end?.dateTime) {
+    throw new Error("Selected slot is no longer valid.");
+  }
+
+  // Extract client name and email from description
+  const desc = event.description || "";
+  const emailMatch = desc.match(/Email:\s*([^\s]+)/);
+  const clientEmail = emailMatch ? emailMatch[1] : null;
+  const nameMatch = desc.match(/Client:\s*(.+)/);
+  const clientName = nameMatch ? nameMatch[1].trim() : "there";
+
+  if (!clientEmail) {
+    throw new Error("Could not find client email in the event description.");
+  }
+
+  const cleanTitle = (event.summary || "").replace("[PENDING] ", "").replace(`Session with ${getConfig().hostName}`, "").trim().replace(/^- /,"").trim() || "Available session";
+
+  // Revert the slot back to AVAILABLE
+  await calendar.events.patch({
+    calendarId,
+    eventId: event.id,
+    requestBody: {
+      summary: `${marker} ${cleanTitle}`,
+      description: "", // clear out client info
+      attendees: [], // ensure no attendees
+    },
+  });
+
+  // Send a polite rejection email to the client
+  const resend = new (require("resend").Resend)(process.env.RESEND_API_KEY);
+
+  const customCommentHtml = comment
+    ? `<p style="margin-top: 20px; padding: 15px; border-left: 4px solid #8b6b4a; background: #fdfdfc; color: #555;"><strong>Message from Michael:</strong><br/>${comment.replace(/\n/g, "<br/>")}</p>`
+    : "";
+
+  await resend.emails.send({
+    from: "Philosophical Coaching <onboarding@resend.dev>",
+    to: clientEmail,
+    subject: "Update regarding your Philosophical Coaching session",
+    html: `
+      <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; color: #333; line-height: 1.6;">
+        <h2 style="color: #8b6b4a;">Session Update</h2>
+        <p>Dear ${clientName},</p>
+        <p>Thank you so much for reaching out and requesting a philosophical coaching session.</p>
+        <p>Unfortunately, I am unable to accommodate your requested time slot on <strong>${new Date(event.start.dateTime).toLocaleString()}</strong>. I apologize for any inconvenience this may cause.</p>
+        ${customCommentHtml}
+        <p style="margin-top: 20px;">If you would like to explore other available times, please feel free to check the calendar on my website again.</p>
+        <p>Warm regards,<br/><br/><strong>Michael Picard</strong><br/>Philosophical Practice</p>
+      </div>
+    `,
+  });
+
+  return { success: true };
 }
