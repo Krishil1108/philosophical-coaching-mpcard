@@ -78,6 +78,7 @@ export default function Footer() {
   const [activePulse, setActivePulse] = useState(0);
   const [currentYear, setCurrentYear] = useState<number | null>(null);
   const [hoveredExplore, setHoveredExplore] = useState<string | null>(null);
+  const [hoveredLogo, setHoveredLogo] = useState<string | null>(null);
 
   useEffect(() => {
     const now = new Date();
@@ -517,14 +518,33 @@ export default function Footer() {
                   letterSpacing: "0.22em",
                   textTransform: "uppercase",
                   color: "var(--accent)",
-                  marginBottom: "0.75rem",
+                  marginBottom: "0.4rem",
                 }}
               >
                 Connect
               </h3>
+              
+              {/* Dynamic hover logo name indicator */}
+              <div style={{ minHeight: "1rem", marginBottom: "0.6rem" }}>
+                <span
+                  style={{
+                    fontFamily: "Space Grotesk, sans-serif",
+                    fontSize: "0.7rem",
+                    letterSpacing: "0.08em",
+                    textTransform: "uppercase",
+                    color: "var(--text-muted)",
+                    fontWeight: 500,
+                    opacity: hoveredLogo ? 0.95 : 0,
+                    transition: "opacity 0.15s ease",
+                    display: "inline-block"
+                  }}
+                >
+                  {hoveredLogo || "\u00A0"}
+                </span>
+              </div>
 
               {/* Real brand logo links row */}
-              <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "0.75rem", justifyItems: "center", margin: "1.25rem 0" }}>
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "0.75rem", justifyItems: "center", margin: "0.75rem 0 1.25rem 0" }}>
                 {[
                   {
                     href: "https://www.linkedin.com/in/michaelpicard/",
@@ -584,6 +604,7 @@ export default function Footer() {
                     rel="noopener noreferrer"
                     whileHover={{ y: -2 }}
                     aria-label={item.label}
+                    title={item.label}
                     style={{
                       width: "48px",
                       height: "48px",
@@ -600,11 +621,13 @@ export default function Footer() {
                       e.currentTarget.style.borderColor = "var(--accent)";
                       e.currentTarget.style.background = "var(--accent)";
                       e.currentTarget.style.color = "white";
+                      setHoveredLogo(item.label);
                     }}
                     onMouseLeave={(e) => {
                       e.currentTarget.style.borderColor = "rgba(139, 107, 74, 0.28)";
                       e.currentTarget.style.background = "rgba(255, 255, 255, 0.6)";
                       e.currentTarget.style.color = "var(--accent)";
+                      setHoveredLogo(null);
                     }}
                   >
                     {item.icon}
