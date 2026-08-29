@@ -307,6 +307,175 @@ export default function Services({ data }: { data?: Service[] }) {
           </div>
         </motion.div>
       ))}
+
+      {/* ─── CONTRIBUTION & COMPENSATION SECTION ─────────────────── */}
+      <motion.div
+        variants={itemVariants}
+        style={{
+          padding: "6rem 0",
+          borderTop: "1px solid var(--border)",
+          background: "linear-gradient(180deg, var(--bg) 0%, rgba(139, 107, 74, 0.03) 100%)",
+        }}
+      >
+        <div className="inner-max" style={{ maxWidth: "78rem" }}>
+          <div style={{ textAlign: "center", marginBottom: "4rem" }}>
+            <span
+              className="section-label"
+              style={{
+                marginBottom: "0.9rem",
+                display: "inline-block",
+              }}
+            >
+              Compensation
+            </span>
+            <h2
+              className="font-serif"
+              style={{
+                fontSize: "clamp(2rem, 3.5vw, 2.75rem)",
+                color: "var(--text-heading)",
+                marginBottom: "1.25rem",
+              }}
+            >
+              Settling Remuneration & Support
+            </h2>
+            <div className="divider-gold" style={{ margin: "0 auto 1.5rem auto" }} />
+            <p
+              style={{
+                fontFamily: "Space Grotesk, sans-serif",
+                fontSize: "1rem",
+                color: "var(--text-muted)",
+                maxWidth: "38rem",
+                margin: "0 auto",
+                lineHeight: 1.8,
+                fontWeight: 300,
+              }}
+            >
+              To compensate for individual sessions, public Café events, or to support ongoing dialogue practice, you may use the digital coordinates below.
+            </p>
+          </div>
+
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+              gap: "3rem",
+              justifyItems: "center",
+              maxWidth: "48rem",
+              margin: "0 auto",
+            }}
+          >
+            {/* 1. Bank Transfer QR */}
+            <div
+              className="card-hover"
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: "1.5rem",
+                background: "var(--bg-card)",
+                border: "1px solid var(--border)",
+                borderRadius: "16px",
+                padding: "2.5rem 2rem",
+                width: "100%",
+                boxShadow: "0 4px 20px rgba(0, 0, 0, 0.02)",
+              }}
+            >
+              <div
+                style={{
+                  position: "relative",
+                  width: "160px",
+                  height: "160px",
+                  borderRadius: "12px",
+                  overflow: "hidden",
+                  border: "1px solid rgba(139, 107, 74, 0.25)",
+                  background: "white",
+                  padding: "0.75rem",
+                }}
+              >
+                <img
+                  src="/bank_qr.png"
+                  alt="Bank Transfer QR Code"
+                  style={{ width: "100%", height: "100%", objectFit: "contain" }}
+                />
+              </div>
+              <div style={{ textAlign: "center" }}>
+                <h3
+                  className="font-serif mb-2"
+                  style={{ fontSize: "1.3rem", color: "var(--text-heading)" }}
+                >
+                  Direct Bank Transfer
+                </h3>
+                <p
+                  style={{
+                    fontFamily: "Space Grotesk, sans-serif",
+                    fontSize: "0.85rem",
+                    color: "var(--text-muted)",
+                    lineHeight: 1.6,
+                    fontWeight: 300,
+                  }}
+                >
+                  Scan with your mobile banking application for direct settlement or e-transfer.
+                </p>
+              </div>
+            </div>
+
+            {/* 2. PayPal QR */}
+            <div
+              className="card-hover"
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: "1.5rem",
+                background: "var(--bg-card)",
+                border: "1px solid var(--border)",
+                borderRadius: "16px",
+                padding: "2.5rem 2rem",
+                width: "100%",
+                boxShadow: "0 4px 20px rgba(0, 0, 0, 0.02)",
+              }}
+            >
+              <div
+                style={{
+                  position: "relative",
+                  width: "160px",
+                  height: "160px",
+                  borderRadius: "12px",
+                  overflow: "hidden",
+                  border: "1px solid rgba(139, 107, 74, 0.25)",
+                  background: "white",
+                  padding: "0.75rem",
+                }}
+              >
+                <img
+                  src="/paypal_qr.png"
+                  alt="PayPal QR Code"
+                  style={{ width: "100%", height: "100%", objectFit: "contain" }}
+                />
+              </div>
+              <div style={{ textAlign: "center" }}>
+                <h3
+                  className="font-serif mb-2"
+                  style={{ fontSize: "1.3rem", color: "var(--text-heading)" }}
+                >
+                  PayPal Payment
+                </h3>
+                <p
+                  style={{
+                    fontFamily: "Space Grotesk, sans-serif",
+                    fontSize: "0.85rem",
+                    color: "var(--text-muted)",
+                    lineHeight: 1.6,
+                    fontWeight: 300,
+                  }}
+                >
+                  Scan with your PayPal app or phone camera for card and international payments.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </motion.div>
     </motion.section>
   );
 }
