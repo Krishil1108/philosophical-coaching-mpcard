@@ -579,7 +579,7 @@ export default function Footer() {
             </h3>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
             {/* 1. Buy Me a Coffee */}
             <motion.div variants={fadeUp} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "1rem" }}>
               <div style={{ position: "relative", width: "120px", height: "120px", borderRadius: "12px", overflow: "hidden", border: "1px solid rgba(139, 107, 74, 0.2)", background: "white", padding: "0.5rem" }}>
@@ -612,6 +612,114 @@ export default function Footer() {
                 <div style={{ fontFamily: "Space Grotesk, sans-serif", fontSize: "0.75rem", color: "var(--text-muted)" }}>Scan for ORCID ID</div>
               </div>
             </motion.div>
+
+            {/* 4. LinkedIn */}
+            <motion.a
+              href="https://www.linkedin.com/in/michaelpicard/"
+              target="_blank"
+              rel="noopener noreferrer"
+              variants={fadeUp}
+              whileHover={{ y: -4 }}
+              style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "1rem", textDecoration: "none" }}
+            >
+              <div style={{ width: "120px", height: "120px", borderRadius: "12px", border: "1px solid rgba(139, 107, 74, 0.2)", background: "white", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "2rem", fontFamily: "Space Grotesk, sans-serif", color: "var(--accent)", transition: "all 0.3s ease" }}>
+                in
+              </div>
+              <div style={{ textAlign: "center" }}>
+                <div style={{ fontFamily: "DM Serif Display, serif", fontSize: "1.2rem", color: "var(--text-heading)", marginBottom: "0.3rem" }}>LinkedIn</div>
+                <div style={{ fontFamily: "Space Grotesk, sans-serif", fontSize: "0.75rem", color: "var(--text-muted)" }}>Professional Praxis</div>
+              </div>
+            </motion.a>
+
+            {/* 5. PhilPeople */}
+            <motion.a
+              href="https://philpeople.org/profiles/michael-picard"
+              target="_blank"
+              rel="noopener noreferrer"
+              variants={fadeUp}
+              whileHover={{ y: -4 }}
+              style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "1rem", textDecoration: "none" }}
+            >
+              <div style={{ width: "120px", height: "120px", borderRadius: "12px", border: "1px solid rgba(139, 107, 74, 0.2)", background: "white", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "2.1rem", fontFamily: "Space Grotesk, sans-serif", color: "var(--accent)", transition: "all 0.3s ease" }}>
+                φp
+              </div>
+              <div style={{ textAlign: "center" }}>
+                <div style={{ fontFamily: "DM Serif Display, serif", fontSize: "1.2rem", color: "var(--text-heading)", marginBottom: "0.3rem" }}>PhilPeople</div>
+                <div style={{ fontFamily: "Space Grotesk, sans-serif", fontSize: "0.75rem", color: "var(--text-muted)" }}>Academic Archive</div>
+              </div>
+            </motion.a>
+
+            {/* 6. Goodreads */}
+            <motion.a
+              href="https://www.goodreads.com/author/show/22260951.Michael_Picard"
+              target="_blank"
+              rel="noopener noreferrer"
+              variants={fadeUp}
+              whileHover={{ y: -4 }}
+              style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "1rem", textDecoration: "none" }}
+            >
+              <div style={{ width: "120px", height: "120px", borderRadius: "12px", border: "1px solid rgba(139, 107, 74, 0.2)", background: "white", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "2rem", fontFamily: "Space Grotesk, sans-serif", color: "var(--accent)", transition: "all 0.3s ease" }}>
+                gr
+              </div>
+              <div style={{ textAlign: "center" }}>
+                <div style={{ fontFamily: "DM Serif Display, serif", fontSize: "1.2rem", color: "var(--text-heading)", marginBottom: "0.3rem" }}>Goodreads</div>
+                <div style={{ fontFamily: "Space Grotesk, sans-serif", fontSize: "0.75rem", color: "var(--text-muted)" }}>Literary Footprints</div>
+              </div>
+            </motion.a>
+
+            {/* 7. YouTube */}
+            <motion.a
+              href="https://www.youtube.com/@michaelpicardmscphd"
+              target="_blank"
+              rel="noopener noreferrer"
+              variants={fadeUp}
+              whileHover={{ y: -4 }}
+              style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "1rem", textDecoration: "none" }}
+            >
+              <div style={{ width: "120px", height: "120px", borderRadius: "12px", border: "1px solid rgba(139, 107, 74, 0.2)", background: "white", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "2rem", fontFamily: "Space Grotesk, sans-serif", color: "var(--accent)", transition: "all 0.3s ease" }}>
+                yt
+              </div>
+              <div style={{ textAlign: "center" }}>
+                <div style={{ fontFamily: "DM Serif Display, serif", fontSize: "1.2rem", color: "var(--text-heading)", marginBottom: "0.3rem" }}>YouTube</div>
+                <div style={{ fontFamily: "Space Grotesk, sans-serif", fontSize: "0.75rem", color: "var(--text-muted)" }}>Visual Dialogues</div>
+              </div>
+            </motion.a>
+
+            {/* 8. Facebook */}
+            <motion.a
+              href="https://www.facebook.com/philosophysports"
+              target="_blank"
+              rel="noopener noreferrer"
+              variants={fadeUp}
+              whileHover={{ y: -4 }}
+              style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "1rem", textDecoration: "none" }}
+            >
+              <div style={{ width: "120px", height: "120px", borderRadius: "12px", border: "1px solid rgba(139, 107, 74, 0.2)", background: "white", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "2rem", fontFamily: "Space Grotesk, sans-serif", color: "var(--accent)", transition: "all 0.3s ease" }}>
+                fb
+              </div>
+              <div style={{ textAlign: "center" }}>
+                <div style={{ fontFamily: "DM Serif Display, serif", fontSize: "1.2rem", color: "var(--text-heading)", marginBottom: "0.3rem" }}>Facebook</div>
+                <div style={{ fontFamily: "Space Grotesk, sans-serif", fontSize: "0.75rem", color: "var(--text-muted)" }}>Philosophy Sports</div>
+              </div>
+            </motion.a>
+
+            {/* 9. Instagram */}
+            <motion.a
+              href="https://www.instagram.com/infinitarian8/"
+              target="_blank"
+              rel="noopener noreferrer"
+              variants={fadeUp}
+              whileHover={{ y: -4 }}
+              style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "1rem", textDecoration: "none" }}
+            >
+              <div style={{ width: "120px", height: "120px", borderRadius: "12px", border: "1px solid rgba(139, 107, 74, 0.2)", background: "white", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "2rem", fontFamily: "Space Grotesk, sans-serif", color: "var(--accent)", transition: "all 0.3s ease" }}>
+                ig
+              </div>
+              <div style={{ textAlign: "center" }}>
+                <div style={{ fontFamily: "DM Serif Display, serif", fontSize: "1.2rem", color: "var(--text-heading)", marginBottom: "0.3rem" }}>Instagram</div>
+                <div style={{ fontFamily: "Space Grotesk, sans-serif", fontSize: "0.75rem", color: "var(--text-muted)" }}>Visual Metaphors</div>
+              </div>
+            </motion.a>
           </div>
         </motion.div>
         <motion.div
