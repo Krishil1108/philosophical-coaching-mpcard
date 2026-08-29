@@ -10,7 +10,8 @@
     "seed:about": "tsx scripts/seed-about-api.ts",
     "seed:contact": "tsx scripts/seed-contact-api.ts",
     "seed:hero": "tsx scripts/seed-hero.ts",
-    "seed:services": "tsx scripts/seed-services-page.ts"
+    "seed:services": "tsx scripts/seed-services-page.ts",
+    "seed:publications": "tsx scripts/seed-publications-page.ts"
   },
   "dependencies": {
     "@sanity/client": "^7.17.0",

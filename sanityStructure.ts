@@ -16,7 +16,15 @@ export const structure: StructureResolver = (S) =>
         .title("Booking Page")
         .id("bookingPageSingleton")
         .child(S.document().schemaType("bookingPage").documentId("booking-page")),
+      S.listItem()
+        .title("Publications Page")
+        .id("publicationsPageSingleton")
+        .child(S.document().schemaType("publicationsPage").documentId("publications-page")),
       ...S.documentTypeListItems().filter(
-        (item) => item.getId() !== "about" && item.getId() !== "contactPage" && item.getId() !== "bookingPage",
+        (item) =>
+          item.getId() !== "about" &&
+          item.getId() !== "contactPage" &&
+          item.getId() !== "bookingPage" &&
+          item.getId() !== "publicationsPage",
       ),
     ]);

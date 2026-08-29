@@ -2,7 +2,7 @@ import SiteLayout from "../components/SiteLayout";
 import PageHeader from "../components/PageHeader";
 import Publications from "../components/Publications";
 import { hasSanityConfig, client } from "../lib/sanity";
-import { publicationsQuery } from "../lib/queries";
+import { publicationsQuery, publicationsPageQuery } from "../lib/queries";
 
 export const revalidate = 0;
 
@@ -12,12 +12,16 @@ export const metadata = {
 };
 
 async function getData() {
-  if (!hasSanityConfig()) return [];
-  return client.fetch(publicationsQuery);
+  if (!hasSanityConfig()) return { publications: [], pageSettings: null };
+  const [publications, pageSettings] = await Promise.all([
+    client.fetch(publicationsQuery),
+    client.fetch(publicationsPageQuery),
+  ]);
+  return { publications, pageSettings };
 }
 
 export default async function PublicationsPage() {
-  const data = await getData();
+  const { publications, pageSettings } = await getData();
 
   return (
     <SiteLayout>
@@ -27,7 +31,7 @@ export default async function PublicationsPage() {
         subtitle="Books, essays, and translations that extend philosophical inquiry beyond the session room."
         breadcrumb={{ label: "Home", href: "/" }}
       />
-      <Publications data={data} />
+      <Publications data={publications} pageSettings={pageSettings || undefined} />
     </SiteLayout>
   );
 }

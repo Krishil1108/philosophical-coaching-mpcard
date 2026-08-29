@@ -1,14 +1,41 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+
+const SafeWidgetContainer = React.memo(
+  () => {
+    return (
+      <div
+        className="ppl-widget-container"
+        style={{
+          fontFamily: "Space Grotesk, sans-serif",
+          fontSize: "0.9375rem",
+          lineHeight: 1.8,
+          color: "var(--text)",
+          opacity: 0,
+          transition: "opacity 0.4s ease",
+        }}
+      />
+    );
+  },
+  () => true
+);
 
 /**
  * PhilPeople Publications Widget
  * Displays academic publications from PhilPapers/PhilPeople
  */
-export function PhilPeoplePublications() {
-  const [isLoaded, setIsLoaded] = useState(false);
+export function PhilPeoplePublications({
+  settings,
+}: {
+  settings?: {
+    philPeopleLabel?: string;
+    philPeopleCategory?: string;
+    philPeopleTitle?: string;
+    philPeopleDesc?: string;
+  };
+}) {
   const [hasError, setHasError] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -18,7 +45,17 @@ export function PhilPeoplePublications() {
     script.src = "https://philpeople.org/widget/97554.js";
     script.async = true;
     script.onload = () => {
-      setTimeout(() => setIsLoaded(true), 500);
+      if (typeof (window as any).philpeople_embed_init === "function") {
+        (window as any).philpeople_embed_init();
+      }
+      const target = document.querySelector(".ppl-widget-container") as HTMLElement;
+      if (target) {
+        target.style.opacity = "1";
+      }
+      const loader = document.getElementById("ppl-widget-loader");
+      if (loader) {
+        loader.style.display = "none";
+      }
     };
     script.onerror = () => setHasError(true);
     
@@ -96,7 +133,7 @@ export function PhilPeoplePublications() {
               paddingTop: "0.5rem",
             }}
           >
-            PhilPapers
+            {settings?.philPeopleLabel || "PhilPapers"}
           </motion.div>
 
           <div>
@@ -131,7 +168,7 @@ export function PhilPeoplePublications() {
                     fontWeight: 500,
                   }}
                 >
-                  Academic Work
+                  {settings?.philPeopleCategory || "Academic Work"}
                 </span>
               </motion.div>
 
@@ -148,7 +185,7 @@ export function PhilPeoplePublications() {
                   lineHeight: 1.2,
                 }}
               >
-                Scholarly Publications
+                {settings?.philPeopleTitle || "Scholarly Publications"}
               </motion.h3>
               <motion.p
                 initial={{ opacity: 0 }}
@@ -164,7 +201,7 @@ export function PhilPeoplePublications() {
                   lineHeight: 1.8,
                 }}
               >
-                Peer-reviewed papers, book chapters, and scholarly contributions indexed on PhilPapers — exploring philosophical practice, phenomenology, and public philosophy.
+                {settings?.philPeopleDesc || "Peer-reviewed papers, book chapters, and scholarly contributions indexed on PhilPapers — exploring philosophical practice, phenomenology, and public philosophy."}
               </motion.p>
             </div>
 
@@ -208,45 +245,41 @@ export function PhilPeoplePublications() {
               />
 
               {/* Loading state with better animation */}
-              <AnimatePresence>
-                {!isLoaded && !hasError && (
+              {!hasError && (
+                <div
+                  id="ppl-widget-loader"
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    gap: "1.25rem",
+                    minHeight: "200px",
+                  }}
+                >
                   <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 1.2, repeat: Infinity, ease: "linear" }}
                     style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      gap: "1.25rem",
-                      minHeight: "200px",
+                      width: "32px",
+                      height: "32px",
+                      border: "3px solid var(--border)",
+                      borderTopColor: "var(--accent)",
+                      borderRadius: "50%",
+                    }}
+                  />
+                  <p
+                    style={{
+                      fontFamily: "Space Grotesk, sans-serif",
+                      fontSize: "0.875rem",
+                      color: "var(--text-muted)",
+                      letterSpacing: "0.05em",
                     }}
                   >
-                    <motion.div
-                      animate={{ rotate: 360 }}
-                      transition={{ duration: 1.2, repeat: Infinity, ease: "linear" }}
-                      style={{
-                        width: "32px",
-                        height: "32px",
-                        border: "3px solid var(--border)",
-                        borderTopColor: "var(--accent)",
-                        borderRadius: "50%",
-                      }}
-                    />
-                    <p
-                      style={{
-                        fontFamily: "Space Grotesk, sans-serif",
-                        fontSize: "0.875rem",
-                        color: "var(--text-muted)",
-                        letterSpacing: "0.05em",
-                      }}
-                    >
-                      Loading publications...
-                    </p>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+                    Loading publications...
+                  </p>
+                </div>
+              )}
 
               {/* Error state */}
               {hasError && (
@@ -292,17 +325,7 @@ export function PhilPeoplePublications() {
               )}
 
               {/* Actual widget container with enhanced styling */}
-              <div
-                className="ppl-widget-container"
-                style={{
-                  fontFamily: "Space Grotesk, sans-serif",
-                  fontSize: "0.9375rem",
-                  lineHeight: 1.8,
-                  color: "var(--text)",
-                  opacity: isLoaded ? 1 : 0,
-                  transition: "opacity 0.4s ease",
-                }}
-              />
+              <SafeWidgetContainer />
             </motion.div>
 
             {/* Enhanced direct link button */}
@@ -370,30 +393,48 @@ export function PhilPeoplePublications() {
   );
 }
 
+const SafeFollowButtonContainer = React.memo(
+  () => {
+    return (
+      <div
+        id="philpeople-component-follow_btn"
+        style={{
+          transition: "opacity 0.4s ease, transform 0.4s ease",
+          opacity: 0,
+          transform: "translateY(10px)",
+        }}
+      />
+    );
+  },
+  () => true
+);
+
 /**
  * PhilPeople Follow Button Widget
  * Allows visitors to follow on PhilPeople
  */
 export function PhilPeopleFollowButton() {
-  const [isLoaded, setIsLoaded] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
-  const [buttonVisible, setButtonVisible] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
-  const buttonContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const script = document.createElement("script");
     script.src = "https://philpeople.org/components/follow_btn?props%5B%3Aprofile_id_prop%5D=97554&props%5Bcontext%5D=external";
     script.async = true;
     script.onload = () => {
-      setTimeout(() => {
-        setIsLoaded(true);
-        setButtonVisible(true);
-      }, 400);
+      const target = document.getElementById("philpeople-component-follow_btn");
+      if (target) {
+        target.style.opacity = "1";
+        target.style.transform = "translateY(0)";
+      }
+      const loader = document.getElementById("follow-btn-loader");
+      if (loader) {
+        loader.style.display = "none";
+      }
     };
     
-    if (buttonContainerRef.current) {
-      buttonContainerRef.current.appendChild(script);
+    if (containerRef.current) {
+      containerRef.current.appendChild(script);
     }
 
     return () => {
@@ -405,6 +446,7 @@ export function PhilPeopleFollowButton() {
 
   return (
     <motion.section
+      ref={containerRef}
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -569,7 +611,6 @@ export function PhilPeopleFollowButton() {
 
           {/* Enhanced widget container */}
           <motion.div
-            ref={containerRef}
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
@@ -631,52 +672,40 @@ export function PhilPeopleFollowButton() {
             </motion.div>
 
             {/* Loading state with enhanced animation */}
-            <AnimatePresence>
-              {!isLoaded && (
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    gap: "1rem",
-                  }}
-                >
-                  <motion.div
-                    animate={{ rotate: 360 }}
-                    transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                    style={{
-                      width: "24px",
-                      height: "24px",
-                      border: "3px solid var(--border)",
-                      borderTopColor: "var(--accent)",
-                      borderRadius: "50%",
-                    }}
-                  />
-                  <p
-                    style={{
-                      fontFamily: "Space Grotesk, sans-serif",
-                      fontSize: "0.8125rem",
-                      color: "var(--text-muted)",
-                      letterSpacing: "0.025em",
-                    }}
-                  >
-                    Loading follow button...
-                  </p>
-                </motion.div>
-              )}
-            </AnimatePresence>
+            <div
+              id="follow-btn-loader"
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: "1rem",
+              }}
+            >
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                style={{
+                  width: "24px",
+                  height: "24px",
+                  border: "3px solid var(--border)",
+                  borderTopColor: "var(--accent)",
+                  borderRadius: "50%",
+                }}
+              />
+              <p
+                style={{
+                  fontFamily: "Space Grotesk, sans-serif",
+                  fontSize: "0.8125rem",
+                  color: "var(--text-muted)",
+                  letterSpacing: "0.025em",
+                }}
+              >
+                Loading follow button...
+              </p>
+            </div>
 
             {/* PhilPeople button container with fade-in */}
-            <motion.div
-              ref={buttonContainerRef}
-              id="philpeople-component-follow_btn"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: buttonVisible ? 1 : 0, y: buttonVisible ? 0 : 10 }}
-              transition={{ duration: 0.4, delay: 0.2 }}
-            />
+            <SafeFollowButtonContainer />
           </motion.div>
 
           {/* Enhanced profile link */}

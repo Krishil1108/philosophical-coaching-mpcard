@@ -150,6 +150,19 @@ export const publicationsQuery = groq`*[_type == "publication"] | order(order as
   }
 }`;
 
+export const publicationsPageQuery = groq`*[_type == "publicationsPage" && _id == "publications-page"][0]{
+  forthcomingText,
+  quoteContext,
+  quoteText,
+  quoteAuthor,
+  quoteSource,
+  quotePublisher,
+  philPeopleLabel,
+  philPeopleCategory,
+  philPeopleTitle,
+  philPeopleDesc
+}`;
+
 export const testimonialsQuery = groq`*[_type == "testimonial"] | order(order asc){
   _id,
   quote,

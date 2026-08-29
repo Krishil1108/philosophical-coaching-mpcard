@@ -261,6 +261,83 @@ function PublicationAction({
   );
 }
 
+function PublicationDescription({ text }: { text?: string }) {
+  const [isExpanded, setIsExpanded] = useState(false);
+  const maxLength = 240;
+
+  if (!text) return null;
+  if (text.length <= maxLength) {
+    return (
+      <p
+        style={{
+          fontFamily: "Space Grotesk, sans-serif",
+          fontWeight: 300,
+          color: "var(--text-muted)",
+          lineHeight: 1.85,
+          fontSize: "0.9375rem",
+          maxWidth: "38rem",
+          whiteSpace: "pre-line",
+        }}
+      >
+        {text}
+      </p>
+    );
+  }
+
+  return (
+    <div style={{ maxWidth: "38rem" }}>
+      <p
+        style={{
+          fontFamily: "Space Grotesk, sans-serif",
+          fontWeight: 300,
+          color: "var(--text-muted)",
+          lineHeight: 1.85,
+          fontSize: "0.9375rem",
+          whiteSpace: "pre-line",
+        }}
+      >
+        {isExpanded ? text : `${text.slice(0, maxLength).trim()}...`}
+      </p>
+      <button
+        onClick={() => setIsExpanded(!isExpanded)}
+        style={{
+          background: "none",
+          border: "none",
+          padding: 0,
+          color: "var(--accent)",
+          fontFamily: "Space Grotesk, sans-serif",
+          fontSize: "0.75rem",
+          fontWeight: 600,
+          letterSpacing: "0.05em",
+          textTransform: "uppercase",
+          cursor: "pointer",
+          display: "inline-flex",
+          alignItems: "center",
+          gap: "0.25rem",
+          marginTop: "0.5rem",
+          transition: "opacity 0.2s ease",
+        }}
+        onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.8")}
+        onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
+      >
+        <span>{isExpanded ? "Read Less" : "Read More"}</span>
+        <motion.svg
+          animate={{ rotate: isExpanded ? 180 : 0 }}
+          transition={{ duration: 0.2 }}
+          width="10"
+          height="10"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2.5"
+          viewBox="0 0 24 24"
+        >
+          <path d="M19 9l-7 7-7-7" />
+        </motion.svg>
+      </button>
+    </div>
+  );
+}
+
 function PublicationRow({ pub, index }: { pub: Publication; index: number }) {
   const editions = pub.editions || [];
   const defaultEditionKey = "default";
@@ -367,17 +444,6 @@ function PublicationRow({ pub, index }: { pub: Publication; index: number }) {
                 )}
               </div>
             )}
-            <div
-              style={{
-                position: "absolute",
-                top: 0,
-                left: 0,
-                right: 0,
-                height: "3px",
-                background: "var(--accent)",
-                borderRadius: "4px 4px 0 0",
-              }}
-            />
           </div>
 
           <div style={{ paddingTop: "0.25rem" }}>
@@ -478,18 +544,7 @@ function PublicationRow({ pub, index }: { pub: Publication; index: number }) {
               </div>
             )}
 
-            <p
-              style={{
-                fontFamily: "Space Grotesk, sans-serif",
-                fontWeight: 300,
-                color: "var(--text-muted)",
-                lineHeight: 1.85,
-                fontSize: "0.9375rem",
-                maxWidth: "38rem",
-              }}
-            >
-              {pub.description}
-            </p>
+            <PublicationDescription text={pub.description} />
           </div>
 
           <div className="pub-cta-col" style={{ paddingTop: "0.5rem", flexShrink: 0, display: "flex", gap: "0.75rem", alignItems: "center" }}>
@@ -520,7 +575,26 @@ function PublicationRow({ pub, index }: { pub: Publication; index: number }) {
 
 const ITEMS_PER_PAGE = 5;
 
-function PublicationsWrapper({ data }: { data?: Publication[] }) {
+interface PublicationsPageSettings {
+  forthcomingText?: string;
+  quoteText?: string;
+  quoteAuthor?: string;
+  quoteSource?: string;
+  quotePublisher?: string;
+  quoteContext?: string;
+  philPeopleLabel?: string;
+  philPeopleCategory?: string;
+  philPeopleTitle?: string;
+  philPeopleDesc?: string;
+}
+
+function PublicationsWrapper({
+  data,
+  pageSettings,
+}: {
+  data?: Publication[];
+  pageSettings?: PublicationsPageSettings;
+}) {
   const publications = data?.length ? data : defaultPublications;
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
@@ -749,7 +823,7 @@ function PublicationsWrapper({ data }: { data?: Publication[] }) {
               }}
             >
               <span style={{ color: "var(--accent)" }}>Forthcoming — </span>
-              Two translations of Gerd Achenbach&apos;s works on Philosophical Praxis, published by Lexington Books.
+              {pageSettings?.forthcomingText || "Two translations of Gerd Achenbach's works on Philosophical Praxis, published by Lexington Books."}
             </p>
           </div>
         </div>
@@ -779,7 +853,7 @@ function PublicationsWrapper({ data }: { data?: Publication[] }) {
               textAlign: "center",
             }}
           >
-            Philosophical Practice — Foundational Principles
+            {pageSettings?.quoteContext || "Philosophical Practice — Foundational Principles"}
           </div>
           <blockquote
             className="font-italic"
@@ -794,7 +868,7 @@ function PublicationsWrapper({ data }: { data?: Publication[] }) {
               margin: "0 auto 2.5rem",
             }}
           >
-            "Philosophical practice must calibrate itself to the themes, problems and question-formulations that burden others, those who in their need have turned to philosophy for help."
+            "{pageSettings?.quoteText || "Philosophical practice must calibrate itself to the themes, problems and question-formulations that burden others, those who in their need have turned to philosophy for help."}"
           </blockquote>
           <cite
             style={{
@@ -809,13 +883,13 @@ function PublicationsWrapper({ data }: { data?: Publication[] }) {
               width: "100%",
             }}
           >
-            — Gerd B. Achenbach, <em>Philosophical Praxis</em> (Bloomsbury, 2024)
+            — {pageSettings?.quoteAuthor || "Gerd B. Achenbach"}, <em>{pageSettings?.quoteSource || "Philosophical Praxis"}</em> ({pageSettings?.quotePublisher || "Bloomsbury, 2024"})
           </cite>
         </div>
       </motion.div>
 
       {/* ─── PHILPEOPLE PUBLICATIONS WIDGET ─────────────────── */}
-      <PhilPeoplePublications />
+      <PhilPeoplePublications settings={pageSettings} />
     </section>
   );
 }
