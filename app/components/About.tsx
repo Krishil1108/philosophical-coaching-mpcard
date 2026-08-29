@@ -456,36 +456,25 @@ export default function About({ data }: { data?: AboutData }) {
               }}>{data?.educationTitle || "Education"}</h3>
               
               <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
-                <div style={{ textAlign: "center" }}>
-                  <div style={{ 
-                    fontFamily: "Space Grotesk, sans-serif", 
-                    fontWeight: 700,
-                    fontSize: "1.125rem",
-                    color: "var(--text-heading)",
-                    marginBottom: "0.5rem"
-                  }}>{educationItems[0]?.label || "PhD, Philosophy"}</div>
-                  <div style={{ 
-                    fontFamily: "Space Grotesk, sans-serif", 
-                    fontSize: "1rem",
-                    color: "var(--accent)",
-                    fontWeight: 500
-                  }}>{educationItems[0]?.value || "Massachusetts Institute of Technology"}</div>
-                </div>
-                <div style={{ textAlign: "center" }}>
-                  <div style={{ 
-                    fontFamily: "Space Grotesk, sans-serif", 
-                    fontWeight: 700,
-                    fontSize: "1.125rem",
-                    color: "var(--text-heading)",
-                    marginBottom: "0.5rem"
-                  }}>{educationItems[1]?.label || "MSc"}</div>
-                  <div style={{ 
-                    fontFamily: "Space Grotesk, sans-serif", 
-                    fontSize: "1rem",
-                    color: "var(--accent)",
-                    fontWeight: 500
-                  }}>{educationItems[1]?.value || "Massachusetts Institute of Technology"}</div>
-                </div>
+                {educationItems.map((item, idx) => (
+                  <div key={item._key || idx} style={{ textAlign: "center" }}>
+                    <div style={{ 
+                      fontFamily: "Space Grotesk, sans-serif", 
+                      fontWeight: 700,
+                      fontSize: "1.125rem",
+                      color: "var(--text-heading)",
+                      marginBottom: "0.5rem"
+                    }}>{item.label}</div>
+                    {item.value && (
+                      <div style={{ 
+                        fontFamily: "Space Grotesk, sans-serif", 
+                        fontSize: "1rem",
+                        color: "var(--accent)",
+                        fontWeight: 500
+                      }}>{item.value}</div>
+                    )}
+                  </div>
+                ))}
               </div>
             </motion.div>
 
@@ -615,49 +604,25 @@ export default function About({ data }: { data?: AboutData }) {
               }}>{data?.innovationTitle || "Innovation"}</h3>
               
               <div style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
-                <div style={{ textAlign: "center" }}>
-                  <div style={{ 
-                    fontFamily: "Space Grotesk, sans-serif", 
-                    fontWeight: 700,
-                    fontSize: "1rem",
-                    color: "var(--text-heading)",
-                    marginBottom: "0.25rem"
-                  }}>{innovationItems[0]?.label || "Founder"}</div>
-                  <div style={{ 
-                    fontFamily: "Space Grotesk, sans-serif", 
-                    fontSize: "0.875rem",
-                    color: "var(--text-muted)"
-                  }}>{innovationItems[0]?.value || "Café Philosophy Victoria BC"}</div>
-                </div>
-                <div style={{ textAlign: "center" }}>
-                  <div style={{ 
-                    fontFamily: "Space Grotesk, sans-serif", 
-                    fontWeight: 700,
-                    fontSize: "1rem",
-                    color: "var(--text-heading)",
-                    marginBottom: "0.25rem"
-                  }}>{innovationItems[1]?.label || "Creator"}</div>
-                  <div style={{ 
-                    fontFamily: "Space Grotesk, sans-serif", 
-                    fontSize: "0.875rem",
-                    color: "var(--text-muted)"
-                  }}>{innovationItems[1]?.value || "Philosophy Sports"}</div>
-                </div>
-                <div style={{ textAlign: "center" }}>
-                  <div style={{ 
-                    fontFamily: "Space Grotesk, sans-serif", 
-                    fontWeight: 700,
-                    fontSize: "1rem",
-                    color: "var(--text-heading)",
-                    marginBottom: "0.25rem"
-                  }}>{innovationItems[2]?.label || "Author"}</div>
-                  <div style={{ 
-                    fontFamily: "Space Grotesk, sans-serif", 
-                    fontSize: "0.875rem",
-                    color: "var(--text-muted)",
-                    fontStyle: "italic"
-                  }}>{innovationItems[2]?.value || "How to Play Philosophy"}</div>
-                </div>
+                {innovationItems.map((item, idx) => (
+                  <div key={item._key || idx} style={{ textAlign: "center" }}>
+                    <div style={{ 
+                      fontFamily: "Space Grotesk, sans-serif", 
+                      fontWeight: 700,
+                      fontSize: "1rem",
+                      color: "var(--text-heading)",
+                      marginBottom: "0.25rem"
+                    }}>{item.label}</div>
+                    {item.value && (
+                      <div style={{ 
+                        fontFamily: "Space Grotesk, sans-serif", 
+                        fontSize: "0.875rem",
+                        color: "var(--text-muted)",
+                        fontStyle: item.label?.toLowerCase() === "author" ? "italic" : "normal"
+                      }}>{item.value}</div>
+                    )}
+                  </div>
+                ))}
               </div>
             </motion.div>
           </div>
