@@ -457,7 +457,7 @@ export default function About({ data }: { data?: AboutData }) {
               
               <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
                 {educationItems.map((item, idx) => (
-                  <div key={item._key || idx} style={{ textAlign: "center" }}>
+                  <div key={idx} style={{ textAlign: "center" }}>
                     <div style={{ 
                       fontFamily: "Space Grotesk, sans-serif", 
                       fontWeight: 700,
@@ -605,7 +605,7 @@ export default function About({ data }: { data?: AboutData }) {
               
               <div style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
                 {innovationItems.map((item, idx) => (
-                  <div key={item._key || idx} style={{ textAlign: "center" }}>
+                  <div key={idx} style={{ textAlign: "center" }}>
                     <div style={{ 
                       fontFamily: "Space Grotesk, sans-serif", 
                       fontWeight: 700,
