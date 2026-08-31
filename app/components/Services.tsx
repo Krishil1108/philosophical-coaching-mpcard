@@ -184,13 +184,14 @@ export default function Services({ data }: { data?: Service[] }) {
                   </div>
                 </div>
 
-                {/* Description + features side by side on larger screens */}
+                {/* Description + features side by side (and QR column for Counsel) */}
                 <div
                   className="service-body-grid"
                   style={{
                     display: "grid",
-                    gridTemplateColumns: "1fr 1fr",
-                    gap: "4rem",
+                    gridTemplateColumns: (i === 0 || service.title?.toLowerCase().includes("counsel")) ? "1.2fr 1fr auto" : "1fr 1fr",
+                    gap: (i === 0 || service.title?.toLowerCase().includes("counsel")) ? "2.5rem" : "4rem",
+                    alignItems: "start",
                     marginBottom: "2.5rem",
                   }}
                 >
@@ -207,7 +208,7 @@ export default function Services({ data }: { data?: Service[] }) {
                   </p>
 
                   {service.features && (
-                    <ul style={{ listStyle: "none", padding: 0 }}>
+                    <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
                       {service.features.map((f, fi) => (
                         <li
                           key={fi}
@@ -237,64 +238,14 @@ export default function Services({ data }: { data?: Service[] }) {
                       ))}
                     </ul>
                   )}
-                </div>
 
-                {/* QR Codes for Philosophy as Counsel */}
-                {(i === 0 || service.title?.toLowerCase().includes("counsel")) && (
-                  <div
-                    style={{
-                      marginTop: "1.5rem",
-                      marginBottom: "3rem",
-                      padding: "1.75rem 2rem",
-                      background: "rgba(139, 107, 74, 0.03)",
-                      border: "1px solid var(--border)",
-                      borderRadius: "12px",
-                    }}
-                  >
-                    <div style={{ marginBottom: "1.25rem" }}>
-                      <span
-                        className="section-label"
-                        style={{
-                          fontSize: "0.625rem",
-                          letterSpacing: "0.25em",
-                          textTransform: "uppercase",
-                          color: "var(--accent)",
-                          display: "block",
-                          marginBottom: "0.3rem",
-                        }}
-                      >
-                        Compensation & Support
-                      </span>
-                      <h3
-                        className="font-serif"
-                        style={{
-                          fontSize: "1.35rem",
-                          color: "var(--text-heading)",
-                          marginBottom: "0.35rem",
-                        }}
-                      >
-                        Settling Remuneration & Support
-                      </h3>
-                      <p
-                        style={{
-                          fontFamily: "Space Grotesk, sans-serif",
-                          fontSize: "0.85rem",
-                          color: "var(--text-muted)",
-                          lineHeight: 1.6,
-                          fontWeight: 300,
-                          maxWidth: "40rem",
-                        }}
-                      >
-                        To compensate for individual sessions, public Café events, or to support ongoing dialogue practice, you may use the digital coordinates below.
-                      </p>
-                    </div>
-
+                  {(i === 0 || service.title?.toLowerCase().includes("counsel")) && (
                     <div
                       style={{
-                        display: "grid",
-                        gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
-                        gap: "1.25rem",
-                        maxWidth: "44rem",
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: "0.875rem",
+                        minWidth: "210px",
                       }}
                     >
                       {/* 1. Buy Me a Coffee QR */}
@@ -303,25 +254,25 @@ export default function Services({ data }: { data?: Service[] }) {
                         style={{
                           display: "flex",
                           alignItems: "center",
-                          gap: "1.25rem",
+                          gap: "0.875rem",
                           background: "var(--bg-card)",
                           border: "1px solid var(--border)",
                           borderRadius: "10px",
-                          padding: "1rem 1.25rem",
+                          padding: "0.75rem 0.875rem",
                           boxShadow: "0 2px 8px rgba(0, 0, 0, 0.02)",
                         }}
                       >
                         <div
                           style={{
                             position: "relative",
-                            width: "84px",
-                            height: "84px",
+                            width: "56px",
+                            height: "56px",
                             flexShrink: 0,
-                            borderRadius: "8px",
+                            borderRadius: "6px",
                             overflow: "hidden",
                             border: "1px solid rgba(139, 107, 74, 0.25)",
                             background: "white",
-                            padding: "0.35rem",
+                            padding: "0.25rem",
                           }}
                         >
                           <img
@@ -334,24 +285,25 @@ export default function Services({ data }: { data?: Service[] }) {
                           <h4
                             className="font-serif"
                             style={{
-                              fontSize: "1.05rem",
+                              fontSize: "0.875rem",
                               color: "var(--text-heading)",
-                              marginBottom: "0.25rem",
+                              marginBottom: "0.15rem",
+                              lineHeight: 1.2,
                             }}
                           >
                             Buy Me a Coffee
                           </h4>
-                          <p
+                          <span
                             style={{
                               fontFamily: "Space Grotesk, sans-serif",
-                              fontSize: "0.775rem",
+                              fontSize: "0.7rem",
                               color: "var(--text-muted)",
-                              lineHeight: 1.45,
                               fontWeight: 300,
+                              display: "block",
                             }}
                           >
-                            Scan to support or contribute via Buy Me a Coffee.
-                          </p>
+                            Scan to support
+                          </span>
                         </div>
                       </div>
 
@@ -361,25 +313,25 @@ export default function Services({ data }: { data?: Service[] }) {
                         style={{
                           display: "flex",
                           alignItems: "center",
-                          gap: "1.25rem",
+                          gap: "0.875rem",
                           background: "var(--bg-card)",
                           border: "1px solid var(--border)",
                           borderRadius: "10px",
-                          padding: "1rem 1.25rem",
+                          padding: "0.75rem 0.875rem",
                           boxShadow: "0 2px 8px rgba(0, 0, 0, 0.02)",
                         }}
                       >
                         <div
                           style={{
                             position: "relative",
-                            width: "84px",
-                            height: "84px",
+                            width: "56px",
+                            height: "56px",
                             flexShrink: 0,
-                            borderRadius: "8px",
+                            borderRadius: "6px",
                             overflow: "hidden",
                             border: "1px solid rgba(139, 107, 74, 0.25)",
                             background: "white",
-                            padding: "0.35rem",
+                            padding: "0.25rem",
                           }}
                         >
                           <img
@@ -392,29 +344,30 @@ export default function Services({ data }: { data?: Service[] }) {
                           <h4
                             className="font-serif"
                             style={{
-                              fontSize: "1.05rem",
+                              fontSize: "0.875rem",
                               color: "var(--text-heading)",
-                              marginBottom: "0.25rem",
+                              marginBottom: "0.15rem",
+                              lineHeight: 1.2,
                             }}
                           >
                             PayPal Payment
                           </h4>
-                          <p
+                          <span
                             style={{
                               fontFamily: "Space Grotesk, sans-serif",
-                              fontSize: "0.775rem",
+                              fontSize: "0.7rem",
                               color: "var(--text-muted)",
-                              lineHeight: 1.45,
                               fontWeight: 300,
+                              display: "block",
                             }}
                           >
-                            Scan with your PayPal app or phone camera for card and international payments.
-                          </p>
+                            Scan to pay
+                          </span>
                         </div>
                       </div>
                     </div>
-                  </div>
-                )}
+                  )}
+                </div>
 
                 {service.showWhatToExpect !== false && service.whatToExpect && service.whatToExpect.length > 0 && (
                   <div style={{ marginTop: "3rem", marginBottom: "3rem" }}>
