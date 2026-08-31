@@ -39,29 +39,5 @@ export const publicationsPage = defineType({
       type: "string",
       description: "E.g., 'Bloomsbury, 2024'."
     }),
-    defineField({
-      name: "philPeopleLabel",
-      title: "PhilPeople Label",
-      type: "string",
-      description: "Side label shown vertically (e.g. 'PhilPapers')."
-    }),
-    defineField({
-      name: "philPeopleCategory",
-      title: "PhilPeople Category",
-      type: "string",
-      description: "Small uppercase label (e.g. 'Academic Work')."
-    }),
-    defineField({
-      name: "philPeopleTitle",
-      title: "PhilPeople Section Title",
-      type: "string",
-      description: "Title (e.g. 'Scholarly Publications')."
-    }),
-    defineField({
-      name: "philPeopleDesc",
-      title: "PhilPeople Section Description",
-      type: "text",
-      rows: 4
-    }),
   ]
 });

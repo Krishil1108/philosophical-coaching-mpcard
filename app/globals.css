@@ -617,10 +617,8 @@ h1, h2, h3, h4, h5, h6 {
   .video-row { padding: 3rem 0 !important; }
   .video-row-num { padding-top: 0 !important; }
 
-  /* Page header and philpeople intro */
+  /* Page header and page subtitles */
   .page-header-subtitle-grid { grid-template-columns: 1.5rem 1fr !important; gap: 1.25rem !important; }
-  .philpeople-grid { grid-template-columns: 1fr !important; gap: 1.25rem !important; }
-  .philpeople-grid > :first-child { display: none !important; }
 
   /* Practice methods */
   .practice-method-row { grid-template-columns: 4rem 12rem 1fr !important; gap: 1.5rem !important; }

@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { useMemo, useState } from "react";
 import { urlFor } from "../lib/sanity";
-import { PhilPeoplePublications } from "./PhilPeopleWidgets";
 
 interface PublicationEdition {
   _key?: string;
@@ -582,10 +581,6 @@ interface PublicationsPageSettings {
   quoteSource?: string;
   quotePublisher?: string;
   quoteContext?: string;
-  philPeopleLabel?: string;
-  philPeopleCategory?: string;
-  philPeopleTitle?: string;
-  philPeopleDesc?: string;
 }
 
 function PublicationsWrapper({
@@ -887,9 +882,6 @@ function PublicationsWrapper({
           </cite>
         </div>
       </motion.div>
-
-      {/* ─── PHILPEOPLE PUBLICATIONS WIDGET ─────────────────── */}
-      <PhilPeoplePublications settings={pageSettings} />
     </section>
   );
 }

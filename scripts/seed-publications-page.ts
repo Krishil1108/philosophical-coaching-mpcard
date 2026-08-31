@@ -32,11 +32,7 @@ async function seedPublicationsPage() {
       quoteText: "Philosophical practice must calibrate itself to the themes, problems and question-formulations that burden others, those who in their need have turned to philosophy for help.",
       quoteAuthor: "Gerd B. Achenbach",
       quoteSource: "Philosophical Praxis",
-      quotePublisher: "Bloomsbury, 2024",
-      philPeopleLabel: "PhilPapers",
-      philPeopleCategory: "Academic Work",
-      philPeopleTitle: "Scholarly Publications",
-      philPeopleDesc: "Peer-reviewed papers, book chapters, and scholarly contributions indexed on PhilPapers — exploring philosophical practice, phenomenology, and public philosophy."
+      quotePublisher: "Bloomsbury, 2024"
     };
 
     console.log("Creating or updating Publications Page settings document...");

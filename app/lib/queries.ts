@@ -156,11 +156,7 @@ export const publicationsPageQuery = groq`*[_type == "publicationsPage" && _id =
   quoteText,
   quoteAuthor,
   quoteSource,
-  quotePublisher,
-  philPeopleLabel,
-  philPeopleCategory,
-  philPeopleTitle,
-  philPeopleDesc
+  quotePublisher
 }`;
 
 export const testimonialsQuery = groq`*[_type == "testimonial"] | order(order asc){
