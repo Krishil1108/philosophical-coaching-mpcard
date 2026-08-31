@@ -184,13 +184,19 @@ export default function Services({ data }: { data?: Service[] }) {
                   </div>
                 </div>
 
-                {/* Description + features side by side (and QR column for Counsel) */}
+                {/* Description + features side by side (and QR column for Counsel / Dialogue) */}
                 <div
                   className="service-body-grid"
                   style={{
                     display: "grid",
-                    gridTemplateColumns: (i === 0 || service.title?.toLowerCase().includes("counsel")) ? "1.2fr 1fr auto" : "1fr 1fr",
-                    gap: (i === 0 || service.title?.toLowerCase().includes("counsel")) ? "2.5rem" : "4rem",
+                    gridTemplateColumns: (
+                      (i === 0 || service.title?.toLowerCase().includes("counsel")) ||
+                      (i === 1 || service.title?.toLowerCase().includes("dialogue") || service.title?.toLowerCase().includes("facilitation"))
+                    ) ? "1.2fr 1fr auto" : "1fr 1fr",
+                    gap: (
+                      (i === 0 || service.title?.toLowerCase().includes("counsel")) ||
+                      (i === 1 || service.title?.toLowerCase().includes("dialogue") || service.title?.toLowerCase().includes("facilitation"))
+                    ) ? "2.5rem" : "4rem",
                     alignItems: "start",
                     marginBottom: "2.5rem",
                   }}
@@ -239,13 +245,14 @@ export default function Services({ data }: { data?: Service[] }) {
                     </ul>
                   )}
 
+                  {/* Philosophy as Counsel QR Codes */}
                   {(i === 0 || service.title?.toLowerCase().includes("counsel")) && (
                     <div
                       style={{
                         display: "flex",
                         flexDirection: "column",
                         gap: "0.875rem",
-                        minWidth: "210px",
+                        minWidth: "225px",
                       }}
                     >
                       {/* 1. Buy Me a Coffee QR */}
@@ -265,29 +272,34 @@ export default function Services({ data }: { data?: Service[] }) {
                         <div
                           style={{
                             position: "relative",
-                            width: "56px",
-                            height: "56px",
+                            width: "76px",
+                            height: "76px",
                             flexShrink: 0,
                             borderRadius: "6px",
                             overflow: "hidden",
                             border: "1px solid rgba(139, 107, 74, 0.25)",
                             background: "white",
-                            padding: "0.25rem",
+                            padding: "0.3rem",
                           }}
                         >
                           <img
                             src="/bmc_qr.png"
                             alt="Buy Me a Coffee QR Code"
-                            style={{ width: "100%", height: "100%", objectFit: "contain" }}
+                            style={{
+                              width: "100%",
+                              height: "100%",
+                              objectFit: "contain",
+                              imageRendering: "pixelated",
+                            }}
                           />
                         </div>
                         <div>
                           <h4
                             className="font-serif"
                             style={{
-                              fontSize: "0.875rem",
+                              fontSize: "0.9375rem",
                               color: "var(--text-heading)",
-                              marginBottom: "0.15rem",
+                              marginBottom: "0.2rem",
                               lineHeight: 1.2,
                             }}
                           >
@@ -296,7 +308,7 @@ export default function Services({ data }: { data?: Service[] }) {
                           <span
                             style={{
                               fontFamily: "Space Grotesk, sans-serif",
-                              fontSize: "0.7rem",
+                              fontSize: "0.725rem",
                               color: "var(--text-muted)",
                               fontWeight: 300,
                               display: "block",
@@ -324,29 +336,34 @@ export default function Services({ data }: { data?: Service[] }) {
                         <div
                           style={{
                             position: "relative",
-                            width: "56px",
-                            height: "56px",
+                            width: "76px",
+                            height: "76px",
                             flexShrink: 0,
                             borderRadius: "6px",
                             overflow: "hidden",
                             border: "1px solid rgba(139, 107, 74, 0.25)",
                             background: "white",
-                            padding: "0.25rem",
+                            padding: "0.3rem",
                           }}
                         >
                           <img
                             src="/paypal_qr.png"
                             alt="PayPal QR Code"
-                            style={{ width: "100%", height: "100%", objectFit: "contain" }}
+                            style={{
+                              width: "100%",
+                              height: "100%",
+                              objectFit: "contain",
+                              imageRendering: "pixelated",
+                            }}
                           />
                         </div>
                         <div>
                           <h4
                             className="font-serif"
                             style={{
-                              fontSize: "0.875rem",
+                              fontSize: "0.9375rem",
                               color: "var(--text-heading)",
-                              marginBottom: "0.15rem",
+                              marginBottom: "0.2rem",
                               lineHeight: 1.2,
                             }}
                           >
@@ -355,7 +372,7 @@ export default function Services({ data }: { data?: Service[] }) {
                           <span
                             style={{
                               fontFamily: "Space Grotesk, sans-serif",
-                              fontSize: "0.7rem",
+                              fontSize: "0.725rem",
                               color: "var(--text-muted)",
                               fontWeight: 300,
                               display: "block",
@@ -365,6 +382,86 @@ export default function Services({ data }: { data?: Service[] }) {
                           </span>
                         </div>
                       </div>
+                    </div>
+                  )}
+
+                  {/* Dialogue Facilitation QR Code (Tug of Logic) */}
+                  {(i === 1 || service.title?.toLowerCase().includes("dialogue") || service.title?.toLowerCase().includes("facilitation")) && (
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: "0.875rem",
+                        minWidth: "225px",
+                      }}
+                    >
+                      <a
+                        href="https://www.tug-of-logic.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="card-hover"
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: "0.875rem",
+                          background: "var(--bg-card)",
+                          border: "1px solid var(--border)",
+                          borderRadius: "10px",
+                          padding: "0.75rem 0.875rem",
+                          boxShadow: "0 2px 8px rgba(0, 0, 0, 0.02)",
+                          textDecoration: "none",
+                        }}
+                      >
+                        <div
+                          style={{
+                            position: "relative",
+                            width: "76px",
+                            height: "76px",
+                            flexShrink: 0,
+                            borderRadius: "6px",
+                            overflow: "hidden",
+                            border: "1px solid rgba(139, 107, 74, 0.25)",
+                            background: "white",
+                            padding: "0.3rem",
+                          }}
+                        >
+                          <img
+                            src="/qrcode_www.tug-of-logic.com.png"
+                            alt="Tug of Logic QR Code"
+                            style={{
+                              width: "100%",
+                              height: "100%",
+                              objectFit: "contain",
+                              imageRendering: "pixelated",
+                            }}
+                          />
+                        </div>
+                        <div>
+                          <h4
+                            className="font-serif"
+                            style={{
+                              fontSize: "0.9375rem",
+                              color: "var(--text-heading)",
+                              marginBottom: "0.2rem",
+                              lineHeight: 1.2,
+                            }}
+                          >
+                            Tug of Logic
+                          </h4>
+                          <span
+                            style={{
+                              fontFamily: "Space Grotesk, sans-serif",
+                              fontSize: "0.725rem",
+                              color: "var(--text-muted)",
+                              fontWeight: 300,
+                              display: "block",
+                              lineHeight: 1.3,
+                            }}
+                          >
+                            Play Philosophy Sports
+                          </span>
+                        </div>
+                      </a>
                     </div>
                   )}
                 </div>

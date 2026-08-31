@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useEffect, useMemo, useState } from "react";
+import BookingMessageBox from "./BookingMessageBox";
 
 interface Slot {
   id: string;
@@ -625,6 +626,9 @@ export default function BookingScheduler({ heading, description }: BookingSchedu
                 )}
               </div>
             )}
+
+            {/* Direct Message Inquiry Box */}
+            <BookingMessageBox />
           </div>
         </div>
       </div>

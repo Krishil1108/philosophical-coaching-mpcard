@@ -3,10 +3,10 @@ import { Resend } from "resend";
 
 export async function POST(request: Request) {
   try {
-    const { name, email, message } = await request.json();
+    const { name, email, topic, message } = await request.json();
 
-    if (!name || !email || !message) {
-      return NextResponse.json({ error: "Name, email, and message are required." }, { status: 400 });
+    if (!email || !message) {
+      return NextResponse.json({ error: "Email and message are required." }, { status: 400 });
     }
 
     const apiKey = process.env.RESEND_API_KEY;
@@ -16,12 +16,16 @@ export async function POST(request: Request) {
     }
 
     const resend = new Resend(apiKey);
+    const receiverEmail = process.env.CONTACT_RECEIVER_EMAIL || "methexis8@gmail.com";
+    const senderName = name?.trim() || "Visitor";
+    const topicLine = topic?.trim() ? `[${topic.trim()}] ` : "";
+
     const { data, error } = await resend.emails.send({
       from: "Philosophical Coaching <bookings@updates.philosophical-practice.com>",
-      to: "michael@philosophicalcoaching.com",
+      to: receiverEmail,
       replyTo: email,
-      subject: `New Contact Request from ${name}`,
-      text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
+      subject: `${topicLine}New Message from ${senderName} (${email})`,
+      text: `Inquiry Topic: ${topic || "General Inquiry"}\nFrom: ${senderName}\nEmail: ${email}\n\nMessage:\n${message}`,
     });
 
     if (error) {
@@ -34,3 +38,4 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Failed to send email." }, { status: 500 });
   }
 }
+
