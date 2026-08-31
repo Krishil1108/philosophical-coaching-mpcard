@@ -1,6 +1,7 @@
 "use client";
 
-import { motion, Variants } from "framer-motion";
+import { AnimatePresence, motion, Variants } from "framer-motion";
+import { useEffect, useState } from "react";
 
 interface Service {
   _id: string;
@@ -67,6 +68,32 @@ function numberToRoman(num: number): string {
 
 export default function Services({ data }: { data?: Service[] }) {
   const services = data?.length ? data : defaultServices;
+  const [zoomedQR, setZoomedQR] = useState<{
+    src: string;
+    alt: string;
+    title: string;
+    subtitle: string;
+    link?: string;
+    linkText?: string;
+  } | null>(null);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setZoomedQR(null);
+      }
+    };
+    if (zoomedQR) {
+      window.addEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "";
+    };
+  }, [zoomedQR]);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -258,6 +285,14 @@ export default function Services({ data }: { data?: Service[] }) {
                       {/* 1. Buy Me a Coffee QR */}
                       <div
                         className="card-hover"
+                        onClick={() =>
+                          setZoomedQR({
+                            src: "/bmc_qr.png",
+                            alt: "Buy Me a Coffee QR Code",
+                            title: "Buy Me a Coffee",
+                            subtitle: "Scan to support or contribute to the philosophical practice.",
+                          })
+                        }
                         style={{
                           display: "flex",
                           alignItems: "center",
@@ -267,7 +302,10 @@ export default function Services({ data }: { data?: Service[] }) {
                           borderRadius: "10px",
                           padding: "0.75rem 0.875rem",
                           boxShadow: "0 2px 8px rgba(0, 0, 0, 0.02)",
+                          cursor: "pointer",
+                          transition: "all 0.2s ease",
                         }}
+                        title="Click to zoom QR code"
                       >
                         <div
                           style={{
@@ -293,7 +331,7 @@ export default function Services({ data }: { data?: Service[] }) {
                             }}
                           />
                         </div>
-                        <div>
+                        <div style={{ flex: 1 }}>
                           <h4
                             className="font-serif"
                             style={{
@@ -316,12 +354,34 @@ export default function Services({ data }: { data?: Service[] }) {
                           >
                             Scan to support
                           </span>
+                          <span
+                            style={{
+                              fontFamily: "Space Grotesk, sans-serif",
+                              fontSize: "0.65rem",
+                              color: "var(--accent)",
+                              fontWeight: 500,
+                              display: "inline-flex",
+                              alignItems: "center",
+                              gap: "0.2rem",
+                              marginTop: "0.25rem",
+                            }}
+                          >
+                            🔍 Click to zoom
+                          </span>
                         </div>
                       </div>
 
                       {/* 2. PayPal QR */}
                       <div
                         className="card-hover"
+                        onClick={() =>
+                          setZoomedQR({
+                            src: "/paypal_qr.png",
+                            alt: "PayPal QR Code",
+                            title: "PayPal Payment",
+                            subtitle: "Scan with your phone camera or PayPal app for card and international payments.",
+                          })
+                        }
                         style={{
                           display: "flex",
                           alignItems: "center",
@@ -331,7 +391,10 @@ export default function Services({ data }: { data?: Service[] }) {
                           borderRadius: "10px",
                           padding: "0.75rem 0.875rem",
                           boxShadow: "0 2px 8px rgba(0, 0, 0, 0.02)",
+                          cursor: "pointer",
+                          transition: "all 0.2s ease",
                         }}
+                        title="Click to zoom QR code"
                       >
                         <div
                           style={{
@@ -357,7 +420,7 @@ export default function Services({ data }: { data?: Service[] }) {
                             }}
                           />
                         </div>
-                        <div>
+                        <div style={{ flex: 1 }}>
                           <h4
                             className="font-serif"
                             style={{
@@ -380,6 +443,20 @@ export default function Services({ data }: { data?: Service[] }) {
                           >
                             Scan to pay
                           </span>
+                          <span
+                            style={{
+                              fontFamily: "Space Grotesk, sans-serif",
+                              fontSize: "0.65rem",
+                              color: "var(--accent)",
+                              fontWeight: 500,
+                              display: "inline-flex",
+                              alignItems: "center",
+                              gap: "0.2rem",
+                              marginTop: "0.25rem",
+                            }}
+                          >
+                            🔍 Click to zoom
+                          </span>
                         </div>
                       </div>
                     </div>
@@ -395,11 +472,18 @@ export default function Services({ data }: { data?: Service[] }) {
                         minWidth: "225px",
                       }}
                     >
-                      <a
-                        href="https://www.tug-of-logic.com"
-                        target="_blank"
-                        rel="noopener noreferrer"
+                      <div
                         className="card-hover"
+                        onClick={() =>
+                          setZoomedQR({
+                            src: "/qrcode_www.tug-of-logic.com.png",
+                            alt: "Tug of Logic QR Code",
+                            title: "Tug of Logic",
+                            subtitle: "Play Philosophy Sports — competitive yet collaborative philosophical inquiry.",
+                            link: "https://www.tug-of-logic.com",
+                            linkText: "Visit tug-of-logic.com ↗",
+                          })
+                        }
                         style={{
                           display: "flex",
                           alignItems: "center",
@@ -409,8 +493,10 @@ export default function Services({ data }: { data?: Service[] }) {
                           borderRadius: "10px",
                           padding: "0.75rem 0.875rem",
                           boxShadow: "0 2px 8px rgba(0, 0, 0, 0.02)",
-                          textDecoration: "none",
+                          cursor: "pointer",
+                          transition: "all 0.2s ease",
                         }}
+                        title="Click to zoom QR code"
                       >
                         <div
                           style={{
@@ -436,7 +522,7 @@ export default function Services({ data }: { data?: Service[] }) {
                             }}
                           />
                         </div>
-                        <div>
+                        <div style={{ flex: 1 }}>
                           <h4
                             className="font-serif"
                             style={{
@@ -460,8 +546,22 @@ export default function Services({ data }: { data?: Service[] }) {
                           >
                             Play Philosophy Sports
                           </span>
+                          <span
+                            style={{
+                              fontFamily: "Space Grotesk, sans-serif",
+                              fontSize: "0.65rem",
+                              color: "var(--accent)",
+                              fontWeight: 500,
+                              display: "inline-flex",
+                              alignItems: "center",
+                              gap: "0.2rem",
+                              marginTop: "0.25rem",
+                            }}
+                          >
+                            🔍 Click to zoom
+                          </span>
                         </div>
-                      </a>
+                      </div>
                     </div>
                   )}
                 </div>
@@ -534,6 +634,169 @@ export default function Services({ data }: { data?: Service[] }) {
           </div>
         </motion.div>
       ))}
+
+      {/* Lightbox / Zoomed QR Code Modal */}
+      <AnimatePresence>
+        {zoomedQR && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            onClick={() => setZoomedQR(null)}
+            style={{
+              position: "fixed",
+              inset: 0,
+              zIndex: 99999,
+              background: "rgba(18, 14, 10, 0.78)",
+              backdropFilter: "blur(8px)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              padding: "1.5rem",
+            }}
+          >
+            <motion.div
+              initial={{ scale: 0.88, y: 20, opacity: 0 }}
+              animate={{ scale: 1, y: 0, opacity: 1 }}
+              exit={{ scale: 0.88, y: 20, opacity: 0 }}
+              transition={{ type: "spring", stiffness: 320, damping: 28 }}
+              onClick={(e) => e.stopPropagation()}
+              style={{
+                position: "relative",
+                maxWidth: "420px",
+                width: "100%",
+                background: "var(--bg-card)",
+                border: "1px solid var(--border)",
+                borderRadius: "16px",
+                padding: "2.25rem 2rem 1.75rem 2rem",
+                boxShadow: "0 25px 60px rgba(0, 0, 0, 0.35)",
+                textAlign: "center",
+              }}
+            >
+              {/* Close button */}
+              <button
+                type="button"
+                onClick={() => setZoomedQR(null)}
+                aria-label="Close zoomed QR"
+                style={{
+                  position: "absolute",
+                  top: "1rem",
+                  right: "1rem",
+                  width: "36px",
+                  height: "36px",
+                  borderRadius: "50%",
+                  border: "1px solid var(--border)",
+                  background: "var(--bg)",
+                  color: "var(--text-muted)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  cursor: "pointer",
+                  fontSize: "1.1rem",
+                  lineHeight: 1,
+                  transition: "all 0.2s ease",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = "var(--accent)";
+                  e.currentTarget.style.color = "var(--accent)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = "var(--border)";
+                  e.currentTarget.style.color = "var(--text-muted)";
+                }}
+              >
+                ✕
+              </button>
+
+              {/* Big High-Res QR Code Display */}
+              <div
+                style={{
+                  position: "relative",
+                  width: "250px",
+                  height: "250px",
+                  margin: "0.5rem auto 1.5rem auto",
+                  borderRadius: "12px",
+                  overflow: "hidden",
+                  border: "2px solid rgba(139, 107, 74, 0.35)",
+                  background: "white",
+                  padding: "0.85rem",
+                  boxShadow: "0 8px 30px rgba(0, 0, 0, 0.12)",
+                }}
+              >
+                <img
+                  src={zoomedQR.src}
+                  alt={zoomedQR.alt}
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "contain",
+                    imageRendering: "pixelated",
+                  }}
+                />
+              </div>
+
+              {/* Title */}
+              <h3
+                className="font-serif"
+                style={{
+                  fontSize: "1.5rem",
+                  color: "var(--text-heading)",
+                  marginBottom: "0.4rem",
+                }}
+              >
+                {zoomedQR.title}
+              </h3>
+
+              {/* Subtitle */}
+              <p
+                style={{
+                  fontFamily: "Space Grotesk, sans-serif",
+                  fontSize: "0.875rem",
+                  color: "var(--text-muted)",
+                  lineHeight: 1.6,
+                  marginBottom: zoomedQR.link ? "1.25rem" : "0.5rem",
+                  fontWeight: 300,
+                }}
+              >
+                {zoomedQR.subtitle}
+              </p>
+
+              {/* Optional Link button */}
+              {zoomedQR.link && (
+                <a
+                  href={zoomedQR.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-primary"
+                  style={{
+                    display: "inline-flex",
+                    justifyContent: "center",
+                    width: "100%",
+                    padding: "0.75rem 1.25rem",
+                    fontSize: "0.875rem",
+                    marginBottom: "0.5rem",
+                  }}
+                >
+                  {zoomedQR.linkText || "Open Link Directly ↗"}
+                </a>
+              )}
+
+              <div
+                style={{
+                  marginTop: "1rem",
+                  fontFamily: "Space Grotesk, sans-serif",
+                  fontSize: "0.725rem",
+                  color: "var(--text-muted)",
+                  opacity: 0.75,
+                }}
+              >
+                Press Escape or tap outside to close
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.section>
   );
 }
