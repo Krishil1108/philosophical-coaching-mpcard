@@ -239,6 +239,183 @@ export default function Services({ data }: { data?: Service[] }) {
                   )}
                 </div>
 
+                {/* QR Codes for Philosophy as Counsel */}
+                {(i === 0 || service.title?.toLowerCase().includes("counsel")) && (
+                  <div
+                    style={{
+                      marginTop: "1.5rem",
+                      marginBottom: "3rem",
+                      padding: "1.75rem 2rem",
+                      background: "rgba(139, 107, 74, 0.03)",
+                      border: "1px solid var(--border)",
+                      borderRadius: "12px",
+                    }}
+                  >
+                    <div style={{ marginBottom: "1.25rem" }}>
+                      <span
+                        className="section-label"
+                        style={{
+                          fontSize: "0.625rem",
+                          letterSpacing: "0.25em",
+                          textTransform: "uppercase",
+                          color: "var(--accent)",
+                          display: "block",
+                          marginBottom: "0.3rem",
+                        }}
+                      >
+                        Compensation & Support
+                      </span>
+                      <h3
+                        className="font-serif"
+                        style={{
+                          fontSize: "1.35rem",
+                          color: "var(--text-heading)",
+                          marginBottom: "0.35rem",
+                        }}
+                      >
+                        Settling Remuneration & Support
+                      </h3>
+                      <p
+                        style={{
+                          fontFamily: "Space Grotesk, sans-serif",
+                          fontSize: "0.85rem",
+                          color: "var(--text-muted)",
+                          lineHeight: 1.6,
+                          fontWeight: 300,
+                          maxWidth: "40rem",
+                        }}
+                      >
+                        To compensate for individual sessions, public Café events, or to support ongoing dialogue practice, you may use the digital coordinates below.
+                      </p>
+                    </div>
+
+                    <div
+                      style={{
+                        display: "grid",
+                        gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+                        gap: "1.25rem",
+                        maxWidth: "44rem",
+                      }}
+                    >
+                      {/* 1. Buy Me a Coffee QR */}
+                      <div
+                        className="card-hover"
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: "1.25rem",
+                          background: "var(--bg-card)",
+                          border: "1px solid var(--border)",
+                          borderRadius: "10px",
+                          padding: "1rem 1.25rem",
+                          boxShadow: "0 2px 8px rgba(0, 0, 0, 0.02)",
+                        }}
+                      >
+                        <div
+                          style={{
+                            position: "relative",
+                            width: "84px",
+                            height: "84px",
+                            flexShrink: 0,
+                            borderRadius: "8px",
+                            overflow: "hidden",
+                            border: "1px solid rgba(139, 107, 74, 0.25)",
+                            background: "white",
+                            padding: "0.35rem",
+                          }}
+                        >
+                          <img
+                            src="/bmc_qr.png"
+                            alt="Buy Me a Coffee QR Code"
+                            style={{ width: "100%", height: "100%", objectFit: "contain" }}
+                          />
+                        </div>
+                        <div>
+                          <h4
+                            className="font-serif"
+                            style={{
+                              fontSize: "1.05rem",
+                              color: "var(--text-heading)",
+                              marginBottom: "0.25rem",
+                            }}
+                          >
+                            Buy Me a Coffee
+                          </h4>
+                          <p
+                            style={{
+                              fontFamily: "Space Grotesk, sans-serif",
+                              fontSize: "0.775rem",
+                              color: "var(--text-muted)",
+                              lineHeight: 1.45,
+                              fontWeight: 300,
+                            }}
+                          >
+                            Scan to support or contribute via Buy Me a Coffee.
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* 2. PayPal QR */}
+                      <div
+                        className="card-hover"
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: "1.25rem",
+                          background: "var(--bg-card)",
+                          border: "1px solid var(--border)",
+                          borderRadius: "10px",
+                          padding: "1rem 1.25rem",
+                          boxShadow: "0 2px 8px rgba(0, 0, 0, 0.02)",
+                        }}
+                      >
+                        <div
+                          style={{
+                            position: "relative",
+                            width: "84px",
+                            height: "84px",
+                            flexShrink: 0,
+                            borderRadius: "8px",
+                            overflow: "hidden",
+                            border: "1px solid rgba(139, 107, 74, 0.25)",
+                            background: "white",
+                            padding: "0.35rem",
+                          }}
+                        >
+                          <img
+                            src="/paypal_qr.png"
+                            alt="PayPal QR Code"
+                            style={{ width: "100%", height: "100%", objectFit: "contain" }}
+                          />
+                        </div>
+                        <div>
+                          <h4
+                            className="font-serif"
+                            style={{
+                              fontSize: "1.05rem",
+                              color: "var(--text-heading)",
+                              marginBottom: "0.25rem",
+                            }}
+                          >
+                            PayPal Payment
+                          </h4>
+                          <p
+                            style={{
+                              fontFamily: "Space Grotesk, sans-serif",
+                              fontSize: "0.775rem",
+                              color: "var(--text-muted)",
+                              lineHeight: 1.45,
+                              fontWeight: 300,
+                            }}
+                          >
+                            Scan with your PayPal app or phone camera for card and international payments.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
                 {service.showWhatToExpect !== false && service.whatToExpect && service.whatToExpect.length > 0 && (
                   <div style={{ marginTop: "3rem", marginBottom: "3rem" }}>
                     <div className="text-left mb-10">
@@ -307,175 +484,6 @@ export default function Services({ data }: { data?: Service[] }) {
           </div>
         </motion.div>
       ))}
-
-      {/* ─── CONTRIBUTION & COMPENSATION SECTION ─────────────────── */}
-      <motion.div
-        variants={itemVariants}
-        style={{
-          padding: "6rem 0",
-          borderTop: "1px solid var(--border)",
-          background: "linear-gradient(180deg, var(--bg) 0%, rgba(139, 107, 74, 0.03) 100%)",
-        }}
-      >
-        <div className="inner-max" style={{ maxWidth: "78rem" }}>
-          <div style={{ textAlign: "center", marginBottom: "4rem" }}>
-            <span
-              className="section-label"
-              style={{
-                marginBottom: "0.9rem",
-                display: "inline-block",
-              }}
-            >
-              Compensation
-            </span>
-            <h2
-              className="font-serif"
-              style={{
-                fontSize: "clamp(2rem, 3.5vw, 2.75rem)",
-                color: "var(--text-heading)",
-                marginBottom: "1.25rem",
-              }}
-            >
-              Settling Remuneration & Support
-            </h2>
-            <div className="divider-gold" style={{ margin: "0 auto 1.5rem auto" }} />
-            <p
-              style={{
-                fontFamily: "Space Grotesk, sans-serif",
-                fontSize: "1rem",
-                color: "var(--text-muted)",
-                maxWidth: "38rem",
-                margin: "0 auto",
-                lineHeight: 1.8,
-                fontWeight: 300,
-              }}
-            >
-              To compensate for individual sessions, public Café events, or to support ongoing dialogue practice, you may use the digital coordinates below.
-            </p>
-          </div>
-
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-              gap: "3rem",
-              justifyItems: "center",
-              maxWidth: "48rem",
-              margin: "0 auto",
-            }}
-          >
-            {/* 1. Bank Transfer QR */}
-            <div
-              className="card-hover"
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                gap: "1.5rem",
-                background: "var(--bg-card)",
-                border: "1px solid var(--border)",
-                borderRadius: "16px",
-                padding: "2.5rem 2rem",
-                width: "100%",
-                boxShadow: "0 4px 20px rgba(0, 0, 0, 0.02)",
-              }}
-            >
-              <div
-                style={{
-                  position: "relative",
-                  width: "160px",
-                  height: "160px",
-                  borderRadius: "12px",
-                  overflow: "hidden",
-                  border: "1px solid rgba(139, 107, 74, 0.25)",
-                  background: "white",
-                  padding: "0.75rem",
-                }}
-              >
-                <img
-                  src="/bank_qr.png"
-                  alt="Bank Transfer QR Code"
-                  style={{ width: "100%", height: "100%", objectFit: "contain" }}
-                />
-              </div>
-              <div style={{ textAlign: "center" }}>
-                <h3
-                  className="font-serif mb-2"
-                  style={{ fontSize: "1.3rem", color: "var(--text-heading)" }}
-                >
-                  Direct Bank Transfer
-                </h3>
-                <p
-                  style={{
-                    fontFamily: "Space Grotesk, sans-serif",
-                    fontSize: "0.85rem",
-                    color: "var(--text-muted)",
-                    lineHeight: 1.6,
-                    fontWeight: 300,
-                  }}
-                >
-                  Scan with your mobile banking application for direct settlement or e-transfer.
-                </p>
-              </div>
-            </div>
-
-            {/* 2. PayPal QR */}
-            <div
-              className="card-hover"
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                gap: "1.5rem",
-                background: "var(--bg-card)",
-                border: "1px solid var(--border)",
-                borderRadius: "16px",
-                padding: "2.5rem 2rem",
-                width: "100%",
-                boxShadow: "0 4px 20px rgba(0, 0, 0, 0.02)",
-              }}
-            >
-              <div
-                style={{
-                  position: "relative",
-                  width: "160px",
-                  height: "160px",
-                  borderRadius: "12px",
-                  overflow: "hidden",
-                  border: "1px solid rgba(139, 107, 74, 0.25)",
-                  background: "white",
-                  padding: "0.75rem",
-                }}
-              >
-                <img
-                  src="/paypal_qr.png"
-                  alt="PayPal QR Code"
-                  style={{ width: "100%", height: "100%", objectFit: "contain" }}
-                />
-              </div>
-              <div style={{ textAlign: "center" }}>
-                <h3
-                  className="font-serif mb-2"
-                  style={{ fontSize: "1.3rem", color: "var(--text-heading)" }}
-                >
-                  PayPal Payment
-                </h3>
-                <p
-                  style={{
-                    fontFamily: "Space Grotesk, sans-serif",
-                    fontSize: "0.85rem",
-                    color: "var(--text-muted)",
-                    lineHeight: 1.6,
-                    fontWeight: 300,
-                  }}
-                >
-                  Scan with your PayPal app or phone camera for card and international payments.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </motion.div>
     </motion.section>
   );
 }
