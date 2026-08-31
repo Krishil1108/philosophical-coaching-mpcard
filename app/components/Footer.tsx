@@ -11,7 +11,7 @@ const navigationLinks = [
   { label: "The Practice", href: "/practice", glyph: "∮" },
   { label: "Publications", href: "/publications", glyph: "✶" },
   { label: "Videos & Talks", href: "/videos", glyph: "▶" },
-  { label: "Contact & Booking", href: "/contact", glyph: "↗" },
+  { label: "Contact & Booking", href: "/book-session", glyph: "↗" },
 ];
 
 const socialLinks = [
