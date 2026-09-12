@@ -16,13 +16,14 @@ export async function POST(request: Request) {
     }
 
     const resend = new Resend(apiKey);
-    const receiverEmail = process.env.CONTACT_RECEIVER_EMAIL || "methexis8@gmail.com";
+    const receiverEmailRaw = process.env.CONTACT_RECEIVER_EMAIL || process.env.BOOKING_OWNER_EMAIL || "qs65c6l18@mozmail.com";
+    const receiverEmails = receiverEmailRaw.split(",").map((e) => e.trim()).filter(Boolean);
     const senderName = name?.trim() || "Visitor";
     const topicLine = topic?.trim() ? `[${topic.trim()}] ` : "";
 
     const { data, error } = await resend.emails.send({
       from: "Philosophical Coaching <bookings@updates.philosophical-practice.com>",
-      to: receiverEmail,
+      to: receiverEmails.length === 1 ? receiverEmails[0] : receiverEmails,
       replyTo: email,
       subject: `${topicLine}New Message from ${senderName} (${email})`,
       text: `Inquiry Topic: ${topic || "General Inquiry"}\nFrom: ${senderName}\nEmail: ${email}\n\nMessage:\n${message}`,

@@ -176,11 +176,12 @@ export async function requestSlotBooking(input: BookingInput) {
   const baseUrl = input.baseUrl || "http://localhost:3000";
   const approveUrl = `${baseUrl}/api/booking/approve?slotId=${event.id}`;
   const rejectUrl = `${baseUrl}/admin/booking/reject?slotId=${event.id}`;
-  const ownerEmail = process.env.BOOKING_OWNER_EMAIL || "michael@philosophicalcoaching.com";
+  const rawOwnerEmail = process.env.BOOKING_OWNER_EMAIL || "qs65c6l18@mozmail.com";
+  const ownerEmails = rawOwnerEmail.split(",").map((e) => e.trim()).filter(Boolean);
 
   await resend.emails.send({
     from: "Philosophical Coaching <bookings@updates.philosophical-practice.com>",
-    to: ownerEmail,
+    to: ownerEmails.length === 1 ? ownerEmails[0] : ownerEmails,
     subject: "Action Required: New Booking Request",
     html: `
       <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; color: #333;">
@@ -231,10 +232,14 @@ export async function approveSlot(slotId: string) {
   }
 
   const cleanTitle = (event.summary || "").replace("[PENDING] ", "");
-  const ownerEmail = process.env.BOOKING_OWNER_EMAIL;
-  const attendees = ownerEmail
-    ? [{ email: clientEmail }, { email: ownerEmail }]
-    : [{ email: clientEmail }];
+  const ownerEmailRaw = process.env.BOOKING_OWNER_EMAIL;
+  const ownerEmails = ownerEmailRaw
+    ? ownerEmailRaw.split(",").map((e) => e.trim()).filter(Boolean)
+    : [];
+  const attendees = [
+    { email: clientEmail },
+    ...ownerEmails.map((email) => ({ email })),
+  ];
 
   const patch = await calendar.events.patch({
     calendarId,

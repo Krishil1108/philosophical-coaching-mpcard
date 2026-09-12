@@ -16,14 +16,15 @@ async function sendTestEmail() {
   const rejectUrl = "http://localhost:3000/admin/booking/reject?slotId=sample_slot_id_123";
 
   // Use the email in .env or fallback
-  const ownerEmail = "methexis8@gmail.com";
+  const rawOwnerEmail = process.env.BOOKING_OWNER_EMAIL || "qs65c6l18@mozmail.com";
+  const ownerEmails = rawOwnerEmail.split(",").map((e) => e.trim()).filter(Boolean);
 
-  console.log(`Attempting to send test email to ${ownerEmail}...`);
+  console.log(`Attempting to send test email to ${ownerEmails.join(", ")}...`);
 
   try {
     const { data, error } = await resend.emails.send({
       from: "Philosophical Coaching <bookings@updates.philosophical-practice.com>",
-      to: ownerEmail,
+      to: ownerEmails.length === 1 ? ownerEmails[0] : ownerEmails,
       subject: "Action Required: New Booking Request (Sample Preview)",
       html: `
         <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; color: #333;">
