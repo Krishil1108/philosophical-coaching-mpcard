@@ -4,11 +4,17 @@ import VideoSection from "../components/VideoSection";
 import { hasSanityConfig, client } from "../lib/sanity";
 import { videosQuery } from "../lib/queries";
 
+import type { Metadata } from "next";
+
 export const revalidate = 0;
 
-export const metadata = {
-  title: "Videos — Michael Picard Philosophical Practice",
-  description: "Watch Michael Picard discuss philosophical coaching, Café Philosophy, and more.",
+export const metadata: Metadata = {
+  title: "Videos & Dialogues",
+  description:
+    "Watch Michael Picard discuss philosophical coaching, Café Philosophy, and contemporary philosophical inquiries.",
+  alternates: {
+    canonical: "/videos",
+  },
 };
 
 async function getData() {

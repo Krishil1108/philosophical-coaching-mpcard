@@ -4,11 +4,17 @@ import Publications from "../components/Publications";
 import { hasSanityConfig, client } from "../lib/sanity";
 import { publicationsQuery, publicationsPageQuery } from "../lib/queries";
 
+import type { Metadata } from "next";
+
 export const revalidate = 0;
 
-export const metadata = {
-  title: "Publications — Michael Picard",
-  description: "Books, essays, and translations by Michael Picard PhD — including How to Play Philosophy and This is Not a Book.",
+export const metadata: Metadata = {
+  title: "Publications & Books",
+  description:
+    "Books, essays, and translations by Michael Picard, PhD — including How to Play Philosophy and This is Not a Book.",
+  alternates: {
+    canonical: "/publications",
+  },
 };
 
 async function getData() {

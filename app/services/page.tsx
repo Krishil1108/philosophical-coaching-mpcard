@@ -4,11 +4,17 @@ import Services from "../components/Services";
 import { hasSanityConfig, client } from "../lib/sanity";
 import { servicesQuery } from "../lib/queries";
 
+import type { Metadata } from "next";
+
 export const revalidate = 0;
 
-export const metadata = {
-  title: "Services — Michael Picard Philosophical Practice",
-  description: "1-on-1 philosophical coaching, Café Philosophy facilitation, and Philosophy Sports with Michael Picard, PhD (MIT).",
+export const metadata: Metadata = {
+  title: "Services & Offerings",
+  description:
+    "1-on-1 philosophical coaching, Café Philosophy facilitation, and Philosophy Sports with Michael Picard, PhD (MIT).",
+  alternates: {
+    canonical: "/services",
+  },
 };
 
 async function getData() {

@@ -3,12 +3,17 @@ import PageHeader from "../components/PageHeader";
 import About from "../components/About";
 import { hasSanityConfig, client } from "../lib/sanity";
 import { aboutQuery } from "../lib/queries";
+import type { Metadata } from "next";
 
 export const revalidate = 0;
 
-export const metadata = {
-  title: "About Michael Picard — Philosophical Practice",
-  description: "Meet Michael Picard: PhD (MIT), Faculty at Douglas College, Founder of Café Philosophy Victoria, and philosophical practitioner with 12+ years of experience.",
+export const metadata: Metadata = {
+  title: "About",
+  description:
+    "Meet Michael Picard: PhD (MIT), Faculty at Douglas College, Founder of Café Philosophy Victoria, and philosophical practitioner with 12+ years of experience.",
+  alternates: {
+    canonical: "/about",
+  },
 };
 
 async function getData() {

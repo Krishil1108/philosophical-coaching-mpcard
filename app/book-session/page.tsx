@@ -3,11 +3,15 @@ import PageHeader from "../components/PageHeader";
 import BookingScheduler from "../components/BookingScheduler";
 import { hasSanityConfig, client } from "../lib/sanity";
 import { bookingPageQuery } from "../lib/queries";
+import type { Metadata } from "next";
 
-export const metadata = {
-  title: "Book a Session — Michael Picard Philosophical Practice",
+export const metadata: Metadata = {
+  title: "Book a Session",
   description:
-    "Choose from Michael Picard's available Google Calendar slots and book your philosophical coaching session with a Google Meet link.",
+    "Schedule a one-on-one philosophical coaching session with Michael Picard, PhD. Select an available time slot with instant Google Meet confirmation.",
+  alternates: {
+    canonical: "/book-session",
+  },
 };
 
 async function getData() {

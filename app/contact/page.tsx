@@ -4,11 +4,17 @@ import ContactForm from "../components/ContactForm";
 import { hasSanityConfig, client } from "../lib/sanity";
 import { contactPageQuery } from "../lib/queries";
 
+import type { Metadata } from "next";
+
 export const revalidate = 0;
 
-export const metadata = {
-  title: "Contact & Book — Michael Picard Philosophical Practice",
-  description: "Book a philosophical coaching session with Michael Picard or reach out about Café Philosophy and Philosophy Sports.",
+export const metadata: Metadata = {
+  title: "Contact & Inquiries",
+  description:
+    "Get in touch with Michael Picard, PhD for philosophical coaching, Café Philosophy hosting, Philosophy Sports events, or speaking engagements.",
+  alternates: {
+    canonical: "/contact",
+  },
 };
 
 type ContactOption = {
